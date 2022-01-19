@@ -6,10 +6,10 @@ const Home = () => {
         <div>
         <Head>
             <title>
-                Hello World!w
+                Hello World!
             </title>
         </Head>
-        <h1 className="text-3xl font-bold underline">
+        <h1 className="text-3xl font-bold underline text-fuchsia-50">
             Hello world!
         </h1>
         </div>
