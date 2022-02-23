@@ -9,7 +9,7 @@ const Home = () => {
                 Hello World!
             </title>
         </Head>
-        <h1 className="text-3xl font-bold underline text-fuchsia-50">
+        <h1 className="text-3xl font-bold underline text-black">
             Hello world!
         </h1>
         </div>
