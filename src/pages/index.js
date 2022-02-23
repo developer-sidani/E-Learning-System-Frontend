@@ -1,13 +1,27 @@
-import React, { useEffect } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import Head from 'next/head'
 import { login } from '../api'
 
 const Home = () => {
+  const onLogin = useCallback(
+    async () => {
+      try {
+        const res = await login({
+          email: 'asidani88@gmail.com',
+          password: 'sidani2001',
+        })
+        console.log(res)
+      } catch (err) {
+        console.log(err)
+      } finally {
+        console.log('finally')
+      }
+    },
+    [],
+  )
   useEffect(() => {
-    login({ email: 'asidani88@gmail.com', password: 'sidani2001' }).then(r => {
-      console.log(r)
-    })
-  }, [])
+    onLogin()
+  }, [onLogin])
   return (
     <>
         <Head>
