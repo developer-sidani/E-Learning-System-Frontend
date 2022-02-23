@@ -1,19 +1,13 @@
-import React from 'react';
-import  Head from "next/Head";
+import React from 'react'
+import Head from 'next/head'
 
-const Home = () => {
-    return (
-        <div>
-        <Head>
-            <title>
-                Hello World!
-            </title>
-        </Head>
-        <h1 className="text-3xl font-bold underline text-black">
-            Hello world!
-        </h1>
-        </div>
-    );
-};
+const Home = () => (
+        <>
+            <Head>
+                <title>Hello</title>
+            </Head>
+            <h1>Hello</h1>
+        </>
+)
 
-export default Home;
+export default Home

@@ -1,3 +1,99 @@
 {
-  "extends": "next/core-web-vitals"
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": [
+    "plugin:react/recommended",
+    "airbnb"
+  ],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 12,
+    "sourceType": "module"
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": [
+          "src"
+        ]
+      }
+    }
+  },
+  "plugins": [
+    "react",
+    "react-hooks"
+  ],
+  "rules": {
+    "no-use-before-define": "off",
+    "react/jsx-filename-extension": [ "warn", {"extensions": [".jsx",".js"]} ],
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "ts": "never",
+        "tsx": "never"
+      }
+    ],
+    "no-shadow": "off",
+    "max-len": ["warn", { "code": 80 }],
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "react/prop-types": "off",
+    "block-spacing": "warn",
+    "no-mixed-spaces-and-tabs": "warn",
+    "semi": [
+      "warn",
+      "never"
+    ],
+    "array-bracket-spacing": [
+      "warn",
+      "never"
+    ],
+    "keyword-spacing": [
+      "warn",
+      {
+        "after": true,
+        "before": true
+      }
+    ],
+    "no-unused-vars": "warn",
+    "react/jsx-indent": "off",
+    "no-tabs": "off",
+    "eol-last": "warn",
+    "react/jsx-props-no-spreading": "off",
+    "arrow-body-style": "warn",
+    "quotes": "warn",
+    "import/prefer-default-export": "off",
+    "arrow-parens": "off",
+    "no-console": "off",
+    "no-plusplus": "off",
+    "no-alert": "off",
+    "consistent-return": "off",
+    "jsx-a11y/no-noninteractive-element-interactions": "off",
+    "jsx-a11y/click-events-have-key-events": "off",
+    "no-return-assign": "off",
+    "jsx-a11y/no-autofocus": "off",
+    "react/no-array-index-key": "off",
+    "react/jsx-one-expression-per-line": "warn",
+    "no-restricted-syntax": "off",
+    "no-restricted-globals": "warn",
+    "no-continue": "off",
+    "no-confusing-arrow": "off",
+    "eqeqeq": "off",
+    "no-param-reassign": "off",
+    "no-nested-ternary": "off",
+    "import/no-cycle": "warn",
+    "no-underscore-dangle": "off",
+    "react/function-component-definition": [
+      2,
+      {
+        "namedComponents": "arrow-function",
+        "unnamedComponents": "arrow-function"
+      }
+    ]
+  }
 }
