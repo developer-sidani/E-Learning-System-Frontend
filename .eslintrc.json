@@ -15,6 +15,7 @@
     "sourceType": "module"
   },
   "settings": {
+    "import/extensions": [".js", ".mjs", ".jsx", ".ts", ".tsx"],
     "import/resolver": {
       "node": {
         "paths": [
@@ -34,8 +35,8 @@
       "error",
       "ignorePackages",
       {
-        "ts": "never",
-        "tsx": "never"
+        "js": "never",
+        "jsx": "never"
       }
     ],
     "no-shadow": "off",
