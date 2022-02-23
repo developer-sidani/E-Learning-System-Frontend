@@ -8,8 +8,8 @@ export const login = async ({ email, password }) => {
       password,
     })
     return {
-      token: result?.data?.token,
-      user: result?.data?.user,
+      token: result?.data?.data?.token,
+      user: result?.data?.data?.user,
       status: result.status,
     }
   } catch (err) {
