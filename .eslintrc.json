@@ -57,13 +57,14 @@
         "jsx": "never"
       }
     ],
+    "jsx-a11y/label-has-associated-control":"off",
     "no-shadow": "off",
-    "max-len": [
-      "warn",
-      {
-        "code": 80
-      }
-    ],
+    // "max-len": [
+    //   "warn",
+    //   {
+    //     "code": 80
+    //   }
+    // ],
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "react/prop-types": "off",
@@ -97,6 +98,7 @@
     "no-plusplus": "off",
     "no-alert": "off",
     "consistent-return": "off",
+    "jsx-a11y/anchor-is-valid":"off",
     "jsx-a11y/no-noninteractive-element-interactions": "off",
     "jsx-a11y/click-events-have-key-events": "off",
     "no-return-assign": "off",
