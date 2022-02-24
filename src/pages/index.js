@@ -7,8 +7,8 @@ const Home = () => {
     async () => {
       try {
         const res = await login({
-          email: 'asidani88@gmail.com',
-          password: 'sidani2001',
+          email: 'testtest1@gmail.com',
+          password: 'test test',
         })
         console.log(res)
       } catch (err) {
