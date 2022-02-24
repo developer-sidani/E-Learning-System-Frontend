@@ -15,7 +15,13 @@
     "sourceType": "module"
   },
   "settings": {
-    "import/extensions": [".js", ".mjs", ".jsx", ".ts", ".tsx"],
+    "import/extensions": [
+      ".js",
+      ".mjs",
+      ".jsx",
+      ".ts",
+      ".tsx"
+    ],
     "import/resolver": {
       "node": {
         "paths": [
@@ -29,8 +35,20 @@
     "react-hooks"
   ],
   "rules": {
+    "linebreak-style": [
+      "off",
+      "windows"
+    ],
     "no-use-before-define": "off",
-    "react/jsx-filename-extension": [ "warn", {"extensions": [".jsx",".js"]} ],
+    "react/jsx-filename-extension": [
+      "warn",
+      {
+        "extensions": [
+          ".jsx",
+          ".js"
+        ]
+      }
+    ],
     "import/extensions": [
       "error",
       "ignorePackages",
@@ -40,7 +58,12 @@
       }
     ],
     "no-shadow": "off",
-    "max-len": ["warn", { "code": 80 }],
+    "max-len": [
+      "warn",
+      {
+        "code": 80
+      }
+    ],
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "react/prop-types": "off",
