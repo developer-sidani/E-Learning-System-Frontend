@@ -19,9 +19,11 @@ const SignInComponent = () => {
           email,
           password,
         })
-        console.log(res.message)
+        console.log({ res })
+        // todo catch the response status and show error if 404 'user not found'
+        // 401 wrong password
       } catch (err) {
-        console.log({ err })
+        console.log(err)
       } finally {
         setLoading(false)
       }
