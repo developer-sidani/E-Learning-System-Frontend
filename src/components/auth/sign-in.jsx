@@ -12,6 +12,10 @@ const SignInSchema = Yup.object().shape({
 })
 const SignInComponent = () => {
   const [loading, setLoading] = useState(false)
+  const [serverErr, setServerErr] = useState({
+    email: '',
+    password: '',
+  })
   const onLogin = useCallback(
     async (email, password) => {
       try {
@@ -20,8 +24,13 @@ const SignInComponent = () => {
           password,
         })
         console.log({ res })
-        // todo catch the response status and show error if 404 'user not found'
-        // 401 wrong password
+        if (res.status === 404) {
+          // not found
+          setServerErr(prevState => ({ ...prevState, email: 'User Not Found!' }))
+        } else if (res?.status === 401) {
+          // wrong password
+          setServerErr(prevState => ({ ...prevState, password: 'Wrong Password!' }))
+        }
       } catch (err) {
         console.log(err)
       } finally {
@@ -58,6 +67,10 @@ const SignInComponent = () => {
             }}
             validationSchema={SignInSchema}
             onSubmit={({ email, password }) => {
+              setServerErr({
+                email: '',
+                password: '',
+              })
               setLoading(true)
               onLogin(email, password)
             }}
@@ -77,9 +90,9 @@ const SignInComponent = () => {
                           required
                           className={styles.inputContainer}
                         />
-                        {errors.email && touched.email ? (
+                        {(errors.email || Boolean(serverErr.email)) && touched.email ? (
                           <div className="mt-2 text-pink-600 text-sm">
-                            {errors.email}
+                            {errors.email || serverErr.email}
                           </div>
                         ) : null}
                       </div>
@@ -97,9 +110,9 @@ const SignInComponent = () => {
                           required
                           className={styles.inputContainer}
                         />
-                        {errors.password && touched.password ? (
+                        {(errors.password || Boolean(serverErr.password)) && touched.password ? (
                           <div className="mt-2 text-pink-600 text-sm">
-                            {errors.password}
+                            {errors.password || serverErr.password}
                           </div>
                         ) : null}
                       </div>
