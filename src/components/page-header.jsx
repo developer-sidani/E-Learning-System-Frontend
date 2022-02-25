@@ -3,7 +3,9 @@ import Head from 'next/head'
 
 const PageHeader = ({ title, children }) => (
     <Head>
-        <title>{title}</title>
+        <title>
+            {title}
+        </title>
         {children}
     </Head>
 )

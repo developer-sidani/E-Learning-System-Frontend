@@ -1,9 +1,10 @@
 import axios from 'axios'
 import { baseUrl } from '../config'
 
-export const login = async ({ email, password }) => {
+export const login = async ({ email, password, username }) => {
   try {
     const result = await axios.post(`${baseUrl}/auth/login`, {
+      username,
       email,
       password,
     })

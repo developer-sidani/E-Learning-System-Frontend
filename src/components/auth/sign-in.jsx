@@ -3,10 +3,11 @@ import { Formik, Form, Field } from 'formik'
 import * as Yup from 'yup'
 import { login } from '../../api'
 import { styles } from './tw-styles'
+import { isEmail } from '../../utils'
 
 const Logo = 'https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg'
 const SignInSchema = Yup.object().shape({
-  email: Yup.string().email('Invalid email').required('Required'),
+  email: Yup.string().required('Required'),
   password: Yup.string()
     .required('Required'),
 })
@@ -17,19 +18,20 @@ const SignInComponent = () => {
     password: '',
   })
   const onLogin = useCallback(
-    async (email, password) => {
+    async (email, username, password) => {
       try {
         const res = await login({
           email,
+          username,
           password,
         })
         console.log({ res })
         if (res.status === 404) {
           // not found
-          setServerErr(prevState => ({ ...prevState, email: 'User Not Found!' }))
+          setServerErr(prevState => ({ ...prevState, email: res?.message }))
         } else if (res?.status === 401) {
           // wrong password
-          setServerErr(prevState => ({ ...prevState, password: 'Wrong Password!' }))
+          setServerErr(prevState => ({ ...prevState, password: res?.message }))
         }
       } catch (err) {
         console.log(err)
@@ -39,6 +41,7 @@ const SignInComponent = () => {
     },
     [],
   )
+
   return (
     <div className={styles.root}>
         <div className={styles.header}>
@@ -72,20 +75,24 @@ const SignInComponent = () => {
                 password: '',
               })
               setLoading(true)
-              onLogin(email, password)
+              if (isEmail(email)) {
+                onLogin(email, null, password)
+              } else {
+                onLogin(null, email, password)
+              }
             }}
           >
               {({ errors, touched }) => (
                   <Form className="space-y-6">
                     <div>
                       <label htmlFor="email" className={styles.inputLabel}>
-                        Email address
+                        Email or Username
                       </label>
                       <div className="mt-1">
                         <Field
                           id="email"
                           name="email"
-                          type="email"
+                          type="text"
                           autoComplete="email"
                           required
                           className={styles.inputContainer}
