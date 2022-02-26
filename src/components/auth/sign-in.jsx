@@ -4,7 +4,7 @@ import * as Yup from 'yup'
 import { useRouter } from 'next/router'
 import { login } from '../../api'
 import { styles } from './tw-styles'
-import { isEmail, wait } from '../../utils'
+import { isEmail } from '../../utils'
 import { Modal } from '.'
 
 const Logo = 'https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg'
@@ -77,7 +77,7 @@ const SignInComponent = () => {
               remember: false,
             }}
             validationSchema={SignInSchema}
-            onSubmit={async ({ email, password }, { resetForm }) => {
+            onSubmit={async ({ email, password }) => {
               setServerErr({
                 email: '',
                 password: '',
@@ -88,8 +88,6 @@ const SignInComponent = () => {
               } else {
                 onLogin(null, email, password)
               }
-              await wait(500)
-              resetForm()
             }}
           >
               {({ errors, touched }) => (
