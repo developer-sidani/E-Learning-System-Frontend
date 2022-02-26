@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 import { login } from '../../api'
 import { styles } from './tw-styles'
 import { isEmail, wait } from '../../utils'
+import { Modal } from '.'
 
 const Logo = 'https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg'
 const SignInSchema = Yup.object().shape({
@@ -15,6 +16,7 @@ const SignInSchema = Yup.object().shape({
 const SignInComponent = () => {
   const router = useRouter()
   const [loading, setLoading] = useState(false)
+  const [open, setOpen] = useState(false)
   const [serverErr, setServerErr] = useState({
     email: '',
     password: '',
@@ -47,6 +49,8 @@ const SignInComponent = () => {
   )
 
   return (
+    <>
+    <Modal open={open} setOpen={setOpen} />
     <div className={styles.root}>
         <div className={styles.header}>
           <img
@@ -144,7 +148,11 @@ const SignInComponent = () => {
                       </div>
 
                       <div className="text-sm">
-                        <a href="#" className={styles.link}>
+                        <a
+                          href="#"
+                          className={styles.link}
+                          onClick={() => setOpen(true)}
+                        >
                           Forgot your password?
                         </a>
                       </div>
@@ -166,6 +174,7 @@ const SignInComponent = () => {
           </div>
         </div>
     </div>
+    </>
   )
 }
 
