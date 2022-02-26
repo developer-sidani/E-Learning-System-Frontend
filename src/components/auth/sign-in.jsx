@@ -4,7 +4,7 @@ import * as Yup from 'yup'
 import { useRouter } from 'next/router'
 import { login } from '../../api'
 import { styles } from './tw-styles'
-import { isEmail } from '../../utils'
+import { isEmail, wait } from '../../utils'
 
 const Logo = 'https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg'
 const SignInSchema = Yup.object().shape({
@@ -28,13 +28,14 @@ const SignInComponent = () => {
           password,
         })
         console.log({ res })
-        router.push('/')
         if (res.status === 403) {
           // not found
           setServerErr(prevState => ({ ...prevState, email: res?.message }))
         } else if (res?.status === 401) {
           // wrong password
           setServerErr(prevState => ({ ...prevState, password: res?.message }))
+        } else {
+          router.push('/')
         }
       } catch (err) {
         console.log(err)
@@ -72,7 +73,7 @@ const SignInComponent = () => {
               remember: false,
             }}
             validationSchema={SignInSchema}
-            onSubmit={({ email, password }) => {
+            onSubmit={async ({ email, password }, { resetForm }) => {
               setServerErr({
                 email: '',
                 password: '',
@@ -83,6 +84,8 @@ const SignInComponent = () => {
               } else {
                 onLogin(null, email, password)
               }
+              await wait(500)
+              resetForm()
             }}
           >
               {({ errors, touched }) => (
