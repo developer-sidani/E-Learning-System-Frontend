@@ -29,7 +29,7 @@ const SignInComponent = () => {
         })
         console.log({ res })
         router.push('/')
-        if (res.status === 404) {
+        if (res.status === 403) {
           // not found
           setServerErr(prevState => ({ ...prevState, email: res?.message }))
         } else if (res?.status === 401) {
