@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from 'react'
 import { Formik, Form, Field } from 'formik'
 import * as Yup from 'yup'
+import { useRouter } from 'next/router'
 import { login } from '../../api'
 import { styles } from './tw-styles'
 import { isEmail } from '../../utils'
@@ -12,6 +13,7 @@ const SignInSchema = Yup.object().shape({
     .required('Required'),
 })
 const SignInComponent = () => {
+  const router = useRouter()
   const [loading, setLoading] = useState(false)
   const [serverErr, setServerErr] = useState({
     email: '',
@@ -26,6 +28,7 @@ const SignInComponent = () => {
           password,
         })
         console.log({ res })
+        router.push('/')
         if (res.status === 404) {
           // not found
           setServerErr(prevState => ({ ...prevState, email: res?.message }))
@@ -39,7 +42,7 @@ const SignInComponent = () => {
         setLoading(false)
       }
     },
-    [],
+    [router],
   )
 
   return (
