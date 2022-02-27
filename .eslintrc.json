@@ -59,12 +59,12 @@
     ],
     "jsx-a11y/label-has-associated-control":"off",
     "no-shadow": "off",
-    // "max-len": [
-    //   "warn",
-    //   {
-    //     "code": 80
-    //   }
-    // ],
+    "max-len": [
+      "off",
+      {
+        "code": 80
+      }
+    ],
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "react/prop-types": "off",
@@ -113,6 +113,7 @@
     "no-param-reassign": "off",
     "no-nested-ternary": "off",
     "import/no-cycle": "warn",
+    "no-promise-executor-return":"off",
     "no-underscore-dangle": "off",
     "react/function-component-definition": [
       2,

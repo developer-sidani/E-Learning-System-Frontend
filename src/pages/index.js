@@ -1,8 +1,11 @@
 import React from 'react'
-import { PageHeader } from '../components'
+import { PageHeader, SignInComponent } from '../components'
 
 const Home = () => (
-    <PageHeader title="Learn+" />
+    <>
+        <PageHeader title="Learn+" />
+        <SignInComponent />
+    </>
 )
 
 export default Home
