@@ -1,7 +1,9 @@
 import React from 'react'
+import { PageHeader } from '../components'
 
 const Custom404 = () => (
     <>
+    <PageHeader title="Learn + | 404" />
     {/*
       This example requires updating your template:
 
