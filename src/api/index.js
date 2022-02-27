@@ -1,1 +1,1 @@
-export { login } from './profile'
+export { login } from './auth'
