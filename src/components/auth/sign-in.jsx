@@ -7,6 +7,11 @@ import { styles } from './tw-styles'
 import { isEmail } from '../../utils'
 import { Modal } from '.'
 
+const errorStatusFromBackend = {
+  password: 401,
+  user: 403,
+}
+
 const Logo = 'https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg'
 const SignInSchema = Yup.object().shape({
   email: Yup.string().required('Required'),
@@ -18,7 +23,7 @@ const SignInComponent = () => {
   const [loading, setLoading] = useState(false)
   const [open, setOpen] = useState(false)
   const [serverErr, setServerErr] = useState({
-    email: '',
+    user: '',
     password: '',
   })
   const onLogin = useCallback(
@@ -30,10 +35,10 @@ const SignInComponent = () => {
           password,
         })
         console.log({ res })
-        if (res.status === 403) {
+        if (res.status === errorStatusFromBackend.user) {
           // not found
-          setServerErr(prevState => ({ ...prevState, email: res?.message }))
-        } else if (res?.status === 401) {
+          setServerErr(prevState => ({ ...prevState, user: res?.message }))
+        } else if (res?.status === errorStatusFromBackend.password) {
           // wrong password
           setServerErr(prevState => ({ ...prevState, password: res?.message }))
         } else {
@@ -105,9 +110,9 @@ const SignInComponent = () => {
                           required
                           className={styles.inputContainer}
                         />
-                        {(errors.email || Boolean(serverErr.email)) && touched.email ? (
+                        {(errors.email || Boolean(serverErr.user)) && touched.email ? (
                           <div className="mt-2 text-pink-600 text-sm">
-                            {errors.email || serverErr.email}
+                            {errors.email || serverErr.user}
                           </div>
                         ) : null}
                       </div>
