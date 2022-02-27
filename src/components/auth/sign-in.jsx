@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState, useCallback, useEffect } from 'react'
 import { Formik, Form, Field } from 'formik'
 import * as Yup from 'yup'
 import { useRouter } from 'next/router'
@@ -27,7 +27,7 @@ const SignInComponent = () => {
     password: '',
   })
   const onLogin = useCallback(
-    async (email, username, password) => {
+    async (email, username, password, callback) => {
       try {
         const res = await login({
           email,
@@ -42,17 +42,23 @@ const SignInComponent = () => {
           // wrong password
           setServerErr(prevState => ({ ...prevState, password: res?.message }))
         } else {
+          callback()
           router.push('/')
         }
       } catch (err) {
-        console.log(err)
+        console.log({ err })
       } finally {
         setLoading(false)
       }
     },
     [router],
   )
-
+  useEffect(() => {
+    setServerErr({
+      user: '',
+      password: '',
+    })
+  }, [])
   return (
     <>
     <Modal open={open} setOpen={setOpen} />
@@ -82,16 +88,16 @@ const SignInComponent = () => {
               remember: false,
             }}
             validationSchema={SignInSchema}
-            onSubmit={async ({ email, password }) => {
+            onSubmit={async ({ email, password }, { resetForm }) => {
               setServerErr({
                 email: '',
                 password: '',
               })
               setLoading(true)
               if (isEmail(email)) {
-                onLogin(email, null, password)
+                onLogin(email, null, password, resetForm)
               } else {
-                onLogin(null, email, password)
+                onLogin(null, email, password, resetForm)
               }
             }}
           >
