@@ -1,5 +1,5 @@
 import React from 'react'
-import { PageHeader } from '../components'
+import { PageHeader } from '../../components'
 
 const Custom404 = () => (
     <>
