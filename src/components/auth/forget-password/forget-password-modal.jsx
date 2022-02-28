@@ -1,10 +1,11 @@
-import React, { Fragment, useRef } from 'react'
+import React, { Fragment, useRef, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import SuccessfulResponse from './successful-response'
 import ModalForm from './modal-form'
 
 const Modal = ({ open, setOpen, email }) => {
   const cancelButtonRef = useRef(null)
+  const [emailSent, setEmailSent] = useState(false)
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog as="div" className="fixed z-10 inset-0 overflow-y-auto" initialFocus={cancelButtonRef} onClose={setOpen}>
@@ -32,8 +33,9 @@ const Modal = ({ open, setOpen, email }) => {
             leaveFrom="opacity-100 translate-y-0 sm:scale-100"
             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
           >
-            {/* <SuccessfulResponse setOpen={setOpen} ref={cancelButtonRef} /> */}
-            <ModalForm setOpen={setOpen} ref={cancelButtonRef} email={email} />
+            {emailSent
+              ? <SuccessfulResponse setOpen={setOpen} ref={cancelButtonRef} />
+              : <ModalForm setOpen={setOpen} ref={cancelButtonRef} email={email} setEmailSent={setEmailSent} />}
           </Transition.Child>
         </div>
       </Dialog>
