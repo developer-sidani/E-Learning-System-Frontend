@@ -102,7 +102,7 @@ const SignInComponent = () => {
               }
             }}
           >
-              {({ errors, touched }) => (
+              {({ errors, touched, handleChange }) => (
                   <Form className="space-y-6">
                     <div>
                       <label htmlFor="email" className={styles.inputLabel}>
@@ -111,7 +111,10 @@ const SignInComponent = () => {
                       <div className="mt-1">
                         <Field
                           value={email}
-                          onChange={(e) => setEmail(e.target.value)}
+                          onChange={(e) => {
+                            handleChange(e)
+                            setEmail(e.target.value)
+                          }}
                           id="email"
                           name="email"
                           type="text"
