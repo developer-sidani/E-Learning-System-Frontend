@@ -1,14 +1,17 @@
 import axios from 'axios'
 import { baseUrl } from '../config'
 
-export const login = async ({ email }) => {
+export const forgetPassword = async ({ email }) => {
   try {
-    return await axios.post(`${baseUrl}/auth/forgot-password`, {
+    const res = await axios.post(`${baseUrl}/auth/forgot-password`, {
       email,
     })
+    return {
+      res: res.data,
+    }
   } catch (err) {
     return {
-      err,
+      res: err.response.data,
     }
   }
 }
