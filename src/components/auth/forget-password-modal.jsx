@@ -2,7 +2,7 @@ import React, { Fragment, useRef } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { ExclamationIcon } from '@heroicons/react/outline'
 
-const Modal = ({ open, setOpen }) => {
+const Modal = ({ open, setOpen, email }) => {
   const cancelButtonRef = useRef(null)
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -40,9 +40,8 @@ const Modal = ({ open, setOpen }) => {
                     <ExclamationIcon className="h-6 w-6 text-red-600" aria-hidden="true" />
                   </div>
                   <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                    <Dialog.Title as="h3" className="text-lg leading-6 font-medium text-gray-900">
-                      Deactivate account
-                    </Dialog.Title>
+                    <Dialog.Title as="h3" className="text-lg leading-6 font-medium text-gray-900" />
+                    {email}
                     <div className="mt-2">
                       <p className="text-sm text-gray-500">
                         Are you sure you want to deactivate your account? All of your data will be permanently removed.
