@@ -59,9 +59,10 @@ const SignInComponent = () => {
       password: '',
     })
   }, [])
+  const [email, setEmail] = useState('')
   return (
     <>
-    <Modal open={open} setOpen={setOpen} />
+    <Modal open={open} setOpen={setOpen} email={isEmail(email) ? email : ''} />
     <div className={styles.root}>
         <div className={styles.header}>
           <img
@@ -109,6 +110,8 @@ const SignInComponent = () => {
                       </label>
                       <div className="mt-1">
                         <Field
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
                           id="email"
                           name="email"
                           type="text"
