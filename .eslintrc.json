@@ -15,6 +15,13 @@
     "sourceType": "module"
   },
   "settings": {
+    "import/extensions": [
+      ".js",
+      ".mjs",
+      ".jsx",
+      ".ts",
+      ".tsx"
+    ],
     "import/resolver": {
       "node": {
         "paths": [
@@ -28,18 +35,36 @@
     "react-hooks"
   ],
   "rules": {
+    "linebreak-style": [
+      "off",
+      "windows"
+    ],
     "no-use-before-define": "off",
-    "react/jsx-filename-extension": [ "warn", {"extensions": [".jsx",".js"]} ],
+    "react/jsx-filename-extension": [
+      "warn",
+      {
+        "extensions": [
+          ".jsx",
+          ".js"
+        ]
+      }
+    ],
     "import/extensions": [
       "error",
       "ignorePackages",
       {
-        "ts": "never",
-        "tsx": "never"
+        "js": "never",
+        "jsx": "never"
       }
     ],
+    "jsx-a11y/label-has-associated-control":"off",
     "no-shadow": "off",
-    "max-len": ["warn", { "code": 80 }],
+    "max-len": [
+      "off",
+      {
+        "code": 80
+      }
+    ],
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "react/prop-types": "off",
@@ -73,6 +98,7 @@
     "no-plusplus": "off",
     "no-alert": "off",
     "consistent-return": "off",
+    "jsx-a11y/anchor-is-valid":"off",
     "jsx-a11y/no-noninteractive-element-interactions": "off",
     "jsx-a11y/click-events-have-key-events": "off",
     "no-return-assign": "off",
@@ -87,6 +113,7 @@
     "no-param-reassign": "off",
     "no-nested-ternary": "off",
     "import/no-cycle": "warn",
+    "no-promise-executor-return":"off",
     "no-underscore-dangle": "off",
     "react/function-component-definition": [
       2,

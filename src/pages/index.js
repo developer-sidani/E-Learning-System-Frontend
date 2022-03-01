@@ -1,13 +1,11 @@
 import React from 'react'
-import Head from 'next/head'
+import { PageHeader } from '../components'
 
 const Home = () => (
-        <>
-            <Head>
-                <title>Hello</title>
-            </Head>
-            <h1>Hello</h1>
-        </>
+    <>
+        <PageHeader title="Learn+" />
+        <h1>Learn+</h1>
+    </>
 )
 
 export default Home
