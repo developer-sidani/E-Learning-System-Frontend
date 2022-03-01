@@ -14,7 +14,7 @@ const errorStatusFromBackend = {
 
 const Logo = 'https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg'
 const SignInSchema = Yup.object().shape({
-  email: Yup.string().required('Required'),
+  user: Yup.string().required('Required'),
   password: Yup.string()
     .required('Required'),
 })
@@ -27,11 +27,10 @@ const SignInComponent = () => {
     password: '',
   })
   const onLogin = useCallback(
-    async (email, username, password, callback) => {
+    async (user, password, callback) => {
       try {
         const res = await login({
-          email,
-          username,
+          user,
           password,
         })
         console.log({ res })
@@ -84,44 +83,46 @@ const SignInComponent = () => {
           <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
           <Formik
             initialValues={{
-              email: '',
+              user: '',
               password: '',
               remember: false,
             }}
             validationSchema={SignInSchema}
-            onSubmit={async ({ email, password }, { resetForm }) => {
+            onSubmit={async ({ user, password }, { resetForm }) => {
               setServerErr({
-                email: '',
+                user: '',
                 password: '',
               })
               setLoading(true)
-              if (isEmail(email)) {
-                onLogin(email, null, password, resetForm)
-              } else {
-                onLogin(null, email, password, resetForm)
-              }
+              onLogin(user, password, () => {
+                resetForm()
+                setEmail('')
+              })
             }}
           >
-              {({ errors, touched }) => (
+              {({ errors, touched, handleChange }) => (
                   <Form className="space-y-6">
                     <div>
-                      <label htmlFor="email" className={styles.inputLabel}>
+                      <label htmlFor="user" className={styles.inputLabel}>
                         Email or Username
                       </label>
                       <div className="mt-1">
                         <Field
                           value={email}
-                          onChange={(e) => setEmail(e.target.value)}
-                          id="email"
-                          name="email"
+                          onChange={(e) => {
+                            handleChange(e)
+                            setEmail(e.target.value)
+                          }}
+                          id="user"
+                          name="user"
                           type="text"
-                          autoComplete="email"
+                          autoComplete="user"
                           required
                           className={styles.inputContainer}
                         />
-                        {(errors.email || Boolean(serverErr.user)) && touched.email ? (
+                        {(errors.user || Boolean(serverErr.user)) && touched.user ? (
                           <div className="mt-2 text-pink-600 text-sm">
-                            {errors.email || serverErr.user}
+                            {errors.user || serverErr.user}
                           </div>
                         ) : null}
                       </div>

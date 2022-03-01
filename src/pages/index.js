@@ -1,10 +1,10 @@
 import React from 'react'
-import { PageHeader, SignInComponent } from '../components'
+import { PageHeader } from '../components'
 
 const Home = () => (
     <>
         <PageHeader title="Learn+" />
-        <SignInComponent />
+        <h1>Learn+</h1>
     </>
 )
 
