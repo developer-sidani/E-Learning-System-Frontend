@@ -11,10 +11,7 @@ const AuthGuard = ({ children }) => {
       return
     }
     if (!profile?.token) {
-      router.push({
-        pathname: '/auth/sing-in',
-        query: { returnUrl: router.asPath },
-      })
+      router.push('/auth/sign-in')
     } else {
       setChecked(true)
     }

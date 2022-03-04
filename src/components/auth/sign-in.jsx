@@ -2,10 +2,12 @@ import React, { useState, useCallback, useEffect } from 'react'
 import { Formik, Form, Field } from 'formik'
 import * as Yup from 'yup'
 import { useRouter } from 'next/router'
+import { useDispatch, useSelector } from 'react-redux'
 import { login } from '../../api'
 import { styles } from './tw-styles'
 import { isEmail } from '../../utils'
 import { Modal } from '.'
+import { set } from '../../slices/profile'
 
 const errorStatusFromBackend = {
   password: 401,
@@ -20,6 +22,8 @@ const SignInSchema = Yup.object().shape({
 })
 const SignInComponent = () => {
   const router = useRouter()
+  const dispatch = useDispatch()
+  const profile = useSelector(state => state.profile)
   const [loading, setLoading] = useState(false)
   const [open, setOpen] = useState(false)
   const [serverErr, setServerErr] = useState({
@@ -33,7 +37,6 @@ const SignInComponent = () => {
           user,
           password,
         })
-        console.log({ res })
         if (res.status === errorStatusFromBackend.user) {
           // not found
           setServerErr(prevState => ({ ...prevState, user: res?.message }))
@@ -42,7 +45,8 @@ const SignInComponent = () => {
           setServerErr(prevState => ({ ...prevState, password: res?.message }))
         } else {
           callback()
-          router.push('/')
+          // router.push('/')
+          dispatch(set({ user: res.user, token: res.token }))
         }
       } catch (err) {
         console.log({ err })

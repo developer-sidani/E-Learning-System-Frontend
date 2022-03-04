@@ -8,14 +8,21 @@ import { AuthRouter } from '../routes'
 
 const { store, persistor } = loadStore()
 
-const MyApp = ({ Component, pageProps }) => (
-    <Provider store={store}>
-        <PersistGate loading={<p>loading</p>} persistor={persistor}>
-            <AuthRouter>
-                <Component {...pageProps} />
-            </AuthRouter>
-        </PersistGate>
-    </Provider>
-)
+const MyApp = ({ Component, pageProps }) => {
+  const getLayout = Component.getLayout ?? ((page) => page)
+
+  return (
+    (
+        <Provider store={store}>
+            <PersistGate loading={<p>loading</p>} persistor={persistor}>
+                <AuthRouter>
+                    {getLayout(
+                        <Component {...pageProps} />,
+                    )}
+                </AuthRouter>
+            </PersistGate>
+        </Provider>
+    ))
+}
 
 export default MyApp
