@@ -4,13 +4,16 @@ import React from 'react'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import loadStore from '../store'
+import { AuthRouter } from '../routes'
 
 const { store, persistor } = loadStore()
 
 const MyApp = ({ Component, pageProps }) => (
     <Provider store={store}>
         <PersistGate loading={<p>loading</p>} persistor={persistor}>
-            <Component {...pageProps} />
+            <AuthRouter>
+                <Component {...pageProps} />
+            </AuthRouter>
         </PersistGate>
     </Provider>
 )
