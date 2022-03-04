@@ -16,7 +16,12 @@ const AuthRouter = ({ children }) => {
     }
   }, [profile, dispatch])
 
-  return { children }
+  return (
+      // eslint-disable-next-line react/jsx-no-useless-fragment
+      <>
+        { children }
+      </>
+  )
 }
 
 export default AuthRouter
