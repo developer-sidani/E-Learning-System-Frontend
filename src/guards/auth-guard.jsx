@@ -1,0 +1,34 @@
+import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
+import { useRouter } from 'next/router'
+
+const AuthGuard = ({ children }) => {
+  const profile = useSelector(state => state.profile)
+  const router = useRouter()
+  const [checked, setChecked] = useState(false)
+  useEffect(() => {
+    if (!router.isReady) {
+      return
+    }
+    if (!profile?.token) {
+      router.push({
+        pathname: '/auth/sing-in',
+        query: { returnUrl: router.asPath },
+      })
+    } else {
+      setChecked(true)
+    }
+  }, [router.isReady])
+  if (!checked) {
+    return null
+  }
+
+  return (
+  // eslint-disable-next-line react/jsx-no-useless-fragment
+    <>
+      {children}
+    </>
+  )
+}
+
+export default AuthGuard
