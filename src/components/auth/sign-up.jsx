@@ -1,4 +1,5 @@
 import React from 'react'
+// import Datepicker from '@themesberg/tailwind-datepicker'
 import { Formik, Form, Field } from 'formik'
 import * as Yup from 'yup'
 import { useRouter } from 'next/router'
@@ -26,6 +27,7 @@ const Logo = 'https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg'
 
 const SignUpComponent = () => (
   <div className="space-y-6 mt-6 md:m-32">
+
 <div className={styles.header}>
           <img
             className={styles.logo}
