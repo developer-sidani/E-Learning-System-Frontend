@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useCallback, useEffect } from 'react'
 // import Datepicker from '@themesberg/tailwind-datepicker'
 import { Formik, Form, Field } from 'formik'
 import * as Yup from 'yup'
@@ -10,17 +10,13 @@ import 'react-phone-input-2/lib/material.css'
 
 const SignUpSchema = Yup.object().shape({
   user: Yup.string().required('Required'),
+  photo: Yup.string(),
   email: Yup.string().email('Must be a valid email').required('Required'),
   password: Yup.string().required('Required'),
   confirm_password: Yup.string().required('Required'),
   firstname: Yup.string().required('Required'),
   lastname: Yup.string().required('Required'),
-  birthday: Yup.string().required('Required'),
   address: Yup.string().required('Required'),
-  country: Yup.string().required('Required'),
-  gender: (gender) => (Boolean) || 'male',
-  isNotified: Yup.boolean().default(true),
-  keepMeUpdated: Yup.boolean().default(true),
 })
 
 const Logo = 'https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg'
@@ -34,7 +30,7 @@ const SignUpComponent = () => (
             src={Logo}
             alt="Learn+"
           />
-          <h2 className={styles.title}>Sign up to start with Learn +</h2>
+          <h2 className={styles.title}>Register to start with Learn +</h2>
           <p className="mt-2 text-center text-sm text-gray-600">
             Already have an account?
               {' '}
@@ -43,6 +39,32 @@ const SignUpComponent = () => (
             </a>
           </p>
 </div>
+
+<Formik
+  initialValues={{
+    user: '',
+    photo: '',
+    email: '',
+    password: '',
+    confirm_password: '',
+    firstname: '',
+    lastname: '',
+    phone: '',
+    birthday: '',
+    address: '',
+    country: 'Lebanon',
+    gender: '',
+    isNotified: true,
+    keepMeUpdated: true,
+  }}
+  validationSchema={SignUpSchema}
+
+>
+{({
+  errors, touched, handleChange, values,
+}) => (
+          <form className="space-y-6" action="#" method="POST">
+
       <div className="bg-white shadow px-4 py-5 sm:rounded-lg sm:p-6">
         <div className="md:grid md:grid-cols-3 md:gap-6">
           <div className="md:col-span-1">
@@ -52,7 +74,7 @@ const SignUpComponent = () => (
             </p>
           </div>
           <div className="mt-5 md:mt-0 md:col-span-2">
-            <form className="space-y-6" action="#" method="POST">
+
               <div className="grid grid-cols-3 gap-6">
                 <div className="col-span-3 sm:col-span-2">
                   <label htmlFor="company-website" className="block text-sm font-medium text-gray-700">
@@ -61,9 +83,11 @@ const SignUpComponent = () => (
                   <div className="mt-1 flex rounded-md shadow-sm">
 
                     <input
+                      value={values.user}
+                      onChange={handleChange}
                       type="text"
-                      name="company-website"
-                      id="company-website"
+                      name="user"
+                      id="user"
                       className={styles.inputContainer}
                       // className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
                       placeholder=""
@@ -80,16 +104,18 @@ const SignUpComponent = () => (
                       <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
                     </svg>
                   </span>
-                  <button
-                    type="button"
+                  <input
+                    value={values.photo}
+                    onChange={handleChange}
+                    id="photo"
+                    name="photo"
+                    type="file"
                     className="bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                  >
-                    Change
-                  </button>
+                  />
+
                 </div>
               </div>
 
-            </form>
           </div>
         </div>
       </div>
@@ -101,7 +127,6 @@ const SignUpComponent = () => (
             <p className="mt-1 text-sm text-gray-500">Use a permanent address where you can receive mail.</p>
           </div>
           <div className="mt-5 md:mt-0 md:col-span-2">
-            <form action="#" method="POST">
 
               {/* FIRSTNAME AND LASTNAME */}
 
@@ -111,10 +136,12 @@ const SignUpComponent = () => (
                     First name
                   </label>
                   <input
+                    value={values.firstname}
+                    onChange={handleChange}
                     type="text"
-                    name="first-name"
-                    id="first-name"
-                    autoComplete="given-name"
+                    name="firstname"
+                    id="firstname"
+                    autoComplete="first-name"
                     className={styles.inputContainer}
                     // className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                   />
@@ -125,10 +152,12 @@ const SignUpComponent = () => (
                     Last name
                   </label>
                   <input
+                    value={values.lastname}
+                    onChange={handleChange}
                     type="text"
-                    name="last-name"
-                    id="last-name"
-                    autoComplete="family-name"
+                    name="lastname"
+                    id="lastname"
+                    autoComplete="last-name"
                     className={styles.inputContainer}
                     // className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                   />
@@ -142,19 +171,23 @@ const SignUpComponent = () => (
                     Email address
                 </label>
                   <input
+                    value={values.email}
+                    onChange={handleChange}
                     type="text"
-                    name="email-address"
-                    id="email-address"
+                    name="email"
+                    id="email"
                     autoComplete="email"
                     className={styles.inputContainer}
                   />
                 </div>
 
                 <div className="col-span-6 sm:col-span-3">
-                <label htmlFor="country" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="gender" className="block text-sm font-medium text-gray-700">
                     Gender
                 </label>
                   <select
+                    value={values.gender}
+                    onChange={handleChange}
                     id="gender"
                     name="gender"
                     autoComplete="Gender"
@@ -173,10 +206,11 @@ const SignUpComponent = () => (
                     Password
                   </label>
                   <input
+                    value={values.password}
+                    onChange={handleChange}
                     type="text"
-                    name="first-name"
-                    id="first-name"
-                    autoComplete="given-name"
+                    name="password"
+                    id="password"
                     className={styles.inputContainer}
                   />
                 </div>
@@ -186,10 +220,11 @@ const SignUpComponent = () => (
                     Confirm Password
                   </label>
                   <input
+                    value={values.confirm_password}
+                    onChange={handleChange}
                     type="text"
-                    name="last-name"
-                    id="last-name"
-                    autoComplete="family-name"
+                    name="confirm_password"
+                    id="confirm_password"
                     className={styles.inputContainer}
                   />
                 </div>
@@ -200,6 +235,8 @@ const SignUpComponent = () => (
                     Country
                 </label>
                   <select
+                    value={values.country}
+                    onChange={handleChange}
                     id="country"
                     name="country"
                     autoComplete="country-name"
@@ -216,10 +253,12 @@ const SignUpComponent = () => (
                           Address
                   </label>
                   <input
+                    value={values.address}
+                    onChange={handleChange}
                     type="text"
-                    name="last-name"
-                    id="last-name"
-                    autoComplete="family-name"
+                    name="address"
+                    id="address"
+                    autoComplete="address"
                     className={styles.inputContainer}
                   />
               </div>
@@ -238,6 +277,8 @@ const SignUpComponent = () => (
                 // enableSearch: true,
 
               }}
+              value={values.phone}
+              onChange={handleChange}
               excludeCountries="il"
               country="lb"
               inputClass={styles.inputContainer2}
@@ -248,11 +289,12 @@ const SignUpComponent = () => (
 
                 </div>
 
-            </form>
           </div>
         </div>
       </div>
-{/* NOTIFICATIONS */}
+
+                          {/* NOTIFICATIONS */}
+
       <div className="bg-white shadow px-4 py-5 sm:rounded-lg sm:p-6">
         <div className="md:grid md:grid-cols-3 md:gap-6">
           <div className="md:col-span-1">
@@ -261,21 +303,22 @@ const SignUpComponent = () => (
           </div>
           <div className="mt-5 md:mt-0 md:col-span-2">
 
-            <form className="space-y-6" action="#" method="POST">
               <fieldset>
                 {/* <legend className="text-base font-medium text-gray-900">By Email</legend> */}
                 <div className="mt-4 space-y-4">
                   <div className="flex items-start">
                     <div className="h-5 flex items-center">
                       <input
-                        id="comments"
-                        name="comments"
+                        checked={values.keepMeUpdated}
+                        onChange={handleChange}
+                        id="keepMeUpdated"
+                        name="keepMeUpdated"
                         type="checkbox"
                         className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
                       />
                     </div>
                     <div className="ml-3 text-sm">
-                      <label htmlFor="comments" className="font-medium text-gray-700">
+                      <label htmlFor="newsletter" className="font-medium text-gray-700">
                         Newsletter
                       </label>
                       <p className="text-gray-500">Subscribe to receive recent news, courses, and offers.</p>
@@ -284,15 +327,17 @@ const SignUpComponent = () => (
                   <div className="flex items-start">
                     <div className="flex items-center h-5">
                       <input
-                        id="candidates"
-                        name="candidates"
+                        checked={values.isNotified}
+                        onChange={handleChange}
+                        id="isNotified"
+                        name="isNotified"
                         type="checkbox"
                         className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
                       />
                     </div>
 
                     <div className="ml-3 text-sm">
-                      <label htmlFor="candidates" className="font-medium text-gray-700">
+                      <label htmlFor="notifications" className="font-medium text-gray-700">
                         Notifications
                       </label>
                       <p className="text-gray-500">Receive all Learn+ relevent notifications.</p>
@@ -300,8 +345,6 @@ const SignUpComponent = () => (
                   </div>
                 </div>
               </fieldset>
-            </form>
-
           </div>
         </div>
       </div>
@@ -314,6 +357,11 @@ const SignUpComponent = () => (
           Sign Up
         </button>
       </div>
+
+          </form>
+)}
+</Formik>
+
   </div>
 )
 
