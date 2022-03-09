@@ -1,7 +1,5 @@
 export const countryList = [
-  {
-    Name: '', Code: '', Timezone: '', UTC: '', MobileCode: '',
-  },
+
   {
     Name: 'Afghanistan', Code: 'AF', Timezone: 'Afghanistan Standard Time', UTC: 'UTC+04:30', MobileCode: '+93',
   }, {
