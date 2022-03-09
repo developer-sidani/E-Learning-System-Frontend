@@ -3,7 +3,7 @@ import { FaqComponent } from '../components'
 
 const FaqsPage = () => (
     <div>
-      <FaqComponent> </FaqComponent>
+      <FaqComponent />
     </div>
 )
 
