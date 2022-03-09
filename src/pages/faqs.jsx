@@ -1,10 +1,14 @@
 import React from 'react'
-import { FaqComponent } from '../components'
+import { FaqComponent, PageHeader } from '../components'
 
 const FaqsPage = () => (
-    <div>
-      <FaqComponent />
-    </div>
+  <>
+    <PageHeader
+      title="Learn+ | FAQS"
+    />
+
+    <FaqComponent />
+  </>
 )
 
 export default FaqsPage
