@@ -32,9 +32,10 @@ const SignUpComponent = () => {
   const registerStudent = useCallback(
     async (data, callback) => {
       try {
-        const res = await register({
-          ...data,
-        })
+        console.log(data)
+        const res = await register(
+          data,
+        )
         console.log({ res })
         // res.status === 200 && callback()
       } catch (err) {
@@ -43,10 +44,14 @@ const SignUpComponent = () => {
     },
     [],
   )
+
   const submitValues = (values, { resetForm }) => {
-    registerStudent(values)
+    // console.log(values)
     values.birthday = '2001-02-14'
-    console.log(values)
+    values.fullName = `${values.firstname} ${values.lastname}`
+    registerStudent(values)
+
+    // console.log(values)
     // resetForm()
   }
   return (
