@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { baseUrl } from '../config'
 
-export const register = async ({
+export const register = async (
   fullName,
   username,
   email,
@@ -13,7 +13,7 @@ export const register = async ({
   address,
   isNotified,
   keepMeUpdated,
-}) => {
+) => {
   try {
     const result = await axios.post(`${baseUrl}/auth/register`, {
       info: {
