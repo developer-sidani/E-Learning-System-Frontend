@@ -16,7 +16,8 @@ const SignUpSchema = Yup.object().shape({
   photo: Yup.string(),
   email: Yup.string().email('Must be a valid email').required('Required'),
   password: Yup.string().required('Required'),
-  confirm_password: Yup.string().required('Required'),
+  confirm_password: Yup.string()
+    .oneOf([Yup.ref('password'), null], 'Passwords must match'),
   firstname: Yup.string().required('Required'),
   lastname: Yup.string().required('Required'),
   address: Yup.string().required('Required'),
