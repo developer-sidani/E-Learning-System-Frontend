@@ -1,8 +1,11 @@
 import React from 'react'
-import { SignUpComponent } from '../../components'
+import { PageHeader, SignUpComponent } from '../../components'
 
 const SignUp = () => (
-    <SignUpComponent />
+    <>
+      <PageHeader title="Learn+ | Sign Up" />
+      <SignUpComponent />
+    </>
 )
 
 export default SignUp
