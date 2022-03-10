@@ -31,8 +31,9 @@ const Logo = 'https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg'
 const SignUpComponent = () => {
   const registerStudent = useCallback(
     async (data, callback) => {
+      console.log(data)
       try {
-        console.log(data)
+        // console.log(data)
         const res = await register(
           data,
         )

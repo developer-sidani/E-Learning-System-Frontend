@@ -17,6 +17,19 @@ export const register = async (
   },
 ) => {
   try {
+    console.log({
+      fullName,
+      username,
+      email,
+      password,
+      phone,
+      birthday,
+      country,
+      gender,
+      address,
+      isNotified,
+      keepMeUpdated,
+    })
     const result = await axios.post(`${baseUrl}/auth/register`, {
       info: {
         fullName,
@@ -36,14 +49,11 @@ export const register = async (
       },
     })
     return {
-      data: result?.data?.data,
-      message: result?.data?.message,
-      status: result?.data?.statusCode,
+      result,
     }
   } catch (err) {
     return {
-      message: err.response.data.message,
-      status: err.response.data.statusCode,
+      err,
     }
   }
 }
