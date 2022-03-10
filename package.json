@@ -10,8 +10,8 @@
     "prod": "next start",
     "dev:up": "docker-compose -f docker-compose.yml -f docker-compose.dev.yml up",
     "prod:up": "docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d",
-    "restart": "docker-compose down && docker image rm fyp-be_fyp-be && yarn run prod:up",
-    "prod:test": "docker-compose down && docker image rm fyp-be_fyp-be && git pull && yarn run prod:up"
+    "restart": "docker-compose down && docker image rm fyp-fe_fyp-fe && yarn run prod:up",
+    "prod:test": "docker-compose down && docker image rm fyp-fe_fyp-fe && git pull && yarn run prod:up"
   },
   "dependencies": {
     "@headlessui/react": "^1.5.0",
