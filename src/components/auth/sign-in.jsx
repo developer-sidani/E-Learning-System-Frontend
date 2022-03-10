@@ -2,7 +2,7 @@ import React, { useState, useCallback, useEffect } from 'react'
 import { Formik, Form, Field } from 'formik'
 import * as Yup from 'yup'
 import { useRouter } from 'next/router'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { login } from '../../api'
 import { styles } from './tw-styles'
 import { isEmail } from '../../utils'
@@ -23,7 +23,6 @@ const SignInSchema = Yup.object().shape({
 const SignInComponent = () => {
   const router = useRouter()
   const dispatch = useDispatch()
-  const profile = useSelector(state => state.profile)
   const [loading, setLoading] = useState(false)
   const [open, setOpen] = useState(false)
   const [serverErr, setServerErr] = useState({
@@ -31,11 +30,12 @@ const SignInComponent = () => {
     password: '',
   })
   const onLogin = useCallback(
-    async (user, password, callback) => {
+    async (user, password, rememberMe, callback) => {
       try {
         const res = await login({
           user,
           password,
+          rememberMe,
         })
         if (res.status === errorStatusFromBackend.user) {
           // not found
@@ -89,16 +89,16 @@ const SignInComponent = () => {
             initialValues={{
               user: '',
               password: '',
-              remember: false,
+              rememberMe: false,
             }}
             validationSchema={SignInSchema}
-            onSubmit={async ({ user, password }, { resetForm }) => {
+            onSubmit={async ({ user, password, rememberMe }, { resetForm }) => {
               setServerErr({
                 user: '',
                 password: '',
               })
               setLoading(true)
-              onLogin(user, password, () => {
+              onLogin(user, password, rememberMe, () => {
                 resetForm()
                 setEmail('')
               })
@@ -154,8 +154,8 @@ const SignInComponent = () => {
                     <div className="flex items-center justify-between">
                       <div className="flex items-center">
                         <Field
-                          id="remember"
-                          name="remember"
+                          id="rememberMe"
+                          name="rememberMe"
                           type="checkbox"
                           className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
                         />
