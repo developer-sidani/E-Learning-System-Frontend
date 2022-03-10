@@ -50,11 +50,15 @@ const SignUpComponent = () => {
     // console.log(values)
     values.birthday = '2001-02-14'
     values.fullName = `${values.firstname} ${values.lastname}`
-    registerStudent(values)
+    registerStudent(values, resetForm)
 
     // console.log(values)
     // resetForm()
   }
+  // todo:
+  // - Change styling for the select input
+  // - Handle server errors
+  // - show a success message to check email
   return (
     <div className="space-y-6 mt-6 md:m-32">
 
@@ -67,7 +71,6 @@ const SignUpComponent = () => {
             <h2 className={styles.title}>Register to start with Learn +</h2>
             <p className="mt-2 text-center text-sm text-gray-600">
               Already have an account?
-                {' '}
               <a href="/auth/sign-in" className={styles.link}>
                 Login Here
               </a>
