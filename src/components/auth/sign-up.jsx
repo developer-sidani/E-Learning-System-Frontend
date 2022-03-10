@@ -67,7 +67,7 @@ const SignUpComponent = () => {
             <p className="mt-2 text-center text-sm text-gray-600">
               Already have an account?
                 {' '}
-              <a href="./sign-in" className={styles.link}>
+              <a href="/auth/sign-in" className={styles.link}>
                 Login Here
               </a>
             </p>
