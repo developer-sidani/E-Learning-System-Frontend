@@ -39,7 +39,7 @@ const SignInComponent = () => {
           rememberMe,
         })
         console.log(res)
-        if (res.status === errorStatusFromBackend.user || errorStatusFromBackend.checkEmail) {
+        if (res.status === errorStatusFromBackend.user || res.status === errorStatusFromBackend.checkEmail) {
           // not found
           setServerErr(prevState => ({ ...prevState, user: res?.message }))
         } else if (res?.status === errorStatusFromBackend.password) {
