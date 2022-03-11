@@ -3,6 +3,7 @@ import PhoneInput from 'react-phone-input-2'
 import { styles } from '../tw-styles'
 import { countryList } from '../../../utils'
 import 'react-phone-input-2/lib/material.css'
+import { SelectMenu } from '../../select-menu'
 
 const PersonalInformationSection = ({
   touched, errors, handleChange, values,
@@ -83,22 +84,29 @@ const PersonalInformationSection = ({
           </div>
 
           <div className="col-span-6 -mt-1 sm:col-span-3">
-            <label htmlFor="gender" className="block text-sm font-medium text-gray-700">
-              Gender
-            </label>
-            <select
-              value={values.gender}
-              onChange={handleChange}
-              id="gender"
+            <SelectMenu
               name="gender"
-              autoComplete="Gender"
-              className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-            >
-              {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-              <option value="" disabled />
-              <option value="male">Male</option>
-              <option value="female">Female</option>
-            </select>
+              handleChange={handleChange}
+              value={values.gender}
+              options={['Male', 'Female']}
+              title="Gender"
+            />
+            {/* <label htmlFor="gender" className="block text-sm font-medium text-gray-700"> */}
+            {/*   Gender */}
+            {/* </label> */}
+            {/* <select */}
+            {/*   value={values.gender} */}
+            {/*   onChange={handleChange} */}
+            {/*   id="gender" */}
+            {/*   name="gender" */}
+            {/*   autoComplete="Gender" */}
+            {/*   className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" */}
+            {/* > */}
+            {/*   /!* eslint-disable-next-line jsx-a11y/control-has-associated-label *!/ */}
+            {/*   <option value="" disabled /> */}
+            {/*   <option value="male">Male</option> */}
+            {/*   <option value="female">Female</option> */}
+            {/* </select> */}
             {(errors.gender) && touched.gender ? (
               <div className="mt-2 text-pink-600 text-sm">
                 {errors.gender}
@@ -172,7 +180,6 @@ const PersonalInformationSection = ({
               </div>
             ) : null}
           </div>
-
           <div className="col-span-6 sm:col-span-3">
             <label htmlFor="last-name" className="block text-sm font-medium text-gray-700">
               Address

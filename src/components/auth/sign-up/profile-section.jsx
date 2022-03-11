@@ -20,7 +20,6 @@ const ProfileSection = ({
               Username
             </label>
             <div className="mt-1 flex rounded-md shadow-sm">
-
               <input
                 value={values.user}
                 onChange={handleChange}
