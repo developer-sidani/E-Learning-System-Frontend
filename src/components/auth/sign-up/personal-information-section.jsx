@@ -192,19 +192,19 @@ const PersonalInformationSection = ({
               </div>
             ) : null}
           </div>
-          {/* PHONE NUMBER */}
 
         </div>
-        <div className="col-span-6 sm:col-span-3">
-          <div className="col-span- mt-8">
+        {/* PHONE NUMBER */}
+        <div className="col-span-3 sm:col-span-3">
+          <div className="col-span-6 mt-8">
             <PhoneInput
               autoFormat={false}
               inputProps={{
                 name: 'phone',
-                // onChange: handleChange,
+                // onChange: handleChange
                 autoFocus: true,
               }}
-              // country="lb"
+              value={values.phone}
               onChange={(phoneNumber, country, e) => { handleChange(e) }}
               inputClass={styles.inputContainer2}
               containerStyle={{ width: '100%' }}
@@ -216,7 +216,6 @@ const PersonalInformationSection = ({
             ) : null}
           </div>
         </div>
-
       </div>
     </div>
   </div>

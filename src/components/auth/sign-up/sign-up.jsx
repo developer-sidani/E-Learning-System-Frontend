@@ -2,15 +2,19 @@ import React, {
   useCallback, useRef, useState,
 } from 'react'
 import { Formik, Form } from 'formik'
-import { SignUpSchema } from './validation-schema'
-import { callRegisterApi, submitValues, initialValues } from './formik-handlers'
-import ProfileSection from './profile-section'
-import PersonalInformationSection from './personal-information-section'
-import NotificationsSection from './notifications-section'
-import ComponentHeader from './component-header'
-import ErrorAlert from './error-alert'
-
-const dateFormat = 'yyyy-MM-DD'
+import {
+  SignUpSchema,
+  callRegisterApi,
+  submitValues,
+  initialValues,
+  ProfileSection,
+  PersonalInformationSection,
+  NotificationsSection,
+  ComponentHeader,
+  ErrorAlert,
+  SuccessModal,
+} from '.'
+import { wait } from '../../../utils'
 
 const SignUpComponent = () => {
   const ref = useRef(null)
@@ -25,6 +29,7 @@ const SignUpComponent = () => {
   }
   const [serverError, setServerError] = useState('')
   const [loading, setLoading] = useState(false)
+  const [open, setOpen] = useState(false)
   const registerStudent = useCallback(
     callRegisterApi,
     [],
@@ -33,6 +38,7 @@ const SignUpComponent = () => {
   return (
     <div className="space-y-6 mt-6 md:m-32">
       <ComponentHeader />
+      <SuccessModal setOpen={setOpen} open={open} />
       {serverError && <ErrorAlert message={serverError} ref={ref} />}
       <Formik
         initialValues={initialValues}
@@ -47,6 +53,13 @@ const SignUpComponent = () => {
           },
           stopLoading() {
             setLoading(false)
+          },
+          success: async (callback) => {
+            setServerError('')
+            setLoading(false)
+            setOpen(true)
+            await wait(500)
+            callback()
           },
         })}
         validationSchema={SignUpSchema}

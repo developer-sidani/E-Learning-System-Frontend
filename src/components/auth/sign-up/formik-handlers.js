@@ -1,5 +1,7 @@
 import { register } from '../../../api'
 
+const dateFormat = 'yyyy-MM-DD'
+
 const submitValues = (callback, handler) => (values, { resetForm }) => {
   values.email = values.email.toLowerCase()
   values.birthday = '2001-02-14'
@@ -11,18 +13,15 @@ const callRegisterApi = async (data, callback, handler) => {
   handler.init()
   console.log(data)
   try {
-    // console.log(data)
     const res = await register(
       data,
     )
     console.log({ res })
-    if (res?.status === 200) {
-      callback()
+    if (res?.status === 200 || res?.result?.status === 200) {
+      await handler.success(callback)
     } else {
-      //  send error
       handler.error(res?.err?.response?.data?.message)
     }
-    // res.status === 200 && callback()
   } catch (err) {
     console.log({ err })
   } finally {
@@ -38,7 +37,7 @@ const initialValues = {
   confirm_password: '',
   firstname: '',
   lastname: '',
-  phone: '+96123456712',
+  phone: '',
   birthday: '',
   address: '',
   country: '',
