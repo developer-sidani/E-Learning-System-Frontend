@@ -1,8 +1,20 @@
 /* eslint-disable jsx-a11y/no-redundant-roles */
 import React from 'react'
-import {
-  MailIcon, PhoneIcon,
-} from '@heroicons/react/outline'
+import { Formik, Form, Field } from 'formik'
+import { MailIcon, PhoneIcon } from '@heroicons/react/outline'
+import * as Yup from 'yup'
+import { useRouter } from 'next/router'
+import { isEmail } from '../../utils'
+
+const ContactSchema = Yup.object().shape({
+  firstname: Yup.string().required('Required'),
+  lastname: Yup.string().required('Required'),
+  email: Yup.string().email('Must be a valid email').required('Required'),
+  phone: Yup.string(),
+  subject: Yup.string().required('Required'),
+  message: Yup.string().max(500).required('Required'),
+})
+
 // todo add formik and handle the api
 const ContactUsComponent = ({ offices }) => (
     <>
@@ -12,7 +24,7 @@ const ContactUsComponent = ({ offices }) => (
         <div className="bg-warm-gray-50">
           <div className="py-24 lg:py-32">
             <div className="relative z-10 max-w-7xl mx-auto pl-4 pr-8 sm:px-6 lg:px-8">
-              <h1 className="text-4xl font-extrabold tracking-tight text-[#0A033c] sm:text-5xl lg:text-6xl">
+              <h1 className="text-4xl font-extrabold tracking-tight text-primary sm:text-5xl lg:text-6xl">
                 Get in touch
               </h1>
               <p className="mt-6 text-xl text-[#6E6259] max-w-3xl">
@@ -58,7 +70,7 @@ const ContactUsComponent = ({ offices }) => (
 
               <div className="grid grid-cols-1 lg:grid-cols-3">
                 {/* Contact information */}
-                <div className="relative overflow-hidden py-10 px-6 bg-gradient-to-b from-teal-500 to-teal-600 sm:px-10 xl:p-12">
+                <div className="relative overflow-hidden py-10 px-6 bg-gradient-to-b from-secondary to-primary sm:px-10 xl:p-12">
                   {/* Decorative angle backgrounds */}
                   <div className="absolute inset-0 pointer-events-none sm:hidden" aria-hidden="true">
                     <svg
@@ -166,7 +178,7 @@ const ContactUsComponent = ({ offices }) => (
                     </dt>
                     <dd className="flex text-base text-teal-50">
                       <PhoneIcon className="flex-shrink-0 w-6 h-6 text-teal-200" aria-hidden="true" />
-                      <span className="ml-3">+961 01 000 111</span>
+                      <span className="ml-3">+961 1 123 456</span>
                     </dd>
                     <dt>
                       <span className="sr-only">Email</span>
@@ -178,7 +190,7 @@ const ContactUsComponent = ({ offices }) => (
                   </dl>
                   <ul role="list" className="mt-8 flex space-x-12">
                     <li>
-                      <a className="text-teal-200 hover:text-teal-100" href="#">
+                      <a className="text-teal-200 hover:text-teal-100" href="https://facebook.com">
                         <span className="sr-only">Facebook</span>
                         <svg className="w-7 h-7" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24">
                           <path
@@ -190,7 +202,7 @@ const ContactUsComponent = ({ offices }) => (
                       </a>
                     </li>
                     <li>
-                      <a className="text-teal-200 hover:text-teal-100" href="#">
+                      <a className="text-teal-200 hover:text-teal-100" href="https://github.com">
                         <span className="sr-only">GitHub</span>
                         <svg className="w-7 h-7" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24">
                           <path
@@ -202,7 +214,7 @@ const ContactUsComponent = ({ offices }) => (
                       </a>
                     </li>
                     <li>
-                      <a className="text-teal-200 hover:text-teal-100" href="#">
+                      <a className="text-teal-200 hover:text-teal-100" href="https://twitter.com">
                         <span className="sr-only">Twitter</span>
                         <svg className="w-7 h-7" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24">
                           <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
@@ -213,9 +225,22 @@ const ContactUsComponent = ({ offices }) => (
                 </div>
 
                 {/* Contact form */}
+
                 <div className="py-10 px-6 sm:px-10 lg:col-span-2 xl:p-12">
                   <h3 className="text-lg font-medium text-[#0A003C]">Send us a message</h3>
-                  <form action="#" method="POST" className="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8">
+                  <Formik
+                    initialValues={{
+                      firstname: '',
+                      lastname: '',
+                      email: '',
+                      phone: '',
+                      subject: '',
+                      message: '',
+                    }}
+                    validationSchema={ContactSchema}
+                  >
+                  {({ errors, touched, handleChange }) => (
+                  <Form className="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8">
                     <div>
                       <label htmlFor="first-name" className="block text-sm font-medium text-[#0A003C]">
                         First name
@@ -223,11 +248,16 @@ const ContactUsComponent = ({ offices }) => (
                       <div className="mt-1">
                         <input
                           type="text"
-                          name="first-name"
-                          id="first-name"
+                          name="firstname"
+                          id="firstname"
                           autoComplete="given-name"
                           className="border py-3 px-4 block w-full shadow-sm text-warm-gray-900 focus:ring-teal-500 focus:border-teal-500 border-warm-gray-300 rounded-md"
                         />
+                        {(errors.firstname) && touched.firstname ? (
+                          <div className="mt-2 text-pink-600 text-sm">
+                            {errors.firstname}
+                          </div>
+                        ) : null}
                       </div>
                     </div>
                     <div>
@@ -237,11 +267,16 @@ const ContactUsComponent = ({ offices }) => (
                       <div className="mt-1">
                         <input
                           type="text"
-                          name="last-name"
-                          id="last-name"
+                          name="lastname"
+                          id="lastname"
                           autoComplete="family-name"
                           className="border py-3 px-4 block w-full shadow-sm text-warm-gray-900 focus:ring-teal-500 focus:border-teal-500 border-warm-gray-300 rounded-md"
                         />
+                         {(errors.lastname) && touched.lastname ? (
+                          <div className="mt-2 text-pink-600 text-sm">
+                            {errors.lastname}
+                          </div>
+                         ) : null}
                       </div>
                     </div>
                     <div>
@@ -256,6 +291,11 @@ const ContactUsComponent = ({ offices }) => (
                           autoComplete="email"
                           className="border py-3 px-4 block w-full shadow-sm text-warm-gray-900 focus:ring-teal-500 focus:border-teal-500 border-warm-gray-300 rounded-md"
                         />
+                        {(errors.email) && touched.email ? (
+                          <div className="mt-2 text-pink-600 text-sm">
+                            {errors.email}
+                          </div>
+                        ) : null}
                       </div>
                     </div>
                     <div>
@@ -276,6 +316,11 @@ const ContactUsComponent = ({ offices }) => (
                           className="border py-3 px-4 block w-full shadow-sm text-warm-gray-900 focus:ring-teal-500 focus:border-teal-500 border-warm-gray-300 rounded-md"
                           aria-describedby="phone-optional"
                         />
+                        {(errors.phone) && touched.phone ? (
+                          <div className="mt-2 text-pink-600 text-sm">
+                            {errors.phone}
+                          </div>
+                        ) : null}
                       </div>
                     </div>
                     <div className="sm:col-span-2">
@@ -289,6 +334,11 @@ const ContactUsComponent = ({ offices }) => (
                           id="subject"
                           className="py-3 px-4 block w-full shadow-sm text-warm-gray-900 focus:ring-teal-500 focus:border-teal-500 border border-warm-gray-300 rounded-md"
                         />
+                        {(errors.subject) && touched.subject ? (
+                          <div className="mt-2 text-pink-600 text-sm">
+                            {errors.subject}
+                          </div>
+                        ) : null}
                       </div>
                     </div>
                     <div className="sm:col-span-2">
@@ -309,6 +359,11 @@ const ContactUsComponent = ({ offices }) => (
                         aria-describedby="message-max"
                         defaultValue=""
                       />
+                      {(errors.message) && touched.message ? (
+                          <div className="mt-2 text-pink-600 text-sm">
+                            {errors.message}
+                          </div>
+                      ) : null}
                       </div>
                     </div>
                     <div className="sm:col-span-2 sm:flex sm:justify-end">
@@ -319,7 +374,9 @@ const ContactUsComponent = ({ offices }) => (
                         Submit
                       </button>
                     </div>
-                  </form>
+                  </Form>
+                  )}
+                  </Formik>
                 </div>
               </div>
             </div>
