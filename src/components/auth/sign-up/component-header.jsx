@@ -11,7 +11,7 @@ const ComponentHeader = () => (
       src={Logo}
       alt="Learn+"
     />
-    <h2 className={styles.title}>Register to start with Learn +</h2>
+    <h2 className={styles.title}>Register to start with Learn+</h2>
     <p className="mt-2 text-center text-sm text-gray-600">
       Already have an account?
       {' '}

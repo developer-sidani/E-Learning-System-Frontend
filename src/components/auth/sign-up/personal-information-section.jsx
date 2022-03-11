@@ -157,12 +157,12 @@ const PersonalInformationSection = ({
               id="country"
               name="country"
               autoComplete="country-name"
-              className={`mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${styles.inputContainer}`}
+              className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             >
               {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
               <option value="" disabled />
-              {countryList.map((x, i) => (
-                <option key={i} value={x.Name}>{x.Name}</option>
+              {countryList.map(({ Name }, i) => (
+                <option key={i} value={Name}>{Name}</option>
               ))}
             </select>
             {(errors.country) && touched.country ? (

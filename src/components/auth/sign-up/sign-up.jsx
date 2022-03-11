@@ -1,33 +1,56 @@
-import React, { useCallback } from 'react'
+import React, {
+  useCallback, useRef, useState,
+} from 'react'
 import { Formik, Form } from 'formik'
 import { SignUpSchema } from './validation-schema'
-import { isEmail, phoneRegex, countryList } from '../../../utils'
-import { styles } from '../tw-styles'
 import 'react-phone-input-2/lib/material.css'
 import { callRegisterApi, submitValues, initialValues } from './formik-handlers'
 import ProfileSection from './profile-section'
 import PersonalInformationSection from './personal-information-section'
 import NotificationsSection from './notifications-section'
 import ComponentHeader from './component-header'
+import ErrorAlert from './error-alert'
+import { styles } from '../tw-styles'
 
-const dataFormat = 'yyyy-MM-DD'
+const dateFormat = 'yyyy-MM-DD'
 
 const SignUpComponent = () => {
+  const ref = useRef(null)
+  const scrollToError = () => {
+    if (ref && ref.current /* + other conditions */) {
+      ref.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+        inline: 'start',
+      })
+    }
+  }
+  const [serverError, setServerError] = useState('')
+  const [loading, setLoading] = useState(false)
   const registerStudent = useCallback(
     callRegisterApi,
     [],
   )
 
-  // todo:
-  // - Change styling for the select input
-  // - Handle server errors
-  // - show a success message to check email
   return (
     <div className="space-y-6 mt-6 md:m-32">
       <ComponentHeader />
+      {serverError && <ErrorAlert message={serverError} ref={ref} />}
       <Formik
         initialValues={initialValues}
-        onSubmit={submitValues(registerStudent)}
+        onSubmit={submitValues(registerStudent, {
+          init() {
+            setServerError('')
+            setLoading(true)
+          },
+          error(message) {
+            setServerError(message)
+            scrollToError()
+          },
+          stopLoading() {
+            setLoading(false)
+          },
+        })}
         validationSchema={SignUpSchema}
       >
         {({
@@ -50,20 +73,19 @@ const SignUpComponent = () => {
               values={values}
               handleChange={handleChange}
             />
-
             <div className="flex justify-center content-center">
               <button
                 type="submit"
-                className="ml-3 w-60 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                disabled={loading}
+                className={loading ? 'animate-pulse ml-3 w-60 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-gray-400'
+                  : 'ml-3 w-60 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'}
               >
                 Sign Up
               </button>
             </div>
-
           </Form>
         )}
       </Formik>
-
     </div>
   )
 }
