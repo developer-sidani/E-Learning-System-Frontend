@@ -15,6 +15,10 @@ const ContactSchema = Yup.object().shape({
   message: Yup.string().max(500).required('Required'),
 })
 
+const submitValues = () => (values, { resetForm }) => {
+  console.log(values)
+}
+
 // todo add formik and handle the api
 const ContactUsComponent = ({ offices }) => (
     <>
