@@ -242,8 +242,11 @@ const ContactUsComponent = ({ offices }) => (
                       message: '',
                     }}
                     validationSchema={ContactSchema}
+                    onSubmit
                   >
-                  {({ errors, touched, handleChange }) => (
+                  {({
+                    values, errors, touched, handleChange,
+                  }) => (
                   <Form className="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8">
                     <div>
                       <label htmlFor="first-name" className="block text-sm font-medium text-[#0A003C]">
@@ -251,6 +254,8 @@ const ContactUsComponent = ({ offices }) => (
                       </label>
                       <div className="mt-1">
                         <input
+                          value={values.firstname}
+                          onChange={handleChange}
                           type="text"
                           name="firstname"
                           id="firstname"
@@ -270,6 +275,8 @@ const ContactUsComponent = ({ offices }) => (
                       </label>
                       <div className="mt-1">
                         <input
+                          value={values.lastname}
+                          onChange={handleChange}
                           type="text"
                           name="lastname"
                           id="lastname"
@@ -289,6 +296,8 @@ const ContactUsComponent = ({ offices }) => (
                       </label>
                       <div className="mt-1">
                         <input
+                          value={values.email}
+                          onChange={handleChange}
                           id="email"
                           name="email"
                           type="email"
@@ -313,6 +322,8 @@ const ContactUsComponent = ({ offices }) => (
                       </div>
                       <div className="mt-1">
                         <input
+                          value={values.phone}
+                          onChange={handleChange}
                           type="text"
                           name="phone"
                           id="phone"
@@ -333,6 +344,8 @@ const ContactUsComponent = ({ offices }) => (
                       </label>
                       <div className="mt-1">
                         <input
+                          value={values.subject}
+                          onChange={handleChange}
                           type="text"
                           name="subject"
                           id="subject"
@@ -356,6 +369,8 @@ const ContactUsComponent = ({ offices }) => (
                       </div>
                       <div className="mt-1">
                       <textarea
+                        value={values.message}
+                        onChange={handleChange}
                         id="message"
                         name="message"
                         rows={4}
