@@ -9,7 +9,7 @@ const Home = () => {
   const profile = useSelector(state => state.profile)
   const router = useRouter()
   console.log({ profile })
-  const { info } = profile.user
+  const { info } = profile.user || { info: null }
   return (
     <>
       <PageHeader title="Learn+" />
@@ -31,9 +31,9 @@ const Home = () => {
 }
 Home.getLayout = (page) => (
   <MainLayout>
-    <AuthGuard>
+    {/* <AuthGuard> */}
       {page}
-    </AuthGuard>
+    {/* </AuthGuard> */}
   </MainLayout>
 )
 export default Home
