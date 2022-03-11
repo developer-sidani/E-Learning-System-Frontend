@@ -1,8 +1,6 @@
 import React, { useCallback } from 'react'
 import { Formik, Form } from 'formik'
-import PhoneInput from 'react-phone-input-2'
 import { SignUpSchema } from './validation-schema'
-import { register } from '../../../api'
 import { isEmail, phoneRegex, countryList } from '../../../utils'
 import { styles } from '../tw-styles'
 import 'react-phone-input-2/lib/material.css'
@@ -10,10 +8,9 @@ import { callRegisterApi, submitValues, initialValues } from './formik-handlers'
 import ProfileSection from './profile-section'
 import PersonalInformationSection from './personal-information-section'
 import NotificationsSection from './notifications-section'
+import ComponentHeader from './component-header'
 
 const dataFormat = 'yyyy-MM-DD'
-
-const Logo = 'https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg'
 
 const SignUpComponent = () => {
   const registerStudent = useCallback(
@@ -27,23 +24,7 @@ const SignUpComponent = () => {
   // - show a success message to check email
   return (
     <div className="space-y-6 mt-6 md:m-32">
-
-      <div className={styles.header}>
-        <img
-          className={styles.logo}
-          src={Logo}
-          alt="Learn+"
-        />
-        <h2 className={styles.title}>Register to start with Learn +</h2>
-        <p className="mt-2 text-center text-sm text-gray-600">
-          Already have an account?
-          {' '}
-          <a href="/auth/sign-in" className={styles.link}>
-            Login Here
-          </a>
-        </p>
-      </div>
-
+      <ComponentHeader />
       <Formik
         initialValues={initialValues}
         onSubmit={submitValues(registerStudent)}
