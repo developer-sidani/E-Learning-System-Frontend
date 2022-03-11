@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
 import { PageHeader } from '../../components'
 import { AuthGuard } from '../../guards'
+import { MainLayout } from '../../layouts'
 
 const Home = () => {
   const profile = useSelector(state => state.profile)
@@ -29,8 +30,10 @@ const Home = () => {
   )
 }
 Home.getLayout = (page) => (
-  <AuthGuard>
-    {page}
-  </AuthGuard>
+  <MainLayout>
+    <AuthGuard>
+      {page}
+    </AuthGuard>
+  </MainLayout>
 )
 export default Home
