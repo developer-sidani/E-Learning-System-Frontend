@@ -2,6 +2,7 @@ import React from 'react'
 import PhoneInput from 'react-phone-input-2'
 import { styles } from '../tw-styles'
 import { countryList } from '../../../utils'
+import 'react-phone-input-2/lib/material.css'
 
 const PersonalInformationSection = ({
   touched, errors, handleChange, values,
@@ -197,12 +198,14 @@ const PersonalInformationSection = ({
         <div className="col-span-6 sm:col-span-3">
           <div className="col-span- mt-8">
             <PhoneInput
+              autoFormat={false}
               inputProps={{
-                // value: values.phone,
+                name: 'phone',
                 // onChange: handleChange,
                 autoFocus: true,
               }}
               // country="lb"
+              onChange={(phoneNumber, country, e) => { handleChange(e) }}
               inputClass={styles.inputContainer2}
               containerStyle={{ width: '100%' }}
             />

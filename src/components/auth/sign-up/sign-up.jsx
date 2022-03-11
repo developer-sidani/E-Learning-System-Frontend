@@ -3,14 +3,12 @@ import React, {
 } from 'react'
 import { Formik, Form } from 'formik'
 import { SignUpSchema } from './validation-schema'
-import 'react-phone-input-2/lib/material.css'
 import { callRegisterApi, submitValues, initialValues } from './formik-handlers'
 import ProfileSection from './profile-section'
 import PersonalInformationSection from './personal-information-section'
 import NotificationsSection from './notifications-section'
 import ComponentHeader from './component-header'
 import ErrorAlert from './error-alert'
-import { styles } from '../tw-styles'
 
 const dateFormat = 'yyyy-MM-DD'
 
