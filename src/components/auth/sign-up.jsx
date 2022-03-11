@@ -15,7 +15,10 @@ const SignUpSchema = Yup.object().shape({
   user: Yup.string().required('Required'),
   photo: Yup.string(),
   email: Yup.string().email('Must be a valid email').required('Required'),
-  password: Yup.string().required('Required'),
+  password: Yup.string().required('Required').matches(
+    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+    'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character',
+  ),
   confirm_password: Yup.string()
     .oneOf([Yup.ref('password'), null], 'Passwords must match'),
   firstname: Yup.string().required('Required'),
@@ -48,6 +51,7 @@ const SignUpComponent = () => {
 
   const submitValues = (values, { resetForm }) => {
     // console.log(values)
+    values.email = `${values.email}`.toLowerCase()
     values.birthday = '2001-02-14'
     values.fullName = `${values.firstname} ${values.lastname}`
     registerStudent(values, resetForm)
@@ -147,6 +151,7 @@ const SignUpComponent = () => {
             <div className="md:col-span-1">
               <h3 className="text-lg font-medium leading-6 text-gray-900">Personal Information</h3>
               <p className="mt-1 text-sm text-gray-500">Use a permanent address where you can receive mail.</p>
+
             </div>
             <div className="mt-5 md:mt-0 md:col-span-2">
 
