@@ -18,8 +18,3 @@ a {
 * {
   box-sizing: border-box;
 }
-html,
-body,
-#__next {
-  @apply flex flex-col h-screen;
-}

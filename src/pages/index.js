@@ -1,28 +1,11 @@
 import React from 'react'
-import { useRouter } from 'next/router'
 import { PageHeader } from '../components'
-import { GuestGuard } from '../guards'
 
-const Home = () => {
-  const router = useRouter()
-  return (
+const Home = () => (
     <>
-      <PageHeader title="Learn+" />
-      <h1>Learn+</h1>
-      <button
-        type="button"
-        onClick={() => {
-          router.push('/auth/sign-in')
-        }}
-      >
-        Sign In
-      </button>
+        <PageHeader title="Learn+" />
+        <h1>Learn+</h1>
     </>
-  )
-}
-Home.getLayout = (page) => (
-    <GuestGuard>
-        {page}
-    </GuestGuard>
 )
+
 export default Home
