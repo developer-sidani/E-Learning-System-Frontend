@@ -3,15 +3,8 @@ import React from 'react'
 import {
   MailIcon, PhoneIcon,
 } from '@heroicons/react/outline'
-
-const offices = [
-  { id: 1, city: 'Los Angeles', address: ['4556 Brendan Ferry', 'Los Angeles, CA 90210'] },
-  { id: 2, city: 'New York', address: ['886 Walter Streets', 'New York, NY 12345'] },
-  { id: 3, city: 'Toronto', address: ['7363 Cynthia Pass', 'Toronto, ON N3Y 4H8'] },
-  { id: 4, city: 'London', address: ['114 Cobble Lane', 'London N1 2EF'] },
-]
-
-const ContactUsComponent = () => (
+// todo add formik and handle the api
+const ContactUsComponent = ({ offices }) => (
     <>
     <div className="bg-white">
       <main className="overflow-hidden">
@@ -233,7 +226,7 @@ const ContactUsComponent = () => (
                           name="first-name"
                           id="first-name"
                           autoComplete="given-name"
-                          className="py-3 px-4 block w-full shadow-sm text-warm-gray-900 focus:ring-teal-500 focus:border-teal-500 border-warm-gray-300 rounded-md"
+                          className="border py-3 px-4 block w-full shadow-sm text-warm-gray-900 focus:ring-teal-500 focus:border-teal-500 border-warm-gray-300 rounded-md"
                         />
                       </div>
                     </div>
@@ -247,7 +240,7 @@ const ContactUsComponent = () => (
                           name="last-name"
                           id="last-name"
                           autoComplete="family-name"
-                          className="py-3 px-4 block w-full shadow-sm text-warm-gray-900 focus:ring-teal-500 focus:border-teal-500 border-warm-gray-300 rounded-md"
+                          className="border py-3 px-4 block w-full shadow-sm text-warm-gray-900 focus:ring-teal-500 focus:border-teal-500 border-warm-gray-300 rounded-md"
                         />
                       </div>
                     </div>
@@ -261,7 +254,7 @@ const ContactUsComponent = () => (
                           name="email"
                           type="email"
                           autoComplete="email"
-                          className="py-3 px-4 block w-full shadow-sm text-warm-gray-900 focus:ring-teal-500 focus:border-teal-500 border-warm-gray-300 rounded-md"
+                          className="border py-3 px-4 block w-full shadow-sm text-warm-gray-900 focus:ring-teal-500 focus:border-teal-500 border-warm-gray-300 rounded-md"
                         />
                       </div>
                     </div>
@@ -280,7 +273,7 @@ const ContactUsComponent = () => (
                           name="phone"
                           id="phone"
                           autoComplete="tel"
-                          className="py-3 px-4 block w-full shadow-sm text-warm-gray-900 focus:ring-teal-500 focus:border-teal-500 border-warm-gray-300 rounded-md"
+                          className="border py-3 px-4 block w-full shadow-sm text-warm-gray-900 focus:ring-teal-500 focus:border-teal-500 border-warm-gray-300 rounded-md"
                           aria-describedby="phone-optional"
                         />
                       </div>
@@ -294,7 +287,7 @@ const ContactUsComponent = () => (
                           type="text"
                           name="subject"
                           id="subject"
-                          className="py-3 px-4 block w-full shadow-sm text-warm-gray-900 focus:ring-teal-500 focus:border-teal-500 border-warm-gray-300 rounded-md"
+                          className="py-3 px-4 block w-full shadow-sm text-warm-gray-900 focus:ring-teal-500 focus:border-teal-500 border border-warm-gray-300 rounded-md"
                         />
                       </div>
                     </div>
@@ -312,7 +305,7 @@ const ContactUsComponent = () => (
                         id="message"
                         name="message"
                         rows={4}
-                        className="py-3 px-4 block w-full shadow-sm text-warm-gray-900 focus:ring-teal-500 focus:border-teal-500 border border-warm-gray-300 rounded-md"
+                        className="py-3 px-4 block w-full shadow-sm text-warm-gray-900 focus:ring-teal-500 focus:border-teal-500 border border-warm-gray-300 rounded-md resize-none"
                         aria-describedby="message-max"
                         defaultValue=""
                       />
@@ -339,16 +332,15 @@ const ContactUsComponent = () => (
                 Our offices
               </h2>
               <p className="mt-6 text-lg text-[#6E6259] max-w-3xl">
-                Varius facilisi mauris sed sit. Non sed et duis dui leo, vulputate id malesuada non. Cras aliquet purus
-                dui laoreet diam sed lacus, fames.
+                No matter where you are, we’re never too far away. Our offices and agents are located across your region.
               </p>
               <div className="mt-10 grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
-                {offices.map((office) => (
+                {offices?.map((office) => (
                   <div key={office.id}>
                     <h3 className="text-lg font-medium text-[#0A003C]">{office.city}</h3>
                     <p className="mt-2 text-base text-[#6E6259]">
-                      {office.address.map((line) => (
-                        <span key={line} className="block">
+                      {office?.address?.map((line, index) => (
+                        <span key={index} className="block">
                         {line}
                         </span>
                       ))}
