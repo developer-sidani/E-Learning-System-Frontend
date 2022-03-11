@@ -94,10 +94,11 @@ const Footer = () => {
   console.log('index')
   return (
 
-          <footer className="bg-gray-800" aria-labelledby="footer-heading">
-            <h2 id="footer-heading" className="sr-only">
+      <footer className="bg-gray-800 static" aria-labelledby="footer-heading">
+          <div className="w-full bottom-0">
+          <h2 id="footer-heading" className="sr-only">
               Footer
-            </h2>
+          </h2>
             <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
               <div className="xl:grid xl:grid-cols-3 xl:gap-8">
                 <div className="grid grid-cols-2 gap-8 xl:col-span-2">
@@ -199,8 +200,9 @@ const Footer = () => {
                 </p>
               </div>
             </div>
-          </footer>
 
+          </div>
+      </footer>
   )
 }
 

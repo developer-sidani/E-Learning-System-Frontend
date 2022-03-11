@@ -1,10 +1,11 @@
 import React from 'react'
-import { Footer } from '../components'
+import { Navbar, Footer } from '../components'
 
 const MainLayout = ({ children }) => (
 
     <>
-
+     {/* Show Navbar Component */}
+      <Navbar />
     {/* Children as props */}
       {children}
       {/* Show Footer Component */}
