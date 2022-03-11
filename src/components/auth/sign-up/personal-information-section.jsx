@@ -5,6 +5,7 @@ import { countryList } from '../../../utils'
 import 'react-phone-input-2/lib/material.css'
 import { SelectMenu } from '../../select-menu'
 
+const countries = countryList.map(({ Name }) => Name)
 const PersonalInformationSection = ({
   touched, errors, handleChange, values,
 }) => (
@@ -157,23 +158,30 @@ const PersonalInformationSection = ({
 
           {/* ************************************************** */}
           <div className="col-span-6 sm:col-span-3 -mt-1">
-            <label htmlFor="country" className="block text-sm font-medium text-gray-700">
-              Country
-            </label>
-            <select
-              value={values.country}
-              onChange={handleChange}
-              id="country"
+            <SelectMenu
               name="country"
-              autoComplete="country-name"
-              className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-            >
-              {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-              <option value="" disabled />
-              {countryList.map(({ Name }, i) => (
-                <option key={i} value={Name}>{Name}</option>
-              ))}
-            </select>
+              handleChange={handleChange}
+              value={values.country}
+              options={countries}
+              title="Country"
+            />
+            {/* <label htmlFor="country" className="block text-sm font-medium text-gray-700"> */}
+            {/*   Country */}
+            {/* </label> */}
+            {/* <select */}
+            {/*   value={values.country} */}
+            {/*   onChange={handleChange} */}
+            {/*   id="country" */}
+            {/*   name="country" */}
+            {/*   autoComplete="country-name" */}
+            {/*   className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" */}
+            {/* > */}
+            {/*   /!* eslint-disable-next-line jsx-a11y/control-has-associated-label *!/ */}
+            {/*   <option value="" disabled /> */}
+            {/*   {countryList.map(({ Name }, i) => ( */}
+            {/*     <option key={i} value={Name}>{Name}</option> */}
+            {/*   ))} */}
+            {/* </select> */}
             {(errors.country) && touched.country ? (
               <div className="mt-2 text-pink-600 text-sm">
                 {errors.country}
