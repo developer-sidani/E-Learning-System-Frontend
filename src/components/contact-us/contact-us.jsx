@@ -17,6 +17,7 @@ const ContactSchema = Yup.object().shape({
 
 const submitValues = () => (values, { resetForm }) => {
   console.log(values)
+  resetForm()
 }
 
 // todo add formik and handle the api
@@ -242,10 +243,10 @@ const ContactUsComponent = ({ offices }) => (
                       message: '',
                     }}
                     validationSchema={ContactSchema}
-                    onSubmit
+                    onSubmit={submitValues()}
                   >
                   {({
-                    values, errors, touched, handleChange,
+                    values, errors, touched, handleChange, handleSubmit,
                   }) => (
                   <Form className="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8">
                     <div>
@@ -376,7 +377,6 @@ const ContactUsComponent = ({ offices }) => (
                         rows={4}
                         className="py-3 px-4 block w-full shadow-sm text-warm-gray-900 focus:ring-teal-500 focus:border-teal-500 border border-warm-gray-300 rounded-md resize-none"
                         aria-describedby="message-max"
-                        defaultValue=""
                       />
                       {(errors.message) && touched.message ? (
                           <div className="mt-2 text-pink-600 text-sm">
@@ -388,6 +388,7 @@ const ContactUsComponent = ({ offices }) => (
                     <div className="sm:col-span-2 sm:flex sm:justify-end">
                       <button
                         type="submit"
+                        onClick={handleSubmit}
                         className="mt-2 w-full inline-flex items-center justify-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-teal-500 hover:bg-teal-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 sm:w-auto"
                       >
                         Submit
