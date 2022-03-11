@@ -5,13 +5,14 @@ import { useRouter } from 'next/router'
 import { useDispatch } from 'react-redux'
 import { login } from '../../api'
 import { styles } from './tw-styles'
-import { isEmail } from '../../utils'
+import { isEmail, wait } from '../../utils'
 import { Modal } from '.'
 import { set } from '../../slices/profile'
 
 const errorStatusFromBackend = {
   password: 401,
   user: 403,
+  checkEmail: 400,
 }
 
 const Logo = 'https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg'
@@ -37,16 +38,16 @@ const SignInComponent = () => {
           password,
           rememberMe,
         })
-        if (res.status === errorStatusFromBackend.user) {
+        console.log(res)
+        if (res.status === errorStatusFromBackend.user || errorStatusFromBackend.checkEmail) {
           // not found
           setServerErr(prevState => ({ ...prevState, user: res?.message }))
         } else if (res?.status === errorStatusFromBackend.password) {
           // wrong password
           setServerErr(prevState => ({ ...prevState, password: res?.message }))
-        } else {
-          callback()
-          // router.push('/')
+        } else if (res?.status === 200) {
           dispatch(set({ user: res.user, token: res.token }))
+          callback()
         }
       } catch (err) {
         console.log({ err })
@@ -98,14 +99,24 @@ const SignInComponent = () => {
                 password: '',
               })
               setLoading(true)
-              onLogin(user, password, rememberMe, () => {
+              onLogin(user, password, rememberMe, async () => {
+                await wait(500)
                 resetForm()
                 setEmail('')
+                router.push('/home')
               })
             }}
           >
-              {({ errors, touched, handleChange }) => (
-                  <Form className="space-y-6">
+              {({
+                errors, handleSubmit, touched, handleChange,
+              }) => (
+                  <Form
+                    className="space-y-6"
+                    onSubmit={e => {
+                      e.preventDefault()
+                      handleSubmit()
+                    }}
+                  >
                     <div>
                       <label htmlFor="user" className={styles.inputLabel}>
                         Email or Username

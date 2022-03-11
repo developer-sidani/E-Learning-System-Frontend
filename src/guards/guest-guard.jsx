@@ -12,7 +12,7 @@ const GuestGuard = ({ children }) => {
       return
     }
     if (profile?.token) {
-      router.push('/')
+      router.push('/home')
     } else {
       setChecked(true)
     }
