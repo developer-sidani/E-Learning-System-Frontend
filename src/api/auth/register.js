@@ -45,7 +45,7 @@ export const register = async (
         address,
         type: 'Student', // keep same here
         isNotified,
-        keepMeUpdated,
+        keepMeUpdated: false,
       },
     })
     return {
