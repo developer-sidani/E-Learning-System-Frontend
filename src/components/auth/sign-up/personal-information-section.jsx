@@ -4,10 +4,12 @@ import { styles } from '../tw-styles'
 import { countryList } from '../../../utils'
 import 'react-phone-input-2/lib/material.css'
 import { SelectMenu } from '../../select-menu'
+import { DatePickerComponent } from '../../date-picker'
+import { Grid } from '@mui/material'
 
 const countries = countryList.map(({ Name }) => Name)
 const PersonalInformationSection = ({
-  touched, errors, handleChange, values,
+  touched, errors, handleChange, values, setFieldValue,
 }) => (
   <div className="bg-white shadow px-4 py-5 sm:rounded-lg sm:p-6">
     <div className="md:grid md:grid-cols-3 md:gap-6">
@@ -165,23 +167,6 @@ const PersonalInformationSection = ({
               options={countries}
               title="Country"
             />
-            {/* <label htmlFor="country" className="block text-sm font-medium text-gray-700"> */}
-            {/*   Country */}
-            {/* </label> */}
-            {/* <select */}
-            {/*   value={values.country} */}
-            {/*   onChange={handleChange} */}
-            {/*   id="country" */}
-            {/*   name="country" */}
-            {/*   autoComplete="country-name" */}
-            {/*   className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" */}
-            {/* > */}
-            {/*   /!* eslint-disable-next-line jsx-a11y/control-has-associated-label *!/ */}
-            {/*   <option value="" disabled /> */}
-            {/*   {countryList.map(({ Name }, i) => ( */}
-            {/*     <option key={i} value={Name}>{Name}</option> */}
-            {/*   ))} */}
-            {/* </select> */}
             {(errors.country) && touched.country ? (
               <div className="mt-2 text-pink-600 text-sm">
                 {errors.country}
@@ -210,27 +195,48 @@ const PersonalInformationSection = ({
 
         </div>
         {/* PHONE NUMBER */}
-        <div className="col-span-3 sm:col-span-3">
-          <div className="col-span-6 mt-8">
-            <PhoneInput
-              autoFormat={false}
-              inputProps={{
-                name: 'phone',
-                // onChange: handleChange
-                autoFocus: true,
-              }}
-              value={values.phone}
-              onChange={(phoneNumber, country, e) => { handleChange(e) }}
-              inputClass={styles.inputContainer2}
-              containerStyle={{ width: '100%' }}
+        <Grid
+          container
+          spacing={3}
+          mt={2}
+        >
+          <Grid
+            item
+            md={6}
+            sm={12}
+          >
+            <>
+              <PhoneInput
+                autoFormat={false}
+                inputProps={{
+                  name: 'phone',
+                  autoFocus: true,
+                }}
+                value={values.phone}
+                onChange={(phoneNumber, country, e) => { handleChange(e) }}
+                // inputClass={styles.inputContainer2}
+                // containerStyle={{ width: '100%' }}
+              />
+              {(errors.phone) && touched.phone ? (
+                <div className="mt-2 text-pink-600 text-sm">
+                  {errors.phone}
+                </div>
+              ) : null}
+            </>
+          </Grid>
+          <Grid
+            item
+            md={6}
+            sm={12}
+          >
+            <DatePickerComponent
+              label="Birthday"
+              date={values.birthday}
+              setDate={setFieldValue}
+              name="birthday"
             />
-            {(errors.phone) && touched.phone ? (
-              <div className="mt-2 text-pink-600 text-sm">
-                {errors.phone}
-              </div>
-            ) : null}
-          </div>
-        </div>
+          </Grid>
+        </Grid>
       </div>
     </div>
   </div>

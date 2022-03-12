@@ -1,10 +1,11 @@
+import moment from 'moment'
 import { register } from '../../../api'
 
 const dateFormat = 'yyyy-MM-DD'
 
 const submitValues = (callback, handler) => (values, { resetForm }) => {
   values.email = values.email.toLowerCase()
-  values.birthday = '2001-02-14'
+  values.birthday = moment(values.birthday).format(dateFormat)
   values.fullName = `${values.firstname} ${values.lastname}`
   callback(values, resetForm, handler)
 }
@@ -38,12 +39,12 @@ const initialValues = {
   firstname: '',
   lastname: '',
   phone: '',
-  birthday: '',
   address: '',
   country: '',
   gender: '',
   isNotified: true,
   keepMeUpdated: true,
+  birthday: new Date(),
 }
 export {
   initialValues,

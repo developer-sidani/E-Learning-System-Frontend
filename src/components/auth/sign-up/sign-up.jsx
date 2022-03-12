@@ -65,6 +65,7 @@ const SignUpComponent = () => {
         validationSchema={SignUpSchema}
       >
         {({
+          setFieldValue,
           errors, touched, handleChange, values,
         }) => (
           <Form className="space-y-6">
@@ -79,6 +80,7 @@ const SignUpComponent = () => {
               errors={errors}
               handleChange={handleChange}
               touched={touched}
+              setFieldValue={setFieldValue}
             />
             <NotificationsSection
               values={values}
