@@ -1,11 +1,17 @@
 {
+  "homepage": "http://learnplus.live/",
   "name": "fyp-fe",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prod": "next start",
+    "dev:up": "docker-compose -f docker-compose.yml -f docker-compose.dev.yml up",
+    "prod:up": "docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d",
+    "restart": "docker-compose down && docker image rm fyp-fe_fyp-fe && yarn run prod:up",
+    "prod:test": "docker-compose down && docker image rm fyp-fe_fyp-fe && git pull && yarn run prod:up"
   },
   "dependencies": {
     "@emotion/react": "^11.8.2",
@@ -14,6 +20,7 @@
     "@heroicons/react": "^1.0.5",
     "@mui/lab": "^5.0.0-alpha.72",
     "@mui/material": "^5.5.0",
+    "@reduxjs/toolkit": "^1.8.0",
     "axios": "^0.26.0",
     "formik": "^2.2.9",
     "moment": "^2.29.1",
@@ -21,6 +28,8 @@
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-phone-input-2": "^2.15.0",
+    "react-redux": "^7.2.6",
+    "redux-persist": "^6.0.0",
     "yup": "^0.32.11"
   },
   "devDependencies": {

@@ -24,7 +24,7 @@ const ModalForm = ({ email, setOpen, setEmailSent }, ref) => {
         const response = await forgetPassword({
           email,
         })
-        if (response.res.statusCode === 404) {
+        if (response.res.statusCode !== 200) {
           // not found
           setRes(prevState => ({ ...prevState, err: response.res?.message }))
         } else {
