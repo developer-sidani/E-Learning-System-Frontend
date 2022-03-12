@@ -1,11 +1,11 @@
 import React from 'react'
 import PhoneInput from 'react-phone-input-2'
+import { Grid } from '@mui/material'
 import { styles } from '../tw-styles'
 import { countryList } from '../../../utils'
 import 'react-phone-input-2/lib/material.css'
 import { SelectMenu } from '../../select-menu'
 import { DatePickerComponent } from '../../date-picker'
-import { Grid } from '@mui/material'
 
 const countries = countryList.map(({ Name }) => Name)
 const PersonalInformationSection = ({
