@@ -1,15 +1,11 @@
 import React from 'react'
 import { Navbar, Footer } from '../components'
 
-const MainLayout = ({ children }) => (
-
+const MainLayout = ({ children, withFooter = true, withNav = true }) => (
     <>
-
-      <Navbar />
-
+      {withNav && <Navbar />}
       {children}
-
-      <Footer />
+      {withFooter && <Footer />}
     </>
 
 )

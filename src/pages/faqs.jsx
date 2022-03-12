@@ -1,5 +1,6 @@
 import React from 'react'
 import { FaqComponent, PageHeader } from '../components'
+import { MainLayout } from '../layouts'
 
 const faqs = [
   {
@@ -42,5 +43,9 @@ const FaqsPage = () => (
     <FaqComponent faqs={faqs} />
   </>
 )
-
+FaqsPage.getLayout = (page) => (
+  <MainLayout>
+    {page}
+  </MainLayout>
+)
 export default FaqsPage
