@@ -78,7 +78,7 @@ const SignInComponent = () => {
           <p className="mt-2 text-center text-sm text-gray-600">
             Or
               {' '}
-            <a href="#" className={styles.link}>
+            <a href="./sign-up" className={styles.link}>
               Register Here
             </a>
           </p>
