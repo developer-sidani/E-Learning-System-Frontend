@@ -44,7 +44,7 @@ const initialValues = {
   gender: '',
   isNotified: true,
   keepMeUpdated: true,
-  birthday: new Date(),
+  birthday: '',
 }
 export {
   initialValues,
