@@ -32,7 +32,6 @@ const faqs = [
     answer:
       'Technology requirements vary according to the program, but schools generally require students to meet basic hardware and software requirements which typically include a computer with the following features: -Recent Windows, Mac or Linux operating system  -High-speed internet access  -Minimum RAM requirements  -Office software, such as word processing, spreadsheet and slide presentation programs  -Web camera  -Headset with microphone -CD/DVD drive',
   },
-
 ]
 const FaqsPage = () => (
   <>
