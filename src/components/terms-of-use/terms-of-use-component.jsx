@@ -1,7 +1,270 @@
 import React from 'react'
 
 const TermsOfUseComponent = () => (
-    <div>Terms Of use</div>
+    <div className="px-20">
+        <h1>Terms of Use
+        These Terms of Use ("Terms") were last updated on April 20, 2022.</h1>
+
+        <p>Learn+’s mission is to improve lives through learning. We enable anyone anywhere to create and share educational content (instructors) and to access that educational content to learn (students). We consider our marketplace model the best way to offer valuable educational content to our users. We need rules to keep our platform and services safe for you, us, and our student and instructor community. These Terms apply to all your activities on the Learn+ website, the Learn+ mobile applications, our TV applications, our APIs, and other related services (“Services”).</p>
+
+        <p>If you publish a course on the Learn+ platform, you must also agree to the Instructor Terms. We also provide details regarding our processing of personal data of our students and instructors in our Privacy Policy. If you are using Learn+ as part of your employer’s Learn+ Business learning and development program, you can consult our Learn+ Business Privacy Statement.</p>
+
+        <p>If you live in the United States or Canada, by agreeing to these Terms, you agree to resolve disputes with Learn+ through binding arbitration (with very limited exceptions, not in court), and you waive certain rights to participate in class actions, as detailed in the Dispute Resolution section.</p>
+
+        <h2>Table of Contents</h2>
+        <ul>
+            <li>
+                <a href="#section1"> 1. Accounts </a> </li>
+            <li>
+                <a href="#section2"> 2. Content Enrollment and Lifetime Access </a> </li>
+            <li>
+                <a href="#section3"> 3. Payments, Credits, and Refunds</a> </li>
+            <li>
+                <a href="#section4"> 4. Content and Behavior Rules</a> </li>
+            <li>
+                <a href="#section5"> 5. Learn+’s Rights to Content You Post</a> </li>
+            <li>
+                <a href="#section6"> 6. Using Learn+ at Your Own Risk</a> </li>
+            <li>
+                <a href="#section7"> 7. Learn+’s Rights</a> </li>
+            <li>
+                <a href="#section8"> 8. Subscription Terms</a> </li>
+            <li>
+                <a href="#section9"> 9. Miscellaneous Legal Terms</a> </li>
+            <li>
+                <a href="#section10"> 10. Dispute Resolution</a> </li>
+            <li>
+                <a href="#section11"> 11. Updating These Terms</a> </li>
+            <li>
+                <a href="#section11"> 12. How to Contact Us</a> </li>
+
+
+        </ul>
+        <h2 id="section1">1. Accounts</h2>
+        <p>You need an account for most activities on our platform. Keep your password somewhere safe, because you’re responsible for all activity associated with your account. If you suspect someone else is using your account, let us know by contacting our Support Team. You must have reached the age of consent for online services in your country to use Learn+.
+        You need an account for most activities on our platform, including to purchase and access content or to submit content for publication. When setting up and maintaining your account, you must provide and continue to provide accurate and complete information, including a valid email address. You have complete responsibility for your account and everything that happens on your account, including for any harm or damage (to us or anyone else) caused by someone using your account without your permission. This means you need to be careful with your password. You may not transfer your account to someone else or use someone else’s account. If you contact us to request access to an account, we will not grant you such access unless you can provide us with the information that we need to prove you are the owner of that account. In the event of the death of a user, the account of that user will be closed.</p>
+
+        <p>You may not share your account login credentials with anyone else. You are responsible for what happens with your account and Learn+ will not intervene in disputes between students or instructors who have shared account login credentials. You must notify us immediately upon learning that someone else may be using your account without your permission (or if you suspect any other breach of security) by contacting our Support Team. We may request some information from you to confirm that you are indeed the owner of your account.</p>
+
+        <p>Students and instructors must be at least 18 years of age to create an account on Learn+ and use the Services. If you are younger than 18 but above the required age for consent to use online services where you live (for example, 13 in the US or 16 in Ireland), you may not set up an account, but we encourage you to invite a parent or guardian to open an account and help you access content that is appropriate for you. If you are below this age of consent to use online services, you may not create a Learn+ account. If we discover that you have created an account that violates these rules, we will terminate your account. Under our Instructor Terms, you may be requested to verify your identity before you are authorized to submit content for publication on Learn+.</p>
+
+        You can terminate your account at any time by following the steps here. Check our Privacy Policy to see what happens when you terminate your account.
+
+
+        <h2 id="section2">2. Content Enrollment and Lifetime Access</h2>
+
+        <p>When you enroll in a course or other content, you get a license from us to view it via the Learn+ Services and no other use. Don’t try to transfer or resell content in any way. We generally grant you a lifetime access license, except when we must disable the content because of legal or policy reasons or for enrollments via Subscription Plans.
+        Under our Instructor Terms, when instructors publish content on Learn+, they grant Learn+ a license to offer a license to the content to students. This means that we have the right to sublicense the content to enrolled students. As a student, when you enroll in a course or other content, whether it’s free or paid content, you are getting a license from Learn+ to view the content via the Learn+ platform and Services, and Learn+ is the licensor of record. Content is licensed, and not sold, to you. This license does not give you any right to resell the content in any manner (including by sharing account information with a purchaser or illegally downloading the content and sharing it on torrent sites).</p>
+
+        <p>In legal, more complete terms, Learn+ grants you (as a student) a limited, non-exclusive, non-transferable license to access and view the content for which you have paid all required fees, solely for your personal, non-commercial, educational purposes through the Services, in accordance with these Terms and any conditions or restrictions associated with the particular content or feature of our Services. All other uses are expressly prohibited. You may not reproduce, redistribute, transmit, assign, sell, broadcast, rent, share, lend, modify, adapt, edit, create derivative works of, sublicense, or otherwise transfer or use any content unless we give you explicit permission to do so in a written agreement signed by a Learn+ authorized representative. This also applies to content you can access via any of our APIs.</p>
+
+        <p>We generally give a lifetime access license to our students when they enroll in a course or other content. However, we reserve the right to revoke any license to access and use any content at any point in time in the event where we decide or are obligated to disable access to the content due to legal or policy reasons, for example, if the course or other content you enrolled in is the object of a copyright complaint, or if we determine it violates our Trust & Safety Guidelines. This lifetime access license does not apply to enrollments via Subscription Plans or to add-on features and services associated with the course or other content you enroll in. For example, instructors may decide at any time to no longer provide teaching assistance or Q&A services in association with the content. To be clear, the lifetime access is to the course content but not to the instructor.</p>
+
+        <p>Instructors may not grant licenses to their content to students directly, and any such direct license shall be null and void and a violation of these Terms.</p>
+
+
+        <h2 id="section3">3. Payments, Credits, and Refunds</h2>
+
+        <p>When you make a payment, you agree to use a valid payment method. If you aren’t happy with your content, Learn+ offers a 30-day refund or credit for most content purchases.</p>
+        <h3>3.1 Pricing</h3>
+        <p>The prices of content on Learn+ are determined based on the terms of the Instructor Terms and our Promotions Policy. In some instances, the price of content offered on the Learn+ website may not be exactly the same as the price offered on our mobile or TV applications, due to mobile platform providers’ pricing systems and their policies around implementing sales and promotions.</p>
+
+        <p>We occasionally run promotions and sales for our content, during which certain content is available at discounted prices for a set period of time. The price applicable to the content will be the price at the time you complete your purchase of the content (at checkout). Any price offered for particular content may also be different when you are logged into your account from the price available to users who aren’t registered or logged in, because some of our promotions are available only to new users.</p>
+
+        <p>If you are logged into your account, the listed currency you see is based on your location when you created your account. If you are not logged into your account, the price currency is based on the country where you are located. We do not enable users to see pricing in other currencies.</p>
+
+        <p>If you are a student located in a country where use and sales tax, goods and services tax, or value added tax is applicable to consumer sales, we are responsible for collecting and remitting that tax to the proper tax authorities. Depending on your location, the price you see may include such taxes, or tax may be added at checkout.</p>
+
+        <h3>3.2 Payments</h3>
+        <p>You agree to pay the fees for content that you purchase, and you authorize us to charge your debit or credit card or process other means of payment (such as Boleto, SEPA, direct debit, or mobile wallet) for those fees. Learn+ works with payment service providers to offer you the most convenient payment methods in your country and to keep your payment information secure. We may update your payment methods using information provided by our payment service providers. Check out our Privacy Policy for more details.</p>
+
+        <p>When you make a purchase, you agree not to use an invalid or unauthorized payment method. If your payment method fails and you still get access to the content you are enrolling in, you agree to pay us the corresponding fees within thirty (30) days of notification from us. We reserve the right to disable access to any content for which we have not received adequate payment.</p>
+
+        <h3>3.3 Refunds and Refund Credits</h3>
+        <p>If the content you purchased is not what you were expecting, you can request, within 30 days of your purchase of the content, that Learn+ apply a refund to your account. This refund option does not apply to Subscription Plan purchases, which are covered in Section 8.4 below. We reserve the right to apply your refund as a refund credit or a refund to your original payment method, at our discretion, depending on capabilities of our payment service providers, the platform from which you purchased your content (website, mobile or TV app), and other factors. No refund is due to you if you request it after the 30-day guarantee time limit has passed. However, if the content you previously purchased is disabled for legal or policy reasons, you are entitled to a refund beyond this 30-day limit. Learn+ also reserves the right to refund students beyond the 30-day limit in cases of suspected or confirmed account fraud.</p>
+
+        <p>To request a refund, follow the steps here. As detailed in the Instructor Terms, instructors agree that students have the right to receive these refunds.</p>
+
+        <p>If we decide to issue refund credits to your account, they will be automatically applied towards your next content purchase on our website, but can’t be used for purchases in our mobile or TV applications. Refund credits may expire if not used within the specified period and have no cash value, in each case unless otherwise required by applicable law.</p>
+
+        <p>At our discretion, if we believe you are abusing our refund policy, such as if you’ve consumed a significant portion of the content that you want to refund or if you’ve previously refunded the content, we reserve the right to deny your refund, restrict you from other future refunds, ban your account, and/or restrict all future use of the Services. If we ban your account or disable your access to the content due to your violation of these Terms or our Trust & Safety Guidelines, you will not be eligible to receive a refund. Additional information on our refund policy is available here.</p>
+
+        <h3>3.4 Gift and Promotional Codes</h3>
+        <p>Learn+ or our partners may offer gift and promotional codes to students. Certain codes may be redeemed for gift or promotional credits applied to your Learn+ account, which then may be used to purchase eligible content on our platform, subject to the terms included with your codes. Other codes may be directly redeemable for specific content. Gift and promotional credits can’t be used for purchases in our mobile or TV applications.</p>
+
+        <p>These codes and credits, as well as any promotional value linked to them, may expire if not used within the period specified in your Learn+ account. Gift and promotional codes offered by Learn+ may not be refunded for cash, unless otherwise specified in the terms included with your codes or as required by applicable law. Gift and promotional codes offered by a partner are subject to that partner’s refund policies. If you have multiple saved credit amounts, Learn+ may determine which of your credits to apply to your purchase. Check out our Support Page and any terms included with your codes for more details.</p>
+
+        <h2 id="section4">4. Content and Behavior Rules</h2>
+
+        <p>You can only use Learn+ for lawful purposes. You’re responsible for all the content that you post on our platform. You should keep the reviews, questions, posts, courses and other content you upload in line with our Trust & Safety Guidelines and the law, and respect the intellectual property rights of others. We can ban your account for repeated or major offenses. If you think someone is infringing your copyright on our platform, let us know.
+        You may not access or use the Services or create an account for unlawful purposes. Your use of the Services and behavior on our platform must comply with applicable local or national laws or regulations of your country. You are solely responsible for the knowledge of and compliance with such laws and regulations that are applicable to you.</p>
+
+        <p>If you are a student, the Services enable you to ask questions to the instructors of courses or other content you are enrolled in, and to post reviews of content. For certain content, the instructor may invite you to submit content as “homework” or tests. Don’t post or submit anything that is not yours.</p>
+
+        <p>If you are an instructor, you can submit content for publication on the platform and you can also communicate with the students who have enrolled in your courses or other content. In both cases, you must abide by the law and respect the rights of others: you cannot post any course, question, answer, review or other content that violates applicable local or national laws or regulations of your country. You are solely responsible for any courses, content, and actions you post or take via the platform and Services and their consequences. Make sure you understand all the copyright restrictions set forth in the Instructor Terms before you submit any content for publication on Learn+.</p>
+
+        <p>If we are put on notice that your course or content violates the law or the rights of others (for example, if it is established that it violates intellectual property or image rights of others, or is about an illegal activity), if we discover that your content or behavior violates our Trust & Safety Guidelines, or if we believe your content or behavior is unlawful, inappropriate, or objectionable (for example if you impersonate someone else), we may remove your content from our platform. Learn+ complies with copyright laws. Check out our Intellectual Property Policy for more details.</p>
+
+        <p>Learn+ has discretion in enforcing these Terms and our Trust & Safety Guidelines. We may restrict or terminate your permission to use our platform and Services or ban your account at any time, with or without notice, for any or no reason, including for any violation of these Terms, if you fail to pay any fees when due, for fraudulent chargeback requests, upon the request of law enforcement or government agencies, for extended periods of inactivity, for unexpected technical issues or problems, if we suspect that you engage in fraudulent or illegal activities, or for any other reason in our sole discretion. Upon any such termination we may delete your account and content, and we may prevent you from further access to the platforms and use of our Services. Your content may still be available on the platforms even if your account is terminated or suspended. You agree that we will have no liability to you or any third party for termination of your account, removal of your content, or blocking of your access to our platforms and services.</p>
+
+        <p>If a user has published content that infringes your copyright or trademark rights, please let us know. Our Instructor Terms require our instructors to follow the law and respect the intellectual property rights of others. For more details on how to file a copyright or trademark infringement claim with us, see our Intellectual Property Policy.</p>
+
+        <h2 id="section5">5. Learn+’s Rights to Content You Post</h2>
+
+        <p>You retain ownership of content you post to our platform, including your courses. We’re allowed to share your content to anyone through any media, including promoting it via advertising on other websites.
+        The content you post as a student or instructor (including courses) remains yours. By posting courses and other content, you allow Learn+ to reuse and share it but you do not lose any ownership rights you may have over your content. If you are an instructor, be sure to understand the content licensing terms that are detailed in the Instructor Terms.
+
+        When you post content, comments, questions, reviews, and when you submit to us ideas and suggestions for new features or improvements, you authorize Learn+ to use and share this content with anyone, distribute it and promote it on any platform and in any media, and to make modifications or edits to it as we see fit.
+
+        In legal language, by submitting or posting content on or through the platforms, you grant us a worldwide, non-exclusive, royalty-free license (with the right to sublicense) to use, copy, reproduce, process, adapt, modify, publish, transmit, display, and distribute your content (including your name and image) in any and all media or distribution methods (existing now or later developed). This includes making your content available to other companies, organizations, or individuals who partner with Learn+ for the syndication, broadcast, distribution, or publication of content on other media, as well as using your content for marketing purposes. You also waive any rights of privacy, publicity, or other rights of a similar nature applicable to all these uses, to the extent permissible under applicable law. You represent and warrant that you have all the rights, power, and authority necessary to authorize us to use any content that you submit. You also agree to all such uses of your content with no compensation paid to you.</p>
+
+        <h2 id="section6">6. Using Learn+ at Your Own Risk</h2>
+
+        <p>Anyone can use Learn+ to create and publish content and instructors and we enable instructors and students to interact for teaching and learning. Like other platforms where people can post content and interact, some things can go wrong, and you use Learn+ at your own risk.
+        Our platform model means we do not review or edit the content for legal issues, and we are not in a position to determine the legality of content. We do not exercise any editorial control over the content that is available on the platform and, as such, do not guarantee in any manner the reliability, validity, accuracy, or truthfulness of the content. If you access content, you rely on any information provided by an instructor at your own risk.
+
+        By using the Services, you may be exposed to content that you consider offensive, indecent, or objectionable. Learn+ has no responsibility to keep such content from you and no liability for your access or enrollment in any course or other content, to the extent permissible under applicable law. This also applies to any content relating to health, wellness, and physical exercise. You acknowledge the inherent risks and dangers in the strenuous nature of these types of content, and by accessing such content you choose to assume those risks voluntarily, including risk of illness, bodily injury, disability, or death. You assume full responsibility for the choices you make before, during, and after your access to the content.
+
+        When you interact directly with a student or an instructor, you must be careful about the types of personal information that you share. While we restrict the types of information instructors may request from students, we do not control what students and instructors do with the information they obtain from other users on the platform. You should not share your email or other personal information about you for your safety.
+
+        We do not hire or employ instructors nor are we responsible or liable for any interactions involved between instructors and students. We are not liable for disputes, claims, losses, injuries, or damage of any kind that might arise out of or relate to the conduct of instructors or students.
+
+        When you use our Services, you will find links to other websites that we don’t own or control. We are not responsible for the content or any other aspect of these third-party sites, including their collection of information about you. You should also read their terms and conditions and privacy policies.</p>
+
+        <h2 id="section7">7. Learn+’s Rights</h2>
+
+        <p>We own the Learn+ platform and Services, including the website, present or future apps and services, and things like our logos, API, code, and content created by our employees. You can’t tamper with those or use them without authorization.
+        All right, title, and interest in and to the Learn+ platform and Services, including our website, our existing or future applications, our APIs, databases, and the content our employees or partners submit or provide through our Services (but excluding content provided by instructors and students) are and will remain the exclusive property of Learn+ and its licensors. Our platforms and services are protected by copyright, trademark, and other laws of both the United States and foreign countries. Nothing gives you a right to use the Learn+ name or any of the Learn+ trademarks, logos, domain names, and other distinctive brand features. Any feedback, comments, or suggestions you may provide regarding Learn+ or the Services is entirely voluntary and we will be free to use such feedback, comments, or suggestions as we see fit and without any obligation to you.
+
+        You may not do any of the following while accessing or using the Learn+ platform and Services:
+
+        access, tamper with, or use non-public areas of the platform (including content storage), Learn+’s computer systems, or the technical delivery systems of Learn+’s service providers.
+        disable, interfere with, or try to circumvent any of the features of the platforms related to security or probe, scan, or test the vulnerability of any of our systems.
+        copy, modify, create a derivative work of, reverse engineer, reverse assemble, or otherwise attempt to discover any source code of or content on the Learn+ platform or Services.
+        access or search or attempt to access or search our platform by any means (automated or otherwise) other than through our currently available search functionalities that are provided via our website, mobile apps, or API (and only pursuant to those API terms and conditions). You may not scrape, spider, use a robot, or use other automated means of any kind to access the Services.
+        in any way use the Services to send altered, deceptive, or false source-identifying information (such as sending email communications falsely appearing as Learn+); or interfere with, or disrupt, (or attempt to do so), the access of any user, host, or network, including, without limitation, sending a virus, overloading, flooding, spamming, or mail-bombing the platforms or services, or in any other manner interfering with or creating an undue burden on the Services.</p>
+
+        <h2 id="section8">8. Subscription Terms</h2>
+
+        <p>This section covers additional terms that apply to your use of our subscription-based collections as a student (“Subscription Plans”). By using a Subscription Plan, you agree to the additional terms in this section. Note that use of Learn+ Business is not subject to these Terms, but is instead governed by the agreement between Learn+ and the subscribing organization.</p>
+
+        <h3>8.1 Subscription Plans</h3>
+        <p>During your subscription to a Subscription Plan, you get a limited, non-exclusive, non-transferable license from us to access and view the content included in that Subscription Plan via the Services. With the exception of the lifetime access license grant, the terms included in the “Content Enrollment and Lifetime Access” section above apply to enrollments via Subscription Plans.
+
+        The subscription that you purchase or renew determines the scope, features, and price of your access to a Subscription Plan. You may not transfer, assign, or share your subscription with anyone else.
+
+        We reserve the right to revoke any license to use the content in our Subscription Plans for legal or policy reasons at any time and at our sole discretion, such as if we no longer have the right to offer the content through a Subscription Plan. Additional information on our right to revoke is included in the “Content Enrollment and Lifetime Access” section.</p>
+
+        <h3>8.2 Account Management</h3>
+        <p>You may cancel your subscription by following the steps outlined on our Support Page. If you cancel your subscription to a Subscription Plan, your access to that Subscription Plan will automatically end on the last day of your billing period. On cancellation, you will not be entitled to receive a refund or credit of any fees already paid for your subscription, unless otherwise required by applicable law. For clarity, cancellation of a subscription does not terminate your Learn+ account.</p>
+
+        <h3>8.3 Free Trials & Renewals</h3>
+        <p>Your subscription may start with a free trial. The duration of the free trial period of your subscription will be specified during sign-up. Learn+ determines free trial eligibility at our sole discretion and may limit eligibility or duration. We reserve the right to terminate the free trial and suspend your subscription if we determine that you aren’t eligible.
+
+        We will charge the subscription fee for your next billing cycle at the end of the free trial period. Your subscription will automatically renew according to your subscription settings (e.g., monthly or annually) unless you cancel your subscription prior to the end of the free trial period. For more information on how to view applicable fees and dates of your free trial period, visit our Support Page.</p>
+
+        <h3>8.4 Payments and Billing</h3>
+        <p>The subscription fee will be listed at the time of your purchase. You can visit our Support Page to learn more about where to find the fees and dates applicable to your subscription. We may also be required to add taxes to your subscription fee as described in the “Payments, Credits, and Refunds” section above. Payments are non-refundable and there are no refunds or credits for partially used periods, unless otherwise required by applicable law. Depending on where you are located, you may qualify for a refund. See our Refund Policy for Subscription Plans for additional information.
+
+        To subscribe to a Subscription Plan, you must provide a payment method. By subscribing to a Subscription Plan and providing your billing information during checkout, you grant us and our payment service providers the right to process payment for the then-applicable fees via the payment method we have on record for you. At the end of each subscription term, we will automatically renew your subscription for the same length of term and process your payment method for payment of the then-applicable fees.
+
+        In the event that we update your payment method using information provided by our payment service providers (as described in the “Payments, Credits, and Refunds” section above), you authorize us to continue to charge the then-applicable fees to your updated payment method.
+
+        If we are unable to process payment through the payment method we have on file for you, or if you file a chargeback disputing charges made to your payment method and the chargeback is granted, we may suspend or terminate your subscription.
+
+        We reserve the right to change our Subscription Plans or adjust pricing for our Services at our sole discretion. Any price changes or changes to your subscription will take effect following notice to you, except as otherwise required by applicable law.</p>
+
+        <h3>8.5 Subscription Disclaimers</h3>
+        <p>We make no guarantees as to the availability of any specific content in any Subscription Plan or as to any minimum amount of content in any Subscription Plan. At any point in the future, we reserve the right to offer or cease to offer additional features to any Subscription Plan, or to otherwise modify or terminate a Subscription Plan at our sole discretion. These disclaimers are in addition to those listed in the “Disclaimers” section below.</p>
+
+        <h2 id="section9">9. Miscellaneous Legal Terms</h2>
+
+        <p>These Terms are like any other contract, and they have boring but important legal terms that protect us from the countless things that could happen and that clarify the legal relationship between us and you.</p>
+        <h3>9.1 Binding Agreement</h3>
+        <p>You agree that by registering, accessing, or using our Services, you are agreeing to enter into a legally binding contract with Learn+. If you do not agree to these Terms, do not register, access, or otherwise use any of our Services.
+
+        If you are an instructor accepting these Terms and using our Services on behalf of a company, organization, government, or other legal entity, you represent and warrant that you are authorized to do so.
+
+        Any version of these Terms in a language other than English is provided for convenience and you understand and agree that the English language will control if there is any conflict.
+
+        These Terms (including any agreements and policies linked from these Terms) constitute the entire agreement between you and us (which include, if you are an instructor, the Instructor Terms and the Promotions Policy).
+
+        If any part of these Terms is found to be invalid or unenforceable by applicable law, then that provision will be deemed superseded by a valid, enforceable provision that most closely matches the intent of the original provision and the remainder of these Terms will continue in effect.
+
+        Even if we are delayed in exercising our rights or fail to exercise a right in one case, it doesn’t mean we waive our rights under these Terms, and we may decide to enforce them in the future. If we decide to waive any of our rights in a particular instance, it doesn’t mean we waive our rights generally or in the future.
+
+        The following sections shall survive the expiration or termination of these Terms: Sections 2 (Content Enrollment and Lifetime Access), 5 (Learn+’s Rights to Content You Post), 6 (Using Learn+ at Your Own Risk), 7 (Learn+’s Rights), 8.5 (Subscription Disclaimers), 9 (Miscellaneous Legal Terms), and 10 (Dispute Resolution).</p>
+
+        <h3>9.2 Disclaimers</h3>
+        <p>It may happen that our platform is down, either for planned maintenance or because something goes down with the site. It may happen that one of our instructors is making misleading statements in their content. It may also happen that we encounter security issues. These are just examples. You accept that you will not have any recourse against us in any of these types of cases where things don’t work out right. In legal, more complete language, the Services and their content are provided on an “as is” and “as available” basis. We (and our affiliates, suppliers, partners, and agents) make no representations or warranties about the suitability, reliability, availability, timeliness, security, lack of errors, or accuracy of the Services or their content, and expressly disclaim any warranties or conditions (express or implied), including implied warranties of merchantability, fitness for a particular purpose, title, and non-infringement. We (and our affiliates, suppliers, partners, and agents) make no warranty that you will obtain specific results from use of the Services. Your use of the Services (including any content) is entirely at your own risk. Some jurisdictions don’t allow the exclusion of implied warranties, so some of the above exclusions may not apply to you.
+
+        We may decide to cease making available certain features of the Services at any time and for any reason. Under no circumstances will Learn+ or its affiliates, suppliers, partners or agents be held liable for any damages due to such interruptions or lack of availability of such features.
+
+        We are not responsible for delay or failure of our performance of any of the Services caused by events beyond our reasonable control, like an act of war, hostility, or sabotage; natural disaster; electrical, internet, or telecommunication outage; or government restrictions.</p>
+
+        <h3>9.3 Limitation of Liability</h3>
+        <p>There are risks inherent to using our Services, for example, if you access health and wellness content like yoga, and you injure yourself. You fully accept these risks and you agree that you will have no recourse to seek damages against even if you suffer loss or damage from using our platform and Services. In legal, more complete language, to the extent permitted by law, we (and our group companies, suppliers, partners, and agents) will not be liable for any indirect, incidental, punitive, or consequential damages (including loss of data, revenue, profits, or business opportunities, or personal injury or death), whether arising in contract, warranty, tort, product liability, or otherwise, and even if we’ve been advised of the possibility of damages in advance. Our liability (and the liability of each of our group companies, suppliers, partners, and agents) to you or any third parties under any circumstance is limited to the greater of one hundred dollars ($100) or the amount you have paid us in the twelve (12) months before the event giving rise to your claims. Some jurisdictions don’t allow the exclusion or limitation of liability for consequential or incidental damages, so some of the above may not apply to you.</p>
+
+        <h3>9.4 Indemnification</h3>            If you behave in a way that gets us in legal trouble, we may exercise legal recourse against you. You agree to indemnify, <p>defend (if we so request), and hold harmless Learn+, our group companies, and their officers, directors, suppliers, partners, and agents from an against any third-party claims, demands, losses, damages, or expenses (including reasonable attorney fees) arising from (a) the content you post or submit, (b) your use of the Services (c) your violation of these Terms, or (d) your violation of any rights of a third party. Your indemnification obligation will survive the termination of these Terms and your use of the Services.</p>
+
+        <h3>9.5 Governing Law and Jurisdiction</h3>
+        <p>When these Terms mention “Learn+,” they’re referring to the Learn+ entity that you’re contracting with. If you’re a student, your contracting entity and governing law will generally be determined based on your location.
+
+        If you’re a student located in India, you’re contracting with Learn+ India LLP and these Terms are governed by the laws of India, without reference to its choice or conflicts of law principles, and you consent to the exclusive jurisdiction and venue of the courts in Delhi, India.
+
+        If you’re a student located in a geographical region other than India, or if you’re accessing our Services as an instructor, you’re contracting with Learn+, Inc. and these Terms are governed by the laws of the State of California, USA without reference to its choice or conflicts of law principles. In cases where the “Dispute Resolution” section below doesn’t apply to you, you consent to the exclusive jurisdiction and venue of federal and state courts in San Francisco, California, USA.</p>
+
+        <h3>9.6 Legal Actions and Notices</h3>
+        <p>No action, regardless of form, arising out of or relating to this Agreement may be brought by either party more than one (1) year after the cause of action has accrued, except where this limitation cannot be imposed by law.
+
+        Any notice or other communication to be given hereunder will be in writing and given by registered or certified mail return receipt requested, or email (by us to the email associated with your account or by you to notices@Learn+.com).</p>
+
+        <h3>9.7 Relationship Between Us</h3>
+        <p>You and we agree that no joint venture, partnership, employment, contractor, or agency relationship exists between us.</p>
+
+        <h3>9.8 No Assignment</h3>
+        <p>You may not assign or transfer these Terms (or the rights and licenses granted under them). For example, if you registered an account as an employee of a company, your account cannot be transferred to another employee. We may assign these Terms (or the rights and licenses granted under them) to another company or person without restriction. Nothing in these Terms confers any right, benefit, or remedy on any third-party person or entity. You agree that your account is non-transferable and that all rights to your account and other rights under these Terms terminate upon your death.</p>
+
+        <h3>9.9 Sanctions and Export Laws</h3>
+        <p> You warrant that you (as an individual or as a representative of any entity on whose behalf you use the Services) aren’t located in, or a resident of, any country that is subject to applicable U.S. trade sanctions or embargoes (such as Cuba, Iran, North Korea, Sudan, Syria, or the Crimea region of Ukraine). You also warrant that you aren’t a person or entity who is named on any U.S. government specially designated national or denied-party list.
+
+        If you become subject to such a restriction during the term of any agreement with Learn+, you will notify us within 24 hours, and we will have the right to terminate any further obligations to you, effective immediately and with no further liability to you (but without prejudice to your outstanding obligations to Learn+).
+
+        You may not access, use, export, re-export, divert, transfer or disclose any portion of the Services or any related technical information or materials, directly or indirectly, in violation of any United States and other applicable country export control and trade sanctions laws, rules and regulations. You agree not to upload any content or technology (including information on encryption) whose export is specifically controlled under such laws.</p>
+
+        <h2 id="section10">10. Dispute Resolution</h2>
+
+        <p>If there’s a dispute, our Support Team is happy to help resolve the issue. If that doesn’t work and you live in the United States or Canada, your options are to go to small claims court or bring a claim in binding arbitration; you may not bring that claim in another court or participate in a non-individual class action claim against us.
+                    This Dispute Resolution section applies only if you live in the United States or Canada. Most disputes can be resolved, so before bringing a formal legal case, please first try contacting our Support Team.</p>
+
+        <h3>10.1 Small Claims</h3>
+                    Either of us can bring a claim in small claims court in (a) San Francisco, California, (b) the county where you live, or (c) another place we both agree on, as long as it qualifies to be brought in that court.
+
+        <h3>10.2 Going to Arbitration</h3>
+        <p>If we can’t resolve our dispute amicably, you and Learn+ agree to resolve any claims related to these Terms (or our other legal terms) through final and binding arbitration, regardless of the type of claim or legal theory. If one of us brings a claim in court that should be arbitrated and the other party refuses to arbitrate it, the other party can ask a court to force us both to go to arbitration (compel arbitration). Either of us can also ask a court to halt a court proceeding while an arbitration proceeding is ongoing.</p>
+
+        <h3>10.3 The Arbitration Process</h3>
+        <p>Any disputes that involve a claim of less than $10,000 USD must be resolved exclusively through binding non-appearance-based arbitration. A party electing arbitration must initiate proceedings by filing an arbitration demand with the American Arbitration Association (AAA). The arbitration proceedings shall be governed by the AAA Commercial Arbitration Rules, Consumer Due Process Protocol, and Supplementary Procedures for Resolution of Consumer-Related Disputes. You and we agree that the following rules will apply to the proceedings: (a) the arbitration will be conducted by telephone, online, or based solely on written submissions (at the choice of the party seeking relief); (b) the arbitration must not involve any personal appearance by the parties or witnesses (unless we and you agree otherwise); and (c) any judgment on the arbitrator’s rendered award may be entered in any court with competent jurisdiction. Disputes that involve a claim of more than $10,000 USD must be resolved per the AAA’s rules about whether the arbitration hearing has to be in-person.</p>
+
+        <h3>10.4 No Class Actions</h3>
+        <p>We both agree that we can each only bring claims against the other on an individual basis. This means: (a) neither of us can bring a claim as a plaintiff or class member in a class action, consolidated action, or representative action; (b) an arbitrator can’t combine multiple people’s claims into a single case (or preside over any consolidated, class, or representative action); and (c) an arbitrator’s decision or award in one person’s case can only impact that user, not other users, and can’t be used to decide other users’ disputes. If a court decides that this “No class actions” clause isn’t enforceable or valid, then this “Dispute Resolution” section will be null and void, but the rest of the Terms will still apply.</p>
+
+        <h3>10.5 Changes</h3>
+        <p>Notwithstanding the “Updating these Terms” section below, if Learn+ changes this "Dispute Resolution" section after the date you last indicated acceptance to these Terms, you may reject any such change by providing Learn+ written notice of such rejection by mail or hand delivery to Learn+ Attn: Legal, 600 Harrison Street, 3rd Floor, San Francisco, CA 94107, or by email from the email address associated with your Account to notices@Learn+.com, within 30 days of the date such change became effective, as indicated by the "last updated on" language above. To be effective, the notice must include your full name and clearly indicate your intent to reject changes to this "Dispute Resolution" section. By rejecting changes, you are agreeing that you will arbitrate any dispute between you and Learn+ in accordance with the provisions of this "Dispute Resolution" section as of the date you last indicated acceptance to these Terms.</p>
+
+        <h2 id="section11"> 11. Updating These Terms</h2>
+
+        <p>From time to time, we may update these Terms to clarify our practices or to reflect new or different practices (such as when we add new features), and Learn+ reserves the right in its sole discretion to modify and/or make changes to these Terms at any time. If we make any material change, we will notify you using prominent means, such as by email notice sent to the email address specified in your account or by posting a notice through our Services. Modifications will become effective on the day they are posted unless stated otherwise.
+
+                    Your continued use of our Services after changes become effective shall mean that you accept those changes. Any revised Terms shall supersede all previous Terms.</p>
+
+        <h2 id="section12"> 12. How to Contact Us</h2>
+
+        <p>The best way to get in touch with us is to contact our Support Team. We’d love to hear your questions, concerns, and feedback about our Services.
+
+Thanks for teaching and learning with us!</p>
+    </div >
 )
+
 
 export { TermsOfUseComponent }
