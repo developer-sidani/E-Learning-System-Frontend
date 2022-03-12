@@ -1,10 +1,8 @@
 /* eslint-disable jsx-a11y/no-redundant-roles */
 import React from 'react'
-import { Formik, Form, Field } from 'formik'
+import { Formik, Form } from 'formik'
 import { MailIcon, PhoneIcon } from '@heroicons/react/outline'
 import * as Yup from 'yup'
-import { useRouter } from 'next/router'
-import { isEmail } from '../../utils'
 
 const ContactSchema = Yup.object().shape({
   firstname: Yup.string().required('Required'),
@@ -12,7 +10,7 @@ const ContactSchema = Yup.object().shape({
   email: Yup.string().email('Must be a valid email').required('Required'),
   phone: Yup.string(),
   subject: Yup.string().required('Required'),
-  message: Yup.string().max(500).required('Required'),
+  message: Yup.string().max(500, 'Message Must be Max of 500 Characters').required('Required'),
 })
 
 const submitValues = () => (values, { resetForm }) => {
