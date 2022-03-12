@@ -92,6 +92,22 @@ const PersonalInformationSection = ({
               options={['Male', 'Female']}
               title="Gender"
             />
+            {/* <label htmlFor="gender" className="block text-sm font-medium text-gray-700"> */}
+            {/*   Gender */}
+            {/* </label> */}
+            {/* <select */}
+            {/*   value={values.gender} */}
+            {/*   onChange={handleChange} */}
+            {/*   id="gender" */}
+            {/*   name="gender" */}
+            {/*   autoComplete="Gender" */}
+            {/*   className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" */}
+            {/* > */}
+            {/*   /!* eslint-disable-next-line jsx-a11y/control-has-associated-label *!/ */}
+            {/*   <option value="" disabled /> */}
+            {/*   <option value="male">Male</option> */}
+            {/*   <option value="female">Female</option> */}
+            {/* </select> */}
             {(errors.gender) && touched.gender ? (
               <div className="mt-2 text-pink-600 text-sm">
                 {errors.gender}
@@ -149,6 +165,23 @@ const PersonalInformationSection = ({
               options={countries}
               title="Country"
             />
+            {/* <label htmlFor="country" className="block text-sm font-medium text-gray-700"> */}
+            {/*   Country */}
+            {/* </label> */}
+            {/* <select */}
+            {/*   value={values.country} */}
+            {/*   onChange={handleChange} */}
+            {/*   id="country" */}
+            {/*   name="country" */}
+            {/*   autoComplete="country-name" */}
+            {/*   className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" */}
+            {/* > */}
+            {/*   /!* eslint-disable-next-line jsx-a11y/control-has-associated-label *!/ */}
+            {/*   <option value="" disabled /> */}
+            {/*   {countryList.map(({ Name }, i) => ( */}
+            {/*     <option key={i} value={Name}>{Name}</option> */}
+            {/*   ))} */}
+            {/* </select> */}
             {(errors.country) && touched.country ? (
               <div className="mt-2 text-pink-600 text-sm">
                 {errors.country}
