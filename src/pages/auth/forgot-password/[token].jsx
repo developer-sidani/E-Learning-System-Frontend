@@ -1,6 +1,6 @@
 import React from 'react'
 import { useRouter } from 'next/router'
-import { PageHeader, ForgotPasswordComponent } from '../../components'
+import { PageHeader, ForgotPasswordComponent } from '../../../components'
 
 const ForgotPassword = () => {
   const router = useRouter()
