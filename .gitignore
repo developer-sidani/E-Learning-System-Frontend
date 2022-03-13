@@ -33,4 +33,4 @@ yarn-error.log*
 # vercel
 .vercel
 .idea/
-#yarn.lock
+yarn.lock
