@@ -174,7 +174,6 @@ const SignInComponent = () => {
                           Remember me
                         </label>
                       </div>
-
                       <div className="text-sm">
                         <a
                           href="#"
@@ -197,7 +196,6 @@ const SignInComponent = () => {
                     </div>
                   </Form>
               )}
-
           </Formik>
           </div>
         </div>
