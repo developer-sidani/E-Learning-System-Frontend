@@ -1,1 +1,3 @@
-export { login, register } from './auth'
+export {
+  login, register, forgetPassword, resetPassword,
+} from './auth'

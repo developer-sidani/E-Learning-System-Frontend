@@ -5,6 +5,7 @@ import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import loadStore from '../store'
 import { AuthRouter } from '../routes'
+import { SplashScreen } from '../screens'
 
 const { store, persistor } = loadStore()
 
@@ -14,7 +15,7 @@ const MyApp = ({ Component, pageProps }) => {
   return (
     (
         <Provider store={store}>
-            <PersistGate loading={<p>loading</p>} persistor={persistor}>
+            <PersistGate loading={<SplashScreen />} persistor={persistor}>
                 <AuthRouter>
                     {getLayout(
                         <Component {...pageProps} />,
