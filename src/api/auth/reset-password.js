@@ -8,11 +8,11 @@ export const resetPassword = async ({ newPassword, resetToken }) => {
       resetToken,
     })
     return {
-      result,
+      result: result?.data,
     }
   } catch (err) {
     return {
-      err,
+      err: err?.response?.data,
     }
   }
 }
