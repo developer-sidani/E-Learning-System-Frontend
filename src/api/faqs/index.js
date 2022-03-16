@@ -1,0 +1,1 @@
+export { getFaqs } from './faqs'
