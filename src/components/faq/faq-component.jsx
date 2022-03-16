@@ -11,8 +11,8 @@ const FaqComponent = ({ faqs }) => (
       <div className="max-w-3xl mx-auto divide-y-2 divide-gray-200">
         <h2 className="text-center text-3xl font-extrabold text-[#0A033C] sm:text-4xl">Frequently asked questions</h2>
         <dl className="my-6 space-y-6 divide-y divide-gray-200">
-          {faqs?.map((faq) => (
-            <Disclosure as="div" key={faq.question} className="pt-6">
+          {faqs?.map((faq, index) => (
+            <Disclosure as="div" key={index} className="pt-6">
               {({ open }) => (
                 <>
                   <dt className="text-lg">
