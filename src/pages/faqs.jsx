@@ -12,7 +12,7 @@ const FaqsPage = () => {
       setLoading(true)
       try {
         const res = await getFaqs()
-        setFaqs(res?.res?.data)
+        setFaqs(res?.res?.data.reverse()) // added .reverse() to fix order
       } catch (e) {
         console.log(e)
       } finally {
@@ -27,6 +27,7 @@ const FaqsPage = () => {
       setFaqs([])
     }
   }, [])
+
   return loading ? (<SplashScreen />) : (
     <>
       <PageHeader
