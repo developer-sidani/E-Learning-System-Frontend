@@ -5,9 +5,8 @@ import { XIcon, UserIcon } from '@heroicons/react/outline'
 const MobileNav = ({
   solutions,
   resources,
-  signIn,
-  signUp,
   profile,
+  reroute,
 }) => (
   <Transition
     as={Fragment}
@@ -53,6 +52,7 @@ const MobileNav = ({
               {profile?.token && (
                 <button
                   type="button"
+                  onClick={reroute.myAccount}
                   className="-m-3 p-3 flex items-center rounded-lg hover:bg-gray-50"
                 >
                   <div
@@ -93,7 +93,7 @@ const MobileNav = ({
             <div className="mt-6">
               <button
                 type="button"
-                onClick={signIn}
+                onClick={reroute.logout}
                 className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
               >
                 Logout
@@ -103,7 +103,7 @@ const MobileNav = ({
             <div className="mt-6">
               <button
                 type="button"
-                onClick={signIn}
+                onClick={reroute.signUp}
                 className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
               >
                 Sign up
@@ -113,7 +113,7 @@ const MobileNav = ({
                 {' '}
                 <button
                   type="button"
-                  onClick={signUp}
+                  onClick={reroute.signIn}
                   className="text-indigo-600 hover:text-indigo-500"
                 >
                   Sign in

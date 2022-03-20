@@ -75,6 +75,13 @@ const Navbar = () => {
     signUp() {
       router.push('/auth/sign-up')
     },
+    logout() {
+      localStorage.clear()
+      router.reload()
+    },
+    myAccount() {
+      router.push('/my-account')
+    },
   }), [router])
   return (
     <Popover className="relative bg-white">
@@ -245,12 +252,13 @@ const Navbar = () => {
             My Account
         </a>
 
-        <a
-          href="#"
+        <button
+          type="button"
+          onClick={reroute.logout}
           className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
         >
             Logout
-        </a>
+        </button>
         </div>
       )}
 
@@ -258,8 +266,7 @@ const Navbar = () => {
       <MobileNav
         solutions={solutions}
         resources={resources}
-        signIn={reroute.signIn}
-        signUp={reroute.signUp}
+        reroute={reroute}
         profile={profile}
       />
     </Popover>
