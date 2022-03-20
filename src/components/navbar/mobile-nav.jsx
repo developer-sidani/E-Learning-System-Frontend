@@ -1,8 +1,14 @@
 import React, { Fragment } from 'react'
 import { Popover, Transition } from '@headlessui/react'
-import { XIcon } from '@heroicons/react/outline'
+import { XIcon, UserIcon } from '@heroicons/react/outline'
 
-const MobileNav = ({ solutions, resources }) => (
+const MobileNav = ({
+  solutions,
+  resources,
+  signIn,
+  signUp,
+  profile,
+}) => (
   <Transition
     as={Fragment}
     enter="duration-200 ease-out"
@@ -44,6 +50,19 @@ const MobileNav = ({ solutions, resources }) => (
                   <div className="ml-4 text-base font-medium text-gray-900">{solution.name}</div>
                 </a>
               ))}
+              {profile?.token && (
+                <button
+                  type="button"
+                  className="-m-3 p-3 flex items-center rounded-lg hover:bg-gray-50"
+                >
+                  <div
+                    className="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-md bg-indigo-500 text-white"
+                  >
+                    <UserIcon className="h-6 w-6" aria-hidden="true" />
+                  </div>
+                  <div className="ml-4 text-base font-medium text-gray-900">My Account</div>
+                </button>
+              )}
             </nav>
           </div>
         </div>
@@ -70,21 +89,38 @@ const MobileNav = ({ solutions, resources }) => (
               </a>
             ))}
           </div>
-          <div className="mt-6">
-            <a
-              href="#"
-              className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
-            >
-              Sign up
-            </a>
-            <p className="mt-6 text-center text-base font-medium text-gray-500">
-              Existing customer?
-              {' '}
-              <a href="#" className="text-indigo-600 hover:text-indigo-500">
-                Sign in
-              </a>
-            </p>
-          </div>
+          {profile?.token ? (
+            <div className="mt-6">
+              <button
+                type="button"
+                onClick={signIn}
+                className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
+              >
+                Logout
+              </button>
+            </div>
+          ) : (
+            <div className="mt-6">
+              <button
+                type="button"
+                onClick={signIn}
+                className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
+              >
+                Sign up
+              </button>
+              <p className="mt-6 text-center text-base font-medium text-gray-500">
+                Existing customer?
+                {' '}
+                <button
+                  type="button"
+                  onClick={signUp}
+                  className="text-indigo-600 hover:text-indigo-500"
+                >
+                  Sign in
+                </button>
+              </p>
+            </div>
+          )}
         </div>
       </div>
     </Popover.Panel>

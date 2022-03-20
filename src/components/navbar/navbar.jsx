@@ -258,6 +258,9 @@ const Navbar = () => {
       <MobileNav
         solutions={solutions}
         resources={resources}
+        signIn={reroute.signIn}
+        signUp={reroute.signUp}
+        profile={profile}
       />
     </Popover>
   )
