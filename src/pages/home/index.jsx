@@ -8,7 +8,6 @@ import { MainLayout } from '../../layouts'
 const Home = () => {
   const profile = useSelector(state => state.profile)
   const router = useRouter()
-  console.log({ profile })
   const { info } = profile.user || { info: null }
   return (
     <>
