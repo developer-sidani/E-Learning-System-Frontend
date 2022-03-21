@@ -1,4 +1,3 @@
-/* This example requires Tailwind CSS v2.0+ */
 import React, { Fragment, useMemo } from 'react'
 import { Popover, Transition } from '@headlessui/react'
 import {
