@@ -3,13 +3,16 @@ import { MainCourseComponent, PageHeader } from '../components'
 import { MainLayout } from '../layouts'
 
 const course = {
+  _id: '621d2f5bbe6a14d70ae04c59',
   title: 'Intro to web',
-  img: '',
-  description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium, obcaecati, officiis. Aperiam asperiores corporis dicta dolor dolorem excepturi inventore odio perspiciatis rerum temporibus, totam velit. Blanditiis culpa quibusdam saepe! Animi!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium, obcaecati, officiis. Aperiam asperiores corporis dicta dolor dolorem excepturi inventore odio perspiciatis rerum temporibus, totam velit. Blanditiis culpa quibusdam saepe! Animi!',
+  image_125_H: 'https://img-c.udemycdn.com/course/125_H/1331946_ed41_4.jpg',
+  image_240x135: 'https://img-c.udemycdn.com/course/240x135/1331946_ed41_4.jpg',
+  image_480x270: 'https://img-c.udemycdn.com/course/480x270/1331946_ed41_4.jpg',
+  headline: 'Beginners, Zero to Hero. AWS EC2 web server, NodeJS Server, AWS RDS database server, S3, SES & CloudWatch.',
   instructor: 'test test',
   price: 49.99,
   rating: 4.3,
-  postDate: new Date(),
+  updatedAt: new Date(),
   bestSeller: false,
   category: 'Web Development',
 }
