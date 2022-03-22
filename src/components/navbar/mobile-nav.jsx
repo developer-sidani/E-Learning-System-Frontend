@@ -3,7 +3,7 @@ import { Popover, Transition } from '@headlessui/react'
 import { XIcon, UserIcon } from '@heroicons/react/outline'
 
 const MobileNav = ({
-  solutions,
+  categories,
   resources,
   profile,
   reroute,
@@ -37,17 +37,18 @@ const MobileNav = ({
           </div>
           <div className="mt-6">
             <nav className="grid grid-cols-1 gap-7">
-              {solutions.map((solution, index) => (
-                <a
+              {categories.map((category, index) => (
+                <button
+                  type="button"
                   key={index}
-                  href={solution.href}
+                  onClick={() => reroute.specific(category.href)}
                   className="-m-3 p-3 flex items-center rounded-lg hover:bg-gray-50"
                 >
                   <div className="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-md bg-indigo-500 text-white">
-                    <solution.icon className="h-6 w-6" aria-hidden="true" />
+                    <category.icon className="h-6 w-6" aria-hidden="true" />
                   </div>
-                  <div className="ml-4 text-base font-medium text-gray-900">{solution.name}</div>
-                </a>
+                  <div className="ml-4 text-base font-medium text-gray-900">{category.name}</div>
+                </button>
               ))}
               {profile?.token && (
                 <button
@@ -68,25 +69,26 @@ const MobileNav = ({
         </div>
         <div className="py-6 px-5">
           <div className="grid grid-cols-2 gap-4">
-            <a href="#" className="text-base font-medium text-gray-900 hover:text-gray-700">
-              Pricing
-            </a>
+            <button
+              type="button"
+              onClick={() => reroute.specific('teach-with-us')}
+              className="text-base font-medium text-gray-900 hover:text-gray-700"
+            >
+              Teach With Us
+            </button>
 
-            <a href="#" className="text-base font-medium text-gray-900 hover:text-gray-700">
+            <button type="button" className="text-base font-medium text-gray-900 hover:text-gray-700">
               Docs
-            </a>
-
-            <a href="#" className="text-base font-medium text-gray-900 hover:text-gray-700">
-              Enterprise
-            </a>
+            </button>
             {resources.map((resource, index) => (
-              <a
+              <button
                 key={index}
-                href={resource.href}
+                type="button"
+                onClick={() => reroute.specific(resource.href)}
                 className="text-base font-medium text-gray-900 hover:text-gray-700"
               >
                 {resource.name}
-              </a>
+              </button>
             ))}
           </div>
           {profile?.token ? (

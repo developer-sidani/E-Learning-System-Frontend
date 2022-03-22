@@ -14,7 +14,7 @@ import { useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
 import MobileNav from './mobile-nav'
 
-const solutions = [
+const categories = [
   {
     name: 'Analytics',
     description: 'Get a better understanding of where your traffic is coming from.',
@@ -81,6 +81,9 @@ const Navbar = () => {
     myAccount() {
       router.push('/my-account')
     },
+    specific(route) {
+      router.push(route)
+    },
   }), [router])
   return (
     <Popover className="relative bg-white">
@@ -133,34 +136,22 @@ const Navbar = () => {
                   <Popover.Panel className="absolute z-10 -ml-4 mt-3 transform w-screen max-w-md lg:max-w-2xl lg:ml-0 lg:left-1/2 lg:-translate-x-1/2">
                     <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
                       <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8 lg:grid-cols-2">
-                        {solutions.map((solution, index) => (
-                          <a
+                        {categories.map((category, index) => (
+                          <button
                             key={index}
-                            href={solution.href}
+                            type="button"
+                            onClick={() => reroute.specific(category.href)}
                             className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50"
                           >
                             <div className="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-md bg-indigo-500 text-white sm:h-12 sm:w-12">
-                              <solution.icon className="h-6 w-6" aria-hidden="true" />
+                              <category.icon className="h-6 w-6" aria-hidden="true" />
                             </div>
                             <div className="ml-4">
-                              <p className="text-base font-medium text-gray-900">{solution.name}</p>
-                              <p className="mt-1 text-sm text-gray-500">{solution.description}</p>
+                              <p className="text-base font-medium text-gray-900">{category.name}</p>
+                              <p className="mt-1 text-sm text-gray-500">{category.description}</p>
                             </div>
-                          </a>
+                          </button>
                         ))}
-                      </div>
-                      <div className="p-5 bg-gray-50 sm:p-8">
-                        <a href="#" className="-m-3 p-3 flow-root rounded-md hover:bg-gray-100">
-                          <div className="flex items-center">
-                            <div className="text-base font-medium text-gray-900">Enterprise</div>
-                            <span className="ml-3 inline-flex items-center px-3 py-0.5 rounded-full text-xs font-medium leading-5 bg-indigo-100 text-indigo-800">
-                              New
-                            </span>
-                          </div>
-                          <p className="mt-1 text-sm text-gray-500">
-                            Empower your entire team with even more advanced tools.
-                          </p>
-                        </a>
                       </div>
                     </div>
                   </Popover.Panel>
@@ -169,9 +160,13 @@ const Navbar = () => {
             )}
           </Popover>
 
-          <a href="#" className="text-base font-medium text-gray-500 hover:text-gray-900">
-            Pricing
-          </a>
+          <button
+            type="button"
+            onClick={() => reroute.specific('teach-with-us')}
+            className="text-base font-medium text-gray-500 hover:text-gray-900"
+          >
+            Teach With Us
+          </button>
           <a href="#" className="text-base font-medium text-gray-500 hover:text-gray-900">
             Docs
           </a>
@@ -263,7 +258,7 @@ const Navbar = () => {
 
       </div>
       <MobileNav
-        solutions={solutions}
+        categories={categories}
         resources={resources}
         reroute={reroute}
         profile={profile}
