@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
 
 const AuthGuard = ({ children }) => {
-  const profile = useSelector(state => state.profile)
+  const profile = useSelector(({ profile }) => profile)
   const router = useRouter()
   const [checked, setChecked] = useState(false)
   useEffect(() => {
@@ -15,7 +15,7 @@ const AuthGuard = ({ children }) => {
     } else {
       setChecked(true)
     }
-  }, [router.isReady])
+  }, [router.isReady, profile])
   if (!checked) {
     return null
   }

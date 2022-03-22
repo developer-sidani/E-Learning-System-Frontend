@@ -1,7 +1,6 @@
 import React, { useState, useCallback, useEffect } from 'react'
 import { Formik, Form, Field } from 'formik'
 import * as Yup from 'yup'
-import { useRouter } from 'next/router'
 import { useDispatch } from 'react-redux'
 import { login } from '../../api'
 import { styles } from './tw-styles'
@@ -22,7 +21,6 @@ const SignInSchema = Yup.object().shape({
     .required('Required'),
 })
 const SignInComponent = () => {
-  const router = useRouter()
   const dispatch = useDispatch()
   const [loading, setLoading] = useState(false)
   const [open, setOpen] = useState(false)
@@ -55,7 +53,7 @@ const SignInComponent = () => {
         setLoading(false)
       }
     },
-    [router],
+    [],
   )
   useEffect(() => {
     setServerErr({
@@ -103,7 +101,6 @@ const SignInComponent = () => {
                 await wait(500)
                 resetForm()
                 setEmail('')
-                router.push('/home')
               })
             }}
           >
@@ -175,13 +172,13 @@ const SignInComponent = () => {
                         </label>
                       </div>
                       <div className="text-sm">
-                        <a
-                          href="#"
+                        <button
+                          type="button"
                           className={styles.link}
                           onClick={() => setOpen(true)}
                         >
                           Forgot your password?
-                        </a>
+                        </button>
                       </div>
                     </div>
 

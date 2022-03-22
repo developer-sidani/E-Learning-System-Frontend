@@ -7,16 +7,15 @@ const GuestGuard = ({ children }) => {
   const router = useRouter()
   const [checked, setChecked] = useState(false)
   useEffect(() => {
-    console.log({ profile })
     if (!router.isReady) {
       return
     }
     if (profile?.token) {
-      router.push('/home')
+      router.push('/')
     } else {
       setChecked(true)
     }
-  }, [router.isReady])
+  }, [router, profile])
   if (!checked) {
     return null
   }

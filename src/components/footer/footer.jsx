@@ -90,9 +90,7 @@ const navigation = {
   ],
 }
 
-const Footer = () => {
-  console.log('index')
-  return (
+const Footer = () => (
 
       <footer className="bg-gray-800 static" aria-labelledby="footer-heading">
           <div className="w-full bottom-0">
@@ -203,7 +201,6 @@ const Footer = () => {
 
           </div>
       </footer>
-  )
-}
+)
 
 export { Footer }
