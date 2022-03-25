@@ -1,9 +1,10 @@
 import React from 'react'
-import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from "pure-react-carousel"
-import "pure-react-carousel/dist/react-carousel.es.css"
+import {
+  CarouselProvider, Slider, Slide, ButtonBack, ButtonNext,
+} from 'pure-react-carousel'
+import 'pure-react-carousel/dist/react-carousel.es.css'
 
-
-const TestimonialsComponent = ({testimonial_array}) => (
+const TestimonialsComponent = ({ testimonials }) => (
 
         <div>
             <div className="flex items-center justify-between h-full w-full absolute z-0">
@@ -11,7 +12,7 @@ const TestimonialsComponent = ({testimonial_array}) => (
                 <div className="w-4/6 ml-16 bg-gray-100 h-full" />
             </div>
             <div className="xl:px-20 px-8 py-20 2xl:mx-auto 2xl:container relative z-40">
-                <CarouselProvider naturalSlideWidth={100} isIntrinsicHeight={true} totalSlides={testimonial_array.length}>
+                <CarouselProvider naturalSlideWidth={100} isIntrinsicHeight totalSlides={testimonials.length}>
                     <h1 className="text-5xl font-bold xl:block hidden leading-tight text-gray-800">
                         What our customers are
                         <br />
@@ -19,8 +20,8 @@ const TestimonialsComponent = ({testimonial_array}) => (
                     </h1>
                     <h1 className="text-5xl font-bold xl:hidden block leading-tight lg:leading-10 text-gray-800">What our users are saying</h1>
                     <Slider>
-                        {testimonial_array?.map((testimonials) => (
-                        <Slide index={0} tabIndex="null">
+                        {testimonials?.map((testimonials, index) => (
+                        <Slide index={0} tabIndex="null" key={index}>
                             <div className="flex">
                                 <div className="mt-14 md:flex">
                                     <div className="relative lg:w-1/2 sm:w-96 xl:h-96 h-80">
@@ -58,6 +59,5 @@ const TestimonialsComponent = ({testimonial_array}) => (
         </div>
 
 )
-
 
 export default TestimonialsComponent
