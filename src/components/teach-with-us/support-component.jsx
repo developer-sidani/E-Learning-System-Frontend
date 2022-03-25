@@ -4,7 +4,7 @@ import React from 'react'
 
 const SupportComponent = () => (
 
-<div>Support Community</div>
+<div></div> 
 
 )
 

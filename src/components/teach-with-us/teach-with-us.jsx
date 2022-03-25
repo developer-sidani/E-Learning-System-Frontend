@@ -28,13 +28,31 @@ const testimonial_array = [
     },
    
   ]
+  const incentivesFunction = [
+    {
+      name: 'Teach your way',
+      imageSrc: 'https://s.udemycdn.com/teaching/value-prop-teach-v3.jpg',
+      description: "Publish the course you want, the way you want, and always have of control your own content.",
+    },
+    {
+      name: 'Inspire learners',
+      imageSrc: 'https://s.udemycdn.com/teaching/value-prop-inspire-v3.jpg',
+      description: "Teach what you know and help learners explore their interests, gain new skills, and advance their careers.",
+    },
+    {
+      name: 'Get rewarded',
+      imageSrc: 'https://s.udemycdn.com/teaching/value-prop-get-rewarded-v3.jpg',
+      description:
+        "Expand your professional network, build your expertise, and earn money on each paid enrollment.",
+    },
+  ]
 const TeachWithUsComponent = () => (
   <>
       
       <BannerComponent/>    
       <IncentivesComponent/>
       <StatsComponent/>
-      <TestimonialsComponent testimonial_array={testimonial_array}/>
+      <TestimonialsComponent testimonial_array={testimonial_array} incentive_function = {incentivesFunction}/>
       <SupportComponent/>
       <CallToActionComponent/>
       

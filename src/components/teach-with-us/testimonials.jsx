@@ -17,7 +17,7 @@ const TestimonialsComponent = ({testimonial_array}) => (
                         <br />
                         saying
                     </h1>
-                    <h1 className="text-5xl font-bold xl:hidden block leading-tight lg:leading-10 text-gray-800">What our customers are saying</h1>
+                    <h1 className="text-5xl font-bold xl:hidden block leading-tight lg:leading-10 text-gray-800">What our users are saying</h1>
                     <Slider>
                         {testimonial_array?.map((testimonials) => (
                         <Slide index={0} tabIndex="null">
