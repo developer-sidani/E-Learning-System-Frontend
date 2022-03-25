@@ -6,11 +6,11 @@ import CallToActionComponent from './call-to-action'
 import TestimonialsComponent from './testimonials'
 
 export {
-    IncentivesComponent,
-    BannerComponent,
-    StatsComponent,
-    SupportComponent,
-    CallToActionComponent,
-    TestimonialsComponent,
+  IncentivesComponent,
+  BannerComponent,
+  StatsComponent,
+  SupportComponent,
+  CallToActionComponent,
+  TestimonialsComponent,
 }
 export { TeachWithUsComponent } from './teach-with-us'

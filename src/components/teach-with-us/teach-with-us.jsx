@@ -1,6 +1,6 @@
 import React from 'react'
 import {
-  IncentivesComponent, BannerComponent, StatsComponent, SupportComponent, CallToActionComponent, TestimonialsComponent,
+  IncentivesComponent, BannerComponent, StatsComponent, CallToActionComponent, TestimonialsComponent,
 } from '.'
 
 const TestimonialArray = [
@@ -51,14 +51,12 @@ const incentivesFunction = [
 ]
 const TeachWithUsComponent = () => (
   <>
-
       <BannerComponent />
       <IncentivesComponent incentivesFunction={incentivesFunction} />
       <StatsComponent />
       <TestimonialsComponent testimonials={TestimonialArray} />
-      <SupportComponent />
+      {/* <SupportComponent /> */}
       <CallToActionComponent />
-
   </>
 )
 

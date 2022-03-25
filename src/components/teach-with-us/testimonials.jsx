@@ -5,7 +5,6 @@ import {
 import 'pure-react-carousel/dist/react-carousel.es.css'
 
 const TestimonialsComponent = ({ testimonials }) => (
-
         <div>
             <div className="flex items-center justify-between h-full w-full absolute z-0">
                 <div className="w-1/3 bg-white h-full" />
@@ -25,7 +24,7 @@ const TestimonialsComponent = ({ testimonials }) => (
                             <div className="flex">
                                 <div className="mt-14 md:flex">
                                     <div className="relative lg:w-1/2 sm:w-96 xl:h-96 h-80">
-                                        <img src={testimonials.image} alt="image of profile" className="w-full h-full flex-shrink-0 object-fit object-cover shadow-lg rounded" />
+                                        <img src={testimonials.image} alt="profile" className="w-full h-full flex-shrink-0 object-fit object-cover shadow-lg rounded" />
                                         <div className="w-32 md:flex hidden items-center justify-center absolute top-0 -mr-16 -mt-14 right-0 h-32 bg-indigo-100 rounded-full">
                                             <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/testimonial-svg1.svg" alt="commas" />
                                         </div>

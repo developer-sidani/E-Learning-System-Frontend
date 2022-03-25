@@ -2,9 +2,8 @@ import React from 'react'
 
 const incentives = ({ incentivesFunction }) => (
 
- <div className="bg-white">
-
-    <div className="max-w-7xl mx-auto px-4 pt-24 sm:px-6 lg:px-8">
+    <div className="bg-white">
+      <div className="max-w-7xl mx-auto px-4 pt-24 sm:px-6 lg:px-8">
       <div className="bg-gray-50 rounded-2xl px-6 py-16 sm:p-16">
         <div className="max-w-xl mx-auto lg:max-w-none">
           <div className="text-center">
@@ -33,8 +32,8 @@ const incentives = ({ incentivesFunction }) => (
           </div>
         </div>
       </div>
+      </div>
     </div>
- </div>
 
 )
 
