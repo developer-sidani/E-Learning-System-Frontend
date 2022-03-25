@@ -1,6 +1,5 @@
 import React from 'react'
 
-
 // const incentivesFunction = [
 //   {
 //     name: 'Teach your way',
@@ -21,12 +20,11 @@ import React from 'react'
 // ]
 
 const ConsoleLog = ({ children }) => {
-  console.log(children);
-  return false;
-};
+  console.log(children)
+  return false
+}
 
-
-const incentives = ({incentive_function}) => (
+const incentives = ({ incentivesFunction }) => (
  <div className="bg-white">
     <div className="max-w-7xl mx-auto px-4 py-24 sm:px-6 lg:px-8">
       <div className="bg-gray-50 rounded-2xl px-6 py-16 sm:p-16">
@@ -38,12 +36,15 @@ const incentives = ({incentive_function}) => (
           </div>
 
           <div className="mt-12 max-w-sm mx-auto grid grid-cols-1 gap-y-10 gap-x-8 sm:max-w-none lg:grid-cols-3">
-            {incentive_function?.map((incentive) => (
+            {incentivesFunction?.map((incentive) => (
+
               <div key={incentive.name} className="text-center sm:flex sm:text-left lg:block lg:text-center">
+                <ConsoleLog>
+              {incentive.name}
+                </ConsoleLog>
                 <div className="sm:flex-shrink-0">
                   <div className="flow-root">
                     <img className="w-16 h-16 mx-auto" src={incentive.imageSrc} alt="" />
-                    <ConsoleLog> {incentive.imageSrc} </ConsoleLog>
                   </div>
                 </div>
                 <div className="mt-3 sm:mt-0 sm:ml-6 lg:mt-6 lg:ml-0">
@@ -56,9 +57,8 @@ const incentives = ({incentive_function}) => (
         </div>
       </div>
     </div>
-  </div>
+ </div>
 
 )
-
 
 export default incentives
