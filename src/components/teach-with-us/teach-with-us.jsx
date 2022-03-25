@@ -53,7 +53,7 @@ const TeachWithUsComponent = () => (
   <>
 
       <BannerComponent />
-      <IncentivesComponent incentive_function={incentivesFunction} />
+      <IncentivesComponent incentivesFunction={incentivesFunction} />
       <StatsComponent />
       <TestimonialsComponent testimonial_array={TestimonialArray} />
       <SupportComponent />
