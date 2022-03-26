@@ -10,5 +10,5 @@ export { FaqComponent } from './faq/faq-component'
 export { Footer } from './footer'
 export { Navbar } from './navbar'
 export { ForgotPasswordComponent } from './auth/forgot-password'
-export { MainCourseComponent } from './courses'
+export { MainCourseComponent, CourseLoading } from './courses'
 export { OnHoverComponent }

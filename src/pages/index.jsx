@@ -1,5 +1,5 @@
 import React from 'react'
-import { MainCourseComponent, PageHeader } from '../components'
+import { MainCourseComponent, PageHeader, CourseLoading } from '../components'
 import { MainLayout } from '../layouts'
 
 const course = {
@@ -29,6 +29,7 @@ const Home = () => (
     <div className="px-5 py-2 sm:grid md:grid-cols-2 xl:grid-cols-3 3xl:flex flex-wrap justify-center">
       <MainCourseComponent course={course} />
       <MainCourseComponent course={course} />
+      <CourseLoading />
     </div>
   </>
 )
