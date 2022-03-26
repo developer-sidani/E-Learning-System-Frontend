@@ -24,7 +24,10 @@ const Home = () => (
     <p className="text-3xl font-extrabold mb-2 ml-1">
       Courses:
     </p>
-    <MainCourseComponent course={course} />
+    <div className="flex flex-wrap flex-row">
+      <MainCourseComponent course={course} />
+      <MainCourseComponent course={course} />
+    </div>
   </>
 )
 Home.getLayout = (page) => (
