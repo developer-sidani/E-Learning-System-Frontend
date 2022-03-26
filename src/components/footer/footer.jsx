@@ -2,33 +2,30 @@ import React from 'react'
 
 const navigation = {
   solutions: [
-    { name: 'Marketing', href: '#' },
-    { name: 'Analytics', href: '#' },
-    { name: 'Commerce', href: '#' },
-    { name: 'Insights', href: '#' },
+    { name: 'Teach on Learn+', href: 'teach-with-us.jsx' },
+    { name: 'About us', href: '#' },
+    { name: 'Contact us', href: 'contact-us.jsx' },
   ],
   support: [
     { name: 'Pricing', href: '#' },
     { name: 'Documentation', href: '#' },
-    { name: 'Guides', href: '#' },
+    { name: 'Terms', href: '#' },
     { name: 'API Status', href: '#' },
   ],
   company: [
     { name: 'About', href: '#' },
     { name: 'Blog', href: '#' },
     { name: 'Jobs', href: '#' },
-    { name: 'Press', href: '#' },
-    { name: 'Partners', href: '#' },
   ],
-  legal: [
-    { name: 'Claim', href: '#' },
-    { name: 'Privacy', href: '#' },
-    { name: 'Terms', href: '#' },
-  ],
+  // legal: [
+  //   { name: 'Claim', href: '#' },
+  //   { name: 'Privacy', href: '#' },
+  //   { name: 'Terms', href: '#' },
+  // ],
   social: [
     {
       name: 'Facebook',
-      href: '#',
+      href: 'https://www.facebook.com/',
       icon: (props) => (
           <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
             <path
@@ -41,7 +38,7 @@ const navigation = {
     },
     {
       name: 'Instagram',
-      href: '#',
+      href: 'https://www.instagram.com/accounts/login/',
       icon: (props) => (
           <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
             <path
@@ -54,7 +51,7 @@ const navigation = {
     },
     {
       name: 'Twitter',
-      href: '#',
+      href: 'https://twitter.com/login?lang=en',
       icon: (props) => (
           <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
             <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
@@ -63,7 +60,7 @@ const navigation = {
     },
     {
       name: 'GitHub',
-      href: '#',
+      href: 'https://github.com/',
       icon: (props) => (
           <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
             <path
@@ -76,7 +73,7 @@ const navigation = {
     },
     {
       name: 'Dribbble',
-      href: '#',
+      href: 'dribbble.com',
       icon: (props) => (
           <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
             <path
@@ -102,7 +99,7 @@ const Footer = () => (
                 <div className="grid grid-cols-2 gap-8 xl:col-span-2">
                   <div className="md:grid md:grid-cols-2 md:gap-8">
                     <div>
-                      <h3 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">Solutions</h3>
+                      {/* <h3 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">Solutions</h3> */}
                       <ul role="list" className="mt-4 space-y-4">
                         {navigation.solutions.map((item) => (
                           <li key={item.name}>
@@ -114,7 +111,7 @@ const Footer = () => (
                       </ul>
                     </div>
                     <div className="mt-12 md:mt-0">
-                      <h3 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">Support</h3>
+                      {/* <h3 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">Support</h3> */}
                       <ul role="list" className="mt-4 space-y-4">
                         {navigation.support.map((item) => (
                           <li key={item.name}>
@@ -128,7 +125,7 @@ const Footer = () => (
                   </div>
                   <div className="md:grid md:grid-cols-2 md:gap-8">
                     <div>
-                      <h3 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">Company</h3>
+                      {/* <h3 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">Company</h3> */}
                       <ul role="list" className="mt-4 space-y-4">
                         {navigation.company.map((item) => (
                           <li key={item.name}>
@@ -140,8 +137,8 @@ const Footer = () => (
                       </ul>
                     </div>
                     <div className="mt-12 md:mt-0">
-                      <h3 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">Legal</h3>
-                      <ul role="list" className="mt-4 space-y-4">
+                      {/* <h3 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">Legal</h3> */}
+                      {/* <ul role="list" className="mt-4 space-y-4">
                         {navigation.legal.map((item) => (
                           <li key={item.name}>
                             <a href={item.href} className="text-base text-gray-300 hover:text-white">
@@ -149,7 +146,7 @@ const Footer = () => (
                             </a>
                           </li>
                         ))}
-                      </ul>
+                      </ul> */}
                     </div>
                   </div>
                 </div>
@@ -194,7 +191,7 @@ const Footer = () => (
                   ))}
                 </div>
                 <p className="mt-8 text-base text-gray-400 md:mt-0 md:order-1">
-                  &copy; 2020 Workflow, Inc. All rights reserved.
+                  &copy; 2022 Workflow, Inc. All rights reserved.
                 </p>
               </div>
             </div>
