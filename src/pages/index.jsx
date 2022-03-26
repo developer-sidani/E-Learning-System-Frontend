@@ -1,6 +1,4 @@
-import React, { useEffect } from 'react'
-import axios from 'axios'
-import log from 'tailwindcss/lib/util/log'
+import React from 'react'
 import { MainCourseComponent, PageHeader } from '../components'
 import { MainLayout } from '../layouts'
 
@@ -18,13 +16,7 @@ const course = {
   bestSeller: false,
   category: 'Web Development',
 }
-const Home = () => {
-  useEffect(() => {
-    fetch('https://geolocation-db.com/json/2d7a1090-a7e0-11ec-bb96-d99740183a81')
-      .then(response => response.json())
-      .then(data => console.log(data))
-  }, [])
-  return (
+const Home = () => (
   <>
     <PageHeader
       title="Learn+"
@@ -34,8 +26,7 @@ const Home = () => {
     </p>
     <MainCourseComponent course={course} />
   </>
-  )
-}
+)
 Home.getLayout = (page) => (
   <MainLayout>
         {page}
