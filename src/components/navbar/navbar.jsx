@@ -67,7 +67,7 @@ const resources = [
 const cart = {
 
   userID: '132',
-  total: 113,
+  total: 150,
   courses: [
     {
       name: 'Help Center',
@@ -258,7 +258,23 @@ const Navbar = () => {
 
 {/* CART */}
 
-<Popover className="relative">
+<div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
+          {/* <button
+            type="button"
+            className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900"
+            onClick={reroute.signIn}
+          >
+              Sign in
+          </button> */}
+
+          {/* <button
+            type="button"
+            className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
+            onClick={reroute.signUp}
+          >
+              Sign up
+          </button> */}
+           <Popover className="relative mr-40 mt-1">
             {({ open }) => (
               <>
                 <Popover.Button
@@ -271,7 +287,7 @@ const Navbar = () => {
                   <ShoppingCartIcon
                     className={classNames(
                       open ? 'text-gray-600' : 'text-gray-400',
-                      'ml-2 h-5 w-5 group-hover:text-gray-500',
+                      'ml-2 h-6 w-6 group-hover:text-gray-500',
                     )}
                     aria-hidden="true"
                   />
@@ -332,13 +348,13 @@ const Navbar = () => {
                 </Transition>
               </>
             )}
-</Popover>
-
+           </Popover>
+</div>
 {/* CART END */}
     {!profile?.token
 
       ? (
-      <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
+      <div className="hidden md:flex items-center justify-end  lg:w-0">
           <button
             type="button"
             className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900"
