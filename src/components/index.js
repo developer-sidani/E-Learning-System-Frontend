@@ -12,3 +12,4 @@ export { Navbar } from './navbar'
 export { ForgotPasswordComponent } from './auth/forgot-password'
 export { MainCourseComponent, CourseLoading } from './courses'
 export { OnHoverComponent }
+export { TeachWithUsComponent } from './teach-with-us'

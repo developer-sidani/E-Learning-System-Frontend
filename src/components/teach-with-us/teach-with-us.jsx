@@ -60,5 +60,4 @@ const TeachWithUsComponent = () => (
   </>
 )
 
-export { TeachWithUsComponent }
-// test
+export default TeachWithUsComponent
