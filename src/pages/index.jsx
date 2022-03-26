@@ -1,4 +1,7 @@
 import React from 'react'
+import {
+  CarouselProvider, Slider, Slide, ButtonBack, ButtonNext,
+} from 'pure-react-carousel'
 import { MainCourseComponent, PageHeader, CourseLoading } from '../components'
 import { MainLayout } from '../layouts'
 
@@ -26,11 +29,26 @@ const Home = () => (
     <p className="text-3xl font-extrabold mb-2 ml-1">
       Courses:
     </p>
-    <div className="px-5 py-2 sm:grid md:grid-cols-2 xl:grid-cols-3 3xl:flex flex-wrap justify-center">
-      <MainCourseComponent course={course} />
-      <MainCourseComponent course={course} />
-      <CourseLoading />
-    </div>
+    <CarouselProvider naturalSlideWidth={300} isIntrinsicHeight totalSlides={5} visibleSlides={3}>
+      <Slider>
+        <Slide index={0} tabIndex="null">
+          <MainCourseComponent course={course} />
+        </Slide>
+        <Slide index={1} tabIndex="null">
+          <MainCourseComponent course={course} />
+        </Slide>
+        <Slide index={2} tabIndex="null">
+          <MainCourseComponent course={course} />
+        </Slide>
+        <Slide index={3} tabIndex="null">
+          <MainCourseComponent course={course} />
+        </Slide>
+        <Slide index={4} tabIndex="null">
+          <CourseLoading />
+        </Slide>
+
+      </Slider>
+    </CarouselProvider>
   </>
 )
 Home.getLayout = (page) => (
