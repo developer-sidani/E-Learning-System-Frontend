@@ -7,7 +7,7 @@ import { OnHoverComponent } from '../index'
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
-const MainCourseComponent = ({ course, loading = true }) => (
+const MainCourseComponent = ({ course, loading }) => (
     <div
       className={loading ? 'animate-pulse p-2 pr-0 mr-0 group cursor-pointer transition duration-200 ease-in transform max-w-xs'
         : 'p-2 pr-0 mr-0 group cursor-pointer transition duration-200 ease-in transform sm:hover:scale-105 hover:z-50 max-w-xs'}
