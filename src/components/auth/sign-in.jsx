@@ -1,15 +1,17 @@
 import React, { useState, useCallback, useEffect } from 'react'
 import { Formik, Form, Field } from 'formik'
 import * as Yup from 'yup'
-import { useRouter } from 'next/router'
+import { useDispatch } from 'react-redux'
 import { login } from '../../api'
 import { styles } from './tw-styles'
-import { isEmail } from '../../utils'
+import { isEmail, wait } from '../../utils'
 import { Modal } from '.'
+import { set } from '../../slices/profile'
 
 const errorStatusFromBackend = {
   password: 401,
   user: 403,
+  checkEmail: 400,
 }
 
 const Logo = 'https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg'
@@ -19,7 +21,7 @@ const SignInSchema = Yup.object().shape({
     .required('Required'),
 })
 const SignInComponent = () => {
-  const router = useRouter()
+  const dispatch = useDispatch()
   const [loading, setLoading] = useState(false)
   const [open, setOpen] = useState(false)
   const [serverErr, setServerErr] = useState({
@@ -27,22 +29,23 @@ const SignInComponent = () => {
     password: '',
   })
   const onLogin = useCallback(
-    async (user, password, callback) => {
+    async (user, password, rememberMe, callback) => {
       try {
         const res = await login({
           user,
           password,
+          rememberMe,
         })
-        console.log({ res })
-        if (res.status === errorStatusFromBackend.user) {
+        console.log(res)
+        if (res.status === errorStatusFromBackend.user || res.status === errorStatusFromBackend.checkEmail) {
           // not found
           setServerErr(prevState => ({ ...prevState, user: res?.message }))
         } else if (res?.status === errorStatusFromBackend.password) {
           // wrong password
           setServerErr(prevState => ({ ...prevState, password: res?.message }))
-        } else {
+        } else if (res?.status === 200) {
+          dispatch(set({ user: res.user, token: res.token }))
           callback()
-          router.push('/')
         }
       } catch (err) {
         console.log({ err })
@@ -50,7 +53,7 @@ const SignInComponent = () => {
         setLoading(false)
       }
     },
-    [router],
+    [],
   )
   useEffect(() => {
     setServerErr({
@@ -73,7 +76,7 @@ const SignInComponent = () => {
           <p className="mt-2 text-center text-sm text-gray-600">
             Or
               {' '}
-            <a href="#" className={styles.link}>
+            <a href="./sign-up" className={styles.link}>
               Register Here
             </a>
           </p>
@@ -85,23 +88,32 @@ const SignInComponent = () => {
             initialValues={{
               user: '',
               password: '',
-              remember: false,
+              rememberMe: false,
             }}
             validationSchema={SignInSchema}
-            onSubmit={async ({ user, password }, { resetForm }) => {
+            onSubmit={async ({ user, password, rememberMe }, { resetForm }) => {
               setServerErr({
                 user: '',
                 password: '',
               })
               setLoading(true)
-              onLogin(user, password, () => {
+              onLogin(user, password, rememberMe, async () => {
+                await wait(500)
                 resetForm()
                 setEmail('')
               })
             }}
           >
-              {({ errors, touched, handleChange }) => (
-                  <Form className="space-y-6">
+              {({
+                errors, handleSubmit, touched, handleChange,
+              }) => (
+                  <Form
+                    className="space-y-6"
+                    onSubmit={e => {
+                      e.preventDefault()
+                      handleSubmit()
+                    }}
+                  >
                     <div>
                       <label htmlFor="user" className={styles.inputLabel}>
                         Email or Username
@@ -150,8 +162,8 @@ const SignInComponent = () => {
                     <div className="flex items-center justify-between">
                       <div className="flex items-center">
                         <Field
-                          id="remember"
-                          name="remember"
+                          id="rememberMe"
+                          name="rememberMe"
                           type="checkbox"
                           className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
                         />
@@ -159,15 +171,14 @@ const SignInComponent = () => {
                           Remember me
                         </label>
                       </div>
-
                       <div className="text-sm">
-                        <a
-                          href="#"
+                        <button
+                          type="button"
                           className={styles.link}
                           onClick={() => setOpen(true)}
                         >
                           Forgot your password?
-                        </a>
+                        </button>
                       </div>
                     </div>
 
@@ -182,7 +193,6 @@ const SignInComponent = () => {
                     </div>
                   </Form>
               )}
-
           </Formik>
           </div>
         </div>

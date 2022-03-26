@@ -58,6 +58,7 @@
       }
     ],
     "jsx-a11y/label-has-associated-control":"off",
+    "jsx-a11y/no-redundant-roles": "off",
     "no-shadow": "off",
     "max-len": [
       "off",
