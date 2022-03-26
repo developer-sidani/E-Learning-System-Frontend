@@ -8,7 +8,7 @@ const CourseLoading = () => (
     <div
       className="w-full h-40 bg-slate-700 space-y-6"
     />
-    <div className="p-2 w-full flex-1 space-y-6 py-1 mt-2">
+    <div className="p-2 w-full flex-1 space-y-6 py-1 my-2">
       <p className="h-3 w-1/2 bg-slate-700 rounded" />
       <p className="h-2 w-1/4 bg-slate-700 rounded" />
       <div className="flex items-center text-clip max-w-xs gap-3">
