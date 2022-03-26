@@ -1,31 +1,27 @@
 import React from 'react'
-import Image from 'next/image'
-import { StarIcon, ThumbUpIcon } from '@heroicons/react/solid'
-import moment from 'moment'
-import { OnHoverComponent } from '../index'
+import { StarIcon } from '@heroicons/react/solid'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 const MainCourseComponent = ({ course }) => (
     <div
-      className="group cursor-pointer transition duration-200 ease-in transform sm:hover:scale-105 hover:z-50 max-w-xs"
+      className="rounded-lg overflow-hidden shadow-lg group cursor-pointer transition duration-200 ease-in transform sm:hover:scale-105 hover:z-50 max-w-xs"
     >
         <img
           src={course?.image_480x270}
-          height={480}
-          width={270}
+          className="w-full"
           alt="ok"
         />
-        <div className="p-2">
-            <h2 className="text-l transition-all duration-100 ease-in-out font-bold group-hover:font-extrabold text-clip max-w-xs">
+        <div className="p-2 w-full">
+            <h2 className="text-md transition-all duration-100 ease-in-out font-[500] group-hover:font-bold text-clip max-w-xs">
                 {course?.title}
             </h2>
-             <p className="truncate max-w-md font-extralight text-sm">
+             <p className="max-w-md font-extralight text-sm">
                  {course?.instructor}
              </p>
             <div className="flex items-center text-clip max-w-xs gap-3">
-                <p className="font-bold text-sm">
+                <p className="font-[500] text-sm">
                   {course?.rating?.toString()}
                 </p>
                 <div className="flex items-center">
@@ -44,6 +40,13 @@ const MainCourseComponent = ({ course }) => (
             <p className="font-bold text-sm p-0">
                 {`${course?.currency} ${course?.price}`}
             </p>
+            <div className="w-1/4 bg-yellow-300 px-3 py-1 mt-1 object-contain">
+                <p
+                  className="text-xs font-[500]"
+                >
+                    {course?.flag}
+                </p>
+            </div>
         </div>
     </div>
 
