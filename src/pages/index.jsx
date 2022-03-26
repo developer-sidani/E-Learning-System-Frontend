@@ -2,6 +2,8 @@ import React from 'react'
 import {
   CarouselProvider, Slider, Slide, ButtonBack, ButtonNext,
 } from 'pure-react-carousel'
+import { useTheme } from '@mui/material/styles'
+import { useMediaQuery } from '@mui/material'
 import { MainCourseComponent, PageHeader, CourseLoading } from '../components'
 import { MainLayout } from '../layouts'
 
@@ -21,7 +23,10 @@ const course = {
   category: 'Web Development',
   flag: 'Bestseller',
 }
-const Home = () => (
+const Home = () => {
+  const theme = useTheme()
+  const mobileDevice = useMediaQuery(theme.breakpoints.up('sm'))
+  return (
   <>
     <PageHeader
       title="Learn+"
@@ -29,8 +34,10 @@ const Home = () => (
     <p className="text-3xl font-extrabold mb-2 ml-1">
       Courses:
     </p>
-    <CarouselProvider naturalSlideWidth={300} isIntrinsicHeight totalSlides={5} visibleSlides={3}>
-      <Slider>
+
+    <CarouselProvider naturalSlideWidth={300} isIntrinsicHeight totalSlides={5} visibleSlides={mobileDevice ? 3 : 1} step={mobileDevice ? 3 : 1}>
+      <ButtonBack>Back</ButtonBack>
+      <Slider className="py-3">
         <Slide index={0} tabIndex="null">
           <MainCourseComponent course={course} />
         </Slide>
@@ -46,11 +53,12 @@ const Home = () => (
         <Slide index={4} tabIndex="null">
           <CourseLoading />
         </Slide>
-
       </Slider>
+      <ButtonNext>Forward</ButtonNext>
     </CarouselProvider>
   </>
-)
+  )
+}
 Home.getLayout = (page) => (
   <MainLayout>
         {page}
