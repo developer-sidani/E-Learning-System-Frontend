@@ -4,6 +4,7 @@ import {
 } from 'pure-react-carousel'
 import { useTheme } from '@mui/material/styles'
 import { useMediaQuery } from '@mui/material'
+import { ArrowLeftIcon } from '@heroicons/react/solid'
 import { MainCourseComponent, PageHeader, CourseLoading } from '../components'
 import { MainLayout } from '../layouts'
 
@@ -35,8 +36,15 @@ const Home = () => {
       Courses:
     </p>
 
-    <CarouselProvider naturalSlideWidth={300} isIntrinsicHeight totalSlides={5} visibleSlides={mobileDevice ? 3 : 1} step={mobileDevice ? 3 : 1}>
-      <ButtonBack>Back</ButtonBack>
+    <CarouselProvider id="carouselExampleSlidesOnly" className="carousel slide relative" data-bs-ride="carousel" naturalSlideWidth={50} isIntrinsicHeight totalSlides={5} visibleSlides={mobileDevice ? 3 : 1} step={mobileDevice ? 3 : 1}>
+      <ButtonBack
+        className="mr-2 carousel-control-next absolute top-1/2 bottom-1/2 flex items-center justify-center p-0 text-center border-0 hover:outline-none hover:no-underline focus:outline-none focus:no-underline left-2 z-50"
+        type="button"
+      >
+        <svg className="text-white w-10 h-10 bg-primary rounded-full p-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+          <ArrowLeftIcon />
+        </svg>
+      </ButtonBack>
       <Slider className="p-3 my-2">
         <Slide index={0} tabIndex="null">
           <MainCourseComponent course={course} />
@@ -54,7 +62,18 @@ const Home = () => {
           <CourseLoading />
         </Slide>
       </Slider>
-      <ButtonNext>Forward</ButtonNext>
+      <ButtonNext
+        className="mr-2 carousel-control-next absolute top-1/2 bottom-1/2 flex items-center justify-center p-0 text-center border-0 hover:outline-none hover:no-underline focus:outline-none focus:no-underline right-2 z-50"
+        type="button"
+      >
+        <svg className="text-white w-10 h-10 bg-primary rounded-full p-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+          <path
+            fillRule="evenodd"
+            d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+            clipRule="evenodd"
+          />
+        </svg>
+      </ButtonNext>
     </CarouselProvider>
   </>
   )
