@@ -6,9 +6,9 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 const MainCourseComponent = ({ course, loading }) => (
-  <OnHoverComponent onHover={<h1>Hello</h1>}>
     <div className="my-6 mx-2 grid grid-cols-1 gap-x-8 gap-y-8 sm:grid-cols-2 sm:gap-y-10 lg:grid-cols-4">
       <div key={course._id} className="group">
+        <OnHoverComponent onHover={<h1>Hello</h1>}>
         <div className="w-full aspect-w-4 aspect-h-3 rounded-lg overflow-hidden bg-gray-100">
           <img src={course.image_480x270} alt="course" className="w-full h-full object-center object-cover group-hover:opacity-80" />
           {/* <div className="flex items-end opacity-0 p-4 group-hover:opacity-100" aria-hidden="true"> */}
@@ -47,9 +47,9 @@ const MainCourseComponent = ({ course, loading }) => (
             ))}
           </div>
         </div>
+        </OnHoverComponent>
       </div>
     </div>
-  </OnHoverComponent>
 )
 
 export default MainCourseComponent
