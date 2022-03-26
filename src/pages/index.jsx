@@ -11,10 +11,12 @@ const course = {
   headline: 'Beginners, Zero to Hero. AWS EC2 web server, NodeJS Server, AWS RDS database server, S3, SES & CloudWatch.',
   instructor: 'test test',
   price: 49.99,
-  rating: 2,
+  currency: '$',
+  rating: '4.0',
   updatedAt: new Date(),
   bestSeller: false,
   category: 'Web Development',
+  flag: 'Bestseller',
 }
 const Home = () => (
   <>
