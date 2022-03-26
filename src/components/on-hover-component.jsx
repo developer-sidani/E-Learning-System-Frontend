@@ -11,7 +11,6 @@ const OnHoverComponent = ({ children, onHover }) => {
   const handlePopoverClose = () => {
     setAnchorEl(null)
   }
-
   const open = Boolean(anchorEl)
   return (
     <div>
