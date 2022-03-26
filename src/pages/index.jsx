@@ -37,7 +37,7 @@ const Home = () => {
 
     <CarouselProvider naturalSlideWidth={300} isIntrinsicHeight totalSlides={5} visibleSlides={mobileDevice ? 3 : 1} step={mobileDevice ? 3 : 1}>
       <ButtonBack>Back</ButtonBack>
-      <Slider className="py-3">
+      <Slider className="p-3 my-2">
         <Slide index={0} tabIndex="null">
           <MainCourseComponent course={course} />
         </Slide>
