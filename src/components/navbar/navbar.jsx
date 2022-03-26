@@ -13,6 +13,7 @@ import {
 import { ChevronDownIcon } from '@heroicons/react/solid'
 import { useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
+import { Badge } from '@mui/material'
 import MobileNav from './mobile-nav'
 
 const categories = [
@@ -283,14 +284,15 @@ const Navbar = () => {
                     'group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none',
                   )}
                 >
-
-                  <ShoppingCartIcon
-                    className={classNames(
-                      open ? 'text-gray-600' : 'text-gray-400',
-                      'ml-2 h-6 w-6 group-hover:text-gray-500',
-                    )}
-                    aria-hidden="true"
-                  />
+                  <Badge color="secondary" badgeContent={cart?.courses?.length}>
+                    <ShoppingCartIcon
+                      className={classNames(
+                        open ? 'text-gray-600' : 'text-gray-400',
+                        'ml-2 h-6 w-6 group-hover:text-gray-500',
+                      )}
+                      aria-hidden="true"
+                    />
+                  </Badge>
                 </Popover.Button>
 
                 <Transition
