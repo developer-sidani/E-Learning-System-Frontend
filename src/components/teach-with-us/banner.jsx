@@ -3,7 +3,6 @@
 import React from 'react'
 
 const BannerComponent = () => (
-
       <div className="relative">
           <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gray-100" />
           <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -44,7 +43,6 @@ const BannerComponent = () => (
             </div>
           </div>
       </div>
-
 )
 
 export default BannerComponent

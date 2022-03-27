@@ -1,4 +1,5 @@
 import OnHoverComponent from './on-hover-component'
+import MainBanner from './main-banner'
 
 export { SignInComponent } from './auth'
 export { SignUpComponent } from './auth'
@@ -11,5 +12,5 @@ export { Footer } from './footer'
 export { Navbar } from './navbar'
 export { ForgotPasswordComponent } from './auth/forgot-password'
 export { MainCourseComponent, CourseLoading } from './courses'
-export { OnHoverComponent }
 export { TeachWithUsComponent } from './teach-with-us'
+export { OnHoverComponent, MainBanner }
