@@ -1,6 +1,6 @@
 import React from 'react'
 import {
-  PageHeader, MainBanner, CoursesContainer, CoursesSlider,
+  PageHeader, MainBanner, CoursesContainer, CoursesSlider, TopCategoriesComponent,
 } from '../components'
 import { MainLayout } from '../layouts'
 
@@ -184,9 +184,40 @@ const courses = [
 ]
 const topCategories = [
   {
+    title: 'Development',
+    img: 'https://s.udemycdn.com/home/top-categories/lohp-category-development-v2.jpg',
+    imgSet: 'https://s.udemycdn.com/home/top-categories/lohp-category-development-v2.jpg 1x, https://s.udemycdn.com/home/top-categories/lohp-category-development-2x-v2.jpg 2x',
+    route: '/categories/development',
+  },
+  {
+    title: 'Personal Development',
+    img: 'https://s.udemycdn.com/home/top-categories/lohp-category-personal-development-v2.jpg',
+    imgSet: 'https://s.udemycdn.com/home/top-categories/lohp-category-personal-development-v2.jpg 1x, https://s.udemycdn.com/home/top-categories/lohp-category-personal-development-2x-v2.jpg 2x',
+    route: '/categories/personal-development',
+  },
+  {
     title: 'Design',
-    img: '',
+    img: 'https://s.udemycdn.com/home/top-categories/lohp-category-design-v2.jpg',
+    imgSet: 'https://s.udemycdn.com/home/top-categories/lohp-category-design-v2.jpg 1x, https://s.udemycdn.com/home/top-categories/lohp-category-design-2x-v2.jpg 2x',
     route: '/categories/design',
+  },
+  {
+    title: 'Business',
+    img: 'https://s.udemycdn.com/home/top-categories/lohp-category-business-v2.jpg',
+    imgSet: 'https://s.udemycdn.com/home/top-categories/lohp-category-business-v2.jpg 1x, https://s.udemycdn.com/home/top-categories/lohp-category-business-2x-v2.jpg 2x',
+    route: '/categories/design',
+  },
+  {
+    title: 'IT & Software',
+    img: 'https://s.udemycdn.com/home/top-categories/lohp-category-it-and-software-v2.jpg',
+    imgSet: 'https://s.udemycdn.com/home/top-categories/lohp-category-it-and-software-v2.jpg 1x, https://s.udemycdn.com/home/top-categories/lohp-category-it-and-software-2x-v2.jpg 2x',
+    route: '/categories/it-and-software',
+  },
+  {
+    title: 'Photography & Video',
+    img: 'https://s.udemycdn.com/home/top-categories/lohp-category-photography-v2.jpg',
+    imgSet: 'https://s.udemycdn.com/home/top-categories/lohp-category-photography-v2.jpg 1x, https://s.udemycdn.com/home/top-categories/lohp-category-photography-2x-v2.jpg 2x',
+    route: '/categories/photography-and-video',
   },
 ]
 const Home = () => (
@@ -195,7 +226,7 @@ const Home = () => (
       title="Learn+"
     />
     <MainBanner />
-    <div className="ml-2 my-3 ">
+    <div className="ml-2 my-3 px-5">
       <p className="text-3xl font-serif">
         A broad selection of courses
       </p>
@@ -209,6 +240,12 @@ const Home = () => (
       title="Grow your software development skills with JavaScript"
       description="JavaScript is a text-based computer programming language used to make dynamic web pages. A must-learn for aspiring web developers or programmers, JavaScript can be used for features like image carousels, displaying countdowns and timers, and playing media on a webpage. "
     />
+    <div className="ml-2 my-3 px-5">
+      <p className="text-3xl font-serif">
+        Top Categories
+      </p>
+      <TopCategoriesComponent categories={topCategories} />
+    </div>
   </>
 )
 Home.getLayout = (page) => (
