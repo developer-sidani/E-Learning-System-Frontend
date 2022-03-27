@@ -1,6 +1,6 @@
 import React from 'react'
 import {
-  PageHeader, MainBanner, CoursesContainer, CoursesSlider, TopCategoriesComponent,
+  PageHeader, MainBanner, CoursesContainer, TopCategoriesComponent, CallToActionComponent,
 } from '../components'
 import { MainLayout } from '../layouts'
 
@@ -246,6 +246,7 @@ const Home = () => (
       </p>
       <TopCategoriesComponent categories={topCategories} />
     </div>
+    <CallToActionComponent />
   </>
 )
 Home.getLayout = (page) => (
