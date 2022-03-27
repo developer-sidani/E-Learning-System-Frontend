@@ -11,7 +11,7 @@ const CoursesSlider = ({ loading, courses }) => {
   const theme = useTheme()
   const mobileDevice = useMediaQuery(theme.breakpoints.up('sm'))
   return (
-    <CarouselProvider id="carouselExampleSlidesOnly" className="carousel slide relative" data-bs-ride="carousel" naturalSlideWidth={50} isIntrinsicHeight totalSlides={5} visibleSlides={mobileDevice ? 3 : 1} step={mobileDevice ? 3 : 1}>
+    <CarouselProvider infinite id="carouselExampleSlidesOnly" className="carousel slide relative" data-bs-ride="carousel" naturalSlideWidth={300} isIntrinsicHeight totalSlides={loading ? 10 : courses.length} visibleSlides={mobileDevice ? 3 : 1} step={mobileDevice ? 3 : 1}>
       <ButtonBack
         className="mr-2 carousel-control-next absolute top-1/2 bottom-1/2 flex items-center justify-center p-0 text-center border-0 hover:outline-none hover:no-underline focus:outline-none focus:no-underline left-2 z-50"
         type="button"
@@ -23,14 +23,14 @@ const CoursesSlider = ({ loading, courses }) => {
       <Slider className="p-3 my-2">
         {loading && (
           [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map(x => (
-            <Slide index={x} tabIndex="null">
+            <Slide index={x} tabIndex="null" key={x}>
               <CourseLoading />
             </Slide>
           ))
         )}
         {!loading && (
           courses?.map((course, index) => (
-            <Slide index={index} tabIndex="null">
+            <Slide index={index} tabIndex="null" key={index}>
               <MainCourseComponent course={course} />
             </Slide>
           ))
