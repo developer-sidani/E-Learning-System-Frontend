@@ -1,5 +1,7 @@
 import React from 'react'
 import { useRouter } from 'next/router'
+// eslint-disable-next-line import/no-cycle
+import { CoursesSlider } from './index'
 
 const CoursesContainer = ({
   title,
@@ -24,7 +26,7 @@ const CoursesContainer = ({
           Explore More
         </button>
       </div>
-
+      <CoursesSlider courses={courses} loading={loading} />
     </div>
   )
 }
