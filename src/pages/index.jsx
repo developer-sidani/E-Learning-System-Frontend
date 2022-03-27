@@ -99,7 +99,7 @@ const courses = [
     updatedAt: new Date(),
     bestSeller: false,
     category: 'Web Development',
-    flag: 'Bestseller',
+    flag: '',
   },
   {
     _id: '621d2f5bbe6a14d70ae014c59',
@@ -198,9 +198,9 @@ const Home = () => (
     </div>
     <CoursesContainer
       courses={courses}
-      loading
-      title="Python"
-      description="Take one of Udemy’s range of Python courses and learn how to code using this incredibly useful language. Its simple syntax and readability makes Python perfect for Flask, Django, data science, and machine learning. You’ll learn how to build everything from games to sites to apps. Choose from a range of courses that wi..."
+      loading={false}
+      title="Grow your software development skills with JavaScript"
+      description="JavaScript is a text-based computer programming language used to make dynamic web pages. A must-learn for aspiring web developers or programmers, JavaScript can be used for features like image carousels, displaying countdowns and timers, and playing media on a webpage. "
     />
   </>
 )
