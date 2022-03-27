@@ -6,7 +6,7 @@ import { useTheme } from '@mui/material/styles'
 import { useMediaQuery } from '@mui/material'
 import { ArrowLeftIcon } from '@heroicons/react/solid'
 import {
-  MainCourseComponent, PageHeader, CourseLoading, MainBanner,
+  MainCourseComponent, PageHeader, CourseLoading, MainBanner, CoursesContainer,
 } from '../components'
 import { MainLayout } from '../layouts'
 
@@ -69,10 +69,19 @@ const Home = () => {
       title="Learn+"
     />
     <MainBanner />
-    <p className="text-3xl font-extrabold mb-2 ml-1">
-      Courses:
-    </p>
+    <div className="ml-2 my-3 ">
+      <p className="text-3xl font-serif">
+        A broad selection of courses
+      </p>
+      <p className="mt-2 text-l font-serif">
+        Choose from 183,000 online video courses with new additions published every month
+      </p>
+    </div>
 
+    <CoursesContainer
+      title="Python"
+      description="Take one of Udemy’s range of Python courses and learn how to code using this incredibly useful language. Its simple syntax and readability makes Python perfect for Flask, Django, data science, and machine learning. You’ll learn how to build everything from games to sites to apps. Choose from a range of courses that wi..."
+    />
     <CarouselProvider id="carouselExampleSlidesOnly" className="carousel slide relative" data-bs-ride="carousel" naturalSlideWidth={50} isIntrinsicHeight totalSlides={5} visibleSlides={mobileDevice ? 3 : 1} step={mobileDevice ? 3 : 1}>
       <ButtonBack
         className="mr-2 carousel-control-next absolute top-1/2 bottom-1/2 flex items-center justify-center p-0 text-center border-0 hover:outline-none hover:no-underline focus:outline-none focus:no-underline left-2 z-50"
