@@ -56,7 +56,6 @@ const TeachWithUsComponent = () => (
       <IncentivesComponent incentivesFunction={incentivesFunction} />
       <StatsComponent />
       <TestimonialsComponent testimonials={TestimonialArray} />
-      {/* <SupportComponent /> */}
       <CallToActionComponent />
   </>
 )
