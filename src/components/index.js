@@ -13,5 +13,7 @@ export { Navbar } from './navbar'
 export { ForgotPasswordComponent } from './auth/forgot-password'
 export { MainCourseComponent, CourseLoading } from './courses'
 export { TeachWithUsComponent } from './teach-with-us'
-export { CoursesContainer, CoursesSlider } from './home'
+export {
+  CoursesContainer, CoursesSlider, TopCategoriesComponent, CategoryContainer,
+} from './home'
 export { OnHoverComponent, MainBanner }

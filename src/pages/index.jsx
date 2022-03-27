@@ -182,6 +182,13 @@ const courses = [
     flag: 'Bestseller',
   },
 ]
+const topCategories = [
+  {
+    title: 'Design',
+    img: '',
+    route: '/categories/design',
+  },
+]
 const Home = () => (
   <>
     <PageHeader
