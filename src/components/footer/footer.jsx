@@ -7,15 +7,14 @@ const navigation = {
     { name: 'Contact us', href: 'contact-us.jsx' },
   ],
   support: [
-    { name: 'Pricing', href: '#' },
-    { name: 'Documentation', href: '#' },
-    { name: 'Terms', href: '#' },
-    { name: 'API Status', href: '#' },
+    { name: 'Cookie Settings', href: '#' },
+    { name: 'Get the App', href: '#' },
+    { name: 'Terms of Use', href: '#' },
   ],
   company: [
-    { name: 'About', href: '#' },
+    { name: 'About Us', href: '#' },
     { name: 'Blog', href: '#' },
-    { name: 'Jobs', href: '#' },
+    { name: 'Privacy Policy', href: '#' },
   ],
   // legal: [
   //   { name: 'Claim', href: '#' },
