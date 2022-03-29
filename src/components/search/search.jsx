@@ -1,34 +1,24 @@
 import React, { Fragment, useState } from 'react'
-import { Combobox, Dialog, Transition } from '@headlessui/react'
 import { SearchIcon } from '@heroicons/react/solid'
-import {
-  ExclamationCircleIcon,
-  PencilAltIcon,
-} from '@heroicons/react/outline'
+import { Combobox, Dialog, Transition } from '@headlessui/react'
 
-const items = [
-  {
-    id: 1,
-    name: 'Text',
-    description: 'Add freeform text with basic formatting options.',
-    url: '#',
-    color: 'bg-indigo-500',
-    icon: PencilAltIcon,
-  },
-  // More items...
+const people = [
+  { id: 1, name: 'Leslie Alexander', url: '#' },
+  // More people...
 ]
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
+
 const SearchComponent = () => {
   const [query, setQuery] = useState('')
 
   const [open, setOpen] = useState(true)
 
-  const filteredItems = query === ''
+  const filteredPeople = query === ''
     ? []
-    : items.filter((item) => item.name.toLowerCase().includes(query.toLowerCase()))
+    : people.filter((person) => person.name.toLowerCase().includes(query.toLowerCase()))
 
   return (
     <Transition.Root show={open} as={Fragment} afterLeave={() => setQuery('')}>
@@ -57,7 +47,7 @@ const SearchComponent = () => {
           <Combobox
             as="div"
             className="mx-auto max-w-xl transform divide-y divide-gray-100 overflow-hidden rounded-xl bg-white shadow-2xl ring-1 ring-black ring-opacity-5 transition-all"
-            onChange={(item) => (window.location = item.url)}
+            onChange={(person) => (window.location = person.url)}
           >
             <div className="relative">
               <SearchIcon
@@ -71,49 +61,22 @@ const SearchComponent = () => {
               />
             </div>
 
-            {filteredItems.length > 0 && (
-              <Combobox.Options static className="max-h-96 scroll-py-3 overflow-y-auto p-3">
-                {filteredItems.map((item) => (
+            {filteredPeople.length > 0 && (
+              <Combobox.Options static className="max-h-72 scroll-py-2 overflow-y-auto py-2 text-sm text-gray-800">
+                {filteredPeople.map((person) => (
                   <Combobox.Option
-                    key={item.id}
-                    value={item}
-                    className={({ active }) => classNames('flex cursor-default select-none rounded-xl p-3', active && 'bg-gray-100')}
+                    key={person.id}
+                    value={person}
+                    className={({ active }) => classNames('cursor-default select-none px-4 py-2', active && 'bg-indigo-600 text-white')}
                   >
-                    {({ active }) => (
-                      <>
-                        <div
-                          className={classNames(
-                            'flex h-10 w-10 flex-none items-center justify-center rounded-lg',
-                            item.color,
-                          )}
-                        >
-                          <item.icon className="h-6 w-6 text-white" aria-hidden="true" />
-                        </div>
-                        <div className="ml-4 flex-auto">
-                          <p className={classNames('text-sm font-medium', active ? 'text-gray-900' : 'text-gray-700')}>
-                            {item.name}
-                          </p>
-                          <p className={classNames('text-sm', active ? 'text-gray-700' : 'text-gray-500')}>
-                            {item.description}
-                          </p>
-                        </div>
-                      </>
-                    )}
+                    {person.name}
                   </Combobox.Option>
                 ))}
               </Combobox.Options>
             )}
 
-            {query !== '' && filteredItems.length === 0 && (
-              <div className="py-14 px-6 text-center text-sm sm:px-14">
-                <ExclamationCircleIcon
-                  type="outline"
-                  name="exclamation-circle"
-                  className="mx-auto h-6 w-6 text-gray-400"
-                />
-                <p className="mt-4 font-semibold text-gray-900">No results found</p>
-                <p className="mt-2 text-gray-500">No components found for this search term. Please try again.</p>
-              </div>
+            {query !== '' && filteredPeople.length === 0 && (
+              <p className="p-4 text-sm text-gray-500">No people found.</p>
             )}
           </Combobox>
         </Transition.Child>
