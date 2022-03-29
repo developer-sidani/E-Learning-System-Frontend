@@ -2,7 +2,6 @@ import React, { useMemo } from 'react'
 import {
   CarouselProvider, Slider, Slide, ButtonBack, ButtonNext,
 } from 'pure-react-carousel'
-import { useTheme } from '@mui/material/styles'
 import { createTheme, useMediaQuery } from '@mui/material'
 import { CourseLoading, MainCourseComponent } from '../../courses'
 
