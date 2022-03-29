@@ -3,9 +3,9 @@ import { SearchIcon } from '@heroicons/react/solid'
 import { Combobox, Dialog, Transition } from '@headlessui/react'
 
 const people = [
-  { id: 1, name: 'Leslie Alexander', url: '#' },
-  // More people...
+  { id: 1, name: 'Leslie Alexander', url: '/search/Leslie Alexander' },
 ]
+const name = 'ali'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
