@@ -221,10 +221,9 @@ const topCategories = [
   },
 ]
 const tabs = [
-  { name: 'My Account', href: '#', current: false },
-  { name: 'Company', href: '#', current: false },
-  { name: 'Team Members', href: '#', current: true },
-  { name: 'Billing', href: '#', current: false },
+  'Web Development',
+  'Data Science',
+  'Design',
 ]
 
 function classNames(...classes) {
@@ -260,7 +259,7 @@ const Home = () => {
             onChange={(e) => setSelectedTab(e.target.value)}
           >
             {tabs.map((tab) => (
-              <option key={tab.name}>{tab.name}</option>
+              <option key={tab}>{tab}</option>
             ))}
           </select>
         </div>
@@ -269,18 +268,18 @@ const Home = () => {
             <nav className="flex space-x-8 mx-3" aria-label="Tabs">
               {tabs.map((tab) => (
                 <button
-                  key={tab.name}
-                  onClick={() => setSelectedTab(tab.name)}
+                  key={tab}
+                  onClick={() => setSelectedTab(tab)}
                   type="button"
                   className={classNames(
-                    tab.name === selectedTab
+                    tab === selectedTab
                       ? 'border-indigo-500 text-indigo-600'
                       : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300',
                     'whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm',
                   )}
-                  aria-current={tab.current ? 'page' : undefined}
+                  aria-current="page"
                 >
-                  {tab.name}
+                  {tab}
                 </button>
               ))}
             </nav>
