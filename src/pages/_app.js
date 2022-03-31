@@ -22,17 +22,16 @@ const MyApp = ({ Component, pageProps }) => {
   const getLayout = Component.getLayout ?? ((page) => page)
 
   return (
-    (
-        <Provider store={store}>
-            <PersistGate loading={<SplashScreen />} persistor={persistor}>
-                <AuthRouter>
-                    {getLayout(
-                        <Component {...pageProps} />,
-                    )}
-                </AuthRouter>
-            </PersistGate>
-        </Provider>
-    ))
+    <Provider store={store}>
+      <PersistGate loading={<SplashScreen />} persistor={persistor}>
+        <AuthRouter>
+          {getLayout(
+            <Component {...pageProps} />,
+          )}
+        </AuthRouter>
+      </PersistGate>
+    </Provider>
+  )
 }
 
 export default MyApp
