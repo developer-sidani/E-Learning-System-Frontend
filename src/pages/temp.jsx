@@ -1,8 +1,21 @@
 import React from 'react'
-import { SearchComponent } from '../components'
+import {
+  PageHeader,
+  SearchComponent, Component1, Component2, Component3, Component4, Component5,
+} from '../components'
 
 const temp = () => (
-    <SearchComponent />
+    <>
+
+    <PageHeader title="Learn+ | Search" />
+      {/* <SearchComponent /> */}
+     {/* <Component1 /> */}
+     {/* <Component2 /> */}
+     {/* <Component3 /> */}
+     {/* <Component4 /> */}
+     <Component5 />
+    </>
+
 )
 
 export default temp

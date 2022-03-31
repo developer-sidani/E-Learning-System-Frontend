@@ -13,5 +13,9 @@ export { ForgotPasswordComponent } from './auth/forgot-password'
 export { MainCourseComponent, CourseLoading } from './courses'
 export { OnHoverComponent }
 export { TeachWithUsComponent } from './teach-with-us'
-export { SearchComponent } from './search'
+
+export {
+  SearchComponent, Component1, Component2, Component3, Component4, Component5,
+} from './search'
+
 export { TermsOfUseComponent } from './terms-of-use'
