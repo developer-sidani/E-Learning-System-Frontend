@@ -46,7 +46,11 @@ const TestPage = () => {
       {url}
       <br />
       <div className="b-2">
-        <ReactPlayer controls="true" url={url || 'https://www.youtube.com/watch?v=yOe4_kdqsmU'} />
+        <ReactPlayer
+          controls
+          config={{ file: { attributes: { controlsList: 'nodownload' /* controlsList: 'nodownload' || 'download' */ } } }}
+          url={url || 'https://firebasestorage.googleapis.com/v0/b/learn-plus-fyp.appspot.com/o/temp%2Fistockphoto-1015455894-640_adpp_is.mp4?alt=media&token=5c1edc1b-770d-4176-840b-ffa1091356bd'}
+        />
       </div>
     </div>
   )
