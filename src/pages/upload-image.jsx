@@ -1,15 +1,16 @@
 import React, { useState } from 'react'
 import ReactPlayer from 'react-player'
+import { uuid } from 'uuidv4'
 import { storage } from '../lib'
 
 const TestPage = () => {
   const [file, setFile] = useState()
   const [url, setUrl] = useState('')
   const [progress, setProgress] = useState(0)
-  console.log(file)
+  const specialId = uuid()
   const handleFileChange = e => e.target.files[0] ? setFile(e.target.files[0]) : null
   const handleUpload = () => {
-    const uploadTask = storage.ref(`temp/${file.name}`).put(file)
+    const uploadTask = storage.ref(`temp/${specialId}-${file.name}`).put(file)
     uploadTask.on(
       'state_changed',
       snapshot => {
@@ -24,7 +25,7 @@ const TestPage = () => {
       () => {
         storage
           .ref('temp')
-          .child(file.name)
+          .child(`${specialId}-${file.name}`)
           .getDownloadURL()
           .then(url => {
             setUrl(url)
@@ -43,6 +44,7 @@ const TestPage = () => {
       <br />
       <button type="button" onClick={() => setUrl('')}>Remove</button>
       <br />
+      <h1>{progress}</h1>
       {url}
       <br />
       <div className="b-2">
