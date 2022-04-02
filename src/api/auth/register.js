@@ -15,6 +15,7 @@ export const register = async (
     isNotified,
     keepMeUpdated,
     photoUrl,
+    interests,
   },
 ) => {
   try {
@@ -35,6 +36,9 @@ export const register = async (
         isNotified,
         keepMeUpdated: false,
         photoUrl,
+      },
+      studentDetails: {
+        interests,
       },
     })
     return {
