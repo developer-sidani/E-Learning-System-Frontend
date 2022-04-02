@@ -66,7 +66,7 @@ const SignUpComponent = () => {
       >
         {({
           setFieldValue,
-          errors, touched, handleChange, values,
+          errors, touched, handleChange, values, handleBlur,
         }) => (
           <Form className="space-y-6">
             <ProfileSection
@@ -74,8 +74,10 @@ const SignUpComponent = () => {
               errors={errors}
               handleChange={handleChange}
               touched={touched}
+              handleBlur={handleBlur}
             />
             <PersonalInformationSection
+              handleBlur={handleBlur}
               values={values}
               errors={errors}
               handleChange={handleChange}

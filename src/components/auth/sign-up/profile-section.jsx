@@ -1,9 +1,11 @@
 import React from 'react'
-import { styles } from '../tw-styles'
+import {
+  Box, LinearProgress, TextField, Typography,
+} from '@mui/material'
 import { UploadFile } from '../../../hooks'
 
 const ProfileSection = ({
-  values, errors, handleChange, touched,
+  values, errors, handleChange, touched, handleBlur,
 }) => {
   const [file, handleUpload] = UploadFile({
     location: 'images/users/students',
@@ -27,28 +29,22 @@ const ProfileSection = ({
 
           <div className="grid grid-cols-3 gap-6">
             <div className="col-span-3 sm:col-span-2">
-              <label htmlFor="company-website" className="block text-sm font-medium text-gray-700">
-                Username
-              </label>
               <div className="mt-1 flex rounded-md shadow-sm">
-                <input
-                  value={values.user}
-                  onChange={handleChange}
-                  type="text"
+                <TextField
+                  onBlur={handleBlur}
+                  error={Boolean(touched.user && errors.user)}
+                  fullWidth
+                  helperText={touched.user && errors.user}
+                  label="Username"
                   name="user"
-                  id="user"
-                  className={styles.inputContainer}
-                  placeholder=""
+                  onChange={handleChange}
+                  required
+                  value={values.user}
                 />
-                {(errors.user) && touched.user ? (
-                  <div className="mt-2 text-pink-600 text-sm">
-                    {errors.user}
-                  </div>
-                ) : null}
               </div>
             </div>
           </div>
-          <div className="sm:col-span-6 mt-2">
+          <div className="sm:col-span-6 mt-6">
             <label htmlFor="photo" className="block text-sm font-medium text-blue-gray-900">
               Photo
             </label>
@@ -92,9 +88,21 @@ const ProfileSection = ({
               </div>
             )}
             {file.active && (
-              <div className="w-1/2 bg-gray-200 rounded-full h-2.5 dark:bg-gray-700 mt-2">
-                <div className="bg-blue-600 h-2.5 rounded-full" style={{ width: `${file.progress.toString()}%` }} />
-              </div>
+              <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                <Box sx={{ width: '50%', mr: 1 }}>
+                  <LinearProgress variant="determinate" value={file.progress} />
+                </Box>
+                <Box sx={{ minWidth: 35 }}>
+                  <Typography variant="body2" color="text.secondary">
+                    {`${Math.round(
+                      file.progress,
+                    )}%`}
+                  </Typography>
+                </Box>
+              </Box>
+              // <div className="w-1/2 bg-gray-200 rounded-full h-2.5 dark:bg-gray-700 mt-2">
+              //   <div className="bg-blue-600 h-2.5 rounded-full" style={{ width: `${file.progress.toString()}%` }} />
+              // </div>
             )}
           </div>
         </div>
