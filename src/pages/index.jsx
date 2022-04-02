@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import {
-  PageHeader, MainBanner, CoursesContainer, TopCategoriesComponent, CallToActionComponent,
+  PageHeader, MainBanner, CoursesContainer, TopCategoriesComponent, CallToActionComponent, IncentivesComponent,
 } from '../components'
 import { MainLayout } from '../layouts'
 
@@ -237,7 +237,7 @@ const Home = () => {
         title="Learn+"
       />
       <MainBanner />
-      <div className="ml-2 my-3 px-5">
+      <div className="ml-2 mt-5 px-5">
         <p className="text-3xl font-serif">
           A broad selection of courses
         </p>
@@ -306,6 +306,7 @@ const Home = () => {
         // description="JavaScript is a text-based computer programming language used to make dynamic web pages. A must-learn for aspiring web developers or programmers, JavaScript can be used for features like image carousels, displaying countdowns and timers, and playing media on a webpage. "
       />
       <CallToActionComponent />
+      <IncentivesComponent />
     </>
   )
 }

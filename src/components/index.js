@@ -17,4 +17,5 @@ export { TeachWithUsComponent } from './teach-with-us'
 export { TermsOfUseComponent } from './terms-of-use'
 export {
   CoursesContainer, CoursesSlider, TopCategoriesComponent, CategoryContainer, CallToActionComponent,
+  IncentivesComponent,
 } from './home'
