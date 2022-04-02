@@ -45,6 +45,7 @@ const initialValues = {
   isNotified: true,
   keepMeUpdated: true,
   birthday: new Date(new Date().setFullYear(new Date().getFullYear() - 10)),
+  interests: [],
 }
 export {
   initialValues,

@@ -88,6 +88,7 @@ const SignUpComponent = () => {
               setFieldValue={setFieldValue}
             />
             <StudentInterests
+              setFieldValue={setFieldValue}
               handleBlur={handleBlur}
               values={values}
               errors={errors}
