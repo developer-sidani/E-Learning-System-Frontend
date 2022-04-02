@@ -54,7 +54,7 @@ const ProfileSection = ({
             </label>
             <div className="mt-1 flex items-center">
               <img
-                className="inline-block h-12 w-12 rounded-full"
+                className="inline-block h-20 w-20 rounded-full"
                 src={file.url.length > 0 ? file.url : 'https://www.kindpng.com/picc/m/78-785827_user-profile-avatar-login-account-male-user-icon.png'}
                 alt=""
               />
@@ -89,6 +89,11 @@ const ProfileSection = ({
             {file.error && (
               <div className="mt-2 text-pink-600 text-sm">
                 {file.error}
+              </div>
+            )}
+            {file.active && (
+              <div className="w-1/2 bg-gray-200 rounded-full h-2.5 dark:bg-gray-700 mt-2">
+                <div className="bg-blue-600 h-2.5 rounded-full" style={{ width: `${file.progress.toString()}%` }} />
               </div>
             )}
           </div>
