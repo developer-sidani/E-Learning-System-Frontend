@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from 'react'
 import {
-  StarIcon, ChevronDownIcon, FilterIcon, MinusSmIcon, PlusSmIcon, ViewGridIcon,
+  ChevronDownIcon, FilterIcon, MinusSmIcon, PlusSmIcon, ViewGridIcon,
 } from '@heroicons/react/solid'
 import {
   Dialog, Disclosure, Menu, Popover, Tab, Transition,
@@ -12,10 +12,6 @@ import Pagination from './pagination'
 import Stars from './stars'
 
 const searchkey = 'test'
-const course = {
-  rating: '4.0',
-
-}
 
 const sortOptions = [
   { name: 'Most Popular', href: '#', current: true },
@@ -24,13 +20,7 @@ const sortOptions = [
   { name: 'Price: Low to High', href: '#', current: false },
   { name: 'Price: High to Low', href: '#', current: false },
 ]
-// const subCategories = [
-//   { name: 'Totes', href: '#' },
-//   { name: 'Backpacks', href: '#' },
-//   { name: 'Travel Bags', href: '#' },
-//   { name: 'Hip Bags', href: '#' },
-//   { name: 'Laptop Sleeves', href: '#' },
-// ]
+
 const filters = [
   {
     id: 'topic',
@@ -83,61 +73,78 @@ const filters = [
 const products = [
   {
     id: 1,
-    name: 'Nomad Pouch',
+    name: 'Understanding HTML and CSS',
+    description:
+      'Deeply understand Semantic HTML, CSS, Flexbox, Grid, learn to read the specifications, and more.',
     href: '#',
-    price: '$50',
-    availability: 'White and Black',
-    imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-07-product-01.jpg',
-    imageAlt: 'White fabric pouch with white zipper, black zipper pull, and black elastic loop.',
+    duration: 5.5,
+    price: '$32.00',
+    lectures: 16,
+    level: 'Beginner',
+    rating: 4,
+    instructor: 'Jonas Schmedtmann',
+    imageSrc: 'https://img-b.udemycdn.com/course/480x270/405926_02c8_2.jpg',
+    imageAlt: '',
   },
-  {
-    id: 2,
-    name: 'Zip Tote Basket',
-    href: '#',
-    price: '$140',
-    availability: 'Washed Black',
-    imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-07-product-02.jpg',
-    imageAlt: 'Front of tote bag with washed black canvas body, black straps, and tan leather handles and accents.',
-  },
-  {
-    id: 2,
-    name: 'Zip Tote Basket',
-    href: '#',
-    price: '$140',
-    availability: 'Washed Black',
-    imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-07-product-02.jpg',
-    imageAlt: 'Front of tote bag with washed black canvas body, black straps, and tan leather handles and accents.',
-  },
-  {
-    id: 2,
-    name: 'Zip Tote Basket',
-    href: '#',
-    price: '$140',
-    availability: 'Washed Black',
-    imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-07-product-02.jpg',
-    imageAlt: 'Front of tote bag with washed black canvas body, black straps, and tan leather handles and accents.',
-  },
-  // more...
   {
     id: 1,
-    name: 'Throwback Hip Bag',
+    name: 'Understanding HTML and CSS',
+    description:
+      'Deeply understand Semantic HTML, CSS, Flexbox, Grid, learn to read the specifications, and more.',
     href: '#',
-    color: 'Salmon',
-    price: '$90.00',
-    quantity: 1,
-    imageSrc: 'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-01.jpg',
-    imageAlt: 'Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt.',
+    duration: 5.5,
+    price: '$32.00',
+    lectures: 16,
+    level: 'Beginner',
+    rating: 4,
+    instructor: 'Jonas Schmedtmann',
+    imageSrc: 'https://img-b.udemycdn.com/course/480x270/405926_02c8_2.jpg',
+    imageAlt: '',
   },
   {
-    id: 2,
-    name: 'Medium Stuff Satchel',
+    id: 1,
+    name: 'Understanding HTML and CSS',
+    description:
+      'Deeply understand Semantic HTML, CSS, Flexbox, Grid, learn to read the specifications, and more.',
     href: '#',
-    color: 'Blue',
+    duration: 5.5,
     price: '$32.00',
-    quantity: 1,
-    imageSrc: 'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-02.jpg',
-    imageAlt:
-      'Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch.',
+    lectures: 16,
+    level: 'Beginner',
+    rating: 4,
+    instructor: 'Jonas Schmedtmann',
+    imageSrc: 'https://img-b.udemycdn.com/course/480x270/405926_02c8_2.jpg',
+    imageAlt: '',
+  },
+  {
+    id: 1,
+    name: 'Understanding HTML and CSS',
+    description:
+      'Deeply understand Semantic HTML, CSS, Flexbox, Grid, learn to read the specifications, and more.',
+    href: '#',
+    duration: 5.5,
+    price: '$32.00',
+    lectures: 16,
+    level: 'Beginner',
+    rating: 4,
+    instructor: 'Jonas Schmedtmann',
+    imageSrc: 'https://img-b.udemycdn.com/course/480x270/405926_02c8_2.jpg',
+    imageAlt: '',
+  },
+  {
+    id: 1,
+    name: 'Understanding HTML and CSS',
+    description:
+      'Deeply understand Semantic HTML, CSS, Flexbox, Grid, learn to read the specifications, and more.',
+    href: '#',
+    duration: 5.5,
+    price: '$32.00',
+    lectures: 16,
+    level: 'Beginner',
+    rating: 4,
+    instructor: 'Jonas Schmedtmann',
+    imageSrc: 'https://img-b.udemycdn.com/course/480x270/405926_02c8_2.jpg',
+    imageAlt: '',
   },
 ]
 
@@ -337,13 +344,6 @@ const Component5 = () => {
               {/* Filters */}
               <form className="hidden lg:block">
                 <h3 className="sr-only">Categories</h3>
-                {/* <ul role="list" className="text-sm font-medium text-gray-900 space-y-4 pb-6 border-b border-gray-200">
-                  {subCategories.map((category) => (
-                    <li key={category.name}>
-                      <a href={category.href}>{category.name}</a>
-                    </li>
-                  ))}
-                </ul> */}
 
                 {filters.map((section) => (
                   <Disclosure as="div" key={section.id} className="border-b border-gray-200 py-6">
@@ -396,70 +396,57 @@ const Component5 = () => {
               </form>
 
               {/* Product grid */}
-              <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:col-span-3 lg:gap-x-8">
-                {products.map((product) => (
-                  <a key={product.id} href={product.href} className="group text-sm">
-                    <div
-                      className="w-full aspect-w-1 aspect-h-1 rounded-lg overflow-hidden bg-gray-100 group-hover:opacity-75"
-                    >
-                      <img
-                        src={product.imageSrc}
-                        alt={product.imageAlt}
-                        className="w-full h-full object-center object-cover"
-                      />
-                    </div>
-                    <h3 className="mt-4 font-medium text-gray-900">{product.name}</h3>
-                    <p className="text-gray-500 italic">{product.availability}</p>
-                    <p className="mt-2 font-medium text-gray-900">{product.price}</p>
-                  </a>
-                ))}
-              </div>
-            </div>
+            <div className="mt-0  border-gray-200">
+              {/* <h2 className="sr-only">Your order</h2> */}
 
+                <h3 className="sr-only">Items</h3>
+                {products.map((product) => (
+                  <div key={product.id} className="py-10 border-b border-gray-200 flex space-x-6">
+                    <img
+                      src={product.imageSrc}
+                      alt={product.imageAlt}
+                      className="flex-none w-28 h-28 mt-0 object-center object-cover bg-gray-100 rounded-lg sm:w-48 sm:h-48"
+                    />
+                    <div className="flex-auto flex flex-col">
+                      <div>
+                        <h4 className="font-medium text-gray-900 font-bold ">
+                          <a href={product.href}>{product.name}</a>
+                        </h4>
+                        <p className="mt-2 text-sm w-100 text-gray-600">{product.description}</p>
+                        <p className="mt-2 mb-2 text-xs w-80 text-gray-600">{product.instructor}</p>
+                        <Stars value={product.rating} />
+                      </div>
+                      <div className="mt-1 flex-1 flex items-end">
+                        <dl className="flex text-sm divide-x divide-gray-200 space-x-5 sm:space-x-6">
+                          <div className="flex">
+                            <dt className="font-medium text-gray-900 [width:max-content]">Total Hours:</dt>
+                            <dd className="ml-2 text-gray-700">{product.duration}</dd>
+                          </div>
+                          <div className="pl-4 flex sm:pl-6">
+                            <dt className="font-medium text-gray-900">Lectures:</dt>
+                            <dd className="ml-2 text-gray-700">{product.lectures}</dd>
+                          </div>
+                          <div className="pl-4 flex sm:pl-6">
+                            <dt className="font-medium text-gray-900">Level:</dt>
+                            <dd className="ml-2 text-gray-700">{product.level}</dd>
+                          </div>
+                        </dl>
+                      </div>
+                      <p className="mt-2 mb-2 text-base font-bold w-80 text-black">{product.price}</p>
+
+                    </div>
+                  </div>
+                ))}
+            </div>
+            </div>
           </section>
         </main>
-            <div className="mt-8">
-                      <div className="flow-root">
-                        <ul role="list" className="-my-6 divide-y divide-gray-200">
-                          {products.map((product) => (
-                            <li key={product.id} className="flex py-6">
-                              <div className="h-44 w-72 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-                                <img
-                                  src={product.imageSrc}
-                                  alt={product.imageAlt}
-                                  className="h-full w-full object-cover object-center"
-                                />
-                              </div>
-
-                              <div className="ml-4 flex flex-1 flex-col">
-                                <div>
-                                  <div className="flex justify-between text-base font-medium text-gray-900">
-                                    <h3>
-                                      <a href={product.href}>{product.name}</a>
-                                    </h3>
-                                    <p className="ml-4">{product.price}</p>
-                                  </div>
-                                  <p className="mt-1 text-sm text-gray-500">{product.color}</p>
-                                </div>
-                                <div className="flex flex-1 items-end justify-between text-sm">
-                                  <p className="text-gray-500">
-                                            Qty
-                                            {' '}
-                                            {product.quantity}
-                                  </p>
-
-                                </div>
-                              </div>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-            </div>
 
             <Pagination />
 
       </div>
     </div>
+
   )
 }
 
