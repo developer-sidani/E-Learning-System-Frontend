@@ -12,13 +12,13 @@ const UploadFile = ({
   const [active, setActive] = useState(false)
   const handleUpload = useCallback((e) => {
     const selectedFile = e.target.files[0]
-    setActive(true)
     if (selectedFile) {
       if (fileTypes.includes(selectedFile.type)) {
         if (selectedFile.size / 1024 / 1024 > fileSize) {
           setError(errorMessages.fileSize)
         } else {
           setError(null)
+          setActive(true)
           const uploadTask = storage.ref(`${location}/${specialId}-${selectedFile.name}`).put(selectedFile)
           uploadTask.on(
             'state_changed',
