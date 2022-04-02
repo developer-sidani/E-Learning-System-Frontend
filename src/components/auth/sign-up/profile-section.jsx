@@ -55,7 +55,7 @@ const ProfileSection = ({
             <div className="mt-1 flex items-center">
               <img
                 className="inline-block h-20 w-20 rounded-full"
-                src={file.url.length > 0 ? file.url : 'https://www.kindpng.com/picc/m/78-785827_user-profile-avatar-login-account-male-user-icon.png'}
+                src={file.url.length > 0 ? file.url : 'https://firebasestorage.googleapis.com/v0/b/learn-plus-fyp.appspot.com/o/images%2Fuser.png?alt=media&token=11e4daf6-bffa-4e1d-8359-260f96c87514'}
                 alt=""
               />
               <div className="ml-4 flex">
@@ -104,9 +104,6 @@ const ProfileSection = ({
                   </Typography>
                 </Box>
               </Box>
-              // <div className="w-1/2 bg-gray-200 rounded-full h-2.5 dark:bg-gray-700 mt-2">
-              //   <div className="bg-blue-600 h-2.5 rounded-full" style={{ width: `${file.progress.toString()}%` }} />
-              // </div>
             )}
           </div>
         </div>
