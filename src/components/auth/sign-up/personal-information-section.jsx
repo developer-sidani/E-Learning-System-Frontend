@@ -174,7 +174,7 @@ const PersonalInformationSection = ({
                   autoFormat={false}
                   inputProps={{
                     name: 'phone',
-                    autoFocus: true,
+                    autoFocus: false,
                   }}
                   value={values.phone}
                   onChange={(phoneNumber, country, e) => {

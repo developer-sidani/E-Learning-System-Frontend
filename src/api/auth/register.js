@@ -14,22 +14,10 @@ export const register = async (
     address,
     isNotified,
     keepMeUpdated,
+    photoUrl,
   },
 ) => {
   try {
-    console.log({
-      fullName,
-      username,
-      email,
-      password,
-      phone,
-      birthday,
-      country,
-      gender,
-      address,
-      isNotified,
-      keepMeUpdated,
-    })
     const result = await axios.post(`${baseUrl}/auth/register`, {
       info: {
         fullName,
@@ -46,6 +34,7 @@ export const register = async (
         type: 'Student', // keep same here
         isNotified,
         keepMeUpdated: false,
+        photoUrl,
       },
     })
     return {

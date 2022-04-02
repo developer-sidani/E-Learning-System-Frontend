@@ -3,8 +3,9 @@ import { register } from '../../../api'
 
 const dateFormat = 'yyyy-MM-DD'
 
-const submitValues = (callback, handler) => (values, { resetForm }) => {
+const submitValues = (callback, handler, photoUrl) => (values, { resetForm }) => {
   values.email = values.email.toLowerCase()
+  values.photoUrl = photoUrl
   values.birthday = moment(values.birthday).format(dateFormat)
   values.fullName = `${values.firstname} ${values.lastname}`
   callback(values, resetForm, handler)
@@ -12,7 +13,6 @@ const submitValues = (callback, handler) => (values, { resetForm }) => {
 
 const callRegisterApi = async (data, callback, handler) => {
   handler.init()
-  console.log(data)
   try {
     const res = await register(
       data,
@@ -44,7 +44,7 @@ const initialValues = {
   gender: '',
   isNotified: true,
   keepMeUpdated: true,
-  birthday: '',
+  birthday: new Date(new Date().setFullYear(new Date().getFullYear() - 10)),
 }
 export {
   initialValues,

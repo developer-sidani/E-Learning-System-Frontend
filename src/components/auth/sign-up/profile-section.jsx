@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {
   Box, LinearProgress, TextField, Typography,
 } from '@mui/material'
 import { UploadFile } from '../../../hooks'
 
 const ProfileSection = ({
-  values, errors, handleChange, touched, handleBlur,
+  values, errors, handleChange, touched, handleBlur, setPhotoUrl,
 }) => {
   const [file, handleUpload] = UploadFile({
     location: 'images/users/students',
@@ -16,6 +16,10 @@ const ProfileSection = ({
       fileSize: 'File Should Not Exceed 2MB',
     },
   })
+  useEffect(() => {
+    setPhotoUrl(file.url)
+  }, [file])
+
   return (
     <div className="bg-white shadow px-4 py-5 sm:rounded-lg sm:p-6">
       <div className="md:grid md:grid-cols-3 md:gap-6">

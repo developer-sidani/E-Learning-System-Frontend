@@ -15,5 +15,5 @@ export const SignUpSchema = Yup.object().shape({
   address: Yup.string().required('Required'),
   gender: Yup.string().required('Required'),
   country: Yup.string().required('Required'),
-  // phone: Yup.string().required('Required'),
+  phone: Yup.string().required('Required'),
 })
