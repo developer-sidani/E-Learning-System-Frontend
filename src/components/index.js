@@ -15,7 +15,7 @@ export { OnHoverComponent }
 export { TeachWithUsComponent } from './teach-with-us'
 
 export {
-  SearchComponent, Component1, Component2, Component3, Component4, Component5,
+  SearchComponent, Component5,
 } from './search'
 
 export { TermsOfUseComponent } from './terms-of-use'
