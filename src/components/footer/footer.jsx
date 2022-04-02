@@ -5,7 +5,7 @@ const navigation = {
     { name: 'Home', href: '/' },
     { name: 'Courses', href: '/courses' },
     { name: 'Teach on Learn+', href: '/teach-with-us' },
-    { name: 'Account', href: '/account' },
+    { name: 'Account', href: '/my-account' },
   ],
   support: [
     { name: 'About us', href: '/about-us' },
