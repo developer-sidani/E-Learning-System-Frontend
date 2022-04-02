@@ -156,7 +156,7 @@ const Component5 = () => {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
 
   return (
-    <div className="bg-white">
+    <div className="bg-white w-max">
 
       <div>
         {/* Mobile filter dialog */}
@@ -263,7 +263,7 @@ const Component5 = () => {
           </Dialog>
         </Transition.Root>
 
-        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <main className="max-w-7xl mx-auto w-max px-4 sm:px-6 lg:px-8">
           <div className="relative z-10 flex items-baseline justify-between pt-24 pb-6 border-b border-gray-200">
 
             <h1 className="text-4xl font-extrabold tracking-tight text-gray-900">
@@ -412,7 +412,7 @@ const Component5 = () => {
                         <h4 className="font-medium text-gray-900 font-bold ">
                           <a href={product.href}>{product.name}</a>
                         </h4>
-                        <p className="mt-2 text-sm w-100 text-gray-600">{product.description}</p>
+                        <p className="mt-2 text-sm w-100 text-gray-600 mobile:w-max-xs">{product.description}</p>
                         <p className="mt-2 mb-2 text-xs w-80 text-gray-600">{product.instructor}</p>
                         <Stars value={product.rating} />
                       </div>
