@@ -15,9 +15,11 @@ import {
   SuccessModal,
 } from '.'
 import { wait } from '../../../utils'
+import StudentInterests from './student-interests'
 
 const SignUpComponent = () => {
   const ref = useRef(null)
+  const [photoUrl, setPhotoUrl] = useState('')
   const scrollToError = () => {
     if (ref && ref.current /* + other conditions */) {
       ref.current.scrollIntoView({
@@ -61,26 +63,37 @@ const SignUpComponent = () => {
             await wait(500)
             callback()
           },
-        })}
+        }, photoUrl)}
         validationSchema={SignUpSchema}
       >
         {({
           setFieldValue,
-          errors, touched, handleChange, values,
+          errors, touched, handleChange, values, handleBlur,
         }) => (
           <Form className="space-y-6">
             <ProfileSection
+              setPhotoUrl={setPhotoUrl}
               values={values}
               errors={errors}
               handleChange={handleChange}
               touched={touched}
+              handleBlur={handleBlur}
             />
             <PersonalInformationSection
+              handleBlur={handleBlur}
               values={values}
               errors={errors}
               handleChange={handleChange}
               touched={touched}
               setFieldValue={setFieldValue}
+            />
+            <StudentInterests
+              setFieldValue={setFieldValue}
+              handleBlur={handleBlur}
+              values={values}
+              errors={errors}
+              handleChange={handleChange}
+              touched={touched}
             />
             <NotificationsSection
               values={values}
