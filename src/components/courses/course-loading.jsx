@@ -3,7 +3,7 @@ import { StarIcon } from '@heroicons/react/solid'
 
 const CourseLoading = () => (
   <div
-    className="animate-pulse rounded-lg overflow-hidden shadow-lg group cursor-pointer transition duration-200 ease-in transform sm:hover:scale-105 hover:z-50 max-w-xs w-[270] sm:w-[160]"
+    className="animate-pulse rounded-lg overflow-hidden shadow-lg group cursor-pointer transition duration-200 ease-in transform sm:hover:scale-105 hover:z-50 max-w-xs w-xs"
   >
     <div
       className="w-full h-40 bg-slate-700 space-y-6"

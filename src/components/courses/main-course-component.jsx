@@ -13,7 +13,7 @@ const MainCourseComponent = ({ course }) => (
           className="w-full"
           alt="ok"
         />
-        <div className="p-2 w-full">
+        <div className={classNames('p-2 w-full', course?.flag?.length === 0 && 'mb-4')}>
             <h2 className="text-md transition-all duration-100 ease-in-out font-[500] group-hover:font-bold text-clip max-w-xs">
                 {course?.title}
             </h2>
@@ -40,13 +40,17 @@ const MainCourseComponent = ({ course }) => (
             <p className="font-bold text-sm p-0">
                 {`${course?.currency} ${course?.price}`}
             </p>
-            <div className="w-1/4 bg-yellow-300 px-3 py-1 mt-1 object-contain">
-                <p
-                  className="text-xs font-[500]"
-                >
-                    {course?.flag}
-                </p>
-            </div>
+            {course?.flag?.length > 0 ? (
+              <div className="w-1/4 bg-yellow-300 px-3 py-1 mt-1 object-contain">
+                  <p
+                    className="text-xs font-[500]"
+                  >
+                      {course?.flag}
+                  </p>
+              </div>
+            ) : (
+              <div className="px-3 py-1 mt-1"><p /></div>
+            )}
         </div>
     </div>
 
