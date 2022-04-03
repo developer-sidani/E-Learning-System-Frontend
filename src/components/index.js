@@ -13,3 +13,6 @@ export { ForgotPasswordComponent } from './auth/forgot-password'
 export { MainCourseComponent, CourseLoading } from './courses'
 export { OnHoverComponent }
 export { TeachWithUsComponent } from './teach-with-us'
+export { GetCourseComponent } from './get-course'
+export { Component1 } from './get-course'
+

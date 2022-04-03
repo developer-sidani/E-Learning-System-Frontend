@@ -216,9 +216,7 @@ export const countryList = [
     Name: 'Iraq', Code: 'IQ', Timezone: 'Arabic Standard Time', UTC: 'UTC+03:00', MobileCode: '+964',
   }, {
     Name: 'Ireland', Code: 'IE', Timezone: 'GMT Standard Time', UTC: 'UTC', MobileCode: '+353',
-  },
-  // {Name: 'Israel', Code: 'IL', Timezone: 'Israel Standard Time', UTC: 'UTC+02:00', MobileCode: '+972',},
-  {
+  },{
     Name: 'Italy', Code: 'IT', Timezone: 'W. Europe Standard Time', UTC: 'UTC+01:00', MobileCode: '+39',
   }, {
     Name: 'Jamaica', Code: 'JM', Timezone: 'SA Pacific Standard Time', UTC: 'UTC-05:00', MobileCode: '+1-876',
