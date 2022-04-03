@@ -22,11 +22,12 @@ const VerifyEmail = () => {
         const res = await verifyEmail({
           verificationToken,
         })
+        console.log({ res })
         setResponse(res)
       } catch (err) {
         console.log({ err })
       } finally {
-        setLoading(true)
+        setLoading(false)
       }
     },
     [],
@@ -36,7 +37,7 @@ const VerifyEmail = () => {
       verifyEmailCallback(token)
     }
   }, [token])
-  const success = response?.error?.statusCode === 400
+  const success = response?.res?.statusCode === 200
   const buttonSx = {
     ...(success ? {
       bgcolor: green[700],
@@ -92,21 +93,27 @@ const VerifyEmail = () => {
                   <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100">
                     <Box sx={{ display: 'flex', alignItems: 'center' }}>
                       <Box sx={{ m: 1, position: 'relative' }}>
-                        <Fab
-                          className="group"
-                          aria-label="save"
-                          color="primary"
-                          sx={buttonSx}
-                        >
-                          {success ? (
-                            <CheckIcon className="h-6 w-6 text-green-700 group-hover:text-white" aria-hidden="true" />
-                          ) : (
-                            <ErrorIcon
-                              className="h-6 w-6 text-red-700 group-hover:text-white"
-                              aria-hidden="true"
-                            />
-                          )}
-                        </Fab>
+
+                          <Fab
+                            className="group"
+                            aria-label="save"
+                            color="primary"
+                            sx={buttonSx}
+                          >
+                            {!loading && (
+                            // eslint-disable-next-line react/jsx-no-useless-fragment
+                            <>
+                              {success ? (
+                                <CheckIcon className="h-6 w-6 text-green-700 group-hover:text-white" aria-hidden="true" />
+                              ) : (
+                                <ErrorIcon
+                                  className="h-6 w-6 text-red-700 group-hover:text-white"
+                                  aria-hidden="true"
+                                />
+                              )}
+                            </>
+                            )}
+                          </Fab>
                         {loading && (
                           <CircularProgress
                             size={68}
@@ -123,25 +130,47 @@ const VerifyEmail = () => {
                     </Box>
                   </div>
                   <div className="mt-3 text-center sm:mt-5">
-                    <Dialog.Title as="h3" className="text-lg leading-6 font-medium text-gray-900">
-                      {success ? 'Email Verified Successfully' : 'Expired Link'}
-                    </Dialog.Title>
+                    {loading ? (
+                      <div className="flex flex-row justify-center align-center mb-4">
+                        <div className="h-2.5 text-center text-lg leading-6  bg-slate-700 rounded w-1/2" />
+                      </div>
+                    ) : (
+                      <Dialog.Title as="h3" className="text-lg leading-6 font-medium text-gray-900">
+                        {success ? 'Email Verified Successfully' : 'Expired Link'}
+                      </Dialog.Title>
+                    )}
                     <div className="mt-2">
-                      <p className="text-sm text-gray-500">
-                        {success ? 'Your email was verified successfully. You can sign in now with your email'
-                          : 'The request was expired, you should send another request to verify your email'}
-                      </p>
+                      {loading ? (
+                        <div className="flex flex-col justify-center align-center flex-wrap gap-2">
+                          <div className="h-1.5 bg-slate-700 rounded w-3/4" />
+                          <div className="h-1.5 bg-slate-700 rounded w-3/4" />
+                          <div className="h-1.5 bg-slate-700 rounded w-3/4" />
+                        </div>
+                      ) : (
+                        <p className="text-sm text-gray-500">
+                          {success ? 'Your email was verified successfully. You can sign in now with your email'
+                            : 'The request was expired, you should send another request to verify your email'}
+                        </p>
+                      )}
                     </div>
                   </div>
                 </div>
                 <div className="mt-5 sm:mt-6">
                   <button
                     type="button"
+                    disabled={loading}
                     className="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm"
                     onClick={() => handleSubmit(success)}
                   >
-                    {success ? 'Sign In'
-                      : 'Resend verification'}
+                    {loading ? (
+                      '...'
+                    ) : (
+                      // eslint-disable-next-line react/jsx-no-useless-fragment
+                      <>
+                        {success ? 'Sign In'
+                          : 'Resend verification'}
+                      </>
+                    )}
                   </button>
                 </div>
               </div>
