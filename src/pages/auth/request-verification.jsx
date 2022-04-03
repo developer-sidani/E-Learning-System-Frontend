@@ -2,14 +2,17 @@ import React, { useState } from 'react'
 import { Field, Form, Formik } from 'formik'
 import { LockClosedIcon } from '@heroicons/react/solid'
 import { useRouter } from 'next/router'
+import * as Yup from 'yup'
 import { PageHeader } from '../../components'
 import { wait } from '../../utils'
 
 const RequestVerificationPage = () => {
+  const verificationSchema = Yup.object().shape({
+    email: Yup.string().email().required('Required'),
+  })
   const [loading, setLoading] = useState(false)
   const router = useRouter()
   const { email } = router.query
-  console.log(email)
   return (
     <>
       <PageHeader title="Learn+ | Request Verification" />
@@ -26,6 +29,7 @@ const RequestVerificationPage = () => {
             </h2>
           </div>
           <Formik
+            validationSchema={verificationSchema}
             enableReinitialize
             initialValues={{
               email: email || '',
@@ -59,9 +63,9 @@ const RequestVerificationPage = () => {
                       className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                       placeholder="Email"
                     />
-                    {errors.password && touched.password ? (
+                    {errors.email && touched.email ? (
                       <div className="my-2 text-pink-600 text-sm">
-                        {errors.password}
+                        {errors.email}
                       </div>
                     ) : null}
                   </div>
@@ -76,7 +80,7 @@ const RequestVerificationPage = () => {
                     <span className="absolute left-0 inset-y-0 flex items-center pl-3">
                       <LockClosedIcon className={loading ? 'animate-pulse h-5 w-5 text-gray-500' : 'h-5 w-5 text-indigo-500 group-hover:text-indigo-400'} aria-hidden="true" />
                     </span>
-                    Confirm
+                    Send
                   </button>
                 </div>
               </Form>
