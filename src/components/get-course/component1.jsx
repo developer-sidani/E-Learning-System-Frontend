@@ -1,31 +1,36 @@
-import React from 'react'
-import { Fragment, useState } from 'react'
-import { Dialog, Popover, Tab, Transition } from '@headlessui/react'
-import { MenuIcon, SearchIcon, ShoppingBagIcon, XIcon } from '@heroicons/react/outline'
-import { StarIcon } from '@heroicons/react/solid'
+import React, { Fragment, useState } from 'react'
+
+import {
+  Dialog, Popover, Tab, Transition,
+} from '@headlessui/react'
+import {
+  MenuIcon, SearchIcon, ShoppingBagIcon, XIcon,
+} from '@heroicons/react/outline'
+import { StarIcon, ArrowLeftIcon } from '@heroicons/react/solid'
 import {
   CarouselProvider, Slider, Slide, ButtonBack, ButtonNext,
 } from 'pure-react-carousel'
-import { ArrowLeftIcon } from '@heroicons/react/solid'
-import { MainCourseComponent, PageHeader, CourseLoading } from '../../components'
+
 import { useMediaQuery } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
-import {Sections} from './sections'
-import {course, instructor, product, reviews, CourseContent, courseOutcomes} from './data.js'
+import { MainCourseComponent, PageHeader, CourseLoading } from '..'
+import { Sections } from './sections'
+import {
+  course, instructor, product, reviews, CourseContent, courseOutcomes,
+} from './data.js'
 
-  
-  function classNames(...classes) {
-    return classes.filter(Boolean).join(' ')
-  }
-  
-  const Component1 = () => {
-    const theme = useTheme()
-    const mobileDevice = useMediaQuery(theme.breakpoints.up('sm'))
-    const [open, setOpen] = useState(false)
+function classNames(...classes) {
+  return classes.filter(Boolean).join(' ')
+}
 
-      return (
+const Component1 = () => {
+  const theme = useTheme()
+  const mobileDevice = useMediaQuery(theme.breakpoints.up('sm'))
+  const [open, setOpen] = useState(false)
+
+  return (
         <div className="bg-white">
-          
+
           <main className="mx-auto pt-14 pb-24 px-4 sm:pt-16 sm:pb-32 sm:px-6 lg:max-w-7xl lg:px-8">
             {/* Product */}
             <div className="lg:grid lg:grid-rows-1 lg:grid-cols-7 lg:gap-x-8 lg:gap-y-10 xl:gap-x-16">
@@ -35,20 +40,19 @@ import {course, instructor, product, reviews, CourseContent, courseOutcomes} fro
                   <img src={product.imageSrc} alt={product.imageAlt} className="object-center object-cover" />
                 </div>
               </div>
-    
+
               {/* Product details */}
               <div className="max-w-2xl mx-auto mt-14 sm:mt-16 lg:max-w-none lg:mt-0 lg:row-end-2 lg:row-span-2 lg:col-span-3">
                 <div className="flex flex-col-reverse">
                   <div className="mt-4">
                     <h1 className="text-2xl font-extrabold tracking-tight text-gray-900 sm:text-3xl">{product.name}</h1>
-    
+
                     <h2 id="information-heading" className="sr-only">
                       Product information
                     </h2>
-                    <p className="text-sm text-gray-500 mt-2">
-                    </p>
+                    <p className="text-sm text-gray-500 mt-2" />
                   </div>
-    
+
                   <div>
                     <h3 className="sr-only">Reviews</h3>
                     <div className="flex items-center">
@@ -57,20 +61,22 @@ import {course, instructor, product, reviews, CourseContent, courseOutcomes} fro
                           key={rating}
                           className={classNames(
                             reviews.average > rating ? 'text-yellow-400' : 'text-gray-300',
-                            'h-5 w-5 flex-shrink-0'
+                            'h-5 w-5 flex-shrink-0',
                           )}
                           aria-hidden="true"
                         />
                       ))}
                     </div>
-                    <p className="sr-only">{reviews.average} out of 5 stars</p>
+                    <p className="sr-only">
+{reviews.average}
+{' '}
+out of 5 stars
+                    </p>
                   </div>
                 </div>
-    
-               
 
                 <p className="text-gray-500 mt-6">{product.description}</p>
-    
+
                 <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2">
                   <button
                     type="button"
@@ -85,7 +91,7 @@ import {course, instructor, product, reviews, CourseContent, courseOutcomes} fro
                           <div className="flex-none py-10">
                             <img src={instructor.imageSrc} alt="" className="w-10 h-10 bg-gray-100 rounded-full" />
                           </div>
-                          <div className= 'border-t border-gray-200 flex-1 py-12'>
+                          <div className="border-t border-gray-200 flex-1 py-12">
                             <h3 className="font-medium text-gray-900">{instructor.name}</h3>
                           </div>
                         </div>
@@ -100,17 +106,18 @@ import {course, instructor, product, reviews, CourseContent, courseOutcomes} fro
                     </ul>
                   </div>
                 </div>
-    
+
                 <div className="border-t border-gray-200 mt-10 pt-10">
                   <h3 className="text-sm font-medium text-gray-900">Course Outcomes</h3>
                   <p className="mt-4 text-sm text-gray-500">
-                    {courseOutcomes.summary}{' '}
+                    {courseOutcomes.summary}
+{' '}
                     <a href={courseOutcomes.href} className="font-medium text-indigo-600 hover:text-indigo-500">
                       Read full course outcomes
                     </a>
                   </p>
                 </div>
-    
+
                 <div className="border-t border-gray-200 mt-10 pt-10">
                   <h3 className="text-sm font-medium text-gray-900">Share</h3>
                   <ul role="list" className="flex items-center space-x-6 mt-4">
@@ -148,58 +155,66 @@ import {course, instructor, product, reviews, CourseContent, courseOutcomes} fro
                     </li>
                   </ul>
                 </div>
-                
+
               </div>
-    
-              
 
               <div className="w-full max-w-2xl mx-auto mt-16 lg:max-w-none lg:mt-0 lg:col-span-4">
-              <Sections/>
+              {/* <Sections /> */}
                 <Tab.Group as="div">
                   <div className="border-b border-gray-200">
                     <Tab.List className="-mb-px flex space-x-8">
+
                       <Tab
-                        className={({ selected }) =>
-                          classNames(
-                            selected
-                              ? 'border-indigo-600 text-indigo-600'
-                              : 'border-transparent text-gray-700 hover:text-gray-800 hover:border-gray-300',
-                            'whitespace-nowrap py-6 border-b-2 font-medium text-sm'
-                          )
-                        }
-                      >
-                        Student Reviews
-                      </Tab>
-                      <Tab
-                        className={({ selected }) =>
-                          classNames(
-                            selected
-                              ? 'border-indigo-600 text-indigo-600'
-                              : 'border-transparent text-gray-700 hover:text-gray-800 hover:border-gray-300',
-                            'whitespace-nowrap py-6 border-b-2 font-medium text-sm'
-                          )
-                        }
+                        className={({ selected }) => classNames(
+                          selected
+                            ? 'border-indigo-600 text-indigo-600'
+                            : 'border-transparent text-gray-700 hover:text-gray-800 hover:border-gray-300',
+                          'whitespace-nowrap py-6 border-b-2 font-medium text-sm',
+                        )}
                       >
                         Course Content
                       </Tab>
                       <Tab
-                        className={({ selected }) =>
-                          classNames(
-                            selected
-                              ? 'border-indigo-600 text-indigo-600'
-                              : 'border-transparent text-gray-700 hover:text-gray-800 hover:border-gray-300',
-                            'whitespace-nowrap py-6 border-b-2 font-medium text-sm'
-                          )
-                        }
+                        className={({ selected }) => classNames(
+                          selected
+                            ? 'border-indigo-600 text-indigo-600'
+                            : 'border-transparent text-gray-700 hover:text-gray-800 hover:border-gray-300',
+                          'whitespace-nowrap py-6 border-b-2 font-medium text-sm',
+                        )}
+                      >
+                        Student Reviews
+                      </Tab>
+                      <Tab
+                        className={({ selected }) => classNames(
+                          selected
+                            ? 'border-indigo-600 text-indigo-600'
+                            : 'border-transparent text-gray-700 hover:text-gray-800 hover:border-gray-300',
+                          'whitespace-nowrap py-6 border-b-2 font-medium text-sm',
+                        )}
                       >
                         What you'll learn
                       </Tab>
                     </Tab.List>
                   </div>
                   <Tab.Panels as={Fragment}>
+
+                    {/* Course content */}
+                    <Tab.Panel as="dl" className="text-sm text-gray-500">
+                      {/* <h3 className="sr-only">Frequently Asked Questions</h3>
+
+                      {CourseContent.map((CourseContent) => (
+                        <Fragment key={CourseContent.question}>
+                          <dt className="mt-10 font-medium text-gray-900">{CourseContent.question}</dt>
+                          <dd className="mt-2 prose prose-sm max-w-none text-gray-500">
+                            <p>{CourseContent.answer}</p>
+                          </dd>
+                        </Fragment>
+                      ))} */}
+                      <Sections />
+                    </Tab.Panel>
                     <Tab.Panel className="-mb-10">
-                      <h3 className="sr-only">Customer Reviews</h3>
-    
+                      <h3 className="sr-only">Reviews</h3>
+
                       {reviews.featured.map((review, reviewIdx) => (
                         <div key={review.id} className="flex text-sm text-gray-500 space-x-4">
                           <div className="flex-none py-10">
@@ -210,21 +225,25 @@ import {course, instructor, product, reviews, CourseContent, courseOutcomes} fro
                             <p>
                               <time dateTime={review.datetime}>{review.date}</time>
                             </p>
-    
+
                             <div className="flex items-center mt-4">
                               {[0, 1, 2, 3, 4].map((rating) => (
                                 <StarIcon
                                   key={rating}
                                   className={classNames(
                                     review.rating > rating ? 'text-yellow-400' : 'text-gray-300',
-                                    'h-5 w-5 flex-shrink-0'
+                                    'h-5 w-5 flex-shrink-0',
                                   )}
                                   aria-hidden="true"
                                 />
                               ))}
                             </div>
-                            <p className="sr-only">{review.rating} out of 5 stars</p>
-    
+                            <p className="sr-only">
+                            {review.rating}
+                            {' '}
+                            out of 5 stars
+                            </p>
+
                             <div
                               className="mt-4 prose prose-sm max-w-none text-gray-500"
                               dangerouslySetInnerHTML={{ __html: review.content }}
@@ -233,23 +252,10 @@ import {course, instructor, product, reviews, CourseContent, courseOutcomes} fro
                         </div>
                       ))}
                     </Tab.Panel>
-    
-                    <Tab.Panel as="dl" className="text-sm text-gray-500">
-                      <h3 className="sr-only">Frequently Asked Questions</h3>
-    
-                      {CourseContent.map((CourseContent) => (
-                        <Fragment key={CourseContent.question}>
-                          <dt className="mt-10 font-medium text-gray-900">{CourseContent.question}</dt>
-                          <dd className="mt-2 prose prose-sm max-w-none text-gray-500">
-                            <p>{CourseContent.answer}</p>
-                          </dd>
-                        </Fragment>
-                      ))}
-                    </Tab.Panel>
-    
+
                     <Tab.Panel className="pt-10">
                       <h3 className="sr-only">courseOutcomes</h3>
-    
+
                       <div
                         className="prose prose-sm max-w-none text-gray-500"
                         dangerouslySetInnerHTML={{ __html: courseOutcomes.content }}
@@ -259,14 +265,15 @@ import {course, instructor, product, reviews, CourseContent, courseOutcomes} fro
                 </Tab.Group>
               </div>
             </div>
-    
+
             {/* Related products */}
             <div className="flex items-center justify-between space-x-4 mt-28">
-                <h2 className="text-lg font-medium text-gray-900">Students also bought</h2>
+                <h2 className="text-lg font-medium text-gray-900">Frequently Bought Together</h2>
                 <a href="#" className="whitespace-nowrap text-sm font-medium text-indigo-600 hover:text-indigo-500">
-                  View all<span aria-hidden="true"> &rarr;</span>
+                  View all
+<span aria-hidden="true"> &rarr;</span>
                 </a>
-              </div>
+            </div>
 
       <CarouselProvider id="carouselExampleSlidesOnly" className="carousel slide relative" data-bs-ride="carousel" naturalSlideWidth={50} isIntrinsicHeight totalSlides={5} visibleSlides={mobileDevice ? 3 : 1} step={mobileDevice ? 3 : 1}>
       <ButtonBack
@@ -306,7 +313,7 @@ import {course, instructor, product, reviews, CourseContent, courseOutcomes} fro
           />
         </svg>
       </ButtonNext>
-    </CarouselProvider>
+      </CarouselProvider>
 
             {/* <div className="max-w-2xl mx-auto mt-24 sm:mt-32 lg:max-w-none">
               <div className="flex items-center justify-between space-x-4">
@@ -341,12 +348,10 @@ import {course, instructor, product, reviews, CourseContent, courseOutcomes} fro
               </div>
             </div> */}
           </main>
-          
+
         </div>
-      
 
+  )
+}
 
-      )
-  }
-    
-    export { Component1 } 
+export { Component1 }
