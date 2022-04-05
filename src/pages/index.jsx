@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
+import { useRouter } from 'next/router'
 import {
   PageHeader, MainBanner, CoursesContainer, TopCategoriesComponent, CallToActionComponent, IncentivesComponent,
 } from '../components'
@@ -230,6 +232,22 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 const Home = () => {
+  const profile = useSelector(({ profile }) => profile)
+  const router = useRouter()
+  // eslint-disable-next-line react/no-unstable-nested-components
+  const IsLoggedIn = ({ children }) => profile?.token ? (
+  // eslint-disable-next-line react/jsx-no-useless-fragment
+      <>
+          {children}
+      </>
+  ) : null
+  // eslint-disable-next-line react/no-unstable-nested-components
+  const IsGuest = ({ children }) => profile?.token ? null : (
+    // eslint-disable-next-line react/jsx-no-useless-fragment
+    <>
+      {children}
+    </>
+  )
   const [selectedTab, setSelectedTab] = useState(tabs[0])
   return (
     <>
@@ -293,19 +311,78 @@ const Home = () => {
         title="Grow your software development skills with JavaScript"
         description="JavaScript is a text-based computer programming language used to make dynamic web pages. A must-learn for aspiring web developers or programmers, JavaScript can be used for features like image carousels, displaying countdowns and timers, and playing media on a webpage. "
       />
+      <IsLoggedIn>
+        <div className="bg-white py-2">
+          <div className="relative bg-gray-900">
+            {/* Decorative image and overlay */}
+            <div aria-hidden="true" className="absolute inset-0 overflow-hidden">
+              <img
+                src="https://tailwindui.com/img/ecommerce-images/home-page-01-hero-full-width.jpg"
+                alt=""
+                className="w-full h-full object-center object-cover"
+              />
+            </div>
+            <div aria-hidden="true" className="absolute inset-0 bg-gray-900 opacity-50" />
+
+            <div className="relative max-w-3xl mx-auto py-32 px-6 flex flex-col items-center text-center sm:py-64 lg:px-0">
+              <h1 className="text-4xl font-extrabold tracking-tight text-white lg:text-6xl">Enrolled Courses</h1>
+              <p className="mt-4 text-xl text-white">
+                View the courses that you are already enrolled in
+              </p>
+              <button
+                type="button"
+                onClick={() => router.push('/my-courses')}
+                className="mt-8 inline-block bg-white border border-transparent rounded-md py-3 px-8 text-base font-medium text-gray-900 hover:bg-gray-100"
+              >
+                Show More
+              </button>
+            </div>
+          </div>
+        </div>
+        <CoursesContainer
+          courses={courses}
+          loading
+          title="Recommended for You"
+          description="JavaScript is a text-based computer programming language used to make dynamic web pages. A must-learn for aspiring web developers or programmers, JavaScript can be used for features like image carousels, displaying countdowns and timers, and playing media on a webpage. "
+        />
+      </IsLoggedIn>
       <div className="ml-2 my-3 px-5">
         <p className="text-3xl font-serif">
           Top Categories
         </p>
         <TopCategoriesComponent categories={topCategories} />
       </div>
+      <IsLoggedIn>
+        <CoursesContainer
+          courses={courses}
+          loading
+          title="Personalized Search"
+          description="JavaScript is a text-based computer programming language used to make dynamic web pages. A must-learn for aspiring web developers or programmers, JavaScript can be used for features like image carousels, displaying countdowns and timers, and playing media on a webpage. "
+        />
+        <CoursesContainer
+          courses={courses}
+          loading={false}
+          title="Popular Right Now / Trending Now"
+          description="JavaScript is a text-based computer programming language used to make dynamic web pages. A must-learn for aspiring web developers or programmers, JavaScript can be used for features like image carousels, displaying countdowns and timers, and playing media on a webpage. "
+        />
+      </IsLoggedIn>
+      <IsGuest>
       <CoursesContainer
         courses={courses}
         loading={false}
         title="Students are viewing"
         // description="JavaScript is a text-based computer programming language used to make dynamic web pages. A must-learn for aspiring web developers or programmers, JavaScript can be used for features like image carousels, displaying countdowns and timers, and playing media on a webpage. "
       />
+      </IsGuest>
       <CallToActionComponent />
+      <IsLoggedIn>
+        <CoursesContainer
+          courses={courses}
+          loading={false}
+          title="You May Also Like / Others Also Bought"
+          description="JavaScript is a text-based computer programming language used to make dynamic web pages. A must-learn for aspiring web developers or programmers, JavaScript can be used for features like image carousels, displaying countdowns and timers, and playing media on a webpage. "
+        />
+      </IsLoggedIn>
       <IncentivesComponent />
     </>
   )
