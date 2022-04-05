@@ -2,6 +2,7 @@ import React, { useState, useCallback, useEffect } from 'react'
 import { Formik, Form, Field } from 'formik'
 import * as Yup from 'yup'
 import { useDispatch } from 'react-redux'
+import { useRouter } from 'next/router'
 import { login } from '../../api'
 import { styles } from './tw-styles'
 import { isEmail, wait } from '../../utils'
@@ -27,6 +28,7 @@ const SignInComponent = () => {
   const [serverErr, setServerErr] = useState({
     user: '',
     password: '',
+    verifyEmail: '',
   })
   const onLogin = useCallback(
     async (user, password, rememberMe, callback) => {
@@ -38,12 +40,14 @@ const SignInComponent = () => {
         })
         console.log(res)
         if (res.status === errorStatusFromBackend.user || res.status === errorStatusFromBackend.checkEmail) {
-          // not found
           setServerErr(prevState => ({ ...prevState, user: res?.message }))
         } else if (res?.status === errorStatusFromBackend.password) {
           // wrong password
           setServerErr(prevState => ({ ...prevState, password: res?.message }))
-        } else if (res?.status === 200) {
+        } else if (res?.status === 406) {
+          // SEND VERIFICATION LINK
+          setServerErr(prevState => ({ ...prevState, verifyEmail: 'Verify your email' }))
+        } else {
           dispatch(set({ user: res.user, token: res.token }))
           callback()
         }
@@ -55,10 +59,12 @@ const SignInComponent = () => {
     },
     [],
   )
+  const router = useRouter()
   useEffect(() => {
     setServerErr({
       user: '',
       password: '',
+      verifyEmail: '',
     })
   }, [])
   const [email, setEmail] = useState('')
@@ -95,6 +101,7 @@ const SignInComponent = () => {
               setServerErr({
                 user: '',
                 password: '',
+                verifyEmail: '',
               })
               setLoading(true)
               onLogin(user, password, rememberMe, async () => {
@@ -105,7 +112,7 @@ const SignInComponent = () => {
             }}
           >
               {({
-                errors, handleSubmit, touched, handleChange,
+                errors, handleSubmit, touched, handleChange, values,
               }) => (
                   <Form
                     className="space-y-6"
@@ -183,13 +190,23 @@ const SignInComponent = () => {
                     </div>
 
                     <div>
-                      <button
-                        type="submit"
-                        className={loading ? styles.disabledButton : styles.button}
-                        disabled={loading}
-                      >
-                        Sign in
-                      </button>
+                      {serverErr.verifyEmail.length > 0 ? (
+                        <button
+                          type="button"
+                          className={styles.link}
+                          onClick={() => router.push(`/auth/request-verification?email=${values.user}`)}
+                        >
+                          {serverErr.verifyEmail}
+                        </button>
+                      ) : (
+                        <button
+                          type="submit"
+                          className={loading ? styles.disabledButton : styles.button}
+                          disabled={loading}
+                        >
+                          Sign in
+                        </button>
+                      )}
                     </div>
                   </Form>
               )}
