@@ -2,11 +2,14 @@ import React, { Fragment, useState } from 'react'
 
 import {
   Dialog, Popover, Tab, Transition,
+  Combobox,
 } from '@headlessui/react'
 import {
   MenuIcon, SearchIcon, ShoppingBagIcon, XIcon,
 } from '@heroicons/react/outline'
-import { StarIcon, ArrowLeftIcon } from '@heroicons/react/solid'
+import {
+  StarIcon, ArrowLeftIcon, ChevronRightIcon, BeakerIcon,
+} from '@heroicons/react/solid'
 import {
   CarouselProvider, Slider, Slide, ButtonBack, ButtonNext,
 } from 'pure-react-carousel'
@@ -17,7 +20,7 @@ import { MainCourseComponent, PageHeader, CourseLoading } from '..'
 import { Sections } from './sections'
 import {
   course, instructor, product, reviews, CourseContent, courseOutcomes,
-} from './data.js'
+} from './data'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -68,9 +71,9 @@ const Component1 = () => {
                       ))}
                     </div>
                     <p className="sr-only">
-{reviews.average}
-{' '}
-out of 5 stars
+                    {reviews.average}
+                    {' '}
+                    out of 5 stars
                     </p>
                   </div>
                 </div>
@@ -87,14 +90,55 @@ out of 5 stars
 
                 </div>
 
-                        <div key={instructor.id} className="flex text-sm text-gray-500 space-x-4">
-                          <div className="flex-none py-10">
-                            <img src={instructor.imageSrc} alt="" className="w-10 h-10 bg-gray-100 rounded-full" />
+                      <div key={instructor.id} className="flex-col text-sm text-gray-500 ">
+                          <div className="border-t border-gray-200 flex-1 pt-12">
+                            <h2 className="text-xl font-medium text-gray-900">{instructor.fullName}</h2>
                           </div>
-                          <div className="border-t border-gray-200 flex-1 py-12">
-                            <h3 className="font-medium text-gray-900">{instructor.name}</h3>
+                          <div className="flex flex-row py-2">
+
+                          <div w-auto>
+                            <img src={instructor.photoURL} alt="" className="w-24 h-24 bg-gray-100 rounded-full" />
                           </div>
-                        </div>
+
+                              <div className="mx-8 flex flex-col text-base">
+
+                                <div className="flex flex-row">
+                                <BeakerIcon className="h-5 w-5 text-blue-500" />
+                                { instructor.rating }
+                                        {' '}
+                                Instructor Rating
+                                </div>
+
+                                <div className="flex flex-row">
+                        <BeakerIcon className="h-5 w-5 text-blue-500" />
+                          { instructor.reviews }
+                                  {' '}
+                                  Reviews
+                                </div>
+
+                                <div className="flex flex-row">
+                        <BeakerIcon className="h-5 w-5 text-blue-500" />
+                        { instructor.students }
+                                {' '}
+                                Students
+                                </div>
+
+                                <div className="flex flex-row">
+                        <BeakerIcon className="h-5 w-5 text-blue-500" />
+                        { instructor.courses }
+                                {' '}
+                                Courses
+                                </div>
+
+                              </div>
+
+                          </div>
+
+                          <div className="flex-none py-2">
+                            <p>{instructor.bio}</p>
+                          </div>
+
+                      </div>
 
                 <div className="border-t border-gray-200 mt-10 pt-10">
                   <h3 className="text-sm font-medium text-gray-900">Course Requirements</h3>
@@ -121,6 +165,7 @@ out of 5 stars
               </div>
 
               <div className="w-full max-w-2xl mx-auto mt-16 lg:max-w-none lg:mt-0 lg:col-span-4">
+
               {/* <Sections /> */}
                 <Tab.Group as="div">
                   <div className="border-b border-gray-200">
@@ -154,7 +199,7 @@ out of 5 stars
                           'whitespace-nowrap py-6 border-b-2 font-medium text-sm',
                         )}
                       >
-                        What you'll learn
+                        What you will learn
                       </Tab>
                     </Tab.List>
                   </div>
