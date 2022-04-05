@@ -3,3 +3,4 @@ export {
 } from './auth'
 export { getFaqs } from './faqs'
 export { getCategories } from './categories'
+export { getTerms } from './terms'

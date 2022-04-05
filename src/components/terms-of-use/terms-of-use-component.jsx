@@ -10,14 +10,14 @@ const TermsOfUseComponent = ({ data }) => (
 
     <ol className="text-1xl list-decimal">
       {data?.overview}
-      {data?.sections?.map(section => (
-        <div key={section?.id}>
+      {data?.sections?.map((section, index) => (
+        <div key={index}>
           <li className="text-2xl font-bold text-[#0A003C] ">{section.title}</li>
           <p>{section.description}</p>
           {section?.subsection && (
             <ul className="list-disc">
-              {section?.subsection?.map(x => (
-                <div key={x?.id}>
+              {section?.subsection?.map((x, i) => (
+                <div key={i}>
                   <li className="text-1xl font-extrabold text-[#0A003C] list-inside">{x?.title}</li>
                   <p>{x?.description}</p>
                 </div>
