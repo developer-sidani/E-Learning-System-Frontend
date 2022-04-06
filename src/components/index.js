@@ -15,6 +15,8 @@ export { MainCourseComponent, CourseLoading } from './courses'
 export { OnHoverComponent, MainBanner }
 export { TeachWithUsComponent } from './teach-with-us'
 export { TermsOfUseComponent } from './terms-of-use'
+export { InstructorComponent } from './instructors'
+
 export {
   CoursesContainer, CoursesSlider, TopCategoriesComponent, CategoryContainer, CallToActionComponent,
   IncentivesComponent,

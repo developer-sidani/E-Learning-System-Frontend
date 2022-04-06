@@ -6,7 +6,7 @@ function classNames(...classes) {
 }
 const MainCourseComponent = ({ course }) => (
     <div
-      className="rounded-lg overflow-hidden shadow-lg group cursor-pointer transition duration-200 ease-in transform sm:hover:scale-105 hover:z-50 max-w-xs w-[270] sm:w-[160]"
+      className="mx-0 rounded-lg overflow-hidden shadow-lg group cursor-pointer transition duration-200 ease-in transform sm:hover:scale-105 hover:z-50 max-w-xs w-[270] sm:w-[160]"
     >
         <img
           src={course?.image_480x270}
