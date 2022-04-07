@@ -46,8 +46,8 @@ const IncentivesComponent = () => (
             </p>
           </div>
           <div
-            data-aos="fade-down-left"
-            data-aos-easing="linear"
+            data-aos="fade-down"
+            // data-aos-easing="linear"
             data-aos-duration="700"
             className="aspect-w-3 aspect-h-2 bg-gray-100 rounded-lg overflow-hidden"
           >
