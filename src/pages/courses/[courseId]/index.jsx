@@ -14,7 +14,6 @@ const GetCoursePage = () => {
     <>
       <PageHeader title="Learn+ | Get Course" />
       <Component1 />
-
     </>
 
   )

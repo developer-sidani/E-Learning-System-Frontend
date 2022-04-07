@@ -8,10 +8,9 @@ import { useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
 
 const user = {
-  name: 'Floyd Miles',
-  email: 'floy.dmiles@example.com',
-  imageUrl:
-    'https://images.unsplash.com/photo-1463453091185-61582044d556?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+  name: 'Guest',
+  email: '',
+  photoUrl: 'https://firebasestorage.googleapis.com/v0/b/learn-plus-fyp.appspot.com/o/images%2Fuser.png?alt=media&token=11e4daf6-bffa-4e1d-8359-260f96c87514',
 }
 const navigation = [
   { name: 'Dashboard', href: '#' },
@@ -26,16 +25,43 @@ function classNames(...classes) {
 
 const Navbar = () => {
   const profile = useSelector(({ profile }) => profile)
+  const userData = profile?.user?.info
   const router = useRouter()
   const userNavigation = useMemo(() => profile
     ?.token ? [
-      { name: 'Your Profile', href: '#' },
-      { name: 'Settings', href: '#' },
-      { name: 'Logout', href: '#' },
+      {
+        name: 'My Courses',
+        handleClick() {
+          router.push('/my-courses')
+        },
+      },
+      {
+        name: 'Settings',
+        handleClick() {
+          router.push('/my-account')
+        },
+      },
+      {
+        name: 'Logout',
+        handleClick() {
+          localStorage.clear()
+          router.reload()
+        },
+      },
     ] : [
-      { name: 'Sign In', href: '#' },
-      { name: 'Sign Up', href: '#' },
-    ], [profile])
+      {
+        name: 'Sign In',
+        handleClick() {
+          router.push('/auth/sign-in')
+        },
+      },
+      {
+        name: 'Sign Up',
+        handleClick() {
+          router.push('/auth/sign-up')
+        },
+      },
+    ], [profile, router])
 
   return (
     <Disclosure as="nav" className="bg-primary" aria-label="Global">
@@ -98,7 +124,7 @@ const Navbar = () => {
               <div className="hidden lg:ml-4 lg:flex lg:items-center">
                 <button
                   type="button"
-                  className="flex-shrink-0 p-1 text-sky-200 rounded-full hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-sky-500 focus:ring-white"
+                  className="flex-shrink-0 p-1 text-sky-200 rounded-full hover:text-white focus:outline-none"
                 >
                   <span className="sr-only">Notifications</span>
                   <ShoppingCartIcon className="h-6 w-6" aria-hidden="true" />
@@ -111,7 +137,7 @@ const Navbar = () => {
                       className="bg-sky-500 rounded-full flex text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-sky-500 focus:ring-white"
                     >
                       <span className="sr-only">Open user menu</span>
-                      <img className="h-8 w-8 rounded-full" src={user.imageUrl} alt="" />
+                      <img className="h-8 w-8 rounded-full" src={user?.photoUrl} alt="" />
                     </Menu.Button>
                   </div>
                   <Transition
@@ -129,15 +155,16 @@ const Navbar = () => {
                       {userNavigation.map((item) => (
                         <Menu.Item key={item.name}>
                           {({ active }) => (
-                            <a
-                              href={item.href}
+                            <button
+                              type="button"
+                              onClick={item.handleClick}
                               className={classNames(
                                 active ? 'bg-gray-100' : '',
-                                'block px-4 py-2 text-sm text-gray-700',
+                                'block px-4 py-2 text-sm text-gray-700 w-full',
                               )}
                             >
                               {item.name}
-                            </a>
+                            </button>
                           )}
                         </Menu.Item>
                       ))}
@@ -164,15 +191,15 @@ const Navbar = () => {
             <div className="pt-4 pb-3 border-t border-sky-500">
               <div className="flex items-center px-4">
                 <div className="flex-shrink-0">
-                  <img className="h-10 w-10 rounded-full" src={user.imageUrl} alt="" />
+                  <img className="h-10 w-10 rounded-full" src={userData?.photoUrl || user.photoUrl} alt="" />
                 </div>
                 <div className="ml-3">
-                  <div className="text-base font-medium text-white">{user.name}</div>
-                  <div className="text-sm font-medium text-sky-200">{user.email}</div>
+                  <div className="text-base font-medium text-white">{userData?.fullName || user.name}</div>
+                  <div className="text-sm font-medium text-sky-200">{userData?.email || user.email}</div>
                 </div>
                 <button
                   type="button"
-                  className="ml-auto flex-shrink-0 rounded-full p-1 text-sky-200 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-sky-500 focus:ring-white"
+                  className="ml-auto flex-shrink-0 rounded-full p-1 text-sky-200 hover:text-white focus:outline-none"
                 >
                   <span className="sr-only">View notifications</span>
                   <ShoppingCartIcon className="h-6 w-6" aria-hidden="true" />
@@ -180,14 +207,14 @@ const Navbar = () => {
               </div>
               <div className="mt-3 px-2">
                 {userNavigation.map((item) => (
-                  <Disclosure.Button
+                  <button
                     key={item.name}
-                    as="a"
-                    href={item.href}
-                    className="block rounded-md py-2 px-3 text-base font-medium text-sky-200 hover:bg-sky-200 hover:text-primary"
+                    type="button"
+                    onClick={item.handleClick}
+                    className="block rounded-md py-2 px-3 text-base font-medium text-sky-200 hover:bg-sky-200 hover:text-primary w-full items-start flex"
                   >
                     {item.name}
-                  </Disclosure.Button>
+                  </button>
                 ))}
               </div>
             </div>
