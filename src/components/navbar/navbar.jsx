@@ -1,9 +1,9 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment } from 'react'
 import {
-  Disclosure, Menu, RadioGroup, Transition,
+  Disclosure, Menu, Transition,
 } from '@headlessui/react'
-import { HomeIcon, PlusIcon, SearchIcon } from '@heroicons/react/solid'
-import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
+import { SearchIcon, ShoppingCartIcon } from '@heroicons/react/solid'
+import { MenuIcon, XIcon } from '@heroicons/react/outline'
 
 const user = {
   name: 'Floyd Miles',
@@ -21,7 +21,7 @@ const navigation = [
 const userNavigation = [
   { name: 'Your Profile', href: '#' },
   { name: 'Settings', href: '#' },
-  { name: 'Sign out', href: '#' },
+  { name: 'Logout', href: '#' },
 ]
 
 function classNames(...classes) {
@@ -29,7 +29,7 @@ function classNames(...classes) {
 }
 
 const Navbar = () => (
-  <Disclosure as="nav" className="bg-sky-500" aria-label="Global">
+  <Disclosure as="nav" className="bg-primary" aria-label="Global">
     {({ open }) => (
       <>
         <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
@@ -47,7 +47,7 @@ const Navbar = () => (
                   <a
                     key={item.name}
                     href={item.href}
-                    className="rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-sky-400"
+                    className="rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-sky-200 hover:text-primary"
                   >
                     {item.name}
                   </a>
@@ -59,14 +59,14 @@ const Navbar = () => (
                 <label htmlFor="search" className="sr-only">
                   Search
                 </label>
-                <div className="relative text-white focus-within:text-gray-400">
+                <div className="relative text-gray-400">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                     <SearchIcon className="flex-shrink-0 h-5 w-5" aria-hidden="true" />
                   </div>
                   <input
                     id="search"
                     name="search"
-                    className="block w-full bg-sky-400 border-transparent py-2 pl-10 pr-3 text-base leading-5 placeholder-white focus:outline-none focus:bg-white focus:ring-0 focus:border-white focus:text-gray-900 focus:placeholder-gray-400 sm:text-sm rounded-md"
+                    className="block w-full bg-white border-transparent py-2 pl-10 pr-3 text-base leading-5 focus:outline-none focus:ring-0 focus:border-white text-gray-900 placeholder-gray-400 sm:text-sm rounded-md"
                     placeholder="Search"
                     type="search"
                   />
@@ -75,7 +75,7 @@ const Navbar = () => (
             </div>
             <div className="flex items-center lg:hidden">
               {/* Mobile menu button */}
-              <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md text-sky-200 hover:text-white hover:bg-sky-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+              <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md text-sky-200 hover:bg-sky-200 hover:text-primary focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
                 <span className="sr-only">Open menu</span>
                 {open ? (
                   <XIcon className="block h-6 w-6" aria-hidden="true" />
@@ -87,10 +87,10 @@ const Navbar = () => (
             <div className="hidden lg:ml-4 lg:flex lg:items-center">
               <button
                 type="button"
-                className="flex-shrink-0 bg-sky-500 p-1 text-sky-200 rounded-full hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-sky-500 focus:ring-white"
+                className="flex-shrink-0 p-1 text-sky-200 rounded-full hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-sky-500 focus:ring-white"
               >
-                <span className="sr-only">Notificaitons</span>
-                <BellIcon className="h-6 w-6" aria-hidden="true" />
+                <span className="sr-only">Notifications</span>
+                <ShoppingCartIcon className="h-6 w-6" aria-hidden="true" />
               </button>
 
               {/* Profile dropdown */}
@@ -140,7 +140,7 @@ const Navbar = () => (
                 key={item.name}
                 as="a"
                 href={item.href}
-                className="block rounded-md py-2 px-3 text-base font-medium text-white hover:text-white hover:bg-sky-400"
+                className="block rounded-md py-2 px-3 text-base font-medium text-white hover:text-white hover:bg-sky-200 hover:text-primary"
               >
                 {item.name}
               </Disclosure.Button>
@@ -157,10 +157,10 @@ const Navbar = () => (
               </div>
               <button
                 type="button"
-                className="ml-auto flex-shrink-0 bg-sky-500 rounded-full p-1 text-sky-200 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-sky-500 focus:ring-white"
+                className="ml-auto flex-shrink-0 rounded-full p-1 text-sky-200 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-sky-500 focus:ring-white"
               >
                 <span className="sr-only">View notifications</span>
-                <BellIcon className="h-6 w-6" aria-hidden="true" />
+                <ShoppingCartIcon className="h-6 w-6" aria-hidden="true" />
               </button>
             </div>
             <div className="mt-3 px-2">
@@ -169,7 +169,7 @@ const Navbar = () => (
                   key={item.name}
                   as="a"
                   href={item.href}
-                  className="block rounded-md py-2 px-3 text-base font-medium text-sky-200 hover:text-white hover:bg-sky-400"
+                  className="block rounded-md py-2 px-3 text-base font-medium text-sky-200 hover:bg-sky-200 hover:text-primary"
                 >
                   {item.name}
                 </Disclosure.Button>
@@ -180,7 +180,6 @@ const Navbar = () => (
       </>
     )}
   </Disclosure>
-
 )
 
 export default Navbar
