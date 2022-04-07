@@ -1,6 +1,6 @@
 import React, { Fragment, useMemo } from 'react'
 import {
-  Disclosure, Menu, Transition,
+  Disclosure, Menu, Popover, Transition,
 } from '@headlessui/react'
 import { SearchIcon, ShoppingCartIcon } from '@heroicons/react/solid'
 import {
@@ -14,6 +14,7 @@ import {
 } from '@heroicons/react/outline'
 import { useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
+import { Badge } from '@mui/material'
 
 const user = {
   name: 'Guest',
@@ -145,13 +146,13 @@ const Navbar = () => {
           <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
             <div className="flex justify-between h-16">
               <div className="flex items-center px-2 lg:px-0">
-                <div className="flex-shrink-0 flex items-center" onClick={() => router.push('/')}>
+                <button type="button" className="flex-shrink-0 flex items-center" onClick={() => router.push('/')}>
                   <img
                     className="h-10 w-auto"
                     src="https://firebasestorage.googleapis.com/v0/b/learn-plus-fyp.appspot.com/o/images%2Flogo%2Flogo-for-navbar.svg?alt=media&token=2fe0d94c-3ae8-4c8b-ac17-c03f0c08c1dc"
                     alt="Workflow"
                   />
-                </div>
+                </button>
                 <div className="hidden lg:ml-8 lg:flex lg:space-x-4">
                   {navigation.map((item) => (
                     <a
@@ -186,7 +187,7 @@ const Navbar = () => {
               <div className="flex items-center lg:hidden">
                 {/* Mobile menu button */}
                 <Disclosure.Button
-                  className="inline-flex items-center justify-center p-2 rounded-md text-sky-200 hover:bg-sky-200 hover:text-primary focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+                  className="flex-shrink-0 p-1 text-sky-200 rounded-full hover:text-white focus:outline-none"
                 >
                   <span className="sr-only">Open menu</span>
                   {open ? (
@@ -197,15 +198,76 @@ const Navbar = () => {
                 </Disclosure.Button>
               </div>
               <div className="hidden lg:ml-4 lg:flex lg:items-center">
-                <button
-                  type="button"
-                  className="flex-shrink-0 p-1 text-sky-200 rounded-full hover:text-white focus:outline-none"
-                >
-                  <span className="sr-only">Notifications</span>
-                  <ShoppingCartIcon className="h-6 w-6" aria-hidden="true" />
-                </button>
+                <Popover className="relative">
+                  {() => (
+                    <>
+                      <Popover.Button
+                        className="flex-shrink-0 p-1 text-sky-200 rounded-full hover:text-white focus:outline-none"
+                      >
+                        <Badge color="secondary" badgeContent={cart?.courses?.length}>
+                          <ShoppingCartIcon
+                            className="h-6 w-6"
+                            aria-hidden="true"
+                          />
+                        </Badge>
+                      </Popover.Button>
 
-                {/* Profile dropdown */}
+                      <Transition
+                        as={Fragment}
+                        enter="transition ease-out duration-200"
+                        enterFrom="opacity-0 translate-y-1"
+                        enterTo="opacity-100 translate-y-0"
+                        leave="transition ease-in duration-150"
+                        leaveFrom="opacity-100 translate-y-0"
+                        leaveTo="opacity-0 translate-y-1"
+                      >
+                        <Popover.Panel className="absolute z-10 left-1/2 transform -translate-x-1/2 mt-3 px-2 w-screen max-w-xs sm:px-0">
+                          <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
+                            <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
+                              {cart?.courses?.map((cart, index) => (
+                                <a
+                                  key={index}
+                                  href={cart.href}
+                                  className="-m-3 p-3 block rounded-md hover:bg-gray-50"
+                                >
+
+                                  {/* <p className="text-base font-medium text-gray-900">{cart.name}</p>
+                            <p className="mt-1 text-sm text-gray-500">{cart.price}</p> */}
+                                  <div className="grid grid-cols-2 h-full w-full">
+                                    {/* <img className="w-24 h-16" src="/image.jpg" alt="ok" /> */}
+                                    <div className="w-28">
+                                      <img className="" src={cart.image} alt="" />
+                                    </div>
+
+                                    <div>
+                                      <div>
+                                        <p className="text-base font-medium text-gray-900">{cart.name}</p>
+                                      </div>
+                                      <div>
+                                        <p className="mt-1 text-sm text-gray-500">{cart.price}</p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </a>
+                              ))}
+                              <hr />
+                              <p className="text-base font-bold text-center text-gray-900">
+                                {' '}
+                                Total price:
+                                {' '}
+                                {cart.total}
+                                {' '}
+                                $
+                              </p>
+                              <button type="button" className="whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-primary hover:bg-white hover:text-primary hover:border-primary">Go to cart</button>
+                            </div>
+
+                          </div>
+                        </Popover.Panel>
+                      </Transition>
+                    </>
+                  )}
+                </Popover>
                 <Menu as="div" className="ml-4 relative flex-shrink-0">
                   <div>
                     <Menu.Button
@@ -276,8 +338,10 @@ const Navbar = () => {
                   type="button"
                   className="ml-auto flex-shrink-0 rounded-full p-1 text-sky-200 hover:text-white focus:outline-none"
                 >
-                  <span className="sr-only">View notifications</span>
-                  <ShoppingCartIcon className="h-6 w-6" aria-hidden="true" />
+                  <span className="sr-only">View Cart</span>
+                  <Badge color="primary" badgeContent={cart?.courses?.length}>
+                    <ShoppingCartIcon className="h-6 w-6" aria-hidden="true" />
+                  </Badge>
                 </button>
               </div>
               <div className="mt-3 px-2">
