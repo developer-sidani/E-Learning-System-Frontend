@@ -23,3 +23,5 @@ export {
   CoursesContainer, CoursesSlider, TopCategoriesComponent, CategoryContainer, CallToActionComponent,
   IncentivesComponent,
 } from './home'
+
+export { ProfileSection } from './my-account'
