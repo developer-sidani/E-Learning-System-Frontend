@@ -3,7 +3,15 @@ import {
   Disclosure, Menu, Transition,
 } from '@headlessui/react'
 import { SearchIcon, ShoppingCartIcon } from '@heroicons/react/solid'
-import { MenuIcon, XIcon } from '@heroicons/react/outline'
+import {
+  MenuIcon, XIcon,
+  CodeIcon,
+  BriefcaseIcon,
+  CameraIcon,
+  PhotographIcon,
+  UserIcon,
+  CogIcon,
+} from '@heroicons/react/outline'
 import { useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
 
@@ -11,6 +19,73 @@ const user = {
   name: 'Guest',
   email: '',
   photoUrl: 'https://firebasestorage.googleapis.com/v0/b/learn-plus-fyp.appspot.com/o/images%2Fuser.png?alt=media&token=11e4daf6-bffa-4e1d-8359-260f96c87514',
+}
+const categories = [
+  {
+    name: 'Development',
+    // description: 'Get a better understanding of where your traffic is coming from.',
+    href: '#',
+    icon: CodeIcon,
+  },
+  {
+    name: 'Business',
+    // description: 'Speak directly to your customers in a more meaningful way.',
+    href: '#',
+    icon: BriefcaseIcon,
+  },
+  {
+    name: 'Personal development',
+    // description: "Your customers' data will be safe and secure.",
+    href: '#',
+    icon: UserIcon,
+  },
+  {
+    name: 'IT & Software',
+    // description: "Connect with third-party tools that you're already using.",
+    href: '#',
+    icon: CogIcon,
+  },
+  {
+    name: 'Design',
+    // description: 'Build strategic funnels that will drive your customers to convert',
+    href: '#',
+    icon: PhotographIcon,
+  },
+  {
+    name: 'Photography & Video',
+    // description: 'Get detailed reports that will help you make more informed decisions ',
+    href: '#',
+    icon: CameraIcon,
+  },
+]
+const cart = {
+
+  userID: '132',
+  total: 150,
+  courses: [
+    {
+      name: 'Help Center',
+      price: '50$',
+      image: 'https://img-c.udemycdn.com/course/125_H/473160_d929_3.jpg',
+      description: 'Get all of your questions answered in our forums or contact support.',
+      href: '#',
+    },
+    {
+      name: 'Help Center2',
+      price: '50$',
+      image: 'https://img-c.udemycdn.com/course/125_H/473160_d929_3.jpg',
+      description: 'Get all of your questions answered in our forums or contact support.',
+      href: '#',
+    },
+    {
+      name: 'Help Center3',
+      price: '50$',
+      image: 'https://img-c.udemycdn.com/course/125_H/473160_d929_3.jpg',
+      description: 'Get all of your questions answered in our forums or contact support.',
+      href: '#',
+    },
+  ],
+
 }
 const navigation = [
   { name: 'Dashboard', href: '#' },
@@ -36,7 +111,7 @@ const Navbar = () => {
         },
       },
       {
-        name: 'Settings',
+        name: 'My Account',
         handleClick() {
           router.push('/my-account')
         },
@@ -70,10 +145,10 @@ const Navbar = () => {
           <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
             <div className="flex justify-between h-16">
               <div className="flex items-center px-2 lg:px-0">
-                <div className="flex-shrink-0 flex items-center">
+                <div className="flex-shrink-0 flex items-center" onClick={() => router.push('/')}>
                   <img
-                    className="h-8 w-auto"
-                    src="https://tailwindui.com/img/logos/workflow-mark-white.svg"
+                    className="h-10 w-auto"
+                    src="https://firebasestorage.googleapis.com/v0/b/learn-plus-fyp.appspot.com/o/images%2Flogo%2Flogo-for-navbar.svg?alt=media&token=2fe0d94c-3ae8-4c8b-ac17-c03f0c08c1dc"
                     alt="Workflow"
                   />
                 </div>
@@ -137,7 +212,7 @@ const Navbar = () => {
                       className="bg-sky-500 rounded-full flex text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-sky-500 focus:ring-white"
                     >
                       <span className="sr-only">Open user menu</span>
-                      <img className="h-8 w-8 rounded-full" src={user?.photoUrl} alt="" />
+                      <img className="h-8 w-8 rounded-full" src={userData?.photoUrl || user?.photoUrl} alt="" />
                     </Menu.Button>
                   </div>
                   <Transition
