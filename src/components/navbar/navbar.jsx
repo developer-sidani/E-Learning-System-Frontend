@@ -11,6 +11,7 @@ import {
   PhotographIcon,
   UserIcon,
   CogIcon,
+  BookOpenIcon,
 } from '@heroicons/react/outline'
 import { useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
@@ -71,7 +72,6 @@ const resources = [
 ]
 
 const cart = {
-
   userID: '132',
   total: 150,
   courses: [
@@ -97,14 +97,7 @@ const cart = {
       href: '#',
     },
   ],
-
 }
-const navigation = [
-  { name: 'Dashboard', href: '#' },
-  { name: 'Jobs', href: '#' },
-  { name: 'Applicants', href: '#' },
-  { name: 'Company', href: '#' },
-]
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -121,34 +114,16 @@ const Navbar = () => {
         handleClick() {
           router.push('/my-courses')
         },
+        icon: BookOpenIcon,
       },
       {
         name: 'My Account',
         handleClick() {
           router.push('/my-account')
         },
+        icon: UserIcon,
       },
-      {
-        name: 'Logout',
-        handleClick() {
-          localStorage.clear()
-          router.reload()
-        },
-      },
-    ] : [
-      {
-        name: 'Sign In',
-        handleClick() {
-          router.push('/auth/sign-in')
-        },
-      },
-      {
-        name: 'Sign Up',
-        handleClick() {
-          router.push('/auth/sign-up')
-        },
-      },
-    ], [profile, router])
+    ] : [], [profile, router])
 
   return (
     <Disclosure as="nav" className="bg-primary" aria-label="Global">
@@ -430,49 +405,92 @@ const Navbar = () => {
           </div>
 
           <Disclosure.Panel className="lg:hidden">
-            <div className="pt-2 pb-3 px-2 space-y-1">
-              {navigation.map((item) => (
-                <Disclosure.Button
-                  key={item.name}
-                  as="a"
-                  href={item.href}
-                  className="block rounded-md py-2 px-3 text-base font-medium text-white hover:text-white hover:bg-sky-200 hover:text-primary"
-                >
-                  {item.name}
-                </Disclosure.Button>
-              ))}
-            </div>
-            <div className="pt-4 pb-3 border-t border-sky-500">
-              <div className="flex items-center px-4">
-                <div className="flex-shrink-0">
-                  <img className="h-10 w-10 rounded-full" src={userData?.photoUrl || user.photoUrl} alt="" />
-                </div>
-                <div className="ml-3">
-                  <div className="text-base font-medium text-white">{userData?.fullName || user.name}</div>
-                  <div className="text-sm font-medium text-sky-200">{userData?.email || user.email}</div>
-                </div>
-                <button
-                  type="button"
-                  className="ml-auto flex-shrink-0 rounded-full p-1 text-white hover:text-sky-200 focus:outline-none"
-                >
-                  <span className="sr-only">View Cart</span>
-                  <Badge color="primary" badgeContent={cart?.courses?.length}>
-                    <ShoppingCartIcon className="h-6 w-6" aria-hidden="true" />
-                  </Badge>
-                </button>
-              </div>
-              <div className="mt-3 px-2">
-                {userNavigation.map((item) => (
+            <div className="mt-6 px-5">
+              <nav className="grid grid-cols-1 gap-7">
+                {categories.map((category, index) => (
                   <button
-                    key={item.name}
                     type="button"
-                    onClick={item.handleClick}
-                    className="block rounded-md py-2 px-3 text-base font-medium text-sky-200 hover:bg-sky-200 hover:text-primary w-full items-start flex"
+                    key={index}
+                    className="p-3 flex items-center rounded-lg text-base font-medium text-white hover:text-sky-200"
                   >
-                    {item.name}
+                    <div className="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-md bg-indigo-500 text-white">
+                      <category.icon className="h-6 w-6" aria-hidden="true" />
+                    </div>
+                    <div className="ml-4 text-base font-medium text-white">{category.name}</div>
                   </button>
                 ))}
+              </nav>
+            </div>
+            <div className="py-6 px-5">
+              <div className="pt-6 pb-3 border-t border-sky-500">
+                <div className="flex items-center px-4">
+                  <div className="flex-shrink-0">
+                    <img className="h-10 w-10 rounded-full" src={userData?.photoUrl || user.photoUrl} alt="" />
+                  </div>
+                  <div className="ml-3">
+                    <div className="text-base font-medium text-white">{userData?.fullName || user.name}</div>
+                    <div className="text-sm font-medium text-sky-200">{userData?.email || user.email}</div>
+                  </div>
+                  <button
+                    type="button"
+                    className="ml-auto flex-shrink-0 rounded-full p-1 text-white hover:text-sky-200 focus:outline-none"
+                  >
+                    <span className="sr-only">View Cart</span>
+                    <Badge color="primary" badgeContent={cart?.courses?.length}>
+                      <ShoppingCartIcon className="h-6 w-6" aria-hidden="true" />
+                    </Badge>
+                  </button>
+                </div>
+                <div className="mt-3 px-2">
+                  {userNavigation.map((item) => (
+                    <button
+                      type="button"
+                      key={item.name}
+                      className="p-3 flex items-center rounded-lg text-base font-medium text-white hover:text-sky-200"
+                    >
+                      <div className="flex-shrink-0 flex items-center justify-center h-9 w-9 rounded-md bg-indigo-500 text-white">
+                        <item.icon className="h-5 w-5" aria-hidden="true" />
+                      </div>
+                      <div className="ml-4 text-sm font-medium text-white">{item.name}</div>
+                    </button>
+                  ))}
+                </div>
               </div>
+              {profile?.token ? (
+                <div className="mt-6">
+                  <button
+                    onClick={() => {
+                      localStorage.clear()
+                      router.reload()
+                    }}
+                    type="button"
+                    className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
+                  >
+                    Logout
+                  </button>
+                </div>
+              ) : (
+                <div className="mt-6">
+                  <button
+                    onClick={() => router.push('/auth/sign-up')}
+                    type="button"
+                    className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
+                  >
+                    Sign up
+                  </button>
+                  <p className="mt-6 text-center text-base font-medium text-white">
+                    Existing customer?
+                    {' '}
+                    <button
+                      type="button"
+                      onClick={() => router.push('/auth/sign-in')}
+                      className="text-indigo-400 hover:text-indigo-500"
+                    >
+                      Sign in
+                    </button>
+                  </p>
+                </div>
+              )}
             </div>
           </Disclosure.Panel>
         </>
