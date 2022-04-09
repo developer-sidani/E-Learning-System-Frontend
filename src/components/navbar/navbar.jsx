@@ -123,7 +123,30 @@ const Navbar = () => {
         },
         icon: UserIcon,
       },
-    ] : [], [profile, router])
+      {
+        name: 'Logout',
+        handleClick() {
+          localStorage.clear()
+          router.reload()
+        },
+        icon: UserIcon,
+      },
+    ] : [
+      {
+        name: 'Sign In',
+        handleClick() {
+          router.push('/auth/sign-in')
+        },
+        icon: BookOpenIcon,
+      },
+      {
+        name: 'Sign Up',
+        handleClick() {
+          router.push('/auth/sign-up')
+        },
+        icon: UserIcon,
+      },
+    ], [profile, router])
 
   return (
     <Disclosure as="nav" className="bg-primary" aria-label="Global">
@@ -441,20 +464,30 @@ const Navbar = () => {
                     </Badge>
                   </button>
                 </div>
-                <div className="mt-3 px-2">
-                  {userNavigation.map((item) => (
+                {profile?.token && (
+                  <div className="mt-3 px-2">
                     <button
                       type="button"
-                      key={item.name}
+                      onClick={() => router.push('/my-courses')}
                       className="p-3 flex items-center rounded-lg text-base font-medium text-white hover:text-sky-200"
                     >
                       <div className="flex-shrink-0 flex items-center justify-center h-9 w-9 rounded-md bg-indigo-500 text-white">
-                        <item.icon className="h-5 w-5" aria-hidden="true" />
+                        <BookOpenIcon className="h-5 w-5" aria-hidden="true" />
                       </div>
-                      <div className="ml-4 text-sm font-medium text-white">{item.name}</div>
+                      <div className="ml-4 text-sm font-medium text-white">My Courses</div>
                     </button>
-                  ))}
-                </div>
+                    <button
+                      type="button"
+                      onClick={() => router.push('/my-account')}
+                      className="p-3 flex items-center rounded-lg text-base font-medium text-white hover:text-sky-200"
+                    >
+                      <div className="flex-shrink-0 flex items-center justify-center h-9 w-9 rounded-md bg-indigo-500 text-white">
+                        <UserIcon className="h-5 w-5" aria-hidden="true" />
+                      </div>
+                      <div className="ml-4 text-sm font-medium text-white">My Account</div>
+                    </button>
+                  </div>
+                )}
               </div>
               {profile?.token ? (
                 <div className="mt-6">
