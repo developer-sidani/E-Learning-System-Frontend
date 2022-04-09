@@ -60,16 +60,6 @@ const categories = [
     icon: CameraIcon,
   },
 ]
-const resources = [
-  {
-    name: 'Help Center',
-    description: 'Get all of your questions answered in our forums or contact support.',
-    href: '#',
-  },
-  { name: 'Guides', description: 'Learn how to maximize our platform to get the most out of it.', href: '#' },
-  { name: 'Events', description: 'See what meet-ups and other events we might be planning near you.', href: '#' },
-  { name: 'Security', description: 'Understand how we take your privacy seriously.', href: '#' },
-]
 
 const cart = {
   userID: '132',
@@ -107,6 +97,36 @@ const Navbar = () => {
   const profile = useSelector(({ profile }) => profile)
   const userData = profile?.user?.info
   const router = useRouter()
+  const resources = [
+    {
+      name: 'Contact Us',
+      description: 'Get all of your questions answered in our forums or contact support.',
+      handleClick() {
+        router.push('/contact-us')
+      },
+    },
+    {
+      name: 'About Us',
+      description: 'Learn how to maximize our platform to get the most out of it.',
+      handleClick() {
+        router.push('/about-us')
+      },
+    },
+    {
+      name: 'FAQs',
+      description: 'See what meet-ups and other events we might be planning near you.',
+      handleClick() {
+        router.push('/faqs')
+      },
+    },
+    {
+      name: 'Terms of Use',
+      description: 'Understand how we take your privacy seriously.',
+      handleClick() {
+        router.push('/terms-of-use')
+      },
+    },
+  ]
   const userNavigation = useMemo(() => profile
     ?.token ? [
       {
@@ -192,7 +212,7 @@ const Navbar = () => {
                             leaveFrom="opacity-100 translate-y-0"
                             leaveTo="opacity-0 translate-y-1"
                           >
-                            <Popover.Panel className="absolute z-10 pl-2 mt-3 transform w-max max-w-md lg:max-w-2xl lg:ml-0 lg:left-40 lg:-translate-x-1/2">
+                            <Popover.Panel className="absolute z-50 pl-2 mt-3 transform w-max max-w-md lg:max-w-2xl lg:ml-0 lg:left-40 lg:-translate-x-1/2">
                               <div className="ml-8 rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
                                 <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8 lg:grid-cols-2">
                                   {categories.map((category, index) => (
@@ -220,7 +240,7 @@ const Navbar = () => {
                     </Popover>
                     <button
                       type="button"
-                      onClick={() => {}}
+                      onClick={() => router.push('/teach-with-us')}
                       className="rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-sky-200 hover:text-primary"
                     >
                       Teach With Us
@@ -257,18 +277,20 @@ const Navbar = () => {
                             leaveFrom="opacity-100 translate-y-0"
                             leaveTo="opacity-0 translate-y-1"
                           >
-                            <Popover.Panel className="absolute z-10 left-1/2 transform -translate-x-1/2 mt-3 px-2 w-screen max-w-xs sm:px-0">
+                            <Popover.Panel className="absolute z-50 left-1/2 transform -translate-x-1/2 mt-3 px-2 w-screen max-w-xs sm:px-0">
                               <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
                                 <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
                                   {resources.map((resource, index) => (
-                                    <a
+                                    <button
+                                      type="button"
                                       key={index}
-                                      href={resource.href}
+                                      onClick={resource.handleClick}
+                                      // href={resource.href}
                                       className="-m-3 p-3 block rounded-md hover:bg-gray-50"
                                     >
                                       <p className="text-base font-medium text-gray-900">{resource.name}</p>
                                       <p className="mt-1 text-sm text-gray-500">{resource.description}</p>
-                                    </a>
+                                    </button>
                                   ))}
                                 </div>
                               </div>
@@ -452,7 +474,7 @@ const Navbar = () => {
                   </div>
                   <div className="ml-3">
                     <div className="text-base font-medium text-white">{userData?.fullName || user.name}</div>
-                    <div className="text-sm font-medium text-sky-200">{userData?.email || user.email}</div>
+                    <div className="text-xs text-clip max-w-xs font-medium text-sky-200">{userData?.email || user.email}</div>
                   </div>
                   <button
                     type="button"
