@@ -1,17 +1,17 @@
 import React, { useState } from 'react'
 import {
-  Disclosure, Switch,
+  Disclosure,
 } from '@headlessui/react'
 import {
   BellIcon,
-  CogIcon,
   CreditCardIcon,
   KeyIcon,
-  MenuIcon,
   UserCircleIcon,
-  ViewGridAddIcon,
 } from '@heroicons/react/outline'
-import { ProfileSection, PasswordSection } from '.'
+// eslint-disable-next-line import/no-cycle
+import {
+  ProfileSection, PasswordSection, NotificationSection, BillingComponent,
+} from '.'
 
 const user = {
   name: 'Debbie Lewis',
@@ -124,6 +124,12 @@ const MyAccountComponent = () => {
                )}
                {tab.name === 'Password' && (
                  <PasswordSection />
+               )}
+               {tab.name === 'Notifications' && (
+                 <NotificationSection />
+               )}
+               {tab.name === 'Billing' && (
+                 <BillingComponent />
                )}
              </div>
            </div>
