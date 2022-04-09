@@ -1,4 +1,6 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
+import { Formik, Form } from 'formik'
+
 import { Switch } from '@headlessui/react'
 import {
   FormControl,
@@ -6,15 +8,70 @@ import {
   Grid, InputLabel, MenuItem, Select, TextField,
 } from '@mui/material'
 import PhoneInput from 'react-phone-input-2'
-import { countryList } from '../../utils'
-import { DatePickerComponent } from '../date-picker'
+import { useSelector } from 'react-redux'
+import { PasswordSchema } from './validation-schema'
 
-const countries = countryList.map(({ Name }) => Name)
+const submitValues = (callback, handler) => (values, { resetForm }) => {
+  console.log(values)
+  // callback(values, resetForm, handler)
+}
 
 const PasswordSection = () => {
   const [loading, setLoading] = useState(false)
+  const profile = useSelector(({ profile }) => profile)
+
+  const ref = useRef(null)
+  const initialValues = {
+    old_password: '',
+    new_password: '',
+    confirm_password: '',
+  }
+
+  const [serverError, setServerError] = useState('')
+  const [open, setOpen] = useState(false)
+
+  const scrollToError = () => {
+    if (ref && ref.current /* + other conditions */) {
+      ref.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+        inline: 'start',
+      })
+    }
+  }
   return (
-    <form className="divide-y divide-gray-200 lg:col-span-9" action="#" method="POST">
+    <Formik
+      initialValues={initialValues}
+      onSubmit={submitValues()}
+      enableReinitialize
+      // onSubmit={submitValues({
+      //   init() {
+      //     setServerError('')
+      //     setLoading(true)
+      //   },
+      //   error(message) {
+      //     setServerError(message)
+      //     scrollToError()
+      //   },
+      //   stopLoading() {
+      //     setLoading(false)
+      //   },
+      //   success: async (callback) => {
+      //     setServerError('')
+      //    setLoading(false) */
+      //    setOpen(true) */
+      //     await wait(500)
+      //     callback()
+      //   },
+      // })}
+      validationSchema={PasswordSchema}
+    >
+
+      {({
+        setFieldValue, dirty,
+        errors, touched, handleChange, values, handleBlur,
+      }) => (
+    <Form className="divide-y divide-gray-200 lg:col-span-9">
       {/* Profile section */}
       <div className="py-6 px-4 sm:p-6 lg:pb-8">
         <div>
@@ -27,15 +84,15 @@ const PasswordSection = () => {
               Old Password
             </label>
             <TextField
-              // error={Boolean(touched.password && errors.password)}
+              error={Boolean(touched.old_password && errors.old_password)}
               fullWidth
-              // helperText={touched.password && errors.password}
+              helperText={touched.old_password && errors.old_password}
               type="password"
-              name="password"
-              // onChange={handleChange}
+              name="old_password"
+              onChange={handleChange}
               required
-              // value={values.password}
-              // onBlur={handleBlur}
+              value={values.old_password}
+              onBlur={handleBlur}
             />
           </div>
         </div>
@@ -46,15 +103,15 @@ const PasswordSection = () => {
              New Password
             </label>
             <TextField
-              // error={Boolean(touched.password && errors.password)}
+              error={Boolean(touched.new_password && errors.new_password)}
               fullWidth
-              // helperText={touched.password && errors.password}
+              helperText={touched.new_password && errors.new_password}
               type="password"
-              name="password"
-              // onChange={handleChange}
+              name="new_password"
+              onChange={handleChange}
               required
-              // value={values.password}
-              // onBlur={handleBlur}
+              value={values.new_password}
+              onBlur={handleBlur}
             />
           </div>
 
@@ -63,15 +120,15 @@ const PasswordSection = () => {
               Confirm New Password
             </label>
             <TextField
-              // onBlur={handleBlur}
-              // error={Boolean(touched.confirm_password && errors.confirm_password)}
+              onBlur={handleBlur}
+              error={Boolean(touched.confirm_password && errors.confirm_password)}
               fullWidth
-              // helperText={touched.confirm_password && errors.confirm_password}
+              helperText={touched.confirm_password && errors.confirm_password}
               type="password"
               name="confirm_password"
-              // onChange={handleChange}
+              onChange={handleChange}
               required
-              // value={values.confirm_password}
+              value={values.confirm_password}
             />
           </div>
 
@@ -87,8 +144,9 @@ const PasswordSection = () => {
           </button>
         </div>
       </div>
-
-    </form>
+    </Form>
+      )}
+    </Formik>
   )
 }
 export default PasswordSection

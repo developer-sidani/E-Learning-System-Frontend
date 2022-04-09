@@ -1,20 +1,91 @@
-import React, { useState } from 'react'
-import { Switch } from '@headlessui/react'
+import React, { useRef, useState } from 'react'
+import { Formik, Form } from 'formik'
+
 import {
   FormControl,
   FormHelperText,
   Grid, InputLabel, MenuItem, Select, TextField,
 } from '@mui/material'
 import PhoneInput from 'react-phone-input-2'
+import { useSelector } from 'react-redux'
 import { countryList } from '../../utils'
 import { DatePickerComponent } from '../date-picker'
+import { ProfileSchema } from './validation-schema'
+
+const submitValues = (callback, handler) => (values, { resetForm }) => {
+  console.log(values)
+  console.log('test')
+  // callback(resetForm)
+  // callback(values, resetForm, handler)
+}
 
 const countries = countryList.map(({ Name }) => Name)
 
 const ProfileSection = ({ user }) => {
   const [loading, setLoading] = useState(false)
+  const profile = useSelector(({ profile }) => profile)
+
+  const ref = useRef(null)
+  const initialValues = {
+    username: profile?.user?.info?.username || '',
+    email: profile?.user?.info?.email || '',
+    address: profile?.user?.info?.address || '',
+    firstname: profile?.user?.info?.fullName.split(' ')[0] || '',
+    lastname: profile?.user?.info?.fullName.substring(profile?.user?.info?.fullName.lastIndexOf(' ') + 1) || '',
+    country: profile?.user?.info?.country || '',
+    gender: profile?.user?.info?.gender.charAt(0).toUpperCase() + profile?.user?.info?.gender.slice(1) || '',
+    phone: profile?.user?.info?.phone || '',
+    birthday: '09/08/2000',
+    // photoURL: profile?.user?.info?.photoURL || '',
+  }
+
+  const [serverError, setServerError] = useState('')
+  const [open, setOpen] = useState(false)
+
+  const scrollToError = () => {
+    if (ref && ref.current /* + other conditions */) {
+      ref.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+        inline: 'start',
+      })
+    }
+  }
+
   return (
-  <form className="divide-y divide-gray-200 lg:col-span-9" action="#" method="POST">
+
+    <Formik
+      initialValues={initialValues}
+      onSubmit={submitValues()}
+      enableReinitialize
+      // onSubmit={submitValues({
+      //   init() {
+      //     setServerError('')
+      //     setLoading(true)
+      //   },
+      //   error(message) {
+      //     setServerError(message)
+      //     scrollToError()
+      //   },
+      //   stopLoading() {
+      //     setLoading(false)
+      //   },
+      //   success: async (callback) => {
+      //     setServerError('')
+      //    setLoading(false) */
+      //    setOpen(true) */
+      //     await wait(500)
+      //     callback()
+      //   },
+      // })}
+      validationSchema={ProfileSchema}
+    >
+
+      {({
+        setFieldValue, dirty,
+        errors, touched, handleChange, values, handleBlur,
+      }) => (
+  <Form className="divide-y divide-gray-200 lg:col-span-9" action="#" method="POST">
     {/* Profile section */}
     <div className="py-6 px-4 sm:p-6 lg:pb-8">
       <div>
@@ -34,23 +105,16 @@ const ProfileSection = ({ user }) => {
                           <span className="bg-gray-50 border border-r-0 border-gray-300 rounded-l-md px-3 inline-flex items-center text-gray-500 sm:text-sm">
                             learnplus.live/
                           </span>
-              {/* <input */}
-              {/*  type="text" */}
-              {/*  name="username" */}
-              {/*  id="username" */}
-              {/*  autoComplete="username" */}
-              {/*  className="focus:ring-sky-500 focus:border-sky-500 flex-grow block w-full min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300" */}
-              {/*  defaultValue={user.handle} */}
-              {/* /> */}
+
               <TextField
-                // onBlur={handleBlur}
-                // error={Boolean(touched.user && errors.user)}
+                onBlur={handleBlur}
+                error={Boolean(touched.username && errors.username)}
                 // fullWidth
-                // helperText={touched.user && errors.user}
-                name="user"
-                // onChange={handleChange}
+                helperText={touched.username && errors.username}
+                name="username"
+                onChange={handleChange}
                 required
-                // value={values.user}
+                value={values.username}
               />
             </div>
           </div>
@@ -61,15 +125,14 @@ const ProfileSection = ({ user }) => {
             </label>
             <div className="mt-1">
               <TextField
-                // error={Boolean(touched.email && errors.email)}
+                error={Boolean(touched.email && errors.email)}
                 fullWidth
-                // helperText={touched.email && errors.email}
-                // label="Email"
+                helperText={touched.email && errors.email}
                 name="email"
-                // onChange={handleChange}
+                onChange={handleChange}
                 required
-                // value="ali"
-                // onBlur={handleBlur}
+                onBlur={handleBlur}
+                value={values.email}
               />
             </div>
 
@@ -97,12 +160,12 @@ const ProfileSection = ({ user }) => {
                     <span>Change</span>
                     <span className="sr-only"> user photo</span>
                   </label>
-                  <input
-                    id="mobile-user-photo"
-                    name="user-photo"
-                    type="file"
-                    className="absolute w-full h-full opacity-0 cursor-pointer border-gray-300 rounded-md"
-                  />
+                  {/* <input */}
+                  {/*  id="mobile-user-photo" */}
+                  {/*  name="user-photo" */}
+                  {/*  type="file" */}
+                  {/*  className="absolute w-full h-full opacity-0 cursor-pointer border-gray-300 rounded-md" */}
+                  {/* /> */}
                 </div>
               </div>
             </div>
@@ -133,14 +196,14 @@ const ProfileSection = ({ user }) => {
             First name
           </label>
           <TextField
-            // onBlur={handleBlur}
-            // error={Boolean(touched.firstname && errors.firstname)}
+            onBlur={handleBlur}
+            error={Boolean(touched.firstname && errors.firstname)}
             fullWidth
-            // helperText={touched.firstname && errors.firstname}
+            helperText={touched.firstname && errors.firstname}
             name="firstname"
-            // onChange={handleChange}
+            onChange={handleChange}
             required
-            // value={values.firstname}
+            value={values.firstname}
           />
         </div>
 
@@ -149,14 +212,14 @@ const ProfileSection = ({ user }) => {
             Last name
           </label>
           <TextField
-            // onBlur={handleBlur}
-            // error={Boolean(touched.lastname && errors.lastname)}
+            onBlur={handleBlur}
+            error={Boolean(touched.lastname && errors.lastname)}
             fullWidth
-            // helperText={touched.lastname && errors.lastname}
+            helperText={touched.lastname && errors.lastname}
             name="lastname"
-            // onChange={handleChange}
+            onChange={handleChange}
             required
-            // value={values.lastname}
+            value={values.lastname}
           />
         </div>
         <div className="col-span-12 sm:col-span-6">
@@ -166,14 +229,13 @@ const ProfileSection = ({ user }) => {
           <Select
             labelId="demo-simple-select-required-label"
             id="demo-simple-select-required"
-            // error={Boolean(touched.country && errors.country)}
+            error={Boolean(touched.country && errors.country)}
             fullWidth
-            label="Country"
             name="country"
-            // onChange={handleChange}
+            onChange={handleChange}
             required
-            // value={values.country}
-            // onBlur={handleBlur}
+            value={values.country}
+            onBlur={handleBlur}
           >
             {countries.map((country, index) => (
               <MenuItem key={index} value={country}>{country}</MenuItem>
@@ -185,15 +247,14 @@ const ProfileSection = ({ user }) => {
             Address
           </label>
           <TextField
-            // onBlur={handleBlur}
-            // error={Boolean(touched.address && errors.address)}
+            onBlur={handleBlur}
+            error={Boolean(touched.address && errors.address)}
             fullWidth
-            // helperText={touched.address && errors.address}
-            // label="Address"
+            helperText={touched.address && errors.address}
             name="address"
-            // onChange={handleChange}
+            onChange={handleChange}
             required
-            // value={values.address}
+            value={values.address}
           />
         </div>
         {/* new */}
@@ -209,11 +270,10 @@ const ProfileSection = ({ user }) => {
               name: 'phone',
               autoFocus: false,
             }}
-            // value={values.phone}
-            // onChange={(phoneNumber, country, e) => {
-            //   handleChange(e)
-            // }
-            // }
+            value={values.phone}
+            onChange={(phoneNumber, country, e) => {
+              handleChange(e)
+            }}
             inputStyle={{ width: '100%' }}
             containerStyle={{ width: '100%' }}
           />
@@ -223,9 +283,10 @@ const ProfileSection = ({ user }) => {
             Birthday
           </label>
           <DatePickerComponent
-            // date={values.birthday}
-            // setDate={setFieldValue}
+            date={values.birthday}
+            setDate={setFieldValue}
             name="birthday"
+            value={values.birthday}
           />
         </div>
         <div className="col-span-12 sm:col-span-6">
@@ -235,16 +296,13 @@ const ProfileSection = ({ user }) => {
           <Select
             labelId="demo-simple-select-required-label"
             id="demo-simple-select-required"
-            // error={Boolean(touched.gender && errors.gender)}
+            error={Boolean(touched.gender && errors.gender)}
             fullWidth
-            label="Gender"
-            placeholder="Gender"
-            aria-placeholder="gender"
             name="gender"
-            // onChange={handleChange}
+            onChange={handleChange}
             required
-            // value={values.gender}
-            // onBlur={handleBlur}
+            value={values.gender}
+            onBlur={handleBlur}
           >
             <MenuItem value="Male">Male</MenuItem>
             <MenuItem value="Female">Female</MenuItem>
@@ -264,7 +322,9 @@ const ProfileSection = ({ user }) => {
       </div>
     </div>
 
-  </form>
+  </Form>
+      )}
+    </Formik>
   )
 }
 export default ProfileSection
