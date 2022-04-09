@@ -25,3 +25,4 @@ export {
 } from './home'
 
 export { ProfileSection } from './my-account'
+export { MyAccountComponent } from './my-account'
