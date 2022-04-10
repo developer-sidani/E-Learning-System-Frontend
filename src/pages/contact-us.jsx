@@ -1,5 +1,6 @@
 import React from 'react'
 import { PageHeader, ContactUsComponent } from '../components'
+import { MainLayout } from '../layouts'
 
 const offices = [
   { id: 1, city: 'Los Angeles', address: ['4556 Brendan Ferry', 'Los Angeles, CA 90210'] },
@@ -12,6 +13,11 @@ const ContactUs = () => (
         <PageHeader title="Learn+ | Contact Us" />
         <ContactUsComponent offices={offices} />
     </>
+)
+ContactUs.getLayout = (page) => (
+  <MainLayout>
+    {page}
+  </MainLayout>
 )
 
 export default ContactUs

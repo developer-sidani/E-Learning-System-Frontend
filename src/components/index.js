@@ -18,6 +18,7 @@ export { TermsOfUseComponent } from './terms-of-use'
 export { InstructorComponent } from './instructors'
 export { GetCourseComponent } from './get-course'
 export { Component1 } from './get-course'
+export { CartComponent } from './cart'
 
 export {
   CoursesContainer, CoursesSlider, TopCategoriesComponent, CategoryContainer, CallToActionComponent,
@@ -25,3 +26,4 @@ export {
 } from './home'
 
 export { MyAccountComponent } from './my-account'
+export { ProfileSection } from './my-account'

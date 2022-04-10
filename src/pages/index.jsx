@@ -8,7 +8,7 @@ import { MainLayout } from '../layouts'
 
 const courses = [
   {
-    _id: '621d2f5bbe6a14d70ae04c59',
+    id: '621d2f5bbe6a14d70ae04c59',
     title: 'Intro to web',
     image_125_H: 'https://img-c.udemycdn.com/course/125_H/1331946_ed41_4.jpg',
     image_240x135: 'https://img-c.udemycdn.com/course/240x135/1331946_ed41_4.jpg',
@@ -24,7 +24,7 @@ const courses = [
     flag: 'Bestseller',
   },
   {
-    _id: '621d2f5bbe6a14d70ae04c549',
+    id: '621d2f5bbe6a14d70ae04c549',
     title: 'Advanced web',
     image_125_H: 'https://img-c.udemycdn.com/course/125_H/1331946_ed41_4.jpg',
     image_240x135: 'https://img-c.udemycdn.com/course/240x135/1331946_ed41_4.jpg',
@@ -40,7 +40,7 @@ const courses = [
     flag: 'Bestseller',
   },
   {
-    _id: '621d2f5bbe6a14d70ae014c59',
+    id: '621d2f5bbe6a14d70ae014c59',
     title: 'Become a senior web developer',
     image_125_H: 'https://img-c.udemycdn.com/course/125_H/1331946_ed41_4.jpg',
     image_240x135: 'https://img-c.udemycdn.com/course/240x135/1331946_ed41_4.jpg',
@@ -56,7 +56,7 @@ const courses = [
     flag: 'Bestseller',
   },
   {
-    _id: '621d2f5bbe6a14d70ae014c59',
+    id: '621d2f5bbe6a14d70ae014c59',
     title: 'Become a senior web developer',
     image_125_H: 'https://img-c.udemycdn.com/course/125_H/1331946_ed41_4.jpg',
     image_240x135: 'https://img-c.udemycdn.com/course/240x135/1331946_ed41_4.jpg',
@@ -72,7 +72,7 @@ const courses = [
     flag: 'Bestseller',
   },
   {
-    _id: '621d2f5bbe6a14d70ae014c59',
+    id: '621d2f5bbe6a14d70ae014c59',
     title: 'Become a senior web developer',
     image_125_H: 'https://img-c.udemycdn.com/course/125_H/1331946_ed41_4.jpg',
     image_240x135: 'https://img-c.udemycdn.com/course/240x135/1331946_ed41_4.jpg',
@@ -88,7 +88,7 @@ const courses = [
     flag: 'Bestseller',
   },
   {
-    _id: '621d2f5bbe6a14d70ae014c59',
+    id: '621d2f5bbe6a14d70ae014c59',
     title: 'Become a senior web developer',
     image_125_H: 'https://img-c.udemycdn.com/course/125_H/1331946_ed41_4.jpg',
     image_240x135: 'https://img-c.udemycdn.com/course/240x135/1331946_ed41_4.jpg',
@@ -104,7 +104,7 @@ const courses = [
     flag: '',
   },
   {
-    _id: '621d2f5bbe6a14d70ae014c59',
+    id: '621d2f5bbe6a14d70ae014c59',
     title: 'Become a senior web developer',
     image_125_H: 'https://img-c.udemycdn.com/course/125_H/1331946_ed41_4.jpg',
     image_240x135: 'https://img-c.udemycdn.com/course/240x135/1331946_ed41_4.jpg',
@@ -120,7 +120,7 @@ const courses = [
     flag: 'Bestseller',
   },
   {
-    _id: '621d2f5bbe6a14d70ae014c59',
+    id: '621d2f5bbe6a14d70ae014c59',
     title: 'Become a senior web developer',
     image_125_H: 'https://img-c.udemycdn.com/course/125_H/1331946_ed41_4.jpg',
     image_240x135: 'https://img-c.udemycdn.com/course/240x135/1331946_ed41_4.jpg',
@@ -136,7 +136,7 @@ const courses = [
     flag: 'Bestseller',
   },
   {
-    _id: '621d2f5bbe6a14d70ae014c59',
+    id: '621d2f5bbe6a14d70ae014c59',
     title: 'Become a senior web developer',
     image_125_H: 'https://img-c.udemycdn.com/course/125_H/1331946_ed41_4.jpg',
     image_240x135: 'https://img-c.udemycdn.com/course/240x135/1331946_ed41_4.jpg',
@@ -152,7 +152,7 @@ const courses = [
     flag: 'Bestseller',
   },
   {
-    _id: '621d2f5bbe6a14d70ae014c59',
+    id: '621d2f5bbe6a14d70ae014c59',
     title: 'Become a senior web developer',
     image_125_H: 'https://img-c.udemycdn.com/course/125_H/1331946_ed41_4.jpg',
     image_240x135: 'https://img-c.udemycdn.com/course/240x135/1331946_ed41_4.jpg',
@@ -168,7 +168,7 @@ const courses = [
     flag: 'Bestseller',
   },
   {
-    _id: '621d2f5bbe6a14d70ae014c59',
+    id: '621d2f5bbe6a14d70ae014c59',
     title: 'Become a senior web developer',
     image_125_H: 'https://img-c.udemycdn.com/course/125_H/1331946_ed41_4.jpg',
     image_240x135: 'https://img-c.udemycdn.com/course/240x135/1331946_ed41_4.jpg',
@@ -255,6 +255,8 @@ const Home = () => {
         title="Learn+"
       />
       <MainBanner />
+      <div className="px-[7%]">
+
       <div className="ml-2 mt-5 px-5">
         <p className="text-3xl font-serif">
           A broad selection of courses
@@ -311,6 +313,8 @@ const Home = () => {
         title="Grow your software development skills with JavaScript"
         description="JavaScript is a text-based computer programming language used to make dynamic web pages. A must-learn for aspiring web developers or programmers, JavaScript can be used for features like image carousels, displaying countdowns and timers, and playing media on a webpage. "
       />
+
+      </div>
       <IsLoggedIn>
         <div className="bg-white py-2">
           <div className="relative bg-gray-900">
@@ -339,13 +343,18 @@ const Home = () => {
             </div>
           </div>
         </div>
+        <div className="px-[7%]">
+
         <CoursesContainer
           courses={courses}
           loading
           title="Recommended for You"
           description="JavaScript is a text-based computer programming language used to make dynamic web pages. A must-learn for aspiring web developers or programmers, JavaScript can be used for features like image carousels, displaying countdowns and timers, and playing media on a webpage. "
         />
+        </div>
       </IsLoggedIn>
+      <div className="px-[7%]">
+
       <div className="ml-2 my-3 px-5">
         <p className="text-3xl font-serif">
           Top Categories
@@ -366,6 +375,7 @@ const Home = () => {
           description="JavaScript is a text-based computer programming language used to make dynamic web pages. A must-learn for aspiring web developers or programmers, JavaScript can be used for features like image carousels, displaying countdowns and timers, and playing media on a webpage. "
         />
       </IsLoggedIn>
+      </div>
       <IsGuest>
       <CoursesContainer
         courses={courses}
@@ -374,14 +384,17 @@ const Home = () => {
         // description="JavaScript is a text-based computer programming language used to make dynamic web pages. A must-learn for aspiring web developers or programmers, JavaScript can be used for features like image carousels, displaying countdowns and timers, and playing media on a webpage. "
       />
       </IsGuest>
+
       <CallToActionComponent />
       <IsLoggedIn>
+        <div className="px-[7%]">
         <CoursesContainer
           courses={courses}
           loading={false}
           title="You May Also Like / Others Also Bought"
           description="JavaScript is a text-based computer programming language used to make dynamic web pages. A must-learn for aspiring web developers or programmers, JavaScript can be used for features like image carousels, displaying countdowns and timers, and playing media on a webpage. "
         />
+        </div>
       </IsLoggedIn>
       <IncentivesComponent />
     </>

@@ -15,7 +15,8 @@ const errorStatusFromBackend = {
   checkEmail: 400,
 }
 
-const Logo = 'https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg'
+// TODO get the link
+const Logo = 'https://firebasestorage.googleapis.com/v0/b/learn-plus-fyp.appspot.com/o/images%2Flogo%2Flogo-svg.svg?alt=media&token=73ba11c6-d384-4bd6-9738-9d7dbd2a141a'
 const SignInSchema = Yup.object().shape({
   user: Yup.string().required('Required'),
   password: Yup.string()

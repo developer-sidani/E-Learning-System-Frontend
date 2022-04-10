@@ -60,44 +60,6 @@ const categories = [
     icon: CameraIcon,
   },
 ]
-const resources = [
-  {
-    name: 'Help Center',
-    description: 'Get all of your questions answered in our forums or contact support.',
-    href: '#',
-  },
-  { name: 'Guides', description: 'Learn how to maximize our platform to get the most out of it.', href: '#' },
-  { name: 'Events', description: 'See what meet-ups and other events we might be planning near you.', href: '#' },
-  { name: 'Security', description: 'Understand how we take your privacy seriously.', href: '#' },
-]
-
-const cart = {
-  userID: '132',
-  total: 150,
-  courses: [
-    {
-      name: 'Help Center',
-      price: '50$',
-      image: 'https://img-c.udemycdn.com/course/125_H/473160_d929_3.jpg',
-      description: 'Get all of your questions answered in our forums or contact support.',
-      href: '#',
-    },
-    {
-      name: 'Help Center2',
-      price: '50$',
-      image: 'https://img-c.udemycdn.com/course/125_H/473160_d929_3.jpg',
-      description: 'Get all of your questions answered in our forums or contact support.',
-      href: '#',
-    },
-    {
-      name: 'Help Center3',
-      price: '50$',
-      image: 'https://img-c.udemycdn.com/course/125_H/473160_d929_3.jpg',
-      description: 'Get all of your questions answered in our forums or contact support.',
-      href: '#',
-    },
-  ],
-}
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -105,8 +67,41 @@ function classNames(...classes) {
 
 const Navbar = () => {
   const profile = useSelector(({ profile }) => profile)
+  const myData = useSelector(({ cart }) => cart)
+  const cart = myData?.data || []
+  const getTotal = cart?.reduce((acc, { price }) => acc + price, 0)
   const userData = profile?.user?.info
   const router = useRouter()
+  const resources = [
+    {
+      name: 'Contact Us',
+      description: 'Get all of your questions answered in our forums or contact support.',
+      handleClick() {
+        router.push('/contact-us')
+      },
+    },
+    {
+      name: 'About Us',
+      description: 'Learn how to maximize our platform to get the most out of it.',
+      handleClick() {
+        router.push('/about-us')
+      },
+    },
+    {
+      name: 'FAQs',
+      description: 'See what meet-ups and other events we might be planning near you.',
+      handleClick() {
+        router.push('/faqs')
+      },
+    },
+    {
+      name: 'Terms of Use',
+      description: 'Understand how we take your privacy seriously.',
+      handleClick() {
+        router.push('/terms-of-use')
+      },
+    },
+  ]
   const userNavigation = useMemo(() => profile
     ?.token ? [
       {
@@ -123,7 +118,30 @@ const Navbar = () => {
         },
         icon: UserIcon,
       },
-    ] : [], [profile, router])
+      {
+        name: 'Logout',
+        handleClick() {
+          localStorage.clear()
+          router.reload()
+        },
+        icon: UserIcon,
+      },
+    ] : [
+      {
+        name: 'Sign In',
+        handleClick() {
+          router.push('/auth/sign-in')
+        },
+        icon: BookOpenIcon,
+      },
+      {
+        name: 'Sign Up',
+        handleClick() {
+          router.push('/auth/sign-up')
+        },
+        icon: UserIcon,
+      },
+    ], [profile, router])
 
   return (
     <Disclosure as="nav" className="bg-primary" aria-label="Global">
@@ -139,7 +157,7 @@ const Navbar = () => {
                     alt="Workflow"
                   />
                 </button>
-                <div className="hidden lg:ml-8 lg:flex lg:space-x-4">
+                <div className=" hidden lg:ml-8 lg:flex lg:space-x-4">
                   <Popover.Group as="nav" className="hidden md:flex space-x-10">
                     <Popover className="relative">
                       {({ open }) => (
@@ -169,7 +187,7 @@ const Navbar = () => {
                             leaveFrom="opacity-100 translate-y-0"
                             leaveTo="opacity-0 translate-y-1"
                           >
-                            <Popover.Panel className="absolute z-10 pl-2 mt-3 transform w-max max-w-md lg:max-w-2xl lg:ml-0 lg:left-1/2 lg:-translate-x-1/2">
+                            <Popover.Panel className="absolute z-50 pl-2 mt-3 transform w-max max-w-md lg:max-w-2xl lg:ml-0 lg:left-40 lg:-translate-x-1/2">
                               <div className="ml-8 rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
                                 <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8 lg:grid-cols-2">
                                   {categories.map((category, index) => (
@@ -197,7 +215,7 @@ const Navbar = () => {
                     </Popover>
                     <button
                       type="button"
-                      onClick={() => {}}
+                      onClick={() => router.push('/teach-with-us')}
                       className="rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-sky-200 hover:text-primary"
                     >
                       Teach With Us
@@ -234,18 +252,20 @@ const Navbar = () => {
                             leaveFrom="opacity-100 translate-y-0"
                             leaveTo="opacity-0 translate-y-1"
                           >
-                            <Popover.Panel className="absolute z-10 left-1/2 transform -translate-x-1/2 mt-3 px-2 w-screen max-w-xs sm:px-0">
+                            <Popover.Panel className="absolute z-50 left-1/2 transform -translate-x-1/2 mt-3 px-2 w-screen max-w-xs sm:px-0">
                               <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
                                 <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
                                   {resources.map((resource, index) => (
-                                    <a
+                                    <button
+                                      type="button"
                                       key={index}
-                                      href={resource.href}
+                                      onClick={resource.handleClick}
+                                      // href={resource.href}
                                       className="-m-3 p-3 block rounded-md hover:bg-gray-50"
                                     >
                                       <p className="text-base font-medium text-gray-900">{resource.name}</p>
                                       <p className="mt-1 text-sm text-gray-500">{resource.description}</p>
-                                    </a>
+                                    </button>
                                   ))}
                                 </div>
                               </div>
@@ -296,7 +316,7 @@ const Navbar = () => {
                       <Popover.Button
                         className="flex-shrink-0 p-1 text-white rounded-full hover:text-sky-200 focus:outline-none"
                       >
-                        <Badge color="secondary" badgeContent={cart?.courses?.length}>
+                        <Badge color="secondary" badgeContent={cart?.length}>
                           <ShoppingCartIcon
                             className="h-6 w-6"
                             aria-hidden="true"
@@ -313,46 +333,64 @@ const Navbar = () => {
                         leaveFrom="opacity-100 translate-y-0"
                         leaveTo="opacity-0 translate-y-1"
                       >
-                        <Popover.Panel className="absolute z-10 left-1/2 transform -translate-x-1/2 mt-3 px-2 w-screen max-w-xs sm:px-0">
+                        <Popover.Panel className="absolute z-10 left-[-200%] transform -translate-x-1/2 mt-3 px-2 w-screen max-w-xs sm:px-0">
                           <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
-                            <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
-                              {cart?.courses?.map((cart, index) => (
-                                <a
-                                  key={index}
-                                  href={cart.href}
-                                  className="-m-3 p-3 block rounded-md hover:bg-gray-50"
+                            {cart?.length ? (
+                              <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
+                                {cart?.map((x, index) => index < 3 && (
+                                  <button
+                                    type="button"
+                                    key={index}
+                                    onClick={() => router.push(`/courses/${x.id}`)}
+                                    className="-m-3 p-3 block rounded-md hover:bg-gray-50"
+                                  >
+
+                                    <div className="grid grid-cols-2 h-full w-full">
+                                      <div className="w-28">
+                                        <img className="" src={x.image_125_H} alt="" />
+                                      </div>
+                                      <div>
+                                        <div>
+                                          <p className="text-base font-medium text-gray-900 truncate">{x.title}</p>
+                                        </div>
+                                        <div>
+                                          <p className="mt-1 text-sm text-gray-500">{`$${x.price}`}</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </button>
+                                ))}
+                                {cart?.length > 3 && (
+                                  <p className="text-sm text-gray-500 -my-2">{`+${cart?.length - 3} more`}</p>
+                                )}
+                                <hr />
+                                <p className="text-base font-bold text-center text-gray-900">
+                                  Total price:
+                                  $
+                                  {getTotal}
+
+                                </p>
+                                <button
+                                  onClick={() => router.push('/cart')}
+                                  type="button"
+                                  className="whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-primary hover:bg-white hover:text-primary hover:border-primary"
                                 >
-
-                                  {/* <p className="text-base font-medium text-gray-900">{cart.name}</p>
-                            <p className="mt-1 text-sm text-gray-500">{cart.price}</p> */}
-                                  <div className="grid grid-cols-2 h-full w-full">
-                                    {/* <img className="w-24 h-16" src="/image.jpg" alt="ok" /> */}
-                                    <div className="w-28">
-                                      <img className="" src={cart.image} alt="" />
-                                    </div>
-
-                                    <div>
-                                      <div>
-                                        <p className="text-base font-medium text-gray-900">{cart.name}</p>
-                                      </div>
-                                      <div>
-                                        <p className="mt-1 text-sm text-gray-500">{cart.price}</p>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </a>
-                              ))}
-                              <hr />
-                              <p className="text-base font-bold text-center text-gray-900">
-                                {' '}
-                                Total price:
-                                {' '}
-                                {cart.total}
-                                {' '}
-                                $
-                              </p>
-                              <button type="button" className="whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-primary hover:bg-white hover:text-primary hover:border-primary">Go to cart</button>
-                            </div>
+                                  Go to cart
+                                </button>
+                              </div>
+                            ) : (
+                              <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
+                                <p>Cart is Empty</p>
+                                <hr />
+                                <button
+                                  onClick={() => router.push('/cart')}
+                                  type="button"
+                                  className="whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-primary hover:bg-white hover:text-primary hover:border-primary"
+                                >
+                                  Go to cart
+                                </button>
+                              </div>
+                            )}
 
                           </div>
                         </Popover.Panel>
@@ -429,32 +467,46 @@ const Navbar = () => {
                   </div>
                   <div className="ml-3">
                     <div className="text-base font-medium text-white">{userData?.fullName || user.name}</div>
-                    <div className="text-sm font-medium text-sky-200">{userData?.email || user.email}</div>
+                    <div className="text-xs text-clip max-w-xs font-medium text-sky-200">{userData?.email || user.email}</div>
                   </div>
                   <button
+                    onClick={() => router.push('/cart')}
                     type="button"
                     className="ml-auto flex-shrink-0 rounded-full p-1 text-white hover:text-sky-200 focus:outline-none"
                   >
                     <span className="sr-only">View Cart</span>
-                    <Badge color="primary" badgeContent={cart?.courses?.length}>
+                    <Badge
+                      color="primary"
+                      badgeContent={cart?.length}
+                    >
                       <ShoppingCartIcon className="h-6 w-6" aria-hidden="true" />
                     </Badge>
                   </button>
                 </div>
-                <div className="mt-3 px-2">
-                  {userNavigation.map((item) => (
+                {profile?.token && (
+                  <div className="mt-3 px-2">
                     <button
                       type="button"
-                      key={item.name}
+                      onClick={() => router.push('/my-courses')}
                       className="p-3 flex items-center rounded-lg text-base font-medium text-white hover:text-sky-200"
                     >
                       <div className="flex-shrink-0 flex items-center justify-center h-9 w-9 rounded-md bg-indigo-500 text-white">
-                        <item.icon className="h-5 w-5" aria-hidden="true" />
+                        <BookOpenIcon className="h-5 w-5" aria-hidden="true" />
                       </div>
-                      <div className="ml-4 text-sm font-medium text-white">{item.name}</div>
+                      <div className="ml-4 text-sm font-medium text-white">My Courses</div>
                     </button>
-                  ))}
-                </div>
+                    <button
+                      type="button"
+                      onClick={() => router.push('/my-account')}
+                      className="p-3 flex items-center rounded-lg text-base font-medium text-white hover:text-sky-200"
+                    >
+                      <div className="flex-shrink-0 flex items-center justify-center h-9 w-9 rounded-md bg-indigo-500 text-white">
+                        <UserIcon className="h-5 w-5" aria-hidden="true" />
+                      </div>
+                      <div className="ml-4 text-sm font-medium text-white">My Account</div>
+                    </button>
+                  </div>
+                )}
               </div>
               {profile?.token ? (
                 <div className="mt-6">
