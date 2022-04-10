@@ -1,19 +1,26 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
+import { useSelector } from 'react-redux'
 import { PageHeader, Component1 } from '../../../components'
-import { GuestGuard } from '../../../guards'
 import { MainLayout } from '../../../layouts'
 
-const course = {}
 const GetCoursePage = () => {
   const router = useRouter()
   const { courseId } = router.query
-
-  course.courseId ??= courseId
+  const { data: cart } = useSelector(({ cart }) => cart)
+  const [courseBelongsToCart, setCourseBelongsToCart] = useState(false)
+  useEffect(() => {
+    if (courseId) {
+      setCourseBelongsToCart(cart.filter(({ id }) => id === courseId).length > 0)
+    }
+  }, [cart, courseId])
   return (
     <>
       <PageHeader title="Learn+ | Get Course" />
-      <Component1 />
+      <Component1
+        courseBelongsToCart={courseBelongsToCart}
+        courseId={courseId}
+      />
     </>
 
   )

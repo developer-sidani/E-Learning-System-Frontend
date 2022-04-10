@@ -1,5 +1,5 @@
 export const course = {
-  _id: '621d2f5bbe6a14d70ae04c59',
+  id: '621d2f5bbe6a14d70ae04c59',
   title: 'Intro to web',
   image_125_H: 'https://img-c.udemycdn.com/course/125_H/1331946_ed41_4.jpg',
   image_240x135: 'https://img-c.udemycdn.com/course/240x135/1331946_ed41_4.jpg',
