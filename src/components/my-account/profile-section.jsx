@@ -18,12 +18,6 @@ import { UploadFile } from '../../hooks'
 const dateFormatInput = 'MM/DD/yyyy'
 const dateFormatOutput = 'yyyy-MM-DD'
 
-const submitValues = (callback, handler) => (values, { resetForm }) => {
-  values.birthday = moment(values.birthday).format(dateFormatOutput)
-  console.log(values)
-  // callback(values, resetForm, handler)
-}
-
 const countries = countryList.map(({ Name }) => Name)
 
 const ProfileSection = ({ user }) => {
@@ -82,7 +76,12 @@ const ProfileSection = ({ user }) => {
 
     <Formik
       initialValues={initialValues}
-      onSubmit={submitValues()}
+      onSubmit={(values, { resetForm }) => {
+        values.birthday = moment(values.birthday).format(dateFormatOutput)
+        values.photoUrl = photoUrl || 'https://firebasestorage.googleapis.com/v0/b/learn-plus-fyp.appspot.com/o/images%2Fuser.png?alt=media&token=11e4daf6-bffa-4e1d-8359-260f96c87514'
+        console.log({ values })
+        // callback(values, resetForm, handler)
+      }}
       enableReinitialize
       // onSubmit={submitValues({
       //   init() {
