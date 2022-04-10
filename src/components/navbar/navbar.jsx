@@ -352,7 +352,7 @@ const Navbar = () => {
                                           <p className="text-base font-medium text-gray-900">{x.name}</p>
                                         </div>
                                         <div>
-                                          <p className="mt-1 text-sm text-gray-500">{x.price}</p>
+                                          <p className="mt-1 text-sm text-gray-500">{`$${x.price}`}</p>
                                         </div>
                                       </div>
                                     </div>
@@ -363,12 +363,10 @@ const Navbar = () => {
                               )}
                               <hr />
                               <p className="text-base font-bold text-center text-gray-900">
-                                {' '}
                                 Total price:
-                                {' '}
-                                {getTotal}
-                                {' '}
                                 $
+                                {getTotal}
+
                               </p>
                               <button type="button" className="whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-primary hover:bg-white hover:text-primary hover:border-primary">Go to cart</button>
                             </div>
