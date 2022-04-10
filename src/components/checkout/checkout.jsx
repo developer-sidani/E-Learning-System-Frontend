@@ -10,7 +10,7 @@ const products = [
     price: '$32.00',
     color: 'Black',
     size: 'Large',
-    imageSrc: 'https://tailwindui.com/img/ecommerce-images/checkout-page-02-product-01.jpg',
+    imageSrc: 'https://img-c.udemycdn.com/course/125_H/1331946_ed41_4.jpg',
     imageAlt: "Front of men's Basic Tee in black.",
   },
   // More products...
