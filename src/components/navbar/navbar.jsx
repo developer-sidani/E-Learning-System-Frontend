@@ -61,34 +61,6 @@ const categories = [
   },
 ]
 
-const myCart = {
-  userID: '132',
-  total: 150,
-  courses: [
-    {
-      name: 'Help Center',
-      price: '50$',
-      image: 'https://img-c.udemycdn.com/course/125_H/473160_d929_3.jpg',
-      description: 'Get all of your questions answered in our forums or contact support.',
-      href: '#',
-    },
-    {
-      name: 'Help Center2',
-      price: '50$',
-      image: 'https://img-c.udemycdn.com/course/125_H/473160_d929_3.jpg',
-      description: 'Get all of your questions answered in our forums or contact support.',
-      href: '#',
-    },
-    {
-      name: 'Help Center3',
-      price: '50$',
-      image: 'https://img-c.udemycdn.com/course/125_H/473160_d929_3.jpg',
-      description: 'Get all of your questions answered in our forums or contact support.',
-      href: '#',
-    },
-  ],
-}
-
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
@@ -96,6 +68,7 @@ function classNames(...classes) {
 const Navbar = () => {
   const profile = useSelector(({ profile }) => profile)
   const cart = useSelector(({ cart }) => cart)
+  const getTotal = cart.reduce((acc, { price }) => acc + price, 0)
   const userData = profile?.user?.info
   const router = useRouter()
   const resources = [
@@ -362,7 +335,7 @@ const Navbar = () => {
                         <Popover.Panel className="absolute z-10 left-[-200%] transform -translate-x-1/2 mt-3 px-2 w-screen max-w-xs sm:px-0">
                           <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
                             <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
-                              {myCart?.courses?.map((x, index) => index < 3 && (
+                              {cart?.map((x, index) => index < 3 && (
                                   <a
                                     key={index}
                                     href={x.href}
@@ -385,18 +358,20 @@ const Navbar = () => {
                                     </div>
                                   </a>
                               ))}
+                              {cart.length > 3 && (
+                                <p className="text-sm text-gray-500 -my-2">{`+${cart.length - 3} more`}</p>
+                              )}
                               <hr />
                               <p className="text-base font-bold text-center text-gray-900">
                                 {' '}
                                 Total price:
                                 {' '}
-                                {myCart.total}
+                                {getTotal}
                                 {' '}
                                 $
                               </p>
                               <button type="button" className="whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-primary hover:bg-white hover:text-primary hover:border-primary">Go to cart</button>
                             </div>
-
                           </div>
                         </Popover.Panel>
                       </Transition>
@@ -479,7 +454,7 @@ const Navbar = () => {
                     className="ml-auto flex-shrink-0 rounded-full p-1 text-white hover:text-sky-200 focus:outline-none"
                   >
                     <span className="sr-only">View Cart</span>
-                    <Badge color="primary" badgeContent={myCart?.courses?.length}>
+                    <Badge color="primary" badgeContent={cart.length}>
                       <ShoppingCartIcon className="h-6 w-6" aria-hidden="true" />
                     </Badge>
                   </button>

@@ -6,7 +6,7 @@ export const cartsSlice = createSlice({
     {
       id: '123',
       name: 'Help Center',
-      price: '50$',
+      price: 50,
       image: 'https://img-c.udemycdn.com/course/125_H/473160_d929_3.jpg',
       description: 'Get all of your questions answered in our forums or contact support.',
       href: '#',
@@ -14,7 +14,7 @@ export const cartsSlice = createSlice({
     {
       id: '456',
       name: 'Help Center2',
-      price: '50$',
+      price: 50,
       image: 'https://img-c.udemycdn.com/course/125_H/473160_d929_3.jpg',
       description: 'Get all of your questions answered in our forums or contact support.',
       href: '#',
@@ -22,7 +22,15 @@ export const cartsSlice = createSlice({
     {
       id: '789',
       name: 'Help Center3',
-      price: '50$',
+      price: 50,
+      image: 'https://img-c.udemycdn.com/course/125_H/473160_d929_3.jpg',
+      description: 'Get all of your questions answered in our forums or contact support.',
+      href: '#',
+    },
+    {
+      id: '789',
+      name: 'Help Center3',
+      price: 50,
       image: 'https://img-c.udemycdn.com/course/125_H/473160_d929_3.jpg',
       description: 'Get all of your questions answered in our forums or contact support.',
       href: '#',
