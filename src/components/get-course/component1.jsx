@@ -7,14 +7,15 @@ import { Sections } from './sections'
 // eslint-disable-next-line import/no-cycle
 import { InstructorComponent } from '.'
 import {
-  course, instructor, product, reviews, courseOutcomes,
+  instructor, product, reviews, courseOutcomes,
 } from './data'
+import { CoursesContainer } from '../home'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-const Component1 = () => (
+const Component1 = ({ courseBelongsToCart }) => (
         <div className="bg-white">
 
           <main className="mx-auto pt-14 pb-24 px-4 sm:pt-16 sm:pb-32 sm:px-6 lg:max-w-7xl lg:px-8">
@@ -63,19 +64,16 @@ const Component1 = () => (
 
                 <p className="text-gray-500 mt-6">{product.description}</p>
 
-                <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2">
+                <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2 mb-2">
                   <button
                     type="button"
                     className="w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500"
                   >
-                    Add to Cart
+                    {courseBelongsToCart ? 'View Cart' : 'Add to Cart'}
                   </button>
-
                 </div>
-                            {/* instructor */}
-
-                  <InstructorComponent instructor={instructor} />
-
+                {/* instructor */}
+                <InstructorComponent instructor={instructor} />
                 <div className="border-t border-gray-200 mt-10 pt-10">
                   <h3 className="text-sm font-medium text-gray-900">Course Requirements</h3>
                   <div className="mt-4 prose prose-sm text-gray-500">
@@ -91,7 +89,6 @@ const Component1 = () => (
                   <h3 className="text-sm font-medium text-gray-900">Course Outcomes</h3>
                   <p className="mt-4 text-sm text-gray-500">
                     {courseOutcomes.summary}
-{' '}
                     <a href={courseOutcomes.href} className="font-medium text-indigo-600 hover:text-indigo-500">
                       Read full course outcomes
                     </a>
@@ -212,6 +209,7 @@ const Component1 = () => (
             </div>
 
             {/* TODO add courses slider  */}
+            <CoursesContainer courses={[]} loading />
 
           </main>
 
