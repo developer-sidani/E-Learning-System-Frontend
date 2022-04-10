@@ -67,8 +67,8 @@ function classNames(...classes) {
 
 const Navbar = () => {
   const profile = useSelector(({ profile }) => profile)
-  const cart = useSelector(({ cart }) => cart)
-  const getTotal = cart.reduce((acc, { price }) => acc + price, 0)
+  const { data: cart } = useSelector(({ cart }) => cart)
+  const getTotal = cart?.reduce((acc, { price }) => acc + price, 0)
   const userData = profile?.user?.info
   const router = useRouter()
   const resources = [
@@ -315,7 +315,7 @@ const Navbar = () => {
                       <Popover.Button
                         className="flex-shrink-0 p-1 text-white rounded-full hover:text-sky-200 focus:outline-none"
                       >
-                        <Badge color="secondary" badgeContent={cart.length}>
+                        <Badge color="secondary" badgeContent={cart?.length}>
                           <ShoppingCartIcon
                             className="h-6 w-6"
                             aria-hidden="true"
@@ -334,7 +334,7 @@ const Navbar = () => {
                       >
                         <Popover.Panel className="absolute z-10 left-[-200%] transform -translate-x-1/2 mt-3 px-2 w-screen max-w-xs sm:px-0">
                           <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
-                            {cart.length ? (
+                            {cart?.length ? (
                               <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
                                 {cart?.map((x, index) => index < 3 && (
                                   <a
@@ -359,8 +359,8 @@ const Navbar = () => {
                                     </div>
                                   </a>
                                 ))}
-                                {cart.length > 3 && (
-                                  <p className="text-sm text-gray-500 -my-2">{`+${cart.length - 3} more`}</p>
+                                {cart?.length > 3 && (
+                                  <p className="text-sm text-gray-500 -my-2">{`+${cart?.length - 3} more`}</p>
                                 )}
                                 <hr />
                                 <p className="text-base font-bold text-center text-gray-900">
@@ -466,7 +466,7 @@ const Navbar = () => {
                     className="ml-auto flex-shrink-0 rounded-full p-1 text-white hover:text-sky-200 focus:outline-none"
                   >
                     <span className="sr-only">View Cart</span>
-                    <Badge color="primary" badgeContent={cart.length}>
+                    <Badge color="primary" badgeContent={cart?.length}>
                       <ShoppingCartIcon className="h-6 w-6" aria-hidden="true" />
                     </Badge>
                   </button>

@@ -9,7 +9,7 @@ const GetCoursePage = () => {
   const router = useRouter()
   const { courseId } = router.query
   course.courseId ??= courseId
-  const cart = useSelector(({ cart }) => cart)
+  const { data: cart } = useSelector(({ cart }) => cart)
   const [courseBelongsToCart, setCourseBelongsToCart] = useState(false)
   useEffect(() => {
     if (courseId) {
@@ -19,7 +19,10 @@ const GetCoursePage = () => {
   return (
     <>
       <PageHeader title="Learn+ | Get Course" />
-      <Component1 courseBelongsToCart={courseBelongsToCart} />
+      <Component1
+        courseBelongsToCart={courseBelongsToCart}
+        courseId={courseId}
+      />
     </>
 
   )
