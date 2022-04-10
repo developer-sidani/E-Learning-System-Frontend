@@ -334,8 +334,9 @@ const Navbar = () => {
                       >
                         <Popover.Panel className="absolute z-10 left-[-200%] transform -translate-x-1/2 mt-3 px-2 w-screen max-w-xs sm:px-0">
                           <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
-                            <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
-                              {cart?.map((x, index) => index < 3 && (
+                            {cart.length ? (
+                              <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
+                                {cart?.map((x, index) => index < 3 && (
                                   <a
                                     key={index}
                                     href={x.href}
@@ -357,19 +358,32 @@ const Navbar = () => {
                                       </div>
                                     </div>
                                   </a>
-                              ))}
-                              {cart.length > 3 && (
-                                <p className="text-sm text-gray-500 -my-2">{`+${cart.length - 3} more`}</p>
-                              )}
-                              <hr />
-                              <p className="text-base font-bold text-center text-gray-900">
-                                Total price:
-                                $
-                                {getTotal}
+                                ))}
+                                {cart.length > 3 && (
+                                  <p className="text-sm text-gray-500 -my-2">{`+${cart.length - 3} more`}</p>
+                                )}
+                                <hr />
+                                <p className="text-base font-bold text-center text-gray-900">
+                                  Total price:
+                                  $
+                                  {getTotal}
 
-                              </p>
-                              <button type="button" className="whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-primary hover:bg-white hover:text-primary hover:border-primary">Go to cart</button>
-                            </div>
+                                </p>
+                                <button type="button" className="whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-primary hover:bg-white hover:text-primary hover:border-primary">Go to cart</button>
+                              </div>
+                            ) : (
+                              <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
+                                <p>Cart is Empty</p>
+                                <hr />
+                                <button
+                                  type="button"
+                                  className="whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-primary hover:bg-white hover:text-primary hover:border-primary"
+                                >
+                                  Go to cart
+                                </button>
+                              </div>
+                            )}
+
                           </div>
                         </Popover.Panel>
                       </Transition>
