@@ -7,11 +7,11 @@ const AuthRouter = ({ children }) => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    if (profile.token && !profile.doneNeededRefresh) {
+    if (profile?.token && !profile?.doneNeededRefresh) {
       dispatch(setProfile({ token: null, doneNeededRefresh: true }))
     }
 
-    if (!profile.doneNeededRefresh) {
+    if (!profile?.doneNeededRefresh) {
       dispatch(setProfile({ doneNeededRefresh: true }))
     }
   }, [profile, dispatch])

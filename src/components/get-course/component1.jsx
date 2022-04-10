@@ -71,7 +71,7 @@ const Component1 = ({ courseBelongsToCart, courseId }) => {
             <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2 mb-2">
               {courseBelongsToCart ? (
                 <button
-                  onClick={() => router.push('/my-cart')}
+                  onClick={() => router.push('/cart')}
                   type="button"
                   className="w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500"
                 >
@@ -81,11 +81,22 @@ const Component1 = ({ courseBelongsToCart, courseId }) => {
                 <button
                   onClick={() => dispatch(addCart({
                     id: courseId,
-                    name: 'Help Center',
-                    price: 50,
-                    image: 'https://img-c.udemycdn.com/course/125_H/473160_d929_3.jpg',
-                    description: 'Get all of your questions answered in our forums or contact support.',
-                    href: '#',
+                    title: 'Become a senior web developer',
+                    image_125_H: 'https://img-c.udemycdn.com/course/125_H/1331946_ed41_4.jpg',
+                    image_240x135: 'https://img-c.udemycdn.com/course/240x135/1331946_ed41_4.jpg',
+                    image_480x270: 'https://img-c.udemycdn.com/course/480x270/1331946_ed41_4.jpg',
+                    headline: 'Beginners, Zero to Hero. AWS EC2 web server, NodeJS Server, AWS RDS database server, S3, SES & CloudWatch.',
+                    instructor: {
+                      id: '123',
+                      name: 'test test',
+                    },
+                    price: 49.99,
+                    currency: '$',
+                    rating: '4.0',
+                    updatedAt: new Date(),
+                    bestSeller: false,
+                    category: 'Web Development',
+                    flag: 'Bestseller',
                   }))}
                   type="button"
                   className="w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500"

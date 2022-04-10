@@ -11,15 +11,16 @@ export const cartsSlice = createSlice({
       state.data.push(action.payload)
     },
     update: (state, action) => console.log(action.payload.data) || [
-      ...state.data.filter((cart) => cart._id !== action.payload.data._id),
+      ...state.data.filter((cart) => cart.id !== action.payload.data.id),
       {
-        ...state.data.find((cart) => cart._id === action.payload.data._id),
+        ...state.data.find((cart) => cart.id === action.payload.data.id),
         ...action.payload.data,
       },
     ],
-    deleteCart: (state, action) => [
-      ...state.data.filter((cart) => cart._id !== action.payload.id),
-    ],
+    deleteCart: (state, action) => {
+      console.log(action.payload)
+      return ({ data: state.data.filter((cart) => cart.id !== action.payload) })
+    },
     deleteAll: (state, action) => {
       state.data = []
     },
