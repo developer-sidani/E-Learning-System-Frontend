@@ -14,6 +14,7 @@ import hardSet from 'redux-persist/lib/stateReconciler/hardSet'
 
 import {
   profileReducer,
+  cartReducer,
 } from '../slices'
 
 const persistConfig = {
@@ -30,6 +31,7 @@ export default () => {
   const store = configureStore({
     reducer: {
       profile: persistedProfileReducer,
+      cart: cartReducer,
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({
       serializableCheck: {
