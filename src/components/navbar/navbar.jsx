@@ -67,7 +67,8 @@ function classNames(...classes) {
 
 const Navbar = () => {
   const profile = useSelector(({ profile }) => profile)
-  const { data: cart } = useSelector(({ cart }) => cart)
+  const myData = useSelector(({ cart }) => cart)
+  const cart = myData?.data || []
   const getTotal = cart?.reduce((acc, { price }) => acc + price, 0)
   const userData = profile?.user?.info
   const router = useRouter()
