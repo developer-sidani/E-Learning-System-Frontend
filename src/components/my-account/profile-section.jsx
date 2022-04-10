@@ -1,21 +1,26 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Formik, Form } from 'formik'
 
 import {
+  Box,
   FormControl,
   FormHelperText,
-  Grid, InputLabel, MenuItem, Select, TextField,
+  Grid, InputLabel, LinearProgress, MenuItem, Select, TextField, Typography,
 } from '@mui/material'
 import PhoneInput from 'react-phone-input-2'
 import { useSelector } from 'react-redux'
+import moment from 'moment'
 import { countryList } from '../../utils'
 import { DatePickerComponent } from '../date-picker'
 import { ProfileSchema } from './validation-schema'
+import { UploadFile } from '../../hooks'
+
+const dateFormatInput = 'MM/DD/yyyy'
+const dateFormatOutput = 'yyyy-MM-DD'
 
 const submitValues = (callback, handler) => (values, { resetForm }) => {
+  values.birthday = moment(values.birthday).format(dateFormatOutput)
   console.log(values)
-  console.log('test')
-  // callback(resetForm)
   // callback(values, resetForm, handler)
 }
 
@@ -24,23 +29,44 @@ const countries = countryList.map(({ Name }) => Name)
 const ProfileSection = ({ user }) => {
   const [loading, setLoading] = useState(false)
   const profile = useSelector(({ profile }) => profile)
-
   const ref = useRef(null)
+  const [photoUrl, setPhotoUrl] = useState('https://firebasestorage.googleapis.com/v0/b/learn-plus-fyp.appspot.com/o/images%2Fuser.png?alt=media&token=11e4daf6-bffa-4e1d-8359-260f96c87514')
+
+  const [file, handleUpload] = UploadFile({
+    location: 'images/users/students',
+    fileTypes: ['image/png', 'image/jpeg', 'image/jpg'],
+    fileSize: 2,
+    errorMessages: {
+      fileType: 'Please select an image file (png or jpg)',
+      fileSize: 'File Should Not Exceed 2MB',
+    },
+  })
+
   const initialValues = {
     username: profile?.user?.info?.username || '',
     email: profile?.user?.info?.email || '',
     address: profile?.user?.info?.address || '',
     firstname: profile?.user?.info?.fullName.split(' ')[0] || '',
+    // eslint-disable-next-line no-unsafe-optional-chaining
     lastname: profile?.user?.info?.fullName.substring(profile?.user?.info?.fullName.lastIndexOf(' ') + 1) || '',
     country: profile?.user?.info?.country || '',
+    // eslint-disable-next-line no-unsafe-optional-chaining
     gender: profile?.user?.info?.gender.charAt(0).toUpperCase() + profile?.user?.info?.gender.slice(1) || '',
     phone: profile?.user?.info?.phone || '',
-    birthday: '09/08/2000',
-    // photoURL: profile?.user?.info?.photoURL || '',
+    birthday: moment(profile?.user?.info?.birthday).format(dateFormatInput) || '',
+    // photoUrl: profile?.user?.info?.photoUrl || 'https://firebasestorage.googleapis.com/v0/b/learn-plus-fyp.appspot.com/o/images%2Fuser.png?alt=media&token=11e4daf6-bffa-4e1d-8359-260f96c87514',
   }
-
+  console.log('log:')
+  console.log(initialValues.photoUrl)
   const [serverError, setServerError] = useState('')
   const [open, setOpen] = useState(false)
+  useEffect(() => {
+    if (file.url) {
+      setPhotoUrl(file.url)
+    } else if (profile?.user?.info?.photoUrl) {
+      setPhotoUrl(profile?.user?.info?.photoUrl)
+    }
+  }, [file.url, profile?.user?.info?.photoUrl])
 
   const scrollToError = () => {
     if (ref && ref.current /* + other conditions */) {
@@ -149,7 +175,7 @@ const ProfileSection = ({ user }) => {
                 className="flex-shrink-0 inline-block rounded-full overflow-hidden h-12 w-12"
                 aria-hidden="true"
               >
-                <img className="rounded-full h-full w-full" src={user.imageUrl} alt="" />
+                <img className="rounded-full h-full w-full" src={photoUrl} alt="" />
               </div>
               <div className="ml-5 rounded-md shadow-sm">
                 <div className="group relative border border-gray-300 rounded-md py-2 px-3 flex items-center justify-center hover:bg-gray-50 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-sky-500">
@@ -160,19 +186,20 @@ const ProfileSection = ({ user }) => {
                     <span>Change</span>
                     <span className="sr-only"> user photo</span>
                   </label>
-                  {/* <input */}
-                  {/*  id="mobile-user-photo" */}
-                  {/*  name="user-photo" */}
-                  {/*  type="file" */}
-                  {/*  className="absolute w-full h-full opacity-0 cursor-pointer border-gray-300 rounded-md" */}
-                  {/* /> */}
+                   <input
+                     onChange={handleUpload}
+                     id="mobile-user-photo"
+                     name="user-photo"
+                     type="file"
+                     className="absolute w-full h-full opacity-0 cursor-pointer border-gray-300 rounded-md"
+                   />
                 </div>
               </div>
             </div>
           </div>
-
+        <div className="flex flex-col flex-wrap">
           <div className="hidden relative rounded-full overflow-hidden lg:block">
-            <img className="relative rounded-full w-40 h-40" src={user.imageUrl} alt="" />
+            <img className="relative rounded-full w-40 h-40" src={photoUrl} alt="" />
             <label
               htmlFor="desktop-user-photo"
               className="absolute inset-0 w-full h-full bg-black bg-opacity-75 flex items-center justify-center text-sm font-medium text-white opacity-0 hover:opacity-100 focus-within:opacity-100"
@@ -180,14 +207,37 @@ const ProfileSection = ({ user }) => {
               <span>Change</span>
               <span className="sr-only"> user photo</span>
               <input
+                onChange={handleUpload}
                 type="file"
                 id="desktop-user-photo"
                 name="user-photo"
                 className="absolute inset-0 w-full h-full opacity-0 cursor-pointer border-gray-300 rounded-md"
               />
             </label>
+
           </div>
+          {file.error && (
+            <div className="mt-2 text-pink-600 text-sm">
+              {file.error}
+            </div>
+          )}
+          {file.active && (
+            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+              <Box sx={{ width: '50%', mr: 1 }}>
+                <LinearProgress variant="determinate" value={file.progress} />
+              </Box>
+              <Box sx={{ minWidth: 35 }}>
+                <Typography variant="body2" color="text.secondary">
+                  {`${Math.round(
+                    file.progress,
+                  )}%`}
+                </Typography>
+              </Box>
+            </Box>
+          )}
         </div>
+        </div>
+
       </div>
 
       <div className="mt-6 grid grid-cols-12 gap-6">
