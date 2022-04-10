@@ -8,7 +8,7 @@ import { MainLayout } from '../layouts'
 
 const courses = [
   {
-    _id: '621d2f5bbe6a14d70ae04c59',
+    id: '621d2f5bbe6a14d70ae04c59',
     title: 'Intro to web',
     image_125_H: 'https://img-c.udemycdn.com/course/125_H/1331946_ed41_4.jpg',
     image_240x135: 'https://img-c.udemycdn.com/course/240x135/1331946_ed41_4.jpg',
@@ -24,7 +24,7 @@ const courses = [
     flag: 'Bestseller',
   },
   {
-    _id: '621d2f5bbe6a14d70ae04c549',
+    id: '621d2f5bbe6a14d70ae04c549',
     title: 'Advanced web',
     image_125_H: 'https://img-c.udemycdn.com/course/125_H/1331946_ed41_4.jpg',
     image_240x135: 'https://img-c.udemycdn.com/course/240x135/1331946_ed41_4.jpg',
@@ -40,7 +40,7 @@ const courses = [
     flag: 'Bestseller',
   },
   {
-    _id: '621d2f5bbe6a14d70ae014c59',
+    id: '621d2f5bbe6a14d70ae014c59',
     title: 'Become a senior web developer',
     image_125_H: 'https://img-c.udemycdn.com/course/125_H/1331946_ed41_4.jpg',
     image_240x135: 'https://img-c.udemycdn.com/course/240x135/1331946_ed41_4.jpg',
@@ -56,7 +56,7 @@ const courses = [
     flag: 'Bestseller',
   },
   {
-    _id: '621d2f5bbe6a14d70ae014c59',
+    id: '621d2f5bbe6a14d70ae014c59',
     title: 'Become a senior web developer',
     image_125_H: 'https://img-c.udemycdn.com/course/125_H/1331946_ed41_4.jpg',
     image_240x135: 'https://img-c.udemycdn.com/course/240x135/1331946_ed41_4.jpg',
@@ -72,7 +72,7 @@ const courses = [
     flag: 'Bestseller',
   },
   {
-    _id: '621d2f5bbe6a14d70ae014c59',
+    id: '621d2f5bbe6a14d70ae014c59',
     title: 'Become a senior web developer',
     image_125_H: 'https://img-c.udemycdn.com/course/125_H/1331946_ed41_4.jpg',
     image_240x135: 'https://img-c.udemycdn.com/course/240x135/1331946_ed41_4.jpg',
@@ -88,7 +88,7 @@ const courses = [
     flag: 'Bestseller',
   },
   {
-    _id: '621d2f5bbe6a14d70ae014c59',
+    id: '621d2f5bbe6a14d70ae014c59',
     title: 'Become a senior web developer',
     image_125_H: 'https://img-c.udemycdn.com/course/125_H/1331946_ed41_4.jpg',
     image_240x135: 'https://img-c.udemycdn.com/course/240x135/1331946_ed41_4.jpg',
@@ -104,7 +104,7 @@ const courses = [
     flag: '',
   },
   {
-    _id: '621d2f5bbe6a14d70ae014c59',
+    id: '621d2f5bbe6a14d70ae014c59',
     title: 'Become a senior web developer',
     image_125_H: 'https://img-c.udemycdn.com/course/125_H/1331946_ed41_4.jpg',
     image_240x135: 'https://img-c.udemycdn.com/course/240x135/1331946_ed41_4.jpg',
@@ -120,7 +120,7 @@ const courses = [
     flag: 'Bestseller',
   },
   {
-    _id: '621d2f5bbe6a14d70ae014c59',
+    id: '621d2f5bbe6a14d70ae014c59',
     title: 'Become a senior web developer',
     image_125_H: 'https://img-c.udemycdn.com/course/125_H/1331946_ed41_4.jpg',
     image_240x135: 'https://img-c.udemycdn.com/course/240x135/1331946_ed41_4.jpg',
@@ -136,7 +136,7 @@ const courses = [
     flag: 'Bestseller',
   },
   {
-    _id: '621d2f5bbe6a14d70ae014c59',
+    id: '621d2f5bbe6a14d70ae014c59',
     title: 'Become a senior web developer',
     image_125_H: 'https://img-c.udemycdn.com/course/125_H/1331946_ed41_4.jpg',
     image_240x135: 'https://img-c.udemycdn.com/course/240x135/1331946_ed41_4.jpg',
@@ -152,7 +152,7 @@ const courses = [
     flag: 'Bestseller',
   },
   {
-    _id: '621d2f5bbe6a14d70ae014c59',
+    id: '621d2f5bbe6a14d70ae014c59',
     title: 'Become a senior web developer',
     image_125_H: 'https://img-c.udemycdn.com/course/125_H/1331946_ed41_4.jpg',
     image_240x135: 'https://img-c.udemycdn.com/course/240x135/1331946_ed41_4.jpg',
@@ -168,7 +168,7 @@ const courses = [
     flag: 'Bestseller',
   },
   {
-    _id: '621d2f5bbe6a14d70ae014c59',
+    id: '621d2f5bbe6a14d70ae014c59',
     title: 'Become a senior web developer',
     image_125_H: 'https://img-c.udemycdn.com/course/125_H/1331946_ed41_4.jpg',
     image_240x135: 'https://img-c.udemycdn.com/course/240x135/1331946_ed41_4.jpg',
