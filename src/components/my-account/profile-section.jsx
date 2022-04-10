@@ -217,13 +217,16 @@ const ProfileSection = ({ user }) => {
 
           </div>
           {file.error && (
-            <div className="mt-2 text-pink-600 text-sm">
+            <div className="sm:w-40 mt-2 text-pink-600 text-clip text-sm text-center">
               {file.error}
             </div>
           )}
           {file.active && (
-            <Box sx={{ display: 'flex', alignItems: 'center' }}>
-              <Box sx={{ width: '50%', mr: 1 }}>
+            <Box sx={{
+              display: 'flex', mt: 1, alignItems: 'center', justifyContent: 'center',
+            }}
+            >
+              <Box sx={{ width: '80%', mr: 1 }}>
                 <LinearProgress variant="determinate" value={file.progress} />
               </Box>
               <Box sx={{ minWidth: 35 }}>
