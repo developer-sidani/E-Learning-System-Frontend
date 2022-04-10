@@ -337,14 +337,14 @@ const Navbar = () => {
                             {cart?.length ? (
                               <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
                                 {cart?.map((x, index) => index < 3 && (
-                                  <a
+                                  <button
+                                    type="button"
                                     key={index}
-                                    href={x.href}
+                                    onClick={() => router.push(`/courses/${x.id}`)}
                                     className="-m-3 p-3 block rounded-md hover:bg-gray-50"
                                   >
 
                                     <div className="grid grid-cols-2 h-full w-full">
-                                      {/* TODO if loading  animate-pulse opacity-0 bg-gray-800 */}
                                       <div className="w-28">
                                         <img className="" src={x.image} alt="" />
                                       </div>
@@ -357,7 +357,7 @@ const Navbar = () => {
                                         </div>
                                       </div>
                                     </div>
-                                  </a>
+                                  </button>
                                 ))}
                                 {cart?.length > 3 && (
                                   <p className="text-sm text-gray-500 -my-2">{`+${cart?.length - 3} more`}</p>

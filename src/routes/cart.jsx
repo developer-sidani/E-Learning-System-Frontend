@@ -6,7 +6,7 @@ const CartProvider = ({ children }) => {
   const cart = useSelector(state => state.cart)
   const dispatch = useDispatch()
   useEffect(() => {
-    if (!Array.isArray(cart.data)) {
+    if (!cart || !Array.isArray(cart.data)) {
       dispatch(setCart({
         data: [],
       }))
