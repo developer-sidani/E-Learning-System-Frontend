@@ -1,10 +1,77 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
+import { Formik, Form } from 'formik'
+import { useSelector } from 'react-redux'
 import { TextField } from '@mui/material'
+import { BillingSchema } from './validation-schema'
+
+const submitValues = (callback, handler) => (values, { resetForm }) => {
+  console.log(values)
+  // callback(resetForm)
+
+  // callback(values, resetForm, handler)
+}
 
 const BillingSection = () => {
   const [loading, setLoading] = useState(false)
+  const profile = useSelector(({ profile }) => profile)
+
+  const ref = useRef(null)
+  const initialValues = {
+    email: profile?.user?.info?.email || '',
+    address: '',
+    name_on_card: '',
+    card_number: '',
+    expiration: '',
+    cvc: '',
+
+  }
+
+  const [serverError, setServerError] = useState('')
+  const [open, setOpen] = useState(false)
+
+  const scrollToError = () => {
+    if (ref && ref.current /* + other conditions */) {
+      ref.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+        inline: 'start',
+      })
+    }
+  }
   return (
-    <form className="divide-y divide-gray-200 lg:col-span-9" action="#" method="POST">
+    <Formik
+      initialValues={initialValues}
+      onSubmit={submitValues()}
+      enableReinitialize
+      // onSubmit={submitValues({
+      //   init() {
+      //     setServerError('')
+      //     setLoading(true)
+      //   },
+      //   error(message) {
+      //     setServerError(message)
+      //     scrollToError()
+      //   },
+      //   stopLoading() {
+      //     setLoading(false)
+      //   },
+      //   success: async (callback) => {
+      //     setServerError('')
+      //    setLoading(false) */
+      //    setOpen(true) */
+      //     await wait(500)
+      //     callback()
+      //   },
+      // })}
+      validationSchema={BillingSchema}
+    >
+
+      {({
+        setFieldValue, dirty,
+        errors, touched, handleChange, values, handleBlur,
+      }) => (
+
+        <Form className="divide-y divide-gray-200 lg:col-span-9">
       {/* Profile section */}
       <div className="py-6 px-4 sm:p-6 lg:pb-8">
         <div>
@@ -20,16 +87,17 @@ const BillingSection = () => {
               Email Address
             </label>
             <TextField
-              // error={Boolean(touched.password && errors.password)}
+              error={Boolean(touched.email && errors.email)}
               fullWidth
-              // helperText={touched.password && errors.password}
+              helperText={touched.password && errors.password}
               type="text"
-              name="password"
-              // onChange={handleChange}
+              name="email"
+              onChange={handleChange}
               required
-              // value={values.password}
-              // onBlur={handleBlur}
+              value={values.email}
+              onBlur={handleBlur}
             />
+
           </div>
 
           <div className="col-span-12 sm:col-span-6">
@@ -37,17 +105,18 @@ const BillingSection = () => {
               Address
             </label>
             <TextField
-              // onBlur={handleBlur}
-              // error={Boolean(touched.confirm_password && errors.confirm_password)}
+              onBlur={handleBlur}
+              error={Boolean(touched.address && errors.address)}
               fullWidth
-              // helperText={touched.confirm_password && errors.confirm_password}
+              helperText={touched.address && errors.address}
               type="text"
-              name="confirm_password"
-              // onChange={handleChange}
+              name="address"
+              onChange={handleChange}
               required
-              // value={values.confirm_password}
+              value={values.address}
             />
           </div>
+
         </div>
 
         {/* Second Row */}
@@ -57,16 +126,17 @@ const BillingSection = () => {
               Name on Card
             </label>
             <TextField
-              // error={Boolean(touched.password && errors.password)}
+              error={Boolean(touched.name_on_card && errors.name_on_card)}
               fullWidth
-              // helperText={touched.password && errors.password}
+              helperText={touched.name_on_card && errors.name_on_card}
               type="text"
-              name="password"
-              // onChange={handleChange}
+              name="name_on_card"
+              onChange={handleChange}
               required
-              // value={values.password}
-              // onBlur={handleBlur}
+              value={values.name_on_card}
+              onBlur={handleBlur}
             />
+
           </div>
 
           <div className="col-span-12 sm:col-span-6">
@@ -74,15 +144,15 @@ const BillingSection = () => {
               Card Number
             </label>
             <TextField
-              // onBlur={handleBlur}
-              // error={Boolean(touched.confirm_password && errors.confirm_password)}
+              onBlur={handleBlur}
+              error={Boolean(touched.card_number && errors.card_number)}
               fullWidth
-              // helperText={touched.confirm_password && errors.confirm_password}
-              type="text"
-              name="confirm_password"
-              // onChange={handleChange}
+              helperText={touched.card_number && errors.card_number}
+              type="number"
+              name="card_number"
+              onChange={handleChange}
               required
-              // value={values.confirm_password}
+              value={values.card_number}
             />
           </div>
 
@@ -95,16 +165,16 @@ const BillingSection = () => {
               Expiration Date
             </label>
             <TextField
-              // error={Boolean(touched.password && errors.password)}
+              error={Boolean(touched.expiration && errors.expiration)}
               fullWidth
-              // helperText={touched.password && errors.password}
+              helperText={touched.expiration && errors.expiration}
               placeholder="MM/YY"
               type="text"
-              name="password"
-              // onChange={handleChange}
+              name="expiration"
+              onChange={handleChange}
               required
-              // value={values.password}
-              // onBlur={handleBlur}
+              value={values.expiration}
+              onBlur={handleBlur}
             />
           </div>
 
@@ -113,14 +183,15 @@ const BillingSection = () => {
               CVC
             </label>
             <TextField
-              // onBlur={handleBlur}
-              // error={Boolean(touched.confirm_password && errors.confirm_password)}
-              // helperText={touched.confirm_password && errors.confirm_password}
-              type="password"
+              onBlur={handleBlur}
+              error={Boolean(touched.cvc && errors.cvc)}
+              helperText={touched.cvc && errors.cvc}
+              type="number"
               name="cvc"
-              // onChange={handleChange}
+              fullWidth
+              onChange={handleChange}
               required
-              // value={values.confirm_password}
+              value={values.cvc}
             />
           </div>
 
@@ -130,16 +201,20 @@ const BillingSection = () => {
         <div className="flex justify-center content-center mt-8">
           <button
             type="submit"
-            disabled={loading}
+            disabled={loading || !dirty}
             className={loading ? 'animate-pulse ml-3 w-60 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-gray-400'
-              : 'ml-3 w-60 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'}
+              : !dirty ? ' ml-3 w-60 inline-flex justify-center py-2 px-4  border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gray-400'
+                : 'ml-3 w-60 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'}
+
           >
             Save Information
           </button>
         </div>
       </div>
 
-    </form>
+        </Form>
+      )}
+    </Formik>
   )
 }
 export default BillingSection
