@@ -6,7 +6,7 @@ import 'aos/dist/aos.css'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import loadStore from '../store'
-import { AuthRouter } from '../routes'
+import { AuthRouter, CartProvider } from '../routes'
 import { SplashScreen } from '../screens' // You can also use <link> for styles
 
 const { store, persistor } = loadStore()
@@ -25,9 +25,11 @@ const MyApp = ({ Component, pageProps }) => {
     <Provider store={store}>
       <PersistGate loading={<SplashScreen />} persistor={persistor}>
         <AuthRouter>
-          {getLayout(
-            <Component {...pageProps} />,
-          )}
+          <CartProvider>
+            {getLayout(
+              <Component {...pageProps} />,
+            )}
+          </CartProvider>
         </AuthRouter>
       </PersistGate>
     </Provider>

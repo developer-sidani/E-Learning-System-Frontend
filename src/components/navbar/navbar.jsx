@@ -61,40 +61,14 @@ const categories = [
   },
 ]
 
-const cart = {
-  userID: '132',
-  total: 150,
-  courses: [
-    {
-      name: 'Help Center',
-      price: '50$',
-      image: 'https://img-c.udemycdn.com/course/125_H/473160_d929_3.jpg',
-      description: 'Get all of your questions answered in our forums or contact support.',
-      href: '#',
-    },
-    {
-      name: 'Help Center2',
-      price: '50$',
-      image: 'https://img-c.udemycdn.com/course/125_H/473160_d929_3.jpg',
-      description: 'Get all of your questions answered in our forums or contact support.',
-      href: '#',
-    },
-    {
-      name: 'Help Center3',
-      price: '50$',
-      image: 'https://img-c.udemycdn.com/course/125_H/473160_d929_3.jpg',
-      description: 'Get all of your questions answered in our forums or contact support.',
-      href: '#',
-    },
-  ],
-}
-
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
 const Navbar = () => {
   const profile = useSelector(({ profile }) => profile)
+  const { data: cart } = useSelector(({ cart }) => cart)
+  const getTotal = cart?.reduce((acc, { price }) => acc + price, 0)
   const userData = profile?.user?.info
   const router = useRouter()
   const resources = [
@@ -341,7 +315,7 @@ const Navbar = () => {
                       <Popover.Button
                         className="flex-shrink-0 p-1 text-white rounded-full hover:text-sky-200 focus:outline-none"
                       >
-                        <Badge color="secondary" badgeContent={cart?.courses?.length}>
+                        <Badge color="secondary" badgeContent={cart?.length}>
                           <ShoppingCartIcon
                             className="h-6 w-6"
                             aria-hidden="true"
@@ -360,44 +334,55 @@ const Navbar = () => {
                       >
                         <Popover.Panel className="absolute z-10 left-[-200%] transform -translate-x-1/2 mt-3 px-2 w-screen max-w-xs sm:px-0">
                           <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
-                            <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
-                              {cart?.courses?.map((cart, index) => (
-                                <a
-                                  key={index}
-                                  href={cart.href}
-                                  className="-m-3 p-3 block rounded-md hover:bg-gray-50"
+                            {cart?.length ? (
+                              <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
+                                {cart?.map((x, index) => index < 3 && (
+                                  <button
+                                    type="button"
+                                    key={index}
+                                    onClick={() => router.push(`/courses/${x.id}`)}
+                                    className="-m-3 p-3 block rounded-md hover:bg-gray-50"
+                                  >
+
+                                    <div className="grid grid-cols-2 h-full w-full">
+                                      <div className="w-28">
+                                        <img className="" src={x.image} alt="" />
+                                      </div>
+                                      <div>
+                                        <div>
+                                          <p className="text-base font-medium text-gray-900">{x.name}</p>
+                                        </div>
+                                        <div>
+                                          <p className="mt-1 text-sm text-gray-500">{`$${x.price}`}</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </button>
+                                ))}
+                                {cart?.length > 3 && (
+                                  <p className="text-sm text-gray-500 -my-2">{`+${cart?.length - 3} more`}</p>
+                                )}
+                                <hr />
+                                <p className="text-base font-bold text-center text-gray-900">
+                                  Total price:
+                                  $
+                                  {getTotal}
+
+                                </p>
+                                <button type="button" className="whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-primary hover:bg-white hover:text-primary hover:border-primary">Go to cart</button>
+                              </div>
+                            ) : (
+                              <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
+                                <p>Cart is Empty</p>
+                                <hr />
+                                <button
+                                  type="button"
+                                  className="whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-primary hover:bg-white hover:text-primary hover:border-primary"
                                 >
-
-                                  {/* <p className="text-base font-medium text-gray-900">{cart.name}</p>
-                            <p className="mt-1 text-sm text-gray-500">{cart.price}</p> */}
-                                  <div className="grid grid-cols-2 h-full w-full">
-                                    {/* <img className="w-24 h-16" src="/image.jpg" alt="ok" /> */}
-                                    <div className="w-28">
-                                      <img className="" src={cart.image} alt="" />
-                                    </div>
-
-                                    <div>
-                                      <div>
-                                        <p className="text-base font-medium text-gray-900">{cart.name}</p>
-                                      </div>
-                                      <div>
-                                        <p className="mt-1 text-sm text-gray-500">{cart.price}</p>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </a>
-                              ))}
-                              <hr />
-                              <p className="text-base font-bold text-center text-gray-900">
-                                {' '}
-                                Total price:
-                                {' '}
-                                {cart.total}
-                                {' '}
-                                $
-                              </p>
-                              <button type="button" className="whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-primary hover:bg-white hover:text-primary hover:border-primary">Go to cart</button>
-                            </div>
+                                  Go to cart
+                                </button>
+                              </div>
+                            )}
 
                           </div>
                         </Popover.Panel>
@@ -481,7 +466,7 @@ const Navbar = () => {
                     className="ml-auto flex-shrink-0 rounded-full p-1 text-white hover:text-sky-200 focus:outline-none"
                   >
                     <span className="sr-only">View Cart</span>
-                    <Badge color="primary" badgeContent={cart?.courses?.length}>
+                    <Badge color="primary" badgeContent={cart?.length}>
                       <ShoppingCartIcon className="h-6 w-6" aria-hidden="true" />
                     </Badge>
                   </button>
