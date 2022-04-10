@@ -4,7 +4,7 @@ import { MainLayout } from '../layouts'
 
 const Cart = () => (
     <>
-        <PageHeader title="Learn+ | Teach With Learn+" />
+        <PageHeader title="Learn+ | My Cart" />
         <CartComponent />
     </>
 )

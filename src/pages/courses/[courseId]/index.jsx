@@ -4,11 +4,9 @@ import { useSelector } from 'react-redux'
 import { PageHeader, Component1 } from '../../../components'
 import { MainLayout } from '../../../layouts'
 
-const course = {}
 const GetCoursePage = () => {
   const router = useRouter()
   const { courseId } = router.query
-  course.courseId ??= courseId
   const { data: cart } = useSelector(({ cart }) => cart)
   const [courseBelongsToCart, setCourseBelongsToCart] = useState(false)
   useEffect(() => {

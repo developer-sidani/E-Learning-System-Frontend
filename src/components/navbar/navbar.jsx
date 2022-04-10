@@ -347,11 +347,11 @@ const Navbar = () => {
 
                                     <div className="grid grid-cols-2 h-full w-full">
                                       <div className="w-28">
-                                        <img className="" src={x.image} alt="" />
+                                        <img className="" src={x.image_125_H} alt="" />
                                       </div>
                                       <div>
                                         <div>
-                                          <p className="text-base font-medium text-gray-900">{x.name}</p>
+                                          <p className="text-base font-medium text-gray-900 truncate">{x.title}</p>
                                         </div>
                                         <div>
                                           <p className="mt-1 text-sm text-gray-500">{`$${x.price}`}</p>
@@ -370,13 +370,20 @@ const Navbar = () => {
                                   {getTotal}
 
                                 </p>
-                                <button type="button" className="whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-primary hover:bg-white hover:text-primary hover:border-primary">Go to cart</button>
+                                <button
+                                  onClick={() => router.push('/cart')}
+                                  type="button"
+                                  className="whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-primary hover:bg-white hover:text-primary hover:border-primary"
+                                >
+Go to cart
+                                </button>
                               </div>
                             ) : (
                               <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
                                 <p>Cart is Empty</p>
                                 <hr />
                                 <button
+                                  onClick={() => router.push('/cart')}
                                   type="button"
                                   className="whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-primary hover:bg-white hover:text-primary hover:border-primary"
                                 >
