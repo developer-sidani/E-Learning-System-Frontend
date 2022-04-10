@@ -375,7 +375,7 @@ const Navbar = () => {
                                   type="button"
                                   className="whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-primary hover:bg-white hover:text-primary hover:border-primary"
                                 >
-Go to cart
+                                  Go to cart
                                 </button>
                               </div>
                             ) : (
@@ -470,11 +470,15 @@ Go to cart
                     <div className="text-xs text-clip max-w-xs font-medium text-sky-200">{userData?.email || user.email}</div>
                   </div>
                   <button
+                    onClick={() => router.push('/cart')}
                     type="button"
                     className="ml-auto flex-shrink-0 rounded-full p-1 text-white hover:text-sky-200 focus:outline-none"
                   >
                     <span className="sr-only">View Cart</span>
-                    <Badge color="primary" badgeContent={cart?.length}>
+                    <Badge
+                      color="primary"
+                      badgeContent={cart?.length}
+                    >
                       <ShoppingCartIcon className="h-6 w-6" aria-hidden="true" />
                     </Badge>
                   </button>
