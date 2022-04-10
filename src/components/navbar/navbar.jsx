@@ -370,7 +370,7 @@ const Navbar = () => {
                                   >
 
                                     <div className="grid grid-cols-2 h-full w-full">
-                                      {/* <img className="w-24 h-16" src="/image.jpg" alt="ok" /> */}
+                                      {/* TODO if loading  animate-pulse opacity-0 bg-gray-800 */}
                                       <div className="w-28">
                                         <img className="" src={x.image} alt="" />
                                       </div>
