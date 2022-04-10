@@ -13,7 +13,7 @@ const GetCoursePage = () => {
   const [courseBelongsToCart, setCourseBelongsToCart] = useState(false)
   useEffect(() => {
     if (courseId) {
-      setCourseBelongsToCart(cart.includes(courseId))
+      setCourseBelongsToCart(cart.filter(({ id }) => id === courseId).length > 0)
     }
   }, [cart, courseId])
   return (
