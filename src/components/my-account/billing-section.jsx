@@ -148,7 +148,7 @@ const BillingSection = () => {
               error={Boolean(touched.card_number && errors.card_number)}
               fullWidth
               helperText={touched.card_number && errors.card_number}
-              type="text"
+              type="number"
               name="card_number"
               onChange={handleChange}
               required
@@ -186,8 +186,9 @@ const BillingSection = () => {
               onBlur={handleBlur}
               error={Boolean(touched.cvc && errors.cvc)}
               helperText={touched.cvc && errors.cvc}
-              type="password"
+              type="number"
               name="cvc"
+              fullWidth
               onChange={handleChange}
               required
               value={values.cvc}

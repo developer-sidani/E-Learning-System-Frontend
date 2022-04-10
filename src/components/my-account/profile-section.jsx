@@ -50,8 +50,7 @@ const ProfileSection = ({ user }) => {
     birthday: moment(profile?.user?.info?.birthday).format(dateFormatInput) || '',
     // photoUrl: profile?.user?.info?.photoUrl || 'https://firebasestorage.googleapis.com/v0/b/learn-plus-fyp.appspot.com/o/images%2Fuser.png?alt=media&token=11e4daf6-bffa-4e1d-8359-260f96c87514',
   }
-  console.log('log:')
-  console.log(initialValues.photoUrl)
+
   const [serverError, setServerError] = useState('')
   const [open, setOpen] = useState(false)
   useEffect(() => {
@@ -150,13 +149,14 @@ const ProfileSection = ({ user }) => {
             </label>
             <div className="mt-1">
               <TextField
-                error={Boolean(touched.email && errors.email)}
+                // error={Boolean(touched.email && errors.email)}
                 fullWidth
-                helperText={touched.email && errors.email}
+                // helperText={touched.email && errors.email}
                 name="email"
-                onChange={handleChange}
+                // onChange={handleChange}
                 required
-                onBlur={handleBlur}
+                disabled
+                // onBlur={handleBlur}
                 value={values.email}
               />
             </div>
@@ -365,9 +365,10 @@ const ProfileSection = ({ user }) => {
       <div className="flex justify-center content-center mt-8">
         <button
           type="submit"
-          disabled={loading}
+          disabled={loading || !dirty}
           className={loading ? 'animate-pulse ml-3 w-60 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-gray-400'
-            : 'ml-3 w-60 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'}
+            : !dirty ? ' ml-3 w-60 inline-flex justify-center py-2 px-4  border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gray-400'
+              : 'ml-3 w-60 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'}
         >
           Update Profile
         </button>

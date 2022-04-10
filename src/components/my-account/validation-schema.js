@@ -3,7 +3,7 @@ import * as Yup from 'yup'
 export const ProfileSchema = Yup.object().shape({
   username: Yup.string().min(5, 'must be at least 5 characters').required('Required'),
   // photo: Yup.string(),
-  email: Yup.string().email('Must be a valid email').required('Required'),
+  // email: Yup.string().email('Must be a valid email').required('Required'),
   firstname: Yup.string().required('Required'),
   lastname: Yup.string().required('Required'),
   address: Yup.string().required('Required'),
@@ -43,7 +43,9 @@ export const BillingSchema = Yup.object().shape({
     )
     .required('Expiration date is required'),
   cvc: Yup.string()
-    .min(3)
-    .max(3)
+    .matches(
+      /\b\d{3}\b/g,
+      'Must be 3 digits',
+    )
     .required(),
 })
