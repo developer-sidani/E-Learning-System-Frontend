@@ -93,7 +93,7 @@ return(
                   </div>
                 </div>
 
-                <div className="sm:col-span-2">
+                {/* <div className="sm:col-span-2">
                   <label htmlFor="company" className="block text-sm font-medium text-gray-700">
                     Company
                   </label>
@@ -134,9 +134,9 @@ return(
                       className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                     />
                   </div>
-                </div>
+                </div> */}
 
-                <div>
+                {/* <div>
                   <label htmlFor="city" className="block text-sm font-medium text-gray-700">
                     City
                   </label>
@@ -149,7 +149,7 @@ return(
                       className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                     />
                   </div>
-                </div>
+                </div> */}
 
                 <div>
                   <label htmlFor="country" className="block text-sm font-medium text-gray-700">
@@ -169,7 +169,7 @@ return(
                   </div>
                 </div>
 
-                <div>
+                {/* <div>
                   <label htmlFor="region" className="block text-sm font-medium text-gray-700">
                     State / Province
                   </label>
@@ -197,7 +197,7 @@ return(
                       className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                     />
                   </div>
-                </div>
+                </div> */}
 
                 <div className="sm:col-span-2">
                   <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
@@ -216,7 +216,7 @@ return(
               </div>
             </div>
 
-            <div className="mt-10 border-t border-gray-200 pt-10">
+            {/* <div className="mt-10 border-t border-gray-200 pt-10">
               <RadioGroup value={selectedDeliveryMethod} onChange={setSelectedDeliveryMethod}>
                 <RadioGroup.Label className="text-lg font-medium text-gray-900">Delivery method</RadioGroup.Label>
 
@@ -266,7 +266,7 @@ return(
                   ))}
                 </div>
               </RadioGroup>
-            </div>
+            </div> */}
 
             {/* Payment */}
             <div className="mt-10 border-t border-gray-200 pt-10">
@@ -434,14 +434,14 @@ return(
                   <dt className="text-sm">Subtotal</dt>
                   <dd className="text-sm font-medium text-gray-900">$64.00</dd>
                 </div>
-                <div className="flex items-center justify-between">
+                {/* <div className="flex items-center justify-between">
                   <dt className="text-sm">Shipping</dt>
                   <dd className="text-sm font-medium text-gray-900">$5.00</dd>
                 </div>
                 <div className="flex items-center justify-between">
                   <dt className="text-sm">Taxes</dt>
                   <dd className="text-sm font-medium text-gray-900">$5.52</dd>
-                </div>
+                </div> */}
                 <div className="flex items-center justify-between border-t border-gray-200 pt-6">
                   <dt className="text-base font-medium">Total</dt>
                   <dd className="text-base font-medium text-gray-900">$75.52</dd>
