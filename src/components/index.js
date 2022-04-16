@@ -12,7 +12,6 @@ export { Footer } from './footer'
 export { Navbar } from './navbar'
 export { ForgotPasswordComponent } from './auth/forgot-password'
 export { MainCourseComponent, CourseLoading } from './courses'
-export { OnHoverComponent, MainBanner }
 export { TeachWithUsComponent } from './teach-with-us'
 export { TermsOfUseComponent } from './terms-of-use'
 export { InstructorComponent } from './instructors'
@@ -28,3 +27,5 @@ export {
 export { MyAccountComponent } from './my-account'
 export { ProfileSection } from './my-account'
 export { MyCoursesComponent } from './my-courses'
+export { OnHoverComponent, MainBanner }
+export { AboutUsComponent } from './about-us'
