@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react'
 import { Tab } from '@headlessui/react'
 import { StarIcon } from '@heroicons/react/solid'
+import { Box, LinearProgress, Typography } from '@mui/material'
 import { Pagination } from '.'
 import { instructor, course } from './data'
 // import { Pagination } from '.'
@@ -11,9 +12,12 @@ const MyCoursesComponent = () => {
   }
 
   return (
-    // <Tab.Panels as={Fragment}>
-    // <Tab.Panel className="mb-10">
-    <div className="mb-10">
+  // <Tab.Panels as={Fragment}>
+  // <Tab.Panel className="mb-
+
+    <div className="my-10">
+      <h2 className="text-center mb-10  text-3xl font-extrabold text-[#0A033C] sm:text-4xl">My Courses</h2>
+
       {/* <div className="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8"> */}
       <div className="max-w-2xl mx-auto py-16 px-4 sm:py-8 sm:px-6 lg:max-w-7xl lg:px-8">
         <h2 className="sr-only">Products</h2>
@@ -62,11 +66,25 @@ const MyCoursesComponent = () => {
                     >
                       {course?.flag}
                     </p>
+
                   </div>
                 ) : (
                   <div className="px-3 py-1 mt-1"><p /></div>
+
                 )}
               </div>
+              <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                <Box sx={{ width: '100%', mr: 1, color: '#0A003C' }}>
+                  <LinearProgress variant="determinate" color="inherit" value={course?.progress} />
+                </Box>
+                <Box sx={{ minWidth: 35 }}>
+                  <Typography variant="body2" color="text.primary">
+                    {`${Math.round(
+                      course?.progress,
+                    )}%`}
+                  </Typography>
+                </Box>
+              </Box>
             </div>
           ))}
         </div>

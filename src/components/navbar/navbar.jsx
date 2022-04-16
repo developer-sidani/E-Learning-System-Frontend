@@ -118,6 +118,7 @@ const Navbar = () => {
         },
         icon: UserIcon,
       },
+
       {
         name: 'Logout',
         handleClick() {

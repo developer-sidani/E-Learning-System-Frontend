@@ -31,6 +31,7 @@ export const course = [
     bestSeller: false,
     category: 'Web Development',
     flag: 'Bestseller',
+    progress: '70',
   },
   {
     _id: '621d2f5bbe6a14d70ae04c549',
@@ -47,6 +48,7 @@ export const course = [
     bestSeller: false,
     category: 'Web Development',
     flag: 'Bestseller',
+    progress: '70',
   },
   {
     _id: '621d2f5bbe6a14d70ae014c59',
@@ -63,6 +65,7 @@ export const course = [
     bestSeller: false,
     category: 'Web Development',
     flag: 'Bestseller',
+    progress: '75',
   },
   {
     _id: '621d2f5bbe6a14d70ae014c59',
@@ -79,6 +82,7 @@ export const course = [
     bestSeller: false,
     category: 'Web Development',
     flag: 'Bestseller',
+    progress: '100',
   },
   {
     _id: '621d2f5bbe6a14d70ae014c59',
@@ -95,6 +99,7 @@ export const course = [
     bestSeller: false,
     category: 'Web Development',
     flag: 'Bestseller',
+    progress: '100',
   },
   {
     _id: '621d2f5bbe6a14d70ae014c59',
@@ -111,6 +116,7 @@ export const course = [
     bestSeller: false,
     category: 'Web Development',
     flag: '',
+    progress: '100',
   },
   {
     _id: '621d2f5bbe6a14d70ae014c59',
@@ -127,6 +133,7 @@ export const course = [
     bestSeller: false,
     category: 'Web Development',
     flag: 'Bestseller',
+    progress: '100',
   },
   {
     _id: '621d2f5bbe6a14d70ae014c59',
@@ -143,6 +150,7 @@ export const course = [
     bestSeller: false,
     category: 'Web Development',
     flag: 'Bestseller',
+    progress: '100',
   },
   {
     _id: '621d2f5bbe6a14d70ae014c59',
@@ -159,6 +167,7 @@ export const course = [
     bestSeller: false,
     category: 'Web Development',
     flag: 'Bestseller',
+    progress: '100',
   },
   {
     _id: '621d2f5bbe6a14d70ae014c59',
@@ -175,6 +184,7 @@ export const course = [
     bestSeller: false,
     category: 'Web Development',
     flag: 'Bestseller',
+    progress: '100',
   },
   {
     _id: '621d2f5bbe6a14d70ae014c59',
@@ -191,5 +201,6 @@ export const course = [
     bestSeller: false,
     category: 'Web Development',
     flag: 'Bestseller',
+    progress: '100',
   },
 ]
