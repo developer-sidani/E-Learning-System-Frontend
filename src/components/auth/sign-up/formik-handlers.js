@@ -3,8 +3,9 @@ import { register } from '../../../api'
 
 const dateFormat = 'yyyy-MM-DD'
 
-const submitValues = (callback, handler) => (values, { resetForm }) => {
+const submitValues = (callback, handler, photoUrl) => (values, { resetForm }) => {
   values.email = values.email.toLowerCase()
+  values.photoUrl = photoUrl || 'https://firebasestorage.googleapis.com/v0/b/learn-plus-fyp.appspot.com/o/images%2Fuser.png?alt=media&token=11e4daf6-bffa-4e1d-8359-260f96c87514'
   values.birthday = moment(values.birthday).format(dateFormat)
   values.fullName = `${values.firstname} ${values.lastname}`
   callback(values, resetForm, handler)
@@ -12,7 +13,6 @@ const submitValues = (callback, handler) => (values, { resetForm }) => {
 
 const callRegisterApi = async (data, callback, handler) => {
   handler.init()
-  console.log(data)
   try {
     const res = await register(
       data,
@@ -44,7 +44,8 @@ const initialValues = {
   gender: '',
   isNotified: true,
   keepMeUpdated: true,
-  birthday: '',
+  birthday: new Date(new Date().setFullYear(new Date().getFullYear() - 10)),
+  interests: [],
 }
 export {
   initialValues,

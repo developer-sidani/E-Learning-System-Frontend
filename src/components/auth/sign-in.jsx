@@ -2,6 +2,7 @@ import React, { useState, useCallback, useEffect } from 'react'
 import { Formik, Form, Field } from 'formik'
 import * as Yup from 'yup'
 import { useDispatch } from 'react-redux'
+import { useRouter } from 'next/router'
 import { login } from '../../api'
 import { styles } from './tw-styles'
 import { isEmail, wait } from '../../utils'
@@ -14,7 +15,8 @@ const errorStatusFromBackend = {
   checkEmail: 400,
 }
 
-const Logo = 'https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg'
+// TODO get the link
+const Logo = 'https://firebasestorage.googleapis.com/v0/b/learn-plus-fyp.appspot.com/o/images%2Flogo%2Flogo-svg.svg?alt=media&token=73ba11c6-d384-4bd6-9738-9d7dbd2a141a'
 const SignInSchema = Yup.object().shape({
   user: Yup.string().required('Required'),
   password: Yup.string()
@@ -27,6 +29,7 @@ const SignInComponent = () => {
   const [serverErr, setServerErr] = useState({
     user: '',
     password: '',
+    verifyEmail: '',
   })
   const onLogin = useCallback(
     async (user, password, rememberMe, callback) => {
@@ -38,12 +41,14 @@ const SignInComponent = () => {
         })
         console.log(res)
         if (res.status === errorStatusFromBackend.user || res.status === errorStatusFromBackend.checkEmail) {
-          // not found
           setServerErr(prevState => ({ ...prevState, user: res?.message }))
         } else if (res?.status === errorStatusFromBackend.password) {
           // wrong password
           setServerErr(prevState => ({ ...prevState, password: res?.message }))
-        } else if (res?.status === 200) {
+        } else if (res?.status === 406) {
+          // SEND VERIFICATION LINK
+          setServerErr(prevState => ({ ...prevState, verifyEmail: 'Verify your email' }))
+        } else {
           dispatch(set({ user: res.user, token: res.token }))
           callback()
         }
@@ -55,10 +60,12 @@ const SignInComponent = () => {
     },
     [],
   )
+  const router = useRouter()
   useEffect(() => {
     setServerErr({
       user: '',
       password: '',
+      verifyEmail: '',
     })
   }, [])
   const [email, setEmail] = useState('')
@@ -76,7 +83,7 @@ const SignInComponent = () => {
           <p className="mt-2 text-center text-sm text-gray-600">
             Or
               {' '}
-            <a href="./sign-up" className={styles.link}>
+            <a href="/auth/sign-up" className={styles.link}>
               Register Here
             </a>
           </p>
@@ -95,6 +102,7 @@ const SignInComponent = () => {
               setServerErr({
                 user: '',
                 password: '',
+                verifyEmail: '',
               })
               setLoading(true)
               onLogin(user, password, rememberMe, async () => {
@@ -105,7 +113,7 @@ const SignInComponent = () => {
             }}
           >
               {({
-                errors, handleSubmit, touched, handleChange,
+                errors, handleSubmit, touched, handleChange, values,
               }) => (
                   <Form
                     className="space-y-6"
@@ -183,13 +191,23 @@ const SignInComponent = () => {
                     </div>
 
                     <div>
-                      <button
-                        type="submit"
-                        className={loading ? styles.disabledButton : styles.button}
-                        disabled={loading}
-                      >
-                        Sign in
-                      </button>
+                      {serverErr.verifyEmail.length > 0 ? (
+                        <button
+                          type="button"
+                          className={styles.link}
+                          onClick={() => router.push(`/auth/request-verification?email=${values.user}`)}
+                        >
+                          {serverErr.verifyEmail}
+                        </button>
+                      ) : (
+                        <button
+                          type="submit"
+                          className={loading ? styles.disabledButton : styles.button}
+                          disabled={loading}
+                        >
+                          Sign in
+                        </button>
+                      )}
                     </div>
                   </Form>
               )}

@@ -12,7 +12,7 @@ const FaqsPage = () => {
       setLoading(true)
       try {
         const res = await getFaqs()
-        setFaqs(res?.res?.data.reverse()) // added .reverse() to fix order
+        setFaqs(res?.res?.data) // added .reverse() to fix order
       } catch (e) {
         console.log(e)
       } finally {

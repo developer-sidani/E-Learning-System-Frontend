@@ -1,4 +1,5 @@
 import React from 'react'
+// eslint-disable-next-line import/no-cycle
 import {
   IncentivesComponent, BannerComponent, StatsComponent, CallToActionComponent, TestimonialsComponent,
 } from '.'
@@ -55,10 +56,8 @@ const TeachWithUsComponent = () => (
       <IncentivesComponent incentivesFunction={incentivesFunction} />
       <StatsComponent />
       <TestimonialsComponent testimonials={TestimonialArray} />
-      {/* <SupportComponent /> */}
       <CallToActionComponent />
   </>
 )
 
-export { TeachWithUsComponent }
-// test
+export default TeachWithUsComponent
