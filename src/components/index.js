@@ -27,3 +27,4 @@ export {
 
 export { MyAccountComponent } from './my-account'
 export { ProfileSection } from './my-account'
+export { MyCoursesComponent } from './my-courses'
