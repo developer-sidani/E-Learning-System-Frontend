@@ -251,4 +251,4 @@ const Component1 = ({ courseBelongsToCart, courseId }) => {
   )
 }
 
-export { Component1 }
+export default Component1
