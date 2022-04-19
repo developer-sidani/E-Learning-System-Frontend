@@ -13,6 +13,17 @@ export const course = {
   bestSeller: false,
   category: 'Web Development',
   flag: 'Bestseller',
+  name: 'Course Name',
+  duration: 8,
+  description:
+    '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."',
+  requirements: [
+    'Lorem ipsum dolor sit amet',
+    'Ut his wisi aliquando',
+    'Mel no corpora inciderint',
+  ],
+  videoSrc: 'https://firebasestorage.googleapis.com/v0/b/learn-plus-fyp.appspot.com/o/lectures%2Fvideoplayback%20(1).mp4?alt=media&token=792ffaf3-6a22-4730-940b-7598005ae636',
+  imageAlt: 'Sample of 30 icons with friendly and fun details in outline, filled, and brand color styles.',
   section: [
     {
       name: 'Intro to Course and Python',
@@ -58,18 +69,18 @@ export const instructor = {
   courses: 14,
 }
 
-export const product = {
-  name: 'Course Name',
-  description:
-        '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."',
-  requiremnets: [
-    'Lorem ipsum dolor sit amet',
-    'Ut his wisi aliquando',
-    'Mel no corpora inciderint',
-  ],
-  imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-05-product-01.jpg',
-  imageAlt: 'Sample of 30 icons with friendly and fun details in outline, filled, and brand color styles.',
-}
+// export const course = {
+//   name: 'Course Name',
+//   description:
+//         '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."',
+//   requiremnets: [
+//     'Lorem ipsum dolor sit amet',
+//     'Ut his wisi aliquando',
+//     'Mel no corpora inciderint',
+//   ],
+//   videoSrc: 'https://firebasestorage.googleapis.com/v0/b/learn-plus-fyp.appspot.com/o/lectures%2Fvideoplayback%20(1).mp4?alt=media&token=792ffaf3-6a22-4730-940b-7598005ae636',
+//   imageAlt: 'Sample of 30 icons with friendly and fun details in outline, filled, and brand color styles.',
+// }
 export const reviews = {
   average: 4,
   featured: [

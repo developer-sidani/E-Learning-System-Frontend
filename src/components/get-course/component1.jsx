@@ -1,13 +1,16 @@
 import React, { Fragment } from 'react'
 import { Tab } from '@headlessui/react'
-import { StarIcon } from '@heroicons/react/solid'
+import {
+  PencilAltIcon, StarIcon, LockOpenIcon, VideoCameraIcon, AcademicCapIcon, DeviceMobileIcon,
+} from '@heroicons/react/solid'
 import { useRouter } from 'next/router'
 import { useDispatch } from 'react-redux'
+import ReactPlayer from 'react-player'
 import { Sections } from './sections'
 // eslint-disable-next-line import/no-cycle
 import { InstructorComponent } from '.'
 import {
-  instructor, product, reviews, courseOutcomes,
+  instructor, reviews, courseOutcomes, course,
 } from './data'
 import { CoursesContainer } from '../home'
 import { addCart } from '../../slices/cart'
@@ -23,23 +26,31 @@ const Component1 = ({ courseBelongsToCart, courseId }) => {
     <div className="bg-white">
 
       <main className="mx-auto pt-14 pb-24 px-4 sm:pt-16 sm:pb-32 sm:px-6 lg:max-w-7xl lg:px-8">
-        {/* Product */}
+        {/* Course */}
         <div className="lg:grid lg:grid-rows-1 lg:grid-cols-7 lg:gap-x-8 lg:gap-y-10 xl:gap-x-16">
-          {/* Product image */}
+          {/* Course Video */}
           <div className="lg:row-end-1 lg:col-span-4">
             <div className="aspect-w-4 aspect-h-3 rounded-lg bg-gray-100 overflow-hidden">
-              <img src={product.imageSrc} alt={product.imageAlt} className="object-center object-cover" />
+              {/* <img src={course.imageSrc} alt={course.imageAlt} className="object-center object-cover" /> */}
+              <ReactPlayer
+                width="inherit"
+                height="inherit"
+                controls
+                config={{ file: { attributes: { controlsList: 'download' } } }}
+                // url="https://firebasestorage.googleapis.com/v0/b/learn-plus-fyp.appspot.com/o/lectures%2Fvideoplayback%20(1).mp4?alt=media&token=792ffaf3-6a22-4730-940b-7598005ae636"
+                url={course.videoSrc}
+              />
             </div>
           </div>
 
-          {/* Product details */}
+          {/* course details */}
           <div className="max-w-2xl mx-auto mt-14 sm:mt-16 lg:max-w-none lg:mt-0 lg:row-end-2 lg:row-span-2 lg:col-span-3">
             <div className="flex flex-col-reverse">
               <div className="mt-4">
-                <h1 className="text-2xl font-extrabold tracking-tight text-gray-900 sm:text-3xl">{product.name}</h1>
+                <h1 className="text-2xl font-extrabold tracking-tight text-gray-900 sm:text-3xl">{course.name}</h1>
 
                 <h2 id="information-heading" className="sr-only">
-                  Product information
+                  Course information
                 </h2>
                 <p className="text-sm text-gray-500 mt-2" />
               </div>
@@ -66,7 +77,7 @@ const Component1 = ({ courseBelongsToCart, courseId }) => {
               </div>
             </div>
 
-            <p className="text-gray-500 mt-6">{product.description}</p>
+            <p className="text-gray-500 mt-6">{course.description}</p>
 
             <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2 mb-2">
               {courseBelongsToCart ? (
@@ -112,8 +123,8 @@ const Component1 = ({ courseBelongsToCart, courseId }) => {
               <h3 className="text-sm font-medium text-gray-900">Course Requirements</h3>
               <div className="mt-4 prose prose-sm text-gray-500">
                 <ul role="list">
-                  {product.requiremnets.map((requiremnet) => (
-                    <li key={requiremnet}>{requiremnet}</li>
+                  {course.requirements.map((requirement) => (
+                    <li key={requirement}>{requirement}</li>
                   ))}
                 </ul>
               </div>
@@ -166,7 +177,17 @@ const Component1 = ({ courseBelongsToCart, courseId }) => {
                       'whitespace-nowrap py-6 border-b-2 font-medium text-sm',
                     )}
                   >
-                    What you will learn
+                    What You Will Learn
+                  </Tab>
+                  <Tab
+                    className={({ selected }) => classNames(
+                      selected
+                        ? 'border-indigo-600 text-indigo-600'
+                        : 'border-transparent text-gray-700 hover:text-gray-800 hover:border-gray-300',
+                      'whitespace-nowrap py-6 border-b-2 font-medium text-sm',
+                    )}
+                  >
+                    This Course Includes
                   </Tab>
                 </Tab.List>
               </div>
@@ -228,12 +249,46 @@ const Component1 = ({ courseBelongsToCart, courseId }) => {
                     dangerouslySetInnerHTML={{ __html: courseOutcomes.content }}
                   />
                 </Tab.Panel>
+                <Tab.Panel className="pt-10">
+                  <h3 className="sr-only">courseOutcomes</h3>
+
+                  <div
+                    className="prose prose-sm max-w-none text-gray-500"
+                  >
+                    <div className=" flex flex-col text-base">
+
+                      <div className="flex flex-row mb-3">
+                        <VideoCameraIcon className="h-5 w-5 text-black-500 mr-10" />
+                        { course?.duration }
+                        {' '}
+                        hours on-demand video
+                      </div>
+
+                      <div className="flex flex-row my-3 ">
+                        <LockOpenIcon className="h-5 w-5 text-black-500 mr-10" />
+                        Full lifetime access
+                      </div>
+
+                      <div className="flex flex-row my-3 ">
+                        <DeviceMobileIcon className="h-5 w-5 text-black-500 mr-10" />
+                        Access on mobile and TV
+                      </div>
+
+                      <div className="flex flex-row my-3 ">
+                        <AcademicCapIcon className="h-5 w-5 text-black-500 mr-10" />
+                        Certification of completion
+                      </div>
+                    </div>
+
+                  </div>
+
+                </Tab.Panel>
               </Tab.Panels>
             </Tab.Group>
           </div>
         </div>
 
-        {/* Related products */}
+        {/* Related courses */}
         <div className="flex items-center justify-between space-x-4 mt-28">
           <h2 className="text-lg font-medium text-gray-900">Frequently Bought Together</h2>
           <a href="#" className="whitespace-nowrap text-sm font-medium text-indigo-600 hover:text-indigo-500">
