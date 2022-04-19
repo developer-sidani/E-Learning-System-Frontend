@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
-import { AuthGuard } from '../guards'
-import { MainLayout } from '../layouts'
-import { PageHeader, MyCoursesComponent } from '../components'
+import React from 'react'
+import { AuthGuard } from '../../guards'
+import { MainLayout } from '../../layouts'
+import { PageHeader, MyCoursesComponent } from '../../components'
 
 const MyCoursesPage = () => (
   <>
