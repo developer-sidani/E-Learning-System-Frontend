@@ -25,7 +25,6 @@ const data = {
 
 }
 
-// todo add formik and handle the api
 const ContactUsComponent = ({ offices }) => {
   const [loading, setLoading] = useState(false)
   const sendCallBack = useCallback(
