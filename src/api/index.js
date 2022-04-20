@@ -4,4 +4,4 @@ export {
 export { getFaqs } from './faqs'
 export { getCategories } from './categories'
 export { getTerms } from './terms'
-export { getCoursesForStudent } from './courses'
+export { getCoursesForStudent, getCourseById } from './courses'

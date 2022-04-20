@@ -1,19 +1,36 @@
-import React from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { AuthGuard, PurchasedCourseGuard } from '../../guards'
 import { MainLayout } from '../../layouts'
-import { PurchasedCourse } from '../../components'
-// import MyCoursesPage from './index'
+import { PageHeader, PurchasedCourse } from '../../components'
+import { getCourseById } from '../../api'
 
 const PurchasedCoursePage = () => {
   const router = useRouter()
   const { courseId } = router.query
+  const [loading, setLoading] = useState(true)
+  const getCourseCallback = useCallback(async (id) => {
+    try {
+      const response = await getCourseById(id)
+      console.log(response)
+    } catch (e) {
+      console.error(e)
+    } finally {
+      setLoading(false)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (courseId) {
+      getCourseCallback(courseId)
+    }
+  }, [courseId])
 
   return (
-    <div>
+    <>
+      <PageHeader title="Learn+" />
       <PurchasedCourse />
-      {courseId}
-    </div>
+    </>
   )
 }
 PurchasedCoursePage.getLayout = (page) => (
