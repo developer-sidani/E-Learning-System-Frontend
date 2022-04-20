@@ -12,7 +12,7 @@ const PurchasedCourseGuard = ({ children }) => {
 
   const getCoursesForStudentCallback = useCallback(async (userId) => {
     try {
-      const response = await getCoursesForStudent(userId)
+      const response = await getCoursesForStudent(userId, 1000, 1)
       return response.courses?.map(({ id }) => id)
     } catch (e) {
       console.error(e)
@@ -28,7 +28,7 @@ const PurchasedCourseGuard = ({ children }) => {
           if (r.includes(courseId)) {
             setChecked(true)
           } else {
-            router.push('/')
+            router.push('/404')
           }
         })
     } else {
