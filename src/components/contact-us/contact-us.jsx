@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/no-redundant-roles */
-import React, { useCallback } from 'react'
+import React, { useCallback, useState } from 'react'
 import { Formik, Form } from 'formik'
 import { MailIcon, PhoneIcon } from '@heroicons/react/outline'
 import * as Yup from 'yup'
@@ -27,6 +27,7 @@ const data = {
 
 // todo add formik and handle the api
 const ContactUsComponent = ({ offices }) => {
+  const [loading, setLoading] = useState(false)
   const sendCallBack = useCallback(
     async (
       {
@@ -40,6 +41,7 @@ const ContactUsComponent = ({ offices }) => {
       successfulCallBack,
       errorCallBack,
     ) => {
+      setLoading(true)
       try {
         const response = await contactUs({
           firstName,
@@ -56,6 +58,8 @@ const ContactUsComponent = ({ offices }) => {
         }
       } catch (e) {
         console.error(e)
+      } finally {
+        setLoading(false)
       }
     },
     [],
@@ -457,9 +461,12 @@ const ContactUsComponent = ({ offices }) => {
                           </div>
                           <div className="sm:col-span-2 sm:flex sm:justify-end">
                             <button
+                              disabled={loading}
                               type="submit"
                               onClick={handleSubmit}
-                              className="mt-2 w-full inline-flex items-center justify-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-primary hover:bg-white hover:text-primary outline outline-offset-2 outline-2  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 sm:w-auto"
+                              className={loading
+                                ? 'animate-pulse mt-2 w-full inline-flex items-center justify-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-gray-400 sm:w-auto'
+                                : 'mt-2 w-full inline-flex items-center justify-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-primary hover:bg-white hover:text-primary outline outline-offset-2 outline-2 sm:w-auto'}
                             >
                               Submit
                             </button>
