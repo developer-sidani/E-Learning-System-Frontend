@@ -2,6 +2,7 @@ import '../styles/globals.css'
 import React, { useEffect } from 'react'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
+import { Toaster } from 'react-hot-toast'
 // eslint-disable-next-line import/no-unresolved
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
@@ -26,6 +27,7 @@ const MyApp = ({ Component, pageProps }) => {
       <PersistGate loading={<SplashScreen />} persistor={persistor}>
         <AuthRouter>
           <CartProvider>
+            <Toaster position="top-center" />
             {getLayout(
               <Component {...pageProps} />,
             )}
