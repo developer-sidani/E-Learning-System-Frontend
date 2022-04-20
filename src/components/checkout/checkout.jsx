@@ -52,26 +52,6 @@ return(
           <div>
             <div>
               <h2 className="text-lg font-medium text-gray-900">Contact information</h2>
-
-              <div className="mt-4">
-                <label htmlFor="email-address" className="block text-sm font-medium text-gray-700">
-                  Email address
-                </label>
-                <div className="mt-1">
-                  <input
-                    type="email"
-                    id="email-address"
-                    name="email-address"
-                    autoComplete="email"
-                    className="block py-1.5 w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                  />
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-10 border-t border-gray-200 pt-10">
-              <h2 className="text-lg font-medium text-gray-900">Shipping information</h2>
-
               <div className="mt-4 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-4">
                 <div>
                   <label htmlFor="first-name" className="block text-sm font-medium text-gray-700">
@@ -128,7 +108,7 @@ return(
 
                 <div className="sm:col-span-2">
                   <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
-                    Phone
+                    Phone Number
                   </label>
                   <div className="mt-1">
                     <input
@@ -141,7 +121,27 @@ return(
                   </div>
                 </div>
               </div>
+              <div className="mt-4">
+                <label htmlFor="email-address" className="block text-sm font-medium text-gray-700">
+                  Email address
+                </label>
+                <div className="mt-1">
+                  <input
+                    type="email"
+                    id="email-address"
+                    name="email-address"
+                    autoComplete="email"
+                    className="block py-1.5 w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  />
+                </div>
+              </div>
             </div>
+
+            {/* <div className="mt-10 border-t border-gray-200 pt-10">
+              <h2 className="text-lg font-medium text-gray-900">Shipping information</h2>
+
+              
+            </div> */}
 
             {/* Payment */}
             <div className="mt-10 border-t border-gray-200 pt-10">
