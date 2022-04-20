@@ -1,6 +1,6 @@
 import React from 'react'
 import { useRouter } from 'next/router'
-import { AuthGuard } from '../../guards'
+import { AuthGuard, PurchasedCourseGuard } from '../../guards'
 import { MainLayout } from '../../layouts'
 import { PurchasedCourse } from '../../components'
 // import MyCoursesPage from './index'
@@ -18,9 +18,11 @@ const PurchasedCoursePage = () => {
 }
 PurchasedCoursePage.getLayout = (page) => (
     <AuthGuard>
-      <MainLayout>
-        {page}
-      </MainLayout>
+      <PurchasedCourseGuard>
+        <MainLayout>
+          {page}
+        </MainLayout>
+      </PurchasedCourseGuard>
     </AuthGuard>
 )
 
