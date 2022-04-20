@@ -26,6 +26,6 @@ export {
 
 export { MyAccountComponent } from './my-account'
 export { ProfileSection } from './my-account'
-export { MyCoursesComponent } from './my-courses'
+export { MyCoursesComponent, PurchasedCourse } from './my-courses'
 export { OnHoverComponent, MainBanner }
 export { AboutUsComponent } from './about-us'

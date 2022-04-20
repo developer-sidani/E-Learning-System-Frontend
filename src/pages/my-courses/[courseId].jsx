@@ -1,24 +1,51 @@
-import React from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import { AuthGuard } from '../../guards'
+import { AuthGuard, PurchasedCourseGuard } from '../../guards'
 import { MainLayout } from '../../layouts'
-// import MyCoursesPage from './index'
+import { PageHeader, PurchasedCourse } from '../../components'
+import { getCourseById } from '../../api'
 
 const PurchasedCoursePage = () => {
   const router = useRouter()
   const { courseId } = router.query
+  const [course, setCourse] = useState()
+  const [loading, setLoading] = useState(true)
+  const getCourseCallback = useCallback(async (id) => {
+    try {
+      const response = await getCourseById(id)
+      if (response.status === 200) {
+        return response.data
+      }
+      await router.push('404')
+    } catch (e) {
+      console.error(e)
+    } finally {
+      setLoading(false)
+    }
+  }, [router])
+
+  useEffect(() => {
+    if (courseId) {
+      getCourseCallback(courseId).then(r => {
+        setCourse(r)
+      })
+    }
+  }, [courseId])
 
   return (
-    <div>
-      {courseId}
-    </div>
+    <>
+      <PageHeader title={`${course?.title} | Learn+`} />
+      <PurchasedCourse course={course} />
+    </>
   )
 }
 PurchasedCoursePage.getLayout = (page) => (
     <AuthGuard>
-      <MainLayout>
-        {page}
-      </MainLayout>
+      <PurchasedCourseGuard>
+        <MainLayout>
+          {page}
+        </MainLayout>
+      </PurchasedCourseGuard>
     </AuthGuard>
 )
 

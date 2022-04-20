@@ -3,7 +3,7 @@ import { Tab } from '@headlessui/react'
 import { StarIcon } from '@heroicons/react/solid'
 import { Box, LinearProgress, Typography } from '@mui/material'
 import { Pagination } from '.'
-import { instructor, course } from './data'
+import { course } from './data'
 // import { Pagination } from '.'
 
 const MyCoursesComponent = () => {

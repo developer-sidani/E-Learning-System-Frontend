@@ -1,10 +1,12 @@
-import React, { Fragment } from 'react'
+import React, {
+  Fragment, useCallback, useEffect, useState,
+} from 'react'
 import { Tab } from '@headlessui/react'
 import {
   PencilAltIcon, StarIcon, LockOpenIcon, VideoCameraIcon, AcademicCapIcon, DeviceMobileIcon,
 } from '@heroicons/react/solid'
 import { useRouter } from 'next/router'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import ReactPlayer from 'react-player'
 import { Sections } from './sections'
 // eslint-disable-next-line import/no-cycle
@@ -14,14 +16,33 @@ import {
 } from './data'
 import { CoursesContainer } from '../home'
 import { addCart } from '../../slices/cart'
+import { getCoursesForStudent } from '../../api'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
 const Component1 = ({ courseBelongsToCart, courseId }) => {
+  const [courseExist, setCourseExist] = useState(false)
+  const profile = useSelector(state => state.profile)
+  const userId = profile?.user?.id
   const router = useRouter()
   const dispatch = useDispatch()
+  const getCoursesForStudentCallback = useCallback(async (user) => {
+    try {
+      const response = await getCoursesForStudent(user, 1000, 1)
+      return response.courses?.filter(({ id }) => id === courseId)?.length > 0
+    } catch (e) {
+      console.error(e)
+    }
+  }, [courseId])
+  useEffect(() => {
+    if (userId) {
+      getCoursesForStudentCallback(userId).then(r => {
+        setCourseExist(r)
+      })
+    }
+  }, [getCoursesForStudentCallback, userId])
   return (
     <div className="bg-white">
 
@@ -80,40 +101,53 @@ const Component1 = ({ courseBelongsToCart, courseId }) => {
             <p className="text-gray-500 mt-6">{course.description}</p>
 
             <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2 mb-2">
-              {courseBelongsToCart ? (
+              {courseExist ? (
                 <button
-                  onClick={() => router.push('/cart')}
+                  onClick={() => router.push(`/my-courses/${courseId}`)}
                   type="button"
                   className="w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500"
                 >
-                  View Cart
+                  Go To Course
                 </button>
               ) : (
-                <button
-                  onClick={() => dispatch(addCart({
-                    id: courseId,
-                    title: 'Become a senior web developer',
-                    image_125_H: 'https://img-c.udemycdn.com/course/125_H/1331946_ed41_4.jpg',
-                    image_240x135: 'https://img-c.udemycdn.com/course/240x135/1331946_ed41_4.jpg',
-                    image_480x270: 'https://img-c.udemycdn.com/course/480x270/1331946_ed41_4.jpg',
-                    headline: 'Beginners, Zero to Hero. AWS EC2 web server, NodeJS Server, AWS RDS database server, S3, SES & CloudWatch.',
-                    instructor: {
-                      id: '123',
-                      name: 'test test',
-                    },
-                    price: 49.99,
-                    currency: '$',
-                    rating: '4.0',
-                    updatedAt: new Date(),
-                    bestSeller: false,
-                    category: 'Web Development',
-                    flag: 'Bestseller',
-                  }))}
-                  type="button"
-                  className="w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500"
-                >
-                  Add to Cart
-                </button>
+                // eslint-disable-next-line react/jsx-no-useless-fragment
+                <>
+                  {courseBelongsToCart ? (
+                    <button
+                      onClick={() => router.push('/cart')}
+                      type="button"
+                      className="w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500"
+                    >
+                      View Cart
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => dispatch(addCart({
+                        id: courseId,
+                        title: 'Become a senior web developer',
+                        image_125_H: 'https://img-c.udemycdn.com/course/125_H/1331946_ed41_4.jpg',
+                        image_240x135: 'https://img-c.udemycdn.com/course/240x135/1331946_ed41_4.jpg',
+                        image_480x270: 'https://img-c.udemycdn.com/course/480x270/1331946_ed41_4.jpg',
+                        headline: 'Beginners, Zero to Hero. AWS EC2 web server, NodeJS Server, AWS RDS database server, S3, SES & CloudWatch.',
+                        instructor: {
+                          id: '123',
+                          name: 'test test',
+                        },
+                        price: 49.99,
+                        currency: '$',
+                        rating: '4.0',
+                        updatedAt: new Date(),
+                        bestSeller: false,
+                        category: 'Web Development',
+                        flag: 'Bestseller',
+                      }))}
+                      type="button"
+                      className="w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500"
+                    >
+                      Add to Cart
+                    </button>
+                  )}
+                </>
               )}
 
             </div>

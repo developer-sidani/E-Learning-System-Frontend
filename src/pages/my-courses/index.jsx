@@ -5,7 +5,6 @@ import { PageHeader, MyCoursesComponent } from '../../components'
 
 const MyCoursesPage = () => (
   <>
-
     <PageHeader title="Learn+ | My Courses" />
     <MyCoursesComponent />
   </>
