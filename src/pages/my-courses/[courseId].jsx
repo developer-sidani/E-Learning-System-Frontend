@@ -8,28 +8,34 @@ import { getCourseById } from '../../api'
 const PurchasedCoursePage = () => {
   const router = useRouter()
   const { courseId } = router.query
+  const [course, setCourse] = useState()
   const [loading, setLoading] = useState(true)
   const getCourseCallback = useCallback(async (id) => {
     try {
       const response = await getCourseById(id)
-      console.log(response)
+      if (response.status === 200) {
+        return response.data
+      }
+      await router.push('404')
     } catch (e) {
       console.error(e)
     } finally {
       setLoading(false)
     }
-  }, [])
+  }, [router])
 
   useEffect(() => {
     if (courseId) {
-      getCourseCallback(courseId)
+      getCourseCallback(courseId).then(r => {
+        setCourse(r)
+      })
     }
   }, [courseId])
 
   return (
     <>
-      <PageHeader title="Learn+" />
-      <PurchasedCourse />
+      <PageHeader title={`${course?.title} | Learn+`} />
+      <PurchasedCourse course={course} />
     </>
   )
 }
