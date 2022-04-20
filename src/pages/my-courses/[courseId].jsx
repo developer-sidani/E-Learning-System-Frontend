@@ -2,6 +2,7 @@ import React from 'react'
 import { useRouter } from 'next/router'
 import { AuthGuard } from '../../guards'
 import { MainLayout } from '../../layouts'
+import { PurchasedCourse } from '../../components'
 // import MyCoursesPage from './index'
 
 const PurchasedCoursePage = () => {
@@ -10,6 +11,7 @@ const PurchasedCoursePage = () => {
 
   return (
     <div>
+      <PurchasedCourse />
       {courseId}
     </div>
   )

@@ -204,4 +204,61 @@ export const course = [
     progress: '100',
   },
 ]
-// test
+
+export const sections = [
+
+  {
+    _id: '123456789',
+    title: 'Section1',
+    lectures: [
+      {
+        _id: '1111',
+        title: 'Lecture 1',
+        videoSrc: 'https://firebasestorage.googleapis.com/v0/b/learn-plus-fyp.appspot.com/o/lectures%2Fvideoplayback%20(1).mp4?alt=media&token=792ffaf3-6a22-4730-940b-7598005ae636',
+      },
+      {
+        _id: '222',
+        title: 'Lecture 2',
+        videoSrc: 'https://firebasestorage.googleapis.com/v0/b/learn-plus-fyp.appspot.com/o/lectures%2Fvideoplayback%20(1).mp4?alt=media&token=792ffaf3-6a22-4730-940b-7598005ae636',
+      },
+
+    ],
+  },
+
+  {
+    _id: '3123123',
+    title: 'Section2',
+    lectures: [
+      {
+        _id: '1111',
+        title: 'Lecture 1',
+        videoSrc: 'https://firebasestorage.googleapis.com/v0/b/learn-plus-fyp.appspot.com/o/lectures%2Fvideoplayback%20(1).mp4?alt=media&token=792ffaf3-6a22-4730-940b-7598005ae636',
+      },
+      {
+        _id: '222',
+        title: 'Lecture 2',
+        videoSrc: 'https://firebasestorage.googleapis.com/v0/b/learn-plus-fyp.appspot.com/o/lectures%2Fvideoplayback%20(1).mp4?alt=media&token=792ffaf3-6a22-4730-940b-7598005ae636',
+      },
+
+    ],
+  },
+
+  {
+    _id: '5235325',
+    title: 'Section3',
+    lectures: [
+      {
+        _id: '1111',
+        title: 'Lecture 1',
+        videoSrc: 'https://firebasestorage.googleapis.com/v0/b/learn-plus-fyp.appspot.com/o/lectures%2Fvideoplayback%20(1).mp4?alt=media&token=792ffaf3-6a22-4730-940b-7598005ae636',
+      },
+      {
+        _id: '222',
+        title: 'Lecture 2',
+        videoSrc: 'https://firebasestorage.googleapis.com/v0/b/learn-plus-fyp.appspot.com/o/lectures%2Fvideoplayback%20(1).mp4?alt=media&token=792ffaf3-6a22-4730-940b-7598005ae636',
+      },
+
+    ],
+  },
+
+]
