@@ -1,97 +1,120 @@
 import React from 'react'
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid'
+import {
+  ChevronLeftIcon, ChevronRightIcon, ChevronDoubleLeftIcon, ChevronDoubleRightIcon,
+} from '@heroicons/react/solid'
 
-const Pagination = () => (
+function classNames(...classes) {
+  return classes.filter(Boolean).join(' ')
+}
+const Pagination = ({ paginationData, getCoursesForStudentCallback }) => (
     <div className="bg-white mt-12 px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
       <div className="flex-1 flex justify-between sm:hidden">
-        <a
-          href="src/components/my-courses/modules/pagination#"
-          className="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
+        <button
+          type="button"
+          disabled={!paginationData?.hasPrevPage}
+          onClick={() => getCoursesForStudentCallback(paginationData?.prevPage)}
+          className={classNames(
+            'ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700',
+            paginationData?.hasPrevPage ? 'bg-white hover:bg-gray-50' : 'bg-gray-400',
+          )}
         >
           Previous
-        </a>
-        <a
-          href="src/components/my-courses/modules/pagination#"
-          className="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
+        </button>
+        <button
+          type="button"
+          onClick={() => getCoursesForStudentCallback(paginationData?.nextPage)}
+          disabled={!paginationData?.hasNextPage}
+          className={classNames(
+            'ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700',
+            paginationData?.hasNextPage ? 'bg-white hover:bg-gray-50' : 'bg-gray-400',
+          )}
         >
           Next
-        </a>
+        </button>
       </div>
       <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
         <div>
           <p className="text-sm text-gray-700">
-            Showing
-                {' '}
-                <span className="font-medium">1</span>
-                {' '}
-                to
-                {' '}
-                <span className="font-medium">10</span>
-                {' '}
-                of
-                {' '}
-                            <span className="font-medium">97</span>
-                {' '}
-                results
+              <span className="font-medium">{`${paginationData?.totalDocs} results`}</span>
           </p>
         </div>
         <div>
           <nav className="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
-            <a
-              href="src/components/my-courses/modules/pagination#"
-              className="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
+            <button
+              type="button"
+              disabled={paginationData.page === 1}
+              onClick={() => getCoursesForStudentCallback(1)}
+              className={classNames(
+                'relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 text-sm font-medium text-gray-500',
+                paginationData.page !== 1 ? 'bg-white hover:bg-gray-50' : 'bg-gray-400',
+              )}
+            >
+              <span className="sr-only">First</span>
+              <ChevronDoubleLeftIcon className="h-5 w-5" aria-hidden="true" />
+            </button>
+            <button
+              type="button"
+              disabled={!paginationData?.hasPrevPage}
+              onClick={() => getCoursesForStudentCallback(paginationData?.prevPage)}
+              className={classNames(
+                'relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 text-sm font-medium text-gray-500',
+                paginationData?.hasPrevPage ? 'bg-white hover:bg-gray-50' : 'bg-gray-400',
+              )}
             >
               <span className="sr-only">Previous</span>
               <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
-            </a>
-            {/* Current: "z-10 bg-indigo-50 border-indigo-500 text-indigo-600", Default: "bg-white border-gray-300 text-gray-500 hover:bg-gray-50" */}
-            <a
-              href="src/components/my-courses/modules/pagination#"
-              aria-current="page"
+            </button>
+            {paginationData?.hasPrevPage && (
+              <button
+                type="button"
+                onClick={() => getCoursesForStudentCallback(paginationData?.prevPage)}
+                className="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
+              >
+                {/* eslint-disable-next-line no-unsafe-optional-chaining */}
+                {paginationData?.prevPage}
+              </button>
+            )}
+            <button
+              type="button"
+              disabled
               className="z-10 bg-indigo-50 border-indigo-500 text-indigo-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
             >
-              1
-            </a>
-            <a
-              href="src/components/my-courses/modules/pagination#"
-              className="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
-            >
-              2
-            </a>
-            <a
-              href="src/components/my-courses/modules/pagination#"
-              className="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 hidden md:inline-flex relative items-center px-4 py-2 border text-sm font-medium"
-            >
-              3
-            </a>
-            <span className="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700">
-              ...
-            </span>
-            <a
-              href="src/components/my-courses/modules/pagination#"
-              className="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 hidden md:inline-flex relative items-center px-4 py-2 border text-sm font-medium"
-            >
-              8
-            </a>
-            <a
-              href="src/components/my-courses/modules/pagination#"
-              className="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
-            >
-              9
-            </a>
-            <a
-              href="src/components/my-courses/modules/pagination#"
-              className="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
-            >
-              10
-            </a>
-            <a
-              href="src/components/my-courses/modules/pagination#"
-              className="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
+              {paginationData?.page}
+            </button>
+            {paginationData?.hasNextPage && (
+              <button
+                type="button"
+                onClick={() => getCoursesForStudentCallback(paginationData?.nextPage)}
+                className="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
+              >
+                {/* eslint-disable-next-line no-unsafe-optional-chaining */}
+                {paginationData?.nextPage}
+              </button>
+            )}
+            <button
+              type="button"
+              onClick={() => getCoursesForStudentCallback(paginationData?.nextPage)}
+              disabled={!paginationData?.hasNextPage}
+              className={classNames(
+                'relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 text-sm font-medium text-gray-500',
+                paginationData?.hasNextPage ? 'bg-white hover:bg-gray-50' : 'bg-gray-400',
+              )}
             >
               <span className="sr-only">Next</span>
               <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />
-            </a>
+            </button>
+            <button
+              type="button"
+              onClick={() => getCoursesForStudentCallback(paginationData?.totalPages)}
+              disabled={paginationData?.page === paginationData?.totalPages}
+              className={classNames(
+                'relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 text-sm font-medium text-gray-500',
+                paginationData?.page !== paginationData?.totalPages ? 'bg-white hover:bg-gray-50' : 'bg-gray-400',
+              )}
+            >
+              <span className="sr-only">Last</span>
+              <ChevronDoubleRightIcon className="h-5 w-5" aria-hidden="true" />
+            </button>
           </nav>
         </div>
       </div>

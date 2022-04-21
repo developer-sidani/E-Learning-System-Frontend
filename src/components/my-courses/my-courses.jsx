@@ -1,6 +1,5 @@
 import React, {
-  memo,
-  useCallback, useEffect, useState,
+  memo, useCallback, useEffect, useState,
 } from 'react'
 import { StarIcon } from '@heroicons/react/solid'
 import { Box, LinearProgress, Typography } from '@mui/material'
@@ -31,26 +30,26 @@ const MyCoursesComponent = () => {
   const [courses, setCourses] = useState([])
   const profile = useSelector(state => state.profile)
   const [loading, setLoading] = useState(false)
+  const [paginationData, setPaginationData] = useState({})
   const userId = profile?.user?.id
-  const getCoursesForStudentCallback = useCallback(async (user, page) => {
-    setLoading(true)
-    try {
-      const response = await getCoursesForStudent(user, 10, page)
-      return response.courses
-    } catch (e) {
-      console.error(e)
-    } finally {
-      setLoading(false)
-    }
-  }, [])
-  useEffect(() => {
+  const getCoursesForStudentCallback = useCallback(async (page) => {
+    await userId
     if (userId) {
-      getCoursesForStudentCallback(userId, 1).then(r => {
-        console.log({ r })
-        setCourses(r)
-      })
+      setLoading(true)
+      try {
+        const response = await getCoursesForStudent(userId, 10, page)
+        setPaginationData(response?.data)
+        setCourses(response?.courses)
+      } catch (e) {
+        console.error(e)
+      } finally {
+        setLoading(false)
+      }
     }
   }, [userId])
+  useEffect(() => {
+    getCoursesForStudentCallback(1)
+  }, [])
 
   return (
     <div className="my-10">
@@ -58,12 +57,13 @@ const MyCoursesComponent = () => {
         My Courses
       </h2>
       <div className="max-w-2xl mx-auto py-16 px-4 sm:py-8 sm:px-6 lg:max-w-7xl lg:px-8">
-        <h2 className="sr-only">Products</h2>
+        <h2 className="sr-only">My Courses</h2>
         {loading ? (<Loader />) : (
           <div className="grid grid-cols-1 gap-y-10 sm:grid-cols-2 gap-x-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-              {courses?.map((course) => (
+              {courses?.map((course, index) => (
                   // eslint-disable-next-line jsx-a11y/no-static-element-interactions
                   <div
+                    key={index}
                     onClick={() => router.push(`/courses/${course?.id}`)}
                     className="rounded-lg overflow-hidden shadow-lg group cursor-pointer transition duration-200 ease-in transform sm:hover:scale-105 hover:z-50 max-w-xs w-[270] sm:w-[160]"
                   >
@@ -77,7 +77,7 @@ const MyCoursesComponent = () => {
                         {course?.title}
                       </h2>
                       <p className="max-w-md font-extralight text-sm">
-                        {course?.instructor}
+                        {course?.instructorId?.info?.fullName}
                       </p>
                       <div className="flex items-center text-clip max-w-xs gap-3">
                         <p className="font-[500] text-sm">
@@ -129,7 +129,12 @@ const MyCoursesComponent = () => {
               ))}
           </div>
         )}
-        <Pagination />
+        {!loading && (
+          <Pagination
+            paginationData={paginationData}
+            getCoursesForStudentCallback={getCoursesForStudentCallback}
+          />
+        )}
       </div>
     </div>
   )
