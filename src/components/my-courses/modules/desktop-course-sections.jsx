@@ -1,11 +1,12 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { Disclosure } from '@headlessui/react'
+import { MinusSmIcon, PlusSmIcon } from '@heroicons/react/solid'
 import { getSectionsWithLectures } from '../../../api'
-// TODO delete this page
+
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
-const CourseSections = ({ courseId, setSelectedLecture }) => {
+const DesktopCourseSections = ({ courseId, setSelectedLecture }) => {
   const [selectedSection, setSelectedSection] = useState()
   const [sections, setSections] = useState([])
   const [loading, setLoading] = useState(true)
@@ -20,7 +21,8 @@ const CourseSections = ({ courseId, setSelectedLecture }) => {
   }, [])
   useEffect(() => {
     if (courseId) {
-      getSectionsForCourse(courseId).then((r) => setSections(r.data))
+      getSectionsForCourse(courseId)
+        .then((r) => setSections(r.data))
     }
   }, [courseId])
   useEffect(() => {
@@ -33,25 +35,49 @@ const CourseSections = ({ courseId, setSelectedLecture }) => {
     }
   }, [sections])
   console.log(sections)
+
   return (
-    <div className="mt-5 flex-grow flex flex-col">
-      <nav className="flex-1 px-2 space-y-1 bg-white" aria-label="Sidebar">
-        {sections?.map((item, index) => !item?.lectures ? (
-          <div key={index}>
-            <button
-              onClick={() => setSelectedSection(item?.id)}
-              type="button"
-              className={classNames(
-                item?.id === selectedSection?.id
-                  ? 'bg-gray-100 text-gray-900'
-                  : 'bg-white text-gray-600 hover:bg-gray-50 hover:text-gray-900',
-                'group w-full flex items-center pl-7 pr-2 py-2 text-sm font-medium rounded-md',
-              )}
-            >
-              {item?.title}
-            </button>
-          </div>
-        ) : (
+    <div className="hidden lg:block">
+      <h3 className="sr-only">Categories</h3>
+
+      {sections?.map((item, index) => !item?.lectures ? (
+        <Disclosure as="div" className="border-b border-gray-200 py-6">
+          {({ open }) => (
+            <>
+              <h3 className="-my-3 flow-root">
+                <Disclosure.Button
+                  className="py-3 bg-white w-full flex items-center justify-between text-sm text-gray-400 hover:text-gray-500"
+                >
+                  <span className="font-medium text-gray-900">{item?.title}</span>
+                  <span className="ml-6 flex items-center">
+                              {open ? (
+                                <MinusSmIcon className="h-5 w-5" aria-hidden="true" />
+                              ) : (
+                                <PlusSmIcon className="h-5 w-5" aria-hidden="true" />
+                              )}
+                  </span>
+                </Disclosure.Button>
+              </h3>
+              <Disclosure.Panel className="pt-6">
+                <div className="space-y-4">
+                  {item?.lectures?.map((lecture, lectureIndex) => (
+                    <div className="flex items-center">
+                      <button
+                        key={lectureIndex}
+                        type="button"
+                        onClick={() => setSelectedLecture(lecture)}
+                        className="group w-full flex items-center pl-10 pr-2 py-2 text-sm font-medium text-gray-600 rounded-md hover:text-gray-900 hover:bg-gray-50"
+                      >
+                        {lecture?.title}
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </Disclosure.Panel>
+            </>
+          )}
+        </Disclosure>
+      ) : (
           <Disclosure as="div" key={item?.title} className="space-y-1">
             {() => (
               <>
@@ -60,7 +86,7 @@ const CourseSections = ({ courseId, setSelectedLecture }) => {
                     item?.id === selectedSection?.id
                       ? 'bg-gray-100 text-gray-900'
                       : 'bg-white text-gray-600 hover:bg-gray-50 hover:text-gray-900',
-                    'group w-full flex items-center pr-2 py-2 text-left text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500',
+                    'group w-full flex items-center pr-2 py-2 text-left text-sm font-medium rounded-md focus:outline-none focus:bg-gray-100',
                   )}
                 >
                   <svg
@@ -90,10 +116,9 @@ const CourseSections = ({ courseId, setSelectedLecture }) => {
               </>
             )}
           </Disclosure>
-        ))}
-      </nav>
+      ))}
     </div>
+
   )
 }
-
-export default CourseSections
+export default DesktopCourseSections

@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { AuthGuard, PurchasedCourseGuard } from '../../guards'
 import { MainLayout } from '../../layouts'
-import { PageHeader, PurchasedCourse } from '../../components'
+import { PageHeader, PurchasedCourse, PurchasedCourseNew } from '../../components'
 import { getCourseById } from '../../api'
 
 const PurchasedCoursePage = () => {
@@ -35,7 +35,7 @@ const PurchasedCoursePage = () => {
   return (
     <>
       <PageHeader title={`${course?.title} | Learn+`} />
-      <PurchasedCourse course={course} />
+      <PurchasedCourseNew course={course} />
     </>
   )
 }
