@@ -16,9 +16,9 @@ const MyCoursesComponent = () => {
   const [courses, setCourses] = useState([])
   const profile = useSelector(state => state.profile)
   const userId = profile?.user?.id
-  const getCoursesForStudentCallback = useCallback(async (user) => {
+  const getCoursesForStudentCallback = useCallback(async (user, page) => {
     try {
-      const response = await getCoursesForStudent(user, 1000, 1)
+      const response = await getCoursesForStudent(user, 10, page)
       return response.courses
     } catch (e) {
       console.error(e)
@@ -26,12 +26,12 @@ const MyCoursesComponent = () => {
   }, [])
   useEffect(() => {
     if (userId) {
-      getCoursesForStudentCallback(userId).then(r => {
+      getCoursesForStudentCallback(userId, 1).then(r => {
         console.log({ r })
         setCourses(r)
       })
     }
-  }, [getCoursesForStudentCallback, userId])
+  }, [userId])
 
   return (
   // <Tab.Panels as={Fragment}>
