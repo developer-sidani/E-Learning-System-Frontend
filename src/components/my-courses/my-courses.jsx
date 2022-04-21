@@ -1,15 +1,37 @@
-import React, { Fragment } from 'react'
-import { Tab } from '@headlessui/react'
+import React, {
+  useCallback, useEffect, useState,
+} from 'react'
 import { StarIcon } from '@heroicons/react/solid'
 import { Box, LinearProgress, Typography } from '@mui/material'
+import { useSelector } from 'react-redux'
+import { useRouter } from 'next/router'
 import { Pagination } from '.'
-import { course } from './data'
-// import { Pagination } from '.'
+import { getCoursesForStudent } from '../../api'
 
 const MyCoursesComponent = () => {
   function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
   }
+  const router = useRouter()
+  const [courses, setCourses] = useState([])
+  const profile = useSelector(state => state.profile)
+  const userId = profile?.user?.id
+  const getCoursesForStudentCallback = useCallback(async (user) => {
+    try {
+      const response = await getCoursesForStudent(user, 1000, 1)
+      return response.courses
+    } catch (e) {
+      console.error(e)
+    }
+  }, [])
+  useEffect(() => {
+    if (userId) {
+      getCoursesForStudentCallback(userId).then(r => {
+        console.log({ r })
+        setCourses(r)
+      })
+    }
+  }, [getCoursesForStudentCallback, userId])
 
   return (
   // <Tab.Panels as={Fragment}>
@@ -23,8 +45,10 @@ const MyCoursesComponent = () => {
         <h2 className="sr-only">Products</h2>
 
         <div className="grid grid-cols-1 gap-y-10 sm:grid-cols-2 gap-x-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-          {course.map((course) => (
+          {courses?.map((course) => (
+            // eslint-disable-next-line jsx-a11y/no-static-element-interactions
             <div
+              onClick={() => router.push(`/courses/${course?.id}`)}
               className="rounded-lg overflow-hidden shadow-lg group cursor-pointer transition duration-200 ease-in transform sm:hover:scale-105 hover:z-50 max-w-xs w-[270] sm:w-[160]"
             >
               <img
@@ -41,7 +65,8 @@ const MyCoursesComponent = () => {
                 </p>
                 <div className="flex items-center text-clip max-w-xs gap-3">
                   <p className="font-[500] text-sm">
-                    {course?.rating?.toString()}
+                    {/* eslint-disable-next-line no-unsafe-optional-chaining */}
+                    {(Math.round(course?.rating * 100) / 100)?.toString()}
                   </p>
                   <div className="flex items-center">
                     {[0, 1, 2, 3, 4].map((rating) => (
@@ -57,7 +82,7 @@ const MyCoursesComponent = () => {
                   </div>
                 </div>
                 <p className="font-bold text-sm p-0">
-                  {`${course?.currency} ${course?.price}`}
+                  {course?.price}
                 </p>
                 {course?.flag?.length > 0 ? (
                   <div className="w-1/4 bg-yellow-300 px-3 py-1 mt-1 object-contain">
@@ -70,17 +95,16 @@ const MyCoursesComponent = () => {
                   </div>
                 ) : (
                   <div className="px-3 py-1 mt-1"><p /></div>
-
                 )}
               </div>
               <Box sx={{ display: 'flex', alignItems: 'center' }}>
                 <Box sx={{ width: '100%', mr: 1, color: '#0A003C' }}>
-                  <LinearProgress variant="determinate" color="inherit" value={course?.progress} />
+                  <LinearProgress variant="determinate" color="inherit" value={course?.progress || 70} />
                 </Box>
                 <Box sx={{ minWidth: 35 }}>
                   <Typography variant="body2" color="text.primary">
                     {`${Math.round(
-                      course?.progress,
+                      course?.progress || 70,
                     )}%`}
                   </Typography>
                 </Box>
