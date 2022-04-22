@@ -6,19 +6,18 @@ import * as Yup from 'yup'
 
 const ContactSchema = Yup.object().shape({
   firstname: Yup.string().required('Required'),
+
   lastname: Yup.string().required('Required'),
   email: Yup.string().email('Must be a valid email').required('Required'),
   phone: Yup.string(),
   subject: Yup.string().required('Required'),
   message: Yup.string().max(500, 'Message Must be Max of 500 Characters').required('Required'),
 })
-
 const submitValues = () => (values, { resetForm }) => {
   console.log(values)
   resetForm()
 }
 
-// todo add formik and handle the api
 const ContactUsComponent = ({ offices }) => (
     <>
     <div className="bg-white">

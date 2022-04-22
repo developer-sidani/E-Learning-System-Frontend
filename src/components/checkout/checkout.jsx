@@ -1,14 +1,16 @@
-import { useState } from 'react'
-import { RadioGroup } from '@headlessui/react'
-import { CheckCircleIcon, TrashIcon } from '@heroicons/react/solid'
-import { countryList } from '../../utils'
+import React, { useRef, useState } from 'react'
+import { Formik, Form } from 'formik'
+// import { RadioGroup } from '@headlessui/react'
+import { TrashIcon } from '@heroicons/react/solid'
 import {
-  FormControl,
-  FormHelperText,
-  Grid, InputLabel, MenuItem, Select, TextField,
+  TextField, RadioGroup,
 } from '@mui/material'
+import * as Yup from 'yup'
+import { useSelector } from 'react-redux'
 
-const countries = countryList.map(({ Name }) => Name)
+// import { countryList } from '../../utils'
+
+// const countries = countryList.map(({ Name }) => Name)
 
 const products = [
   {
@@ -19,36 +21,99 @@ const products = [
     color: 'Black',
     size: 'Large',
     imageSrc: 'https://img-c.udemycdn.com/course/125_H/1331946_ed41_4.jpg',
-    imageAlt: "Front of men's Basic Tee in black.",
+    imageAlt: 'Front of men\'s Basic Tee in black.',
   },
   // More products...
 ]
 const deliveryMethods = [
-  { id: 1, title: 'Standard', turnaround: '4–10 business days', price: '$5.00' },
-  { id: 2, title: 'Express', turnaround: '2–5 business days', price: '$16.00' },
+  {
+    id: 1,
+    title: 'Standard',
+    turnaround: '4–10 business days',
+    price: '$5.00',
+  },
+  {
+    id: 2,
+    title: 'Express',
+    turnaround: '2–5 business days',
+    price: '$16.00',
+  },
 ]
 const paymentMethods = [
-  { id: 'master-card', title: 'Master Card' },
-  { id: 'visa-card', title: 'Visa Card' },
+  {
+    id: 'master-card',
+    title: 'Master Card',
+  },
+  {
+    id: 'visa-card',
+    title: 'Visa Card',
+  },
   // { id: 'etransfer', title: 'eTransfer' },
 ]
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
+// function classNames(...classes) {
+//   return classes.filter(Boolean)
+//     .join(' ')
+// }
+
+const CheckoutSchema = Yup.object().shape({
+  // Personal
+  firstname: Yup.string().required('Required'),
+  lastname: Yup.string().required('Required'),
+  email: Yup.string().email('Must be a valid email').required('Required'),
+  phone: Yup.string().required('Required'),
+
+  // Billing
+  nameOnCard: Yup.string().required('Required'),
+  cardNumber: Yup.string().max(16).required('Required'),
+  expiration: Yup.string()
+    .typeError('Not a valid expiration date. Example: MM/YY')
+    .max(5, 'Not a valid expiration date. Example: MM/YY')
+    .matches(
+      /([0-9]{2})\/([0-9]{2})/,
+      'Not a valid expiration date. Example: MM/YY',
+    )
+    .required('Expiration date is required'),
+  cvc: Yup.string()
+    .min(3)
+    .max(3)
+    .required('Required'),
+})
+
+const submitValues = () => (values, { resetForm }) => {
+  console.log(values)
+  // resetForm()
 }
 
-const CheckoutComponent = ({
-  touched, errors, handleChange, values, setFieldValue, handleBlur,
-}) => {
-  const [selectedDeliveryMethod, setSelectedDeliveryMethod] = useState(deliveryMethods[0])
+const Checkout = () => {
+  const profile = useSelector(({ profile }) => profile)
+  return (
 
-return(
-  
-    <div className="bg-gray-50">
+    <div className="">
       <div className="max-w-2xl mx-auto pt-16 pb-24 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
         <h2 className="sr-only">Checkout</h2>
+        <Formik
+          initialValues={{
+            userId: profile?.user?.id,
+            firstname: '',
+            lastname: '',
+            email: '',
+            phone: '',
+            paymentType: 'Master Card',
+            nameOnCard: '',
+            cardNumber: '',
+            expiration: '',
+            cvc: '',
 
-        <form className="lg:grid lg:grid-cols-2 lg:gap-x-12 xl:gap-x-16">
+          }}
+          validationSchema={CheckoutSchema}
+          onSubmit={submitValues()}
+        >
+          {({
+            values, errors, touched, handleChange, handleBlur,
+          }) => (
+
+        <Form className="lg:grid lg:grid-cols-2 lg:gap-x-12 xl:gap-x-16">
           <div>
             <div>
               <h2 className="text-lg font-medium text-gray-900">Contact information</h2>
@@ -58,12 +123,15 @@ return(
                     First name
                   </label>
                   <div className="mt-1">
-                    <input
-                      type="text"
-                      id="first-name"
-                      name="first-name"
-                      autoComplete="given-name"
-                      className="block py-1.5 w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                    <TextField
+                      onBlur={handleBlur}
+                      error={Boolean(touched.firstname && errors.firstname)}
+                      fullWidth
+                      helperText={touched.firstname && errors.firstname}
+                      name="firstname"
+                      onChange={handleChange}
+                      required
+                      value={values.firstname}
                     />
                   </div>
                 </div>
@@ -73,17 +141,20 @@ return(
                     Last name
                   </label>
                   <div className="mt-1">
-                    <input
-                      type="text"
-                      id="last-name"
-                      name="last-name"
-                      autoComplete="family-name"
-                      className="block py-1.5 w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                    <TextField
+                      onBlur={handleBlur}
+                      error={Boolean(touched.lastname && errors.lastname)}
+                      fullWidth
+                      helperText={touched.lastname && errors.lastname}
+                      name="lastname"
+                      onChange={handleChange}
+                      required
+                      value={values.lastname}
                     />
                   </div>
                 </div>
 
-{/* <div className="col-span-6 sm:col-span-3">
+                {/* <div className="col-span-6 sm:col-span-3">
               <FormControl required fullWidth>
                 <InputLabel id="demo-simple-select-required-label">Country</InputLabel>
                 <Select
@@ -111,12 +182,15 @@ return(
                     Phone Number
                   </label>
                   <div className="mt-1">
-                    <input
-                      type="text"
+                    <TextField
+                      onBlur={handleBlur}
+                      error={Boolean(touched.phone && errors.phone)}
+                      fullWidth
+                      helperText={touched.phone && errors.phone}
                       name="phone"
-                      id="phone"
-                      autoComplete="tel"
-                      className="block py-1.5 w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                      onChange={handleChange}
+                      required
+                      value={values.phone}
                     />
                   </div>
                 </div>
@@ -126,12 +200,15 @@ return(
                   Email address
                 </label>
                 <div className="mt-1">
-                  <input
-                    type="email"
-                    id="email-address"
-                    name="email-address"
-                    autoComplete="email"
-                    className="block py-1.5 w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  <TextField
+                    onBlur={handleBlur}
+                    error={Boolean(touched.email && errors.email)}
+                    fullWidth
+                    helperText={touched.email && errors.email}
+                    name="email"
+                    onChange={handleChange}
+                    required
+                    value={values.email}
                   />
                 </div>
               </div>
@@ -140,7 +217,6 @@ return(
             {/* <div className="mt-10 border-t border-gray-200 pt-10">
               <h2 className="text-lg font-medium text-gray-900">Shipping information</h2>
 
-              
             </div> */}
 
             {/* Payment */}
@@ -155,16 +231,20 @@ return(
                       {paymentMethodIdx === 0 ? (
                         <input
                           id={paymentMethod.id}
-                          name="payment-type"
+                          name="paymentType"
                           type="radio"
+                          onChange={handleChange}
+                          value="Master Card"
                           defaultChecked
                           className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
                         />
                       ) : (
                         <input
                           id={paymentMethod.id}
-                          name="payment-type"
+                          name="paymentType"
                           type="radio"
+                          onChange={handleChange}
+                          value="visa"
                           className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
                         />
                       )}
@@ -183,13 +263,17 @@ return(
                     Card number
                   </label>
                   <div className="mt-1">
-                    <input
-                      type="text"
-                      id="card-number"
-                      name="card-number"
-                      autoComplete="cc-number"
-                      className="block py-1.5 w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                    <TextField
+                      onBlur={handleBlur}
+                      error={Boolean(touched.cardNumber && errors.cardNumber)}
+                      fullWidth
+                      helperText={touched.cardNumber && errors.cardNumber}
+                      name="cardNumber"
+                      onChange={handleChange}
+                      required
+                      value={values.cardNumber}
                     />
+
                   </div>
                 </div>
 
@@ -198,12 +282,15 @@ return(
                     Name on card
                   </label>
                   <div className="mt-1">
-                    <input
-                      type="text"
-                      id="name-on-card"
-                      name="name-on-card"
-                      autoComplete="cc-name"
-                      className="block py-1.5 w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                    <TextField
+                      onBlur={handleBlur}
+                      error={Boolean(touched.nameOnCard && errors.nameOnCard)}
+                      fullWidth
+                      helperText={touched.nameOnCard && errors.nameOnCard}
+                      name="nameOnCard"
+                      onChange={handleChange}
+                      required
+                      value={values.nameOnCard}
                     />
                   </div>
                 </div>
@@ -213,12 +300,15 @@ return(
                     Expiration date (MM/YY)
                   </label>
                   <div className="mt-1">
-                    <input
-                      type="text"
-                      name="expiration-date"
-                      id="expiration-date"
-                      autoComplete="cc-exp"
-                      className="block py-1.5 w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                    <TextField
+                      onBlur={handleBlur}
+                      error={Boolean(touched.expiration && errors.expiration)}
+                      fullWidth
+                      helperText={touched.expiration && errors.expiration}
+                      name="expiration"
+                      onChange={handleChange}
+                      required
+                      value={values.expiration}
                     />
                   </div>
                 </div>
@@ -228,12 +318,15 @@ return(
                     CVC
                   </label>
                   <div className="mt-1">
-                    <input
-                      type="text"
+                    <TextField
+                      onBlur={handleBlur}
+                      error={Boolean(touched.cvc && errors.cvc)}
+                      fullWidth
+                      helperText={touched.cvc && errors.cvc}
                       name="cvc"
-                      id="cvc"
-                      autoComplete="csc"
-                      className="block py-1.5 w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                      onChange={handleChange}
+                      required
+                      value={values.cvc}
                     />
                   </div>
                 </div>
@@ -325,8 +418,13 @@ return(
               </div>
             </div>
           </div>
-        </form>
+        </Form>
+          )}
+        </Formik>
+
       </div>
     </div>
-  )}
-  export default CheckoutComponent
+  )
+}
+
+export default Checkout
