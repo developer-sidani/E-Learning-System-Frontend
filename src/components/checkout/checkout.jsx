@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 import { Formik, Form } from 'formik'
-import { TrashIcon } from '@heroicons/react/solid'
+import { StarIcon, TrashIcon } from '@heroicons/react/solid'
 import {
   TextField,
 } from '@mui/material'
@@ -8,19 +8,10 @@ import * as Yup from 'yup'
 import { useDispatch, useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
 
-const products = [
-  {
-    id: 1,
-    title: 'Basic Tee',
-    href: '#',
-    price: '$32.00',
-    color: 'Black',
-    size: 'Large',
-    imageSrc: 'https://img-c.udemycdn.com/course/125_H/1331946_ed41_4.jpg',
-    imageAlt: 'Front of men\'s Basic Tee in black.',
-  },
-  // More products...
-]
+function classNames(...classes) {
+  return classes.filter(Boolean).join(' ')
+}
+
 const paymentMethods = [
   {
     id: 'master-card',
@@ -310,7 +301,18 @@ const Checkout = () => {
                             </a>
                           </h4>
                           <p className="mt-1 text-sm text-gray-500">{product?.instructor?.name}</p>
-                          <p className="mt-1 text-sm text-gray-500">{product.size}</p>
+                          <div className="flex items-center mt-4">
+                            {[0, 1, 2, 3, 4].map((rating) => (
+                              <StarIcon
+                                key={rating}
+                                className={classNames(
+                                  rating ? 'text-yellow-400' : 'text-gray-300',
+                                  'h-5 w-5 flex-shrink-0',
+                                )}
+                                aria-hidden="true"
+                              />
+                            ))}
+                          </div>
                         </div>
 
                         <div className="ml-4 flex-shrink-0 flow-root">
