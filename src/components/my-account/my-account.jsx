@@ -95,7 +95,7 @@ const MyAccountComponent = () => {
                        onClick={() => setTab(item)}
                        className={classNames(
                          item === tab
-                           ? 'bg-teal-50 border-[#0A003C] text-[#9C4DF4] hover:bg-teal-50 hover:text-teal-700'
+                           ? 'bg-indigo-50 border-[#0A003C] text-[#9C4DF4] hover:bg-indigo-100 hover:text-indigo-700'
                            : 'border-transparent text-gray-900 hover:bg-gray-50 hover:text-gray-900',
                          'group border-l-4 px-3 py-2 flex items-center text-sm font-medium w-full',
                        )}
@@ -104,7 +104,7 @@ const MyAccountComponent = () => {
                        <item.icon
                          className={classNames(
                            item === tab
-                             ? 'text-teal-500 group-hover:text-teal-500'
+                             ? 'text-indigo-500 group-hover:text-indigo-700'
                              : 'text-gray-400 group-hover:text-gray-500',
                            'flex-shrink-0 -ml-1 mr-3 h-6 w-6',
                          )}

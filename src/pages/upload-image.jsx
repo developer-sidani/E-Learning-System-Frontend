@@ -5,7 +5,8 @@ import { UploadFile } from '../hooks'
 const TestPage = () => {
   const [file, handleUpload] = UploadFile({
     location: 'temp',
-    fileTypes: ['image/png', 'image/jpeg', 'image/jpg'],
+    // fileTypes: ['image/png', 'image/jpeg', 'image/jpg'],
+    fileTypes: ['video/mp4', 'video/x-m4v', 'video/*'],
     fileSize: 1,
     errorMessages: {
       fileType: 'Please select an image file (png or jpg)',
