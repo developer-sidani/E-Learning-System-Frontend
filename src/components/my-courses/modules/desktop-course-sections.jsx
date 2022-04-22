@@ -37,7 +37,7 @@ const DesktopCourseSections = ({ courseId, setSelectedLecture }) => {
   console.log(sections)
 
   return (
-    <div className="hidden lg:block">
+    <div className="hidden lg:block border-r">
       <h3 className="sr-only">Categories</h3>
 
       {sections?.map((item, index) => !item?.lectures ? (
