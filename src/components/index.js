@@ -21,7 +21,7 @@ export { CartComponent } from './cart'
 
 export {
   CoursesContainer, CoursesSlider, TopCategoriesComponent, CategoryContainer, CallToActionComponent,
-  IncentivesComponent,
+  IncentivesComponent, RecommendedCourses, PersonalizedSearchCourses, TrendingCourses, StudentsAreViewingCourses, AlsoBoughtCourses,
 } from './home'
 
 export { MyAccountComponent } from './my-account'
