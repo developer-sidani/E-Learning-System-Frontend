@@ -1,16 +1,11 @@
 import React, { useRef, useState } from 'react'
 import { Formik, Form } from 'formik'
-// import { RadioGroup } from '@headlessui/react'
 import { TrashIcon } from '@heroicons/react/solid'
 import {
-  TextField, RadioGroup,
+  TextField,
 } from '@mui/material'
 import * as Yup from 'yup'
 import { useSelector } from 'react-redux'
-
-// import { countryList } from '../../utils'
-
-// const countries = countryList.map(({ Name }) => Name)
 
 const products = [
   {
@@ -48,13 +43,7 @@ const paymentMethods = [
     id: 'visa-card',
     title: 'Visa Card',
   },
-  // { id: 'etransfer', title: 'eTransfer' },
 ]
-
-// function classNames(...classes) {
-//   return classes.filter(Boolean)
-//     .join(' ')
-// }
 
 const CheckoutSchema = Yup.object().shape({
   // Personal
@@ -154,29 +143,6 @@ const Checkout = () => {
                   </div>
                 </div>
 
-                {/* <div className="col-span-6 sm:col-span-3">
-              <FormControl required fullWidth>
-                <InputLabel id="demo-simple-select-required-label">Country</InputLabel>
-                <Select
-                  labelId="demo-simple-select-required-label"
-                  id="demo-simple-select-required"
-                  error={Boolean(touched.country && errors.country)}
-                  fullWidth
-                  label="Country"
-                  name="country"
-                  onChange={handleChange}
-                  required
-                  value={values.country}
-                  onBlur={handleBlur}
-                >
-                  {countries.map((country, index) => (
-                    <MenuItem key={index} value={country}>{country}</MenuItem>
-                  ))}
-                </Select>
-                <FormHelperText color="#3DDB77">{touched.country && errors.country}</FormHelperText>
-              </FormControl>
-            </div> */}
-
                 <div className="sm:col-span-2">
                   <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
                     Phone Number
@@ -213,11 +179,6 @@ const Checkout = () => {
                 </div>
               </div>
             </div>
-
-            {/* <div className="mt-10 border-t border-gray-200 pt-10">
-              <h2 className="text-lg font-medium text-gray-900">Shipping information</h2>
-
-            </div> */}
 
             {/* Payment */}
             <div className="mt-10 border-t border-gray-200 pt-10">
