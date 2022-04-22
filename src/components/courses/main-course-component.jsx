@@ -8,6 +8,7 @@ function classNames(...classes) {
 const MainCourseComponent = ({ course }) => {
   const router = useRouter()
   return (
+  // eslint-disable-next-line jsx-a11y/no-static-element-interactions
       <div
         onClick={() => router.push(`/courses/${course?.id}`)}
         className="mx-0 rounded-lg overflow-hidden shadow-lg group cursor-pointer transition duration-200 ease-in transform sm:hover:scale-105 hover:z-50 max-w-xs w-[270] sm:w-[160]"
@@ -22,7 +23,7 @@ const MainCourseComponent = ({ course }) => {
                   {course?.title}
               </h2>
               <p className="max-w-md font-extralight text-sm">
-                  {course?.instructor}
+                  {course?.instructorId?.info?.fullName}
               </p>
               <div className="flex items-center text-clip max-w-xs gap-3">
                   <p className="font-[500] text-sm">
@@ -42,7 +43,7 @@ const MainCourseComponent = ({ course }) => {
                   </div>
               </div>
               <p className="font-bold text-sm p-0">
-                  {`${course?.currency} ${course?.price}`}
+                  {course?.price}
               </p>
               {course?.flag?.length > 0 ? (
                 <div className="w-1/4 bg-yellow-300 px-3 py-1 mt-1 object-contain">

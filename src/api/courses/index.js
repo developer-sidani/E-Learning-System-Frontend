@@ -1,2 +1,2 @@
 export { getCoursesForStudent } from './get-courses-for-student'
-export { getCourseById } from './get-course'
+export { getCourseById, getCourses, getCoursesForCategory } from './get-course'

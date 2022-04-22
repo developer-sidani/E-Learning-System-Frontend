@@ -31,7 +31,7 @@ const CoursesSlider = ({ loading, courses }) => {
     return { visibleSlides: 1, step: 1 }
   }, [largeDevice, mobileDevice, tabDevice])
   return (
-    <CarouselProvider infinite id="carouselExampleSlidesOnly" className="mx-2 carousel slide relative" data-bs-ride="carousel" naturalSlideWidth={300} isIntrinsicHeight totalSlides={loading ? 10 : courses.length} visibleSlides={getSettingsForCarousel.visibleSlides} step={getSettingsForCarousel.step}>
+    <CarouselProvider infinite id="carouselExampleSlidesOnly" className="mx-2 carousel slide relative" data-bs-ride="carousel" naturalSlideWidth={300} isIntrinsicHeight totalSlides={loading ? 10 : courses?.length} visibleSlides={getSettingsForCarousel.visibleSlides} step={getSettingsForCarousel.step}>
       <ButtonBack
         className="mr-1 carousel-control-next absolute top-1/2 bottom-1/2 flex items-center justify-center p-0 text-center border-0 hover:outline-none hover:no-underline focus:outline-none focus:no-underline left-2 z-50"
         type="button"
