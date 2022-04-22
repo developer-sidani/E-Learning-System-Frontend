@@ -8,11 +8,13 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 const LectureOverview = ({ selectedLecture }) => (
-  <div className="flex flex-col">
+  <div className=" flex flex-col">
     <div className="mb-10">
       <p className="text-base text-primary font-bold text-xl my-10">{selectedLecture?.title}</p>
-      <div className=" mx-[20%]">
+      <div className=" md:mx-[20%]">
         <ReactPlayer
+          height="100%"
+          width="100%"
           // className="relative top-0 left-0"
           controls
           config={{ file: { attributes: { controlsList: selectedLecture?.isDownloadable ? 'download' : 'nodownload' /* controlsList: 'nodownload' || 'download' */ } } }}
@@ -50,7 +52,7 @@ const LectureOverview = ({ selectedLecture }) => (
       </div>
       <Tab.Panels as={Fragment}>
         <Tab.Panel className="pt-10">
-          <div className="mb-10 px-10">
+          <div className="mb-10 ">
             <h3 className="sr-only">Reviews</h3>
 
             {reviews.featured.map((review, reviewIdx) => (
@@ -76,7 +78,7 @@ const LectureOverview = ({ selectedLecture }) => (
           </div>
         </Tab.Panel>
         <Tab.Panel className="pt-10">
-          <div className="mb-10 px-10">
+          <div className="mb-10 ">
             <h3 className="sr-only">Reviews</h3>
 
             {reviews.featured.map((review, reviewIdx) => (

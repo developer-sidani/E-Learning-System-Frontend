@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { CourseSections, LectureOverview } from './modules'
 
+// TODO delete this page
+
 const PurchasedCourse = ({ course }) => {
   const [selectedLecture, setSelectedLecture] = useState()
   return (
