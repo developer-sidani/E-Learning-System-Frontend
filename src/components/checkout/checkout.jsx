@@ -5,7 +5,8 @@ import {
   TextField,
 } from '@mui/material'
 import * as Yup from 'yup'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { useRouter } from 'next/router'
 
 const products = [
   {
@@ -19,20 +20,6 @@ const products = [
     imageAlt: 'Front of men\'s Basic Tee in black.',
   },
   // More products...
-]
-const deliveryMethods = [
-  {
-    id: 1,
-    title: 'Standard',
-    turnaround: '4–10 business days',
-    price: '$5.00',
-  },
-  {
-    id: 2,
-    title: 'Express',
-    turnaround: '2–5 business days',
-    price: '$16.00',
-  },
 ]
 const paymentMethods = [
   {
@@ -76,6 +63,12 @@ const submitValues = () => (values, { resetForm }) => {
 
 const Checkout = () => {
   const profile = useSelector(({ profile }) => profile)
+  const myData = useSelector(({ cart }) => cart)
+  const cart = myData?.data || []
+  const subTotal = cart?.reduce((acc, { price }) => acc + price, 0)
+  const dispatch = useDispatch()
+  const router = useRouter()
+  console.log(cart)
   return (
 
     <div className="">
@@ -297,15 +290,15 @@ const Checkout = () => {
 
           {/* Order summary */}
           <div className="mt-10 lg:mt-0">
-            <h2 className="text-lg font-medium text-gray-900">Order summary</h2>
+            <h2 className="text-lg font-medium text-gray-900">Cart summary</h2>
 
             <div className="mt-4 bg-white border border-gray-200 rounded-lg shadow-sm">
               <h3 className="sr-only">Items in your cart</h3>
               <ul role="list" className="divide-y divide-gray-200">
-                {products.map((product) => (
+                {cart.map((product) => (
                   <li key={product.id} className="flex py-6 px-4 sm:px-6">
                     <div className="flex-shrink-0">
-                      <img src={product.imageSrc} alt={product.imageAlt} className="w-20 rounded-md" />
+                      <img src={product.image_125_H} alt={product.imageAlt} className="w-20 rounded-md" />
                     </div>
 
                     <div className="ml-6 flex-1 flex flex-col">
@@ -316,7 +309,7 @@ const Checkout = () => {
                               {product.title}
                             </a>
                           </h4>
-                          <p className="mt-1 text-sm text-gray-500">{product.color}</p>
+                          <p className="mt-1 text-sm text-gray-500">{product?.instructor?.name}</p>
                           <p className="mt-1 text-sm text-gray-500">{product.size}</p>
                         </div>
 
@@ -332,27 +325,11 @@ const Checkout = () => {
                       </div>
 
                       <div className="flex-1 pt-2 flex items-end justify-between">
-                        <p className="mt-1 text-sm font-medium text-gray-900">{product.price}</p>
+                        <p className="mt-1 text-sm font-medium text-gray-900">
+$
+{product.price}
+                        </p>
 
-                        <div className="ml-4">
-                          <label htmlFor="quantity" className="sr-only">
-                            Quantity
-                          </label>
-                          <select
-                            id="quantity"
-                            name="quantity"
-                            className="rounded-md border border-gray-300 text-base font-medium text-gray-700 text-left shadow-sm focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                          >
-                            <option value={1}>1</option>
-                            <option value={2}>2</option>
-                            <option value={3}>3</option>
-                            <option value={4}>4</option>
-                            <option value={5}>5</option>
-                            <option value={6}>6</option>
-                            <option value={7}>7</option>
-                            <option value={8}>8</option>
-                          </select>
-                        </div>
                       </div>
                     </div>
                   </li>
@@ -361,11 +338,17 @@ const Checkout = () => {
               <dl className="border-t border-gray-200 py-6 px-4 space-y-6 sm:px-6">
                 <div className="flex items-center justify-between">
                   <dt className="text-sm">Subtotal</dt>
-                  <dd className="text-sm font-medium text-gray-900">$64.00</dd>
+                  <dd className="text-sm font-medium text-gray-900">
+                  $
+                  {subTotal}
+                  </dd>
                 </div>
                 <div className="flex items-center justify-between border-t border-gray-200 pt-6">
                   <dt className="text-base font-medium">Total</dt>
-                  <dd className="text-base font-medium text-gray-900">$75.52</dd>
+                  <dd className="text-base font-medium text-gray-900">
+                    $
+                    {subTotal}
+                  </dd>
                 </div>
               </dl>
 
