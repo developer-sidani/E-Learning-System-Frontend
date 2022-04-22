@@ -302,11 +302,11 @@ const Checkout = () => {
                           </h4>
                           <p className="mt-1 text-sm text-gray-500">{product?.instructor?.name}</p>
                           <div className="flex items-center mt-4">
-                            {[0, 1, 2, 3, 4].map((rating) => (
+                            {[0, 1, 2, 3, 4].map((ratings) => (
                               <StarIcon
-                                key={rating}
+                                key={ratings}
                                 className={classNames(
-                                  rating ? 'text-yellow-400' : 'text-gray-300',
+                                  product.rating > ratings ? 'text-yellow-400' : 'text-gray-300',
                                   'h-5 w-5 flex-shrink-0',
                                 )}
                                 aria-hidden="true"
