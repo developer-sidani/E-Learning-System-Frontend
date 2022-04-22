@@ -32,7 +32,6 @@ const CourseSections = ({ courseId, setSelectedLecture }) => {
       setSelectedSection(null)
     }
   }, [sections])
-  console.log(sections)
   return (
     <div className="mt-5 flex-grow flex flex-col">
       <nav className="flex-1 px-2 space-y-1 bg-white" aria-label="Sidebar">

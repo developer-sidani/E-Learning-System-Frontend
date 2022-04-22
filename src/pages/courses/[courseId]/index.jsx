@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { useSelector } from 'react-redux'
-import { PageHeader, Component1 } from '../../../components'
+import { PageHeader, GetCourseComponent } from '../../../components'
 import { MainLayout } from '../../../layouts'
+import { getCourse } from '../../../api'
 
 const GetCoursePage = () => {
   const router = useRouter()
@@ -10,6 +11,36 @@ const GetCoursePage = () => {
   const myData = useSelector(({ cart }) => cart)
   const cart = myData?.data || []
   const [courseBelongsToCart, setCourseBelongsToCart] = useState(false)
+
+  // ******************************
+  const [course, setCourse] = useState([])
+  const [loading, setLoading] = useState(false)
+  const getCourseCallback = useCallback(
+    async (id) => {
+      setLoading(true)
+      try {
+        // console.log(courseId)
+        const res = await getCourse(id)
+        setCourse(res?.res?.data)
+        console.log(res)
+      } catch (e) {
+        console.log(e)
+      } finally {
+        setLoading(false)
+      }
+    },
+    [],
+  )
+  useEffect(() => {
+    if (courseId) {
+      getCourseCallback(courseId)
+    }
+    return () => {
+      setCourse([])
+    }
+  }, [courseId])
+
+  // ***********************************
   useEffect(() => {
     if (courseId) {
       setCourseBelongsToCart(cart.filter(({ id }) => id === courseId).length > 0)
@@ -18,7 +49,8 @@ const GetCoursePage = () => {
   return (
     <>
       <PageHeader title="Learn+ | Get Course" />
-      <Component1
+      <GetCourseComponent
+        data={course}
         courseBelongsToCart={courseBelongsToCart}
         courseId={courseId}
       />
