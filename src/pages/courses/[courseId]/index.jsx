@@ -7,7 +7,8 @@ import { MainLayout } from '../../../layouts'
 const GetCoursePage = () => {
   const router = useRouter()
   const { courseId } = router.query
-  const { data: cart } = useSelector(({ cart }) => cart)
+  const myData = useSelector(({ cart }) => cart)
+  const cart = myData?.data || []
   const [courseBelongsToCart, setCourseBelongsToCart] = useState(false)
   useEffect(() => {
     if (courseId) {

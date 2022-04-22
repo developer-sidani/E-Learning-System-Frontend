@@ -17,6 +17,7 @@ export { TermsOfUseComponent } from './terms-of-use'
 export { InstructorComponent } from './instructors'
 export { GetCourseComponent } from './get-course'
 export { Component1 } from './get-course'
+export { CheckoutComponent } from './checkout'
 export { CartComponent } from './cart'
 
 export {

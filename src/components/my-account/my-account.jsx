@@ -40,10 +40,6 @@ function classNames(...classes) {
 }
 
 const MyAccountComponent = () => {
-  const [availableToHire, setAvailableToHire] = useState(true)
-  const [privateAccount, setPrivateAccount] = useState(false)
-  const [allowCommenting, setAllowCommenting] = useState(true)
-  const [allowMentions, setAllowMentions] = useState(true)
   const [tab, setTab] = useState(subNavigation[0])
   return (
 
