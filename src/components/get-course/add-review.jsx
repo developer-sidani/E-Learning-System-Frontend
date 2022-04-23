@@ -5,25 +5,28 @@ import {
   TextField,
 } from '@mui/material'
 import * as Yup from 'yup'
+import StarRatings from 'react-star-ratings'
 
 export const ReviewSchema = Yup.object().shape({
 
   message: Yup.string().required('Your message could not be empty'),
+  rating: Yup.number().required('Rating could not be zero'),
 
 })
 
-const submitValues = (callback, handler) => (values, { resetForm }) => {
-  resetForm()
-  console.log(values)
-  // callback(values, resetForm, handler)
-}
-
 const AddReview = ({ courseId }) => {
-  const [rating, setRating] = useState(0)
+  const [starRating, setStarRating] = useState()
+
   const profile = useSelector(({ profile }) => profile)
   const ref = useRef(null)
   const initialValues = {
     message: '',
+    rating: starRating,
+  }
+  const submitValues = (callback, handler) => (values, { resetForm }) => {
+    resetForm()
+    console.log(values)
+    // callback(values, resetForm, handler)
   }
 
   const [loading, setLoading] = useState(false)
@@ -84,6 +87,23 @@ const AddReview = ({ courseId }) => {
           }) => (
         <Form>
           <div className=" border-gray-200 focus-within:border-indigo-600">
+            <StarRatings
+              error={Boolean(touched.rating && errors.rating)}
+              rating={starRating}
+              changeRating={setStarRating}
+              name="rating"
+              starDimension="20px"
+              starHoverColor="#FACC15"
+              starRatedColor="#FACC15"
+              starSpacing="0px"
+              numberOfStars={5}
+            />
+            {(errors.rating) && touched.rating ? (
+              <div className="mt-1 text-pink-600 text-sm">
+                {errors.rating}
+              </div>
+            ) : null}
+
             <label htmlFor="comment" className="sr-only">
               Add your review
             </label>
@@ -99,7 +119,7 @@ const AddReview = ({ courseId }) => {
               onBlur={handleBlur}
               multiline
               rows={4}
-              className=" block w-full border-0 border-b border-transparent p-0 pb-2 resize-none focus:ring-0 focus:border-indigo-600 sm:text-sm"
+              className=" mt-5 block w-full border-0 border-b border-transparent p-0 pb-2 resize-none focus:ring-0 focus:border-indigo-600 sm:text-sm"
               placeholder="Add your comment..."
             />
           </div>
@@ -121,21 +141,7 @@ const AddReview = ({ courseId }) => {
           )}
         </Formik>
       </div>
-      <div className="star-rating">
-        {[...Array(5)].map((star, index) => {
-          index += 1
-          return (
-            <button
-              type="button"
-              key={index}
-              className={index <= rating ? 'bg-white' : 'off'}
-              onClick={() => setRating(index)}
-            >
-              <span className="star">&#9733;</span>
-            </button>
-          )
-        })}
-      </div>
+
     </div>
   )
 }
