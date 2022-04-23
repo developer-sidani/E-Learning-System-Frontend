@@ -107,7 +107,7 @@ const GetCourseComponent = ({
               </div>
             </div>
 
-            <p className="text-gray-500 mt-6">{data.description}</p>
+            <p className="text-gray-500 mt-6">{data?.description}</p>
             <p className="text-md my-4 text-gray-600">{`Level: ${data?.levelId?.title}`}</p>
             <p className="text-md text-gray-600">{`${data?.price}`}</p>
 

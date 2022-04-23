@@ -19,8 +19,10 @@ const GetCoursePage = () => {
     async (id) => {
       setLoading(true)
       try {
-        // console.log(courseId)
         const res = await getCourse(id)
+        if (res?.status !== 200) {
+          await router.push('/404')
+        }
         setCourse(res?.res?.data)
         console.log(res)
       } catch (e) {
