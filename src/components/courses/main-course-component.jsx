@@ -19,7 +19,7 @@ const MainCourseComponent = ({ course }) => {
             alt="ok"
           />
           <div className={classNames('p-2 w-full', course?.flag?.length === 0 && 'mb-4')}>
-              <h2 className="text-md transition-all duration-100 ease-in-out font-[500] group-hover:font-bold text-clip max-w-xs">
+              <h2 className="text-md h-12 transition-all duration-100 ease-in-out font-[500] group-hover:font-bold text-clip max-w-xs">
                   {course?.title}
               </h2>
               <p className="max-w-md font-extralight text-sm">
