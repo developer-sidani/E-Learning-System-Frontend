@@ -57,7 +57,7 @@ const CartComponent = () => {
                       >
                         <p className="mt-1 text-sm text-gray-500 hover:text-gray-700 hover:font-bold">{items.instructorId.info.fullName}</p>
                       </button>
-                      <p className="mt-1 text-sm text-gray-500">{(Math.round(items.rating * 100) / 100)?.toString()}</p>
+                      <p className="mt-1 text-sm text-gray-500">{items.rating === -1 ? 'N/A' : (Math.round(items.rating * 100) / 100)?.toString()}</p>
                     </div>
                     <div className="mt-4 flex-1 flex items-end justify-between">
                       <p className="flex items-center text-sm text-gray-700 space-x-2" />
