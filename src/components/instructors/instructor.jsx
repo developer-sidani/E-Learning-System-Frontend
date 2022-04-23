@@ -11,9 +11,7 @@ function classNames(...classes) {
 }
 
 const InstructorComponent = ({ instructor }) => {
-  console.log(instructor)
   const router = useRouter()
-  console.log(instructor?.info?.fullName)
   return (
     <div className="h-full flex">
 
