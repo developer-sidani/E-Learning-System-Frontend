@@ -19,7 +19,6 @@ const CartProvider = ({ children }) => {
     if (profile?.token) {
       getCartCallback(profile?.token).then(r => {
         if (r?.length > 0) {
-          console.log(r)
           dispatch(setCart({
             data: [...r],
           }))
@@ -32,6 +31,9 @@ const CartProvider = ({ children }) => {
       }))
     }
   }, [dispatch, profile?.token])
+  useEffect(() => {
+    console.log(cart.data)
+  }, [cart])
 
   return (
     // eslint-disable-next-line react/jsx-no-useless-fragment
