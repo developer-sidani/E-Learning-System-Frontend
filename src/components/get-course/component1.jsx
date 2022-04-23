@@ -3,7 +3,7 @@ import React, {
 } from 'react'
 import { Tab } from '@headlessui/react'
 import {
-  PencilAltIcon, StarIcon, LockOpenIcon, VideoCameraIcon, AcademicCapIcon, DeviceMobileIcon,
+  StarIcon, LockOpenIcon, VideoCameraIcon, AcademicCapIcon, DeviceMobileIcon,
 } from '@heroicons/react/solid'
 import { useRouter } from 'next/router'
 import { useDispatch, useSelector } from 'react-redux'

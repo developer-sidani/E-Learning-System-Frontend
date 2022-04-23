@@ -1,22 +1,32 @@
-import React, { Fragment, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Formik, Form } from 'formik'
 import {
   TextField,
 } from '@mui/material'
-import { QuestionSchema } from './validation-schema'
+import * as Yup from 'yup'
+import StarRatings from 'react-star-ratings'
 
-const submitValues = (callback, handler) => (values, { resetForm }) => {
-  resetForm()
-  console.log(values)
-  // callback(values, resetForm, handler)
-}
+export const ReviewSchema = Yup.object().shape({
 
-const AddQuestion = () => {
+  message: Yup.string().required('Your message could not be empty'),
+  rating: Yup.number().required('Rating could not be zero'),
+
+})
+
+const AddReview = ({ courseId }) => {
+  const [starRating, setStarRating] = useState()
+
   const profile = useSelector(({ profile }) => profile)
   const ref = useRef(null)
   const initialValues = {
     message: '',
+    rating: starRating,
+  }
+  const submitValues = (callback, handler) => (values, { resetForm }) => {
+    resetForm()
+    console.log(values)
+    // callback(values, resetForm, handler)
   }
 
   const [loading, setLoading] = useState(false)
@@ -68,7 +78,7 @@ const AddQuestion = () => {
           //     callback()
           //   },
           // })}
-          validationSchema={QuestionSchema}
+          validationSchema={ReviewSchema}
         >
 
           {({
@@ -77,8 +87,25 @@ const AddQuestion = () => {
           }) => (
         <Form>
           <div className=" border-gray-200 focus-within:border-indigo-600">
+            <StarRatings
+              error={Boolean(touched.rating && errors.rating)}
+              rating={starRating}
+              changeRating={setStarRating}
+              name="rating"
+              starDimension="20px"
+              starHoverColor="#FACC15"
+              starRatedColor="#FACC15"
+              starSpacing="0px"
+              numberOfStars={5}
+            />
+            {(errors.rating) && touched.rating ? (
+              <div className="mt-1 text-pink-600 text-sm">
+                {errors.rating}
+              </div>
+            ) : null}
+
             <label htmlFor="comment" className="sr-only">
-              Add your comment
+              Add your review
             </label>
             <TextField
               error={Boolean(touched.message && errors.message)}
@@ -92,7 +119,7 @@ const AddQuestion = () => {
               onBlur={handleBlur}
               multiline
               rows={4}
-              className=" block w-full border-0 border-b border-transparent p-0 pb-2 resize-none focus:ring-0 focus:border-indigo-600 sm:text-sm"
+              className=" mt-5 block w-full border-0 border-b border-transparent p-0 pb-2 resize-none focus:ring-0 focus:border-indigo-600 sm:text-sm"
               placeholder="Add your comment..."
             />
           </div>
@@ -114,8 +141,9 @@ const AddQuestion = () => {
           )}
         </Formik>
       </div>
+
     </div>
   )
 }
 
-export default AddQuestion
+export { AddReview }

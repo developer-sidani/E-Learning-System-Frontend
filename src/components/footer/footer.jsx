@@ -80,7 +80,9 @@ const navigation = {
 
 const Footer = () => (
 
-    <footer className="bg-gray-800 static" aria-labelledby="footer-heading">
+  // <footer className="bg-gray-800 static" aria-labelledby="footer-heading">
+     <footer className="bg-primary static" aria-labelledby="footer-heading">
+
       <div className="w-full bottom-0">
         <h2 id="footer-heading" className="sr-only">
           Footer
@@ -165,7 +167,7 @@ const Footer = () => (
         </div>
 
       </div>
-    </footer>
+     </footer>
 )
 
 export { Footer }

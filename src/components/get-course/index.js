@@ -1,7 +1,8 @@
 import GetCourseComponent from './get-course'
 import { InstructorComponent } from './instructor'
-import Component1 from './component1'
+import GetCourseComponent1 from './component1'
+import { AddReview } from './add-review'
 
 export {
-  Component1, GetCourseComponent, InstructorComponent,
+  GetCourseComponent1, GetCourseComponent, InstructorComponent, AddReview,
 }

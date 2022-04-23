@@ -1,0 +1,4 @@
+GET http://137.184.188.231:8080/courses/621d2f78be6a14d70ae054f1/reviews
+Accept: application/json
+
+###
