@@ -40,6 +40,7 @@ const MyCoursesComponent = () => {
         const response = await getCoursesForStudent(userId, 10, page)
         setPaginationData(response?.data)
         setCourses(response?.courses)
+        console.log(courses)
       } catch (e) {
         console.error(e)
       } finally {
@@ -73,17 +74,26 @@ const MyCoursesComponent = () => {
                       alt="ok"
                     />
                     <div className={classNames('p-2 w-full', course?.flag?.length === 0 && 'mb-4')}>
-                      <h2 className="text-md transition-all duration-100 ease-in-out font-[500] group-hover:font-bold text-clip max-w-xs">
+                      <h2 className="text-md h-10 mb-2 transition-all duration-100 ease-in-out font-[500] group-hover:font-bold text-clip max-w-xs">
                         {course?.title}
                       </h2>
                       <p className="max-w-md font-extralight text-sm">
                         {course?.instructorId?.info?.fullName}
                       </p>
                       <div className="flex items-center text-clip max-w-xs gap-3">
-                        <p className="font-[500] text-sm">
-                          {/* eslint-disable-next-line no-unsafe-optional-chaining */}
-                          {(Math.round(course?.rating * 100) / 100)?.toString()}
-                        </p>
+                        {course?.rating !== -1
+                          ? (
+                            <p className="font-[500] text-sm">
+                              {Math.round(course?.rating * 100) / 100}
+                            </p>
+                          )
+                          : (
+                            <p className="font-[500] text-sm">
+
+                              N/A
+                            </p>
+
+                          )}
                         <div className="flex items-center">
                           {[0, 1, 2, 3, 4].map((rating) => (
                             <StarIcon
@@ -115,12 +125,12 @@ const MyCoursesComponent = () => {
                     </div>
                     <Box sx={{ display: 'flex', alignItems: 'center' }}>
                       <Box sx={{ width: '100%', mr: 1, color: '#0A003C' }}>
-                        <LinearProgress variant="determinate" color="inherit" value={course?.progress || 70} />
+                        <LinearProgress variant="determinate" color="inherit" value={course?.percentage} />
                       </Box>
                       <Box sx={{ minWidth: 35 }}>
                         <Typography variant="body2" color="text.primary">
                           {`${Math.round(
-                            course?.progress || 70,
+                            course?.percentage,
                           )}%`}
                         </Typography>
                       </Box>
