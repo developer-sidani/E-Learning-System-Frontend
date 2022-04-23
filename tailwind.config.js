@@ -16,6 +16,10 @@ module.exports = {
         primary: '#0A003C',
         secondary: '#9C4DF4',
       },
+      screens: {
+        mobile: '320px',
+        // => @media (min-width: 320px) { ... }
+      },
     },
   },
 

@@ -158,15 +158,15 @@ const GetCourseComponent = ({
               </div>
             </div>
 
-            <div className="border-t border-gray-200 mt-10 pt-10">
-              <h3 className="text-sm font-medium text-gray-900">Course Outcomes</h3>
-              <p className="mt-4 text-sm text-gray-500">
-                {courseOutcomes.summary}
-                <a href={courseOutcomes.href} className="font-medium text-indigo-600 hover:text-indigo-500">
-                  Read full course outcomes
-                </a>
-              </p>
-            </div>
+            {/* <div className="border-t border-gray-200 mt-10 pt-10"> */}
+            {/*  <h3 className="text-sm font-medium text-gray-900">Course Outcomes</h3> */}
+            {/*  <p className="mt-4 text-sm text-gray-500"> */}
+            {/*    {courseOutcomes.summary} */}
+            {/*    <a href={courseOutcomes.href} className="font-medium text-indigo-600 hover:text-indigo-500"> */}
+            {/*      Read full course outcomes */}
+            {/*    </a> */}
+            {/*  </p> */}
+            {/* </div> */}
 
           </div>
 
@@ -175,7 +175,7 @@ const GetCourseComponent = ({
             {/* <Sections /> */}
             <Tab.Group as="div">
               <div className="border-b border-gray-200">
-                <Tab.List className="-mb-px flex space-x-8">
+                <Tab.List className="-mb-px flex flex-col space-x-0 sm:space-x-8 sm:flex sm:flex-row">
 
                   <Tab
                     className={({ selected }) => classNames(
