@@ -151,7 +151,7 @@ const Component1 = ({ courseBelongsToCart, courseId }) => {
               )}
 
             </div>
-            {/* instructor */}
+            {/* get-user */}
             <InstructorComponent instructor={instructor} />
             <div className="border-t border-gray-200 mt-10 pt-10">
               <h3 className="text-sm font-medium text-gray-900">Course Requirements</h3>

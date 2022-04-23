@@ -27,7 +27,8 @@ const MainCourseComponent = ({ course }) => {
               </p>
               <div className="flex items-center text-clip max-w-xs gap-3">
                   <p className="font-[500] text-sm">
-                      {course?.rating?.toString()}
+                      {/* eslint-disable-next-line no-unsafe-optional-chaining */}
+                      { Math.round(course?.rating * 100) / 100 }
                   </p>
                   <div className="flex items-center">
                       {[0, 1, 2, 3, 4].map((rating) => (

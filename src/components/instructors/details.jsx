@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Tab } from '@headlessui/react'
 
 const Details = ({ instructor }) => {
-  const text = instructor.about
+  const text = instructor?.instructorDetails?.biography
   const [showMore, setShowMore] = useState(false)
   return (
     <Tab.Panel as="dl" className="text-sm text-gray-500">
@@ -11,29 +11,29 @@ const Details = ({ instructor }) => {
 
     <div className="sm:col-span-1">
       <dt className="text-sm font-medium text-gray-500">Title</dt>
-      <dd className="mt-1 text-sm text-gray-900">{instructor.title}</dd>
+      <dd className="mt-1 text-sm text-gray-900">{instructor?.info?.type}</dd>
     </div>
     <div className="sm:col-span-1">
       <dt className="text-sm font-medium text-gray-500">Email</dt>
-      <dd className="mt-1 text-sm text-gray-900">{instructor.email}</dd>
+      <dd className="mt-1 text-sm text-gray-900">{instructor?.info?.email}</dd>
     </div>
     <div className="sm:col-span-1">
       <dt className="text-sm font-medium text-gray-500">Reviews</dt>
-      <dd className="mt-1 text-sm text-gray-900">{instructor.reviews}</dd>
+      <dd className="mt-1 text-sm text-gray-900">{instructor?.instructorDetails?.reviewsCount}</dd>
     </div>
     <div className="sm:col-span-1">
       <dt className="text-sm font-medium text-gray-500">Students</dt>
-      <dd className="mt-1 text-sm text-gray-900">{instructor.students}</dd>
+      <dd className="mt-1 text-sm text-gray-900">{instructor?.instructorDetails?.studentsCount}</dd>
     </div>
   <div className="sm:col-span-2">
     <dt className="text-sm font-medium text-gray-500">About</dt>
     <dd
       className="mt-1 max-w-prose text-sm text-gray-900 space-y-5"
-    //   dangerouslySetInnerHTML={{ __html: instructor.about }}
+    //   dangerouslySetInnerHTML={{ __html: get-user.about }}
     />
-   {/* {instructor.about} */}
+   {/* {get-user.about} */}
    <h6>
-    {showMore ? text : `${text.substring(0, 400)}`}
+    {showMore ? text : `${text?.substring(0, 400)}`}
     <button type="button" className="btn text-indigo-700" onClick={() => setShowMore(!showMore)}>{showMore ? 'Show less' : 'Show more'}</button>
 
    </h6>

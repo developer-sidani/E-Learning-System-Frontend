@@ -7,6 +7,7 @@ export { getTerms } from './terms'
 export { contactUs } from './contact-us'
 export { getCourse } from './get-course'
 export { getReviews } from './get-reviews'
+export { getUser } from './get-user'
 
 export { getSectionsLectures } from './get-sections'
 
