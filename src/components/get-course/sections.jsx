@@ -45,8 +45,6 @@ const Sections = ({ courseId }) => {
     }
   }, [courseId])
 
-  console.log(sections)
-
   return loading ? <Loader /> : (
 
     <div className="border-t divide-y divide-gray-200">

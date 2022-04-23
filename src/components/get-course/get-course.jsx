@@ -10,19 +10,25 @@ import { useDispatch, useSelector } from 'react-redux'
 import ReactPlayer from 'react-player'
 import { Sections } from './sections'
 // eslint-disable-next-line import/no-cycle
-import { InstructorComponent } from '.'
+import { InstructorComponent, AddReview } from '.'
+import ReviewsComponent from './reviews'
 import {
-  instructor, reviews, courseOutcomes, course,
+  courseOutcomes, course,
 } from './data'
 import { CoursesContainer } from '../home'
 import { addCart } from '../../slices/cart'
 import { getCoursesForStudent } from '../../api'
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
+  return classes.filter(Boolean)
+    .join(' ')
 }
 
-const GetCourseComponent = ({ courseBelongsToCart, courseId, data }) => {
+const GetCourseComponent = ({
+  courseBelongsToCart,
+  courseId,
+  data,
+}) => {
   const [courseExist, setCourseExist] = useState(false)
   const profile = useSelector(state => state.profile)
   const userId = profile?.user?.id
@@ -38,9 +44,10 @@ const GetCourseComponent = ({ courseBelongsToCart, courseId, data }) => {
   }, [courseId])
   useEffect(() => {
     if (userId) {
-      getCoursesForStudentCallback(userId).then(r => {
-        setCourseExist(r)
-      })
+      getCoursesForStudentCallback(userId)
+        .then(r => {
+          setCourseExist(r)
+        })
     }
   }, [getCoursesForStudentCallback, userId])
   return (
@@ -65,7 +72,9 @@ const GetCourseComponent = ({ courseBelongsToCart, courseId, data }) => {
           </div>
 
           {/* course details */}
-          <div className="max-w-2xl mx-auto mt-14 sm:mt-16 lg:max-w-none lg:mt-0 lg:row-end-2 lg:row-span-2 lg:col-span-3">
+          <div
+            className="max-w-2xl mx-auto mt-14 sm:mt-16 lg:max-w-none lg:mt-0 lg:row-end-2 lg:row-span-2 lg:col-span-3"
+          >
             <div className="flex flex-col-reverse">
               <div className="mt-4">
                 <h1 className="text-2xl font-extrabold tracking-tight text-gray-900 sm:text-3xl">{data?.title}</h1>
@@ -123,7 +132,7 @@ const GetCourseComponent = ({ courseBelongsToCart, courseId, data }) => {
                       View Cart
                     </button>
                   ) : (
-                  /* TODO fix add cart */
+                    /* TODO fix add cart */
                     <button
                       onClick={() => dispatch(addCart(course))}
                       type="button"
@@ -218,45 +227,9 @@ const GetCourseComponent = ({ courseBelongsToCart, courseId, data }) => {
                   <Sections courseId={data?.id} />
                 </Tab.Panel>
                 <Tab.Panel className="-mb-10">
-                  <h3 className="sr-only">Reviews</h3>
+                  <ReviewsComponent courseId={courseId} />
+                  <AddReview courseId={courseId} />
 
-                  {reviews.featured.map((review, reviewIdx) => (
-                    <div key={review.id} className="flex text-sm text-gray-500 space-x-4">
-                      <div className="flex-none py-10">
-                        <img src={review.avatarSrc} alt="" className="w-10 h-10 bg-gray-100 rounded-full" />
-                      </div>
-                      <div className={classNames(reviewIdx === 0 ? '' : 'border-t border-gray-200', 'flex-1 py-10')}>
-                        <h3 className="font-medium text-gray-900">{review.author}</h3>
-                        <p>
-                          <time dateTime={review.datetime}>{review.date}</time>
-                        </p>
-
-                        <div className="flex items-center mt-4">
-                          {[0, 1, 2, 3, 4].map((rating) => (
-                            <StarIcon
-                              key={rating}
-                              className={classNames(
-                                review.rating > rating ? 'text-yellow-400' : 'text-gray-300',
-                                'h-5 w-5 flex-shrink-0',
-                              )}
-                              aria-hidden="true"
-                            />
-                          ))}
-                        </div>
-                        <p className="sr-only">
-                          {review.rating}
-                          {' '}
-                          out of 5 stars
-                        </p>
-
-                        <div
-                          className="mt-4 prose prose-sm max-w-none text-gray-500"
-                          // eslint-disable-next-line react/no-danger
-                          dangerouslySetInnerHTML={{ __html: review.content }}
-                        />
-                      </div>
-                    </div>
-                  ))}
                 </Tab.Panel>
 
                 <Tab.Panel className="pt-10">
@@ -287,7 +260,7 @@ const GetCourseComponent = ({ courseBelongsToCart, courseId, data }) => {
 
                       <div className="flex flex-row mb-3">
                         <VideoCameraIcon className="h-5 w-5 text-black-500 mr-10" />
-                        { data?.duration }
+                        {data?.duration}
                         {' '}
                         hours on-demand video
                       </div>

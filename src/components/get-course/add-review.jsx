@@ -1,10 +1,16 @@
-import React, { Fragment, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Formik, Form } from 'formik'
 import {
   TextField,
 } from '@mui/material'
-import { QuestionSchema } from './validation-schema'
+import * as Yup from 'yup'
+
+export const ReviewSchema = Yup.object().shape({
+
+  message: Yup.string().required('Your message could not be empty'),
+
+})
 
 const submitValues = (callback, handler) => (values, { resetForm }) => {
   resetForm()
@@ -12,7 +18,8 @@ const submitValues = (callback, handler) => (values, { resetForm }) => {
   // callback(values, resetForm, handler)
 }
 
-const AddQuestion = () => {
+const AddReview = ({ courseId }) => {
+  const [rating, setRating] = useState(0)
   const profile = useSelector(({ profile }) => profile)
   const ref = useRef(null)
   const initialValues = {
@@ -68,7 +75,7 @@ const AddQuestion = () => {
           //     callback()
           //   },
           // })}
-          validationSchema={QuestionSchema}
+          validationSchema={ReviewSchema}
         >
 
           {({
@@ -78,7 +85,7 @@ const AddQuestion = () => {
         <Form>
           <div className=" border-gray-200 focus-within:border-indigo-600">
             <label htmlFor="comment" className="sr-only">
-              Add your comment
+              Add your review
             </label>
             <TextField
               error={Boolean(touched.message && errors.message)}
@@ -114,8 +121,23 @@ const AddQuestion = () => {
           )}
         </Formik>
       </div>
+      <div className="star-rating">
+        {[...Array(5)].map((star, index) => {
+          index += 1
+          return (
+            <button
+              type="button"
+              key={index}
+              className={index <= rating ? 'bg-white' : 'off'}
+              onClick={() => setRating(index)}
+            >
+              <span className="star">&#9733;</span>
+            </button>
+          )
+        })}
+      </div>
     </div>
   )
 }
 
-export default AddQuestion
+export { AddReview }
