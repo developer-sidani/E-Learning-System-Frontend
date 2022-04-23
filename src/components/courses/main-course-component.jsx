@@ -27,7 +27,6 @@ const MainCourseComponent = ({ course }) => {
               </p>
               <div className="flex items-center text-clip max-w-xs gap-3">
                   <p className="font-[500] text-sm">
-                      {/* eslint-disable-next-line no-unsafe-optional-chaining */}
                       { Math.round(course?.rating * 100) / 100 }
                   </p>
                   <div className="flex items-center">
