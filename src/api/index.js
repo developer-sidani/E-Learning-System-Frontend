@@ -14,7 +14,7 @@ export { searchData } from './searchData'
 export { getSectionsLectures } from './get-sections'
 
 export {
-  getCoursesForStudent, getCourseById, getCourses, getCoursesForCategory,
+  getCoursesForStudent, getCoursesForInstructor, getCourseById, getCourses, getCoursesForCategory,
 } from './courses'
 export { getBilling, createBilling } from './billing'
 export { getSectionsWithLectures } from './sections'

@@ -6,13 +6,13 @@ import {
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
-const Pagination = ({ paginationData, getCoursesForStudentCallback }) => (
+const Pagination = ({ paginationData, getCoursesForInstructorCallback }) => (
     <div className="bg-white mt-12 px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
       <div className="flex-1 flex justify-between sm:hidden">
         <button
           type="button"
           disabled={!paginationData?.hasPrevPage}
-          onClick={() => getCoursesForStudentCallback(paginationData?.prevPage)}
+          onClick={() => getCoursesForInstructorCallback(paginationData?.prevPage)}
           className={classNames(
             'ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700',
             paginationData?.hasPrevPage ? 'bg-white hover:bg-gray-50' : 'bg-gray-400',
@@ -22,7 +22,7 @@ const Pagination = ({ paginationData, getCoursesForStudentCallback }) => (
         </button>
         <button
           type="button"
-          onClick={() => getCoursesForStudentCallback(paginationData?.nextPage)}
+          onClick={() => getCoursesForInstructorCallback(paginationData?.nextPage)}
           disabled={!paginationData?.hasNextPage}
           className={classNames(
             'ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700',
@@ -42,11 +42,11 @@ const Pagination = ({ paginationData, getCoursesForStudentCallback }) => (
           <nav className="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
             <button
               type="button"
-              disabled={paginationData.page === 1}
-              onClick={() => getCoursesForStudentCallback(1)}
+              disabled={paginationData?.page === 1}
+              onClick={() => getCoursesForInstructorCallback(1)}
               className={classNames(
                 'relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 text-sm font-medium text-gray-500',
-                paginationData.page !== 1 ? 'bg-white hover:bg-gray-50' : 'bg-gray-400',
+                paginationData?.page !== 1 ? 'bg-white hover:bg-gray-50' : 'bg-gray-400',
               )}
             >
               <span className="sr-only">First</span>
@@ -55,7 +55,7 @@ const Pagination = ({ paginationData, getCoursesForStudentCallback }) => (
             <button
               type="button"
               disabled={!paginationData?.hasPrevPage}
-              onClick={() => getCoursesForStudentCallback(paginationData?.prevPage)}
+              onClick={() => getCoursesForInstructorCallback(paginationData?.prevPage)}
               className={classNames(
                 'relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 text-sm font-medium text-gray-500',
                 paginationData?.hasPrevPage ? 'bg-white hover:bg-gray-50' : 'bg-gray-400',
@@ -67,7 +67,7 @@ const Pagination = ({ paginationData, getCoursesForStudentCallback }) => (
             {paginationData?.hasPrevPage && (
               <button
                 type="button"
-                onClick={() => getCoursesForStudentCallback(paginationData?.prevPage)}
+                onClick={() => getCoursesForInstructorCallback(paginationData?.prevPage)}
                 className="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
               >
                 {/* eslint-disable-next-line no-unsafe-optional-chaining */}
@@ -84,7 +84,7 @@ const Pagination = ({ paginationData, getCoursesForStudentCallback }) => (
             {paginationData?.hasNextPage && (
               <button
                 type="button"
-                onClick={() => getCoursesForStudentCallback(paginationData?.nextPage)}
+                onClick={() => getCoursesForInstructorCallback(paginationData?.nextPage)}
                 className="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
               >
                 {/* eslint-disable-next-line no-unsafe-optional-chaining */}
@@ -93,7 +93,7 @@ const Pagination = ({ paginationData, getCoursesForStudentCallback }) => (
             )}
             <button
               type="button"
-              onClick={() => getCoursesForStudentCallback(paginationData?.nextPage)}
+              onClick={() => getCoursesForInstructorCallback(paginationData?.nextPage)}
               disabled={!paginationData?.hasNextPage}
               className={classNames(
                 'relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 text-sm font-medium text-gray-500',
@@ -105,7 +105,7 @@ const Pagination = ({ paginationData, getCoursesForStudentCallback }) => (
             </button>
             <button
               type="button"
-              onClick={() => getCoursesForStudentCallback(paginationData?.totalPages)}
+              onClick={() => getCoursesForInstructorCallback(paginationData?.totalPages)}
               disabled={paginationData?.page === paginationData?.totalPages}
               className={classNames(
                 'relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 text-sm font-medium text-gray-500',

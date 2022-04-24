@@ -2,11 +2,10 @@ import React, {
   memo, useCallback, useEffect, useState,
 } from 'react'
 import { StarIcon } from '@heroicons/react/solid'
-import { useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
 import { Tab } from '@headlessui/react'
 import { Pagination } from './pagination'
-import { getCoursesForStudent } from '../../api'
+import { getCoursesForInstructor } from '../../api'
 
 const Courses = ({ instructorId }) => {
   function classNames(...classes) {
@@ -26,29 +25,29 @@ const Courses = ({ instructorId }) => {
         </div>
     )
   })
+
   const router = useRouter()
   const [courses, setCourses] = useState([])
   const [loading, setLoading] = useState(false)
   const [paginationData, setPaginationData] = useState({})
-  const userId = instructorId
-  const getCoursesForStudentCallback = useCallback(async (page) => {
-    await userId
-    if (userId) {
+  // const userId = instructorId
+  const getCoursesForInstructorCallback = useCallback(async (page) => {
+    // await userId
+    if (instructorId) {
       setLoading(true)
       try {
-        const response = await getCoursesForStudent(userId, 10, page)
+        const response = await getCoursesForInstructor(instructorId, 10, page)
         setPaginationData(response?.data)
         setCourses(response?.courses)
-        console.log(courses)
       } catch (e) {
         console.error(e)
       } finally {
         setLoading(false)
       }
     }
-  }, [userId])
+  }, [instructorId])
   useEffect(() => {
-    getCoursesForStudentCallback(1)
+    getCoursesForInstructorCallback(1)
   }, [])
 
   return (
@@ -80,6 +79,7 @@ const Courses = ({ instructorId }) => {
                       {course?.rating !== -1
                         ? (
                           <p className="font-[500] text-sm">
+                            {/* eslint-disable-next-line no-unsafe-optional-chaining */}
                             {Math.round(course?.rating * 100) / 100}
                           </p>
                         )
@@ -126,7 +126,7 @@ const Courses = ({ instructorId }) => {
           {!loading && (
             <Pagination
               paginationData={paginationData}
-              getCoursesForStudentCallback={getCoursesForStudentCallback}
+              getCoursesForInstructorCallback={getCoursesForInstructorCallback}
             />
           )}
         </div>
