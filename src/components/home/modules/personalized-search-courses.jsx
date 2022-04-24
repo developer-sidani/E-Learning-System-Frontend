@@ -24,7 +24,7 @@ const PersonalizedSearchCourses = () => {
       courses={courses}
       loading={loading}
       title="Personalized Search"
-      description="JavaScript is a text-based computer programming language used to make dynamic web pages. A must-learn for aspiring web developers or programmers, JavaScript can be used for features like image carousels, displaying countdowns and timers, and playing media on a webpage. "
+      description="View the most relevant courses to satisfy your specific needs and save time."
     />
   )
 }
