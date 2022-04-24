@@ -2,14 +2,13 @@ import React, {
   memo, useCallback, useEffect, useState,
 } from 'react'
 import { StarIcon } from '@heroicons/react/solid'
-import { Box, LinearProgress, Typography } from '@mui/material'
 import { useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
 import { Tab } from '@headlessui/react'
 import { Pagination } from './pagination'
 import { getCoursesForStudent } from '../../api'
 
-const Courses = () => {
+const Courses = ({ instructorId }) => {
   function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
   }
@@ -29,10 +28,9 @@ const Courses = () => {
   })
   const router = useRouter()
   const [courses, setCourses] = useState([])
-  const profile = useSelector(state => state.profile)
   const [loading, setLoading] = useState(false)
   const [paginationData, setPaginationData] = useState({})
-  const userId = profile?.user?.id
+  const userId = instructorId
   const getCoursesForStudentCallback = useCallback(async (page) => {
     await userId
     if (userId) {
