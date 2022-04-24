@@ -1,5 +1,5 @@
 import React, {
-  Fragment, useCallback, useEffect, useState,
+  Fragment, useCallback, useEffect, useRef, useState,
 } from 'react'
 import { Tab } from '@headlessui/react'
 import {
@@ -8,6 +8,7 @@ import {
 import { useRouter } from 'next/router'
 import { useDispatch, useSelector } from 'react-redux'
 import ReactPlayer from 'react-player'
+import moment from 'moment'
 import { Sections } from './sections'
 // eslint-disable-next-line import/no-cycle
 import { InstructorComponent, AddReview } from '.'
@@ -26,7 +27,6 @@ const GetCourseComponent = ({
   courseId,
   data,
 }) => {
-  console.log(data)
   const [courseExist, setCourseExist] = useState(false)
   const profile = useSelector(state => state.profile)
   const userId = profile?.user?.id
@@ -63,11 +63,13 @@ const GetCourseComponent = ({
             <div className="aspect-w-4 aspect-h-3 rounded-lg bg-gray-100 overflow-hidden">
               {/* <img src={course.imageSrc} alt={course.imageAlt} className="object-center object-cover" /> */}
               <ReactPlayer
+                // onProgress={(progress) => {
+                //   console.log(moment.utc(progress.playedSeconds * 1000).format('mm:ss'))
+                // }}
                 width="inherit"
                 height="inherit"
                 controls
                 config={{ file: { attributes: { controlsList: 'download' } } }}
-                // url="https://firebasestorage.googleapis.com/v0/b/learn-plus-fyp.appspot.com/o/lectures%2Fvideoplayback%20(1).mp4?alt=media&token=792ffaf3-6a22-4730-940b-7598005ae636"
                 url={data?.previewVideoUrl}
               />
             </div>
@@ -90,9 +92,9 @@ const GetCourseComponent = ({
               <div>
                 <h3 className="sr-only">Reviews</h3>
                 <div className="flex items-center">
-                  {[0, 1, 2, 3, 4].map((rating) => (
+                  {[0, 1, 2, 3, 4].map((rating, index) => (
                     <StarIcon
-                      key={rating}
+                      key={index}
                       className={classNames(
                         data?.rating > rating ? 'text-yellow-400' : 'text-gray-300',
                         'h-5 w-5 flex-shrink-0',
@@ -165,8 +167,8 @@ const GetCourseComponent = ({
               <h3 className="text-sm font-medium text-gray-900">Course Requirements</h3>
               <div className="mt-4 prose prose-sm text-gray-500">
                 <ul role="list">
-                  {data?.requirements?.map((requirement) => (
-                    <li key={requirement}>{requirement}</li>
+                  {data?.requirements?.map((requirement, index) => (
+                    <li key={index}>{requirement}</li>
                   ))}
                 </ul>
               </div>
@@ -256,8 +258,8 @@ const GetCourseComponent = ({
                   >
                     <div className="mt-4 prose prose-sm text-gray-500">
                       <ul role="list">
-                        {data?.learningOutcomes?.map((requirement) => (
-                          <li key={requirement}>{requirement}</li>
+                        {data?.learningOutcomes?.map((requirement, index) => (
+                          <li key={index}>{requirement}</li>
                         ))}
                       </ul>
                     </div>

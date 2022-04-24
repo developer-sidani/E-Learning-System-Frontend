@@ -19,3 +19,4 @@ export {
 export { getBilling, createBilling } from './billing'
 export { getSectionsWithLectures } from './sections'
 export { createPayment } from './payment'
+export { getLastWatched } from './lectures'
