@@ -3,13 +3,12 @@ import { Tab } from '@headlessui/react'
 
 import { MailIcon, GlobeAltIcon } from '@heroicons/react/solid'
 import { useRouter } from 'next/router'
-import { instructor, course } from './data'
 import { Details, Courses } from '.'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
-
+// {{url}}/courses/instructor/6249aebfd2414247444885fe?isActive=true
 const InstructorComponent = ({ instructor }) => {
   const router = useRouter()
   return (
@@ -104,7 +103,7 @@ const InstructorComponent = ({ instructor }) => {
                     <Details instructor={instructor} />
 
                     {/* second tab */}
-                    <Courses />
+                    <Courses instructorId={instructor?.id} />
 
                   </Tab.Panels>
               </Tab.Group>
