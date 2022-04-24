@@ -4,26 +4,40 @@ import React, {
 import ReactPlayer from 'react-player'
 import { Tab } from '@headlessui/react'
 import moment from 'moment'
+import { useSelector } from 'react-redux'
 import { reviews } from '../../get-course/data'
 import AddQuestion from '../add-question'
+import { setLastWatched } from '../../../api'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 const LectureOverview = ({ selectedLecture }) => {
+  const profile = useSelector(({ profile }) => profile)
+  const [isPaused, setIsPaused] = useState(false)
   const [progress, setProgress] = useState('00:00')
   const ref = useRef()
   const duration = useMemo(() => selectedLecture?.timeWatched, [selectedLecture?.timeWatched])
+  const setStudentLearningCallback = useCallback(async (lectureId, timeWatched, token) => {
+    try {
+      const response = await setLastWatched(lectureId, timeWatched, token)
+      console.log(response)
+    } catch (e) {
+      console.error(e)
+    }
+  }, [])
   const updateTime = useCallback((time) => {
     ref.current?.seekTo(moment(time, 'mm:ss')
       .diff(moment()
         .startOf('day'), 'seconds'))
   }, [])
   useEffect(
-    () => () => {
-      console.log(`ok ${progress}`)
+    () => {
+      if (isPaused && profile?.token && selectedLecture?.id) {
+        setStudentLearningCallback(selectedLecture?.id, progress, profile?.token)
+      }
     },
-    [progress],
+    [isPaused, progress, profile, selectedLecture],
   )
   useEffect(() => {
     if (duration) {
@@ -41,8 +55,10 @@ const LectureOverview = ({ selectedLecture }) => {
             height="100%"
             width="100%"
             onProgress={(progress) => {
+              setIsPaused(false)
               setProgress(moment.utc(progress.playedSeconds * 1000).format('mm:ss'))
             }}
+            onPause={() => setIsPaused(true)}
             // className="relative top-0 left-0"
             controls
             config={{ file: { attributes: { controlsList: selectedLecture?.isDownloadable ? 'download' : 'nodownload' /* controlsList: 'nodownload' || 'download' */ } } }}
