@@ -27,37 +27,37 @@ const categories = [
   {
     name: 'Development',
     // description: 'Get a better understanding of where your traffic is coming from.',
-    href: '#',
+    route: '/categories/623e622e079cc03328b019d6',
     icon: CodeIcon,
   },
   {
     name: 'Business',
     // description: 'Speak directly to your customers in a more meaningful way.',
-    href: '#',
+    route: '/categories/623e6448079cc03328b019db',
     icon: BriefcaseIcon,
   },
   {
     name: 'Personal development',
     // description: "Your customers' data will be safe and secure.",
-    href: '#',
+    route: '/categories/623e646d079cc03328b019de',
     icon: UserIcon,
   },
   {
     name: 'IT & Software',
     // description: "Connect with third-party tools that you're already using.",
-    href: '#',
+    route: '/categories/623e647b079cc03328b019e1',
     icon: CogIcon,
   },
   {
     name: 'Design',
     // description: 'Build strategic funnels that will drive your customers to convert',
-    href: '#',
+    route: '/categories/623e648a079cc03328b019e4',
     icon: PhotographIcon,
   },
   {
     name: 'Photography & Video',
     // description: 'Get detailed reports that will help you make more informed decisions ',
-    href: '#',
+    route: '/categories/623e649a079cc03328b019e8',
     icon: CameraIcon,
   },
 ]
@@ -206,7 +206,7 @@ const Navbar = () => {
                                       <button
                                         key={index}
                                         type="button"
-                                        onClick={() => {}}
+                                        onClick={() => router.push(category?.route)}
                                         className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50"
                                       >
                                         <div className="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-md bg-indigo-500 text-white sm:h-12 sm:w-12">
