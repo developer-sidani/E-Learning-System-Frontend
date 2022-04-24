@@ -151,7 +151,7 @@ const products = [
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
-const Component5 = () => {
+const Component5 = ({ keyword }) => {
 //   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
 
@@ -267,9 +267,9 @@ const Component5 = () => {
           <div className="relative z-10 flex items-baseline justify-between pt-24 pb-6 border-b border-gray-200">
 
             <h1 className="text-4xl font-extrabold tracking-tight text-gray-900">
-                Search Result for
-{' '}
-{searchkey}
+                Search result for
+                {' '}
+                {keyword}
             </h1>
 
             <div className="flex items-center">

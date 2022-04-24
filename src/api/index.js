@@ -8,6 +8,7 @@ export { contactUs } from './contact-us'
 export { getCourse } from './get-course'
 export { getReviews } from './get-reviews'
 export { getUser } from './get-user'
+export { searchData } from './searchData'
 
 export { getSectionsLectures } from './get-sections'
 
