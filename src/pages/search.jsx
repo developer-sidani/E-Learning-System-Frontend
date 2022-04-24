@@ -13,12 +13,9 @@ import { searchData } from '../api'
 const Search = () => {
   const profile = useSelector(({ profile }) => profile)
   const userId = profile?.user?.id
-  // console.log(token)
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const router = useRouter()
   const { keyword } = router.query
-  // if (keyword) console.log(keyword)
-
   const [search, setSearch] = useState()
   const [loading, setLoading] = useState(true)
 

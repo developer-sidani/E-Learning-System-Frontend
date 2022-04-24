@@ -73,11 +73,10 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 const SearchComponent = ({ keyword, search }) => {
-//   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
 
   return (
-
+    // TODO FIX WIDTH
     <div className="bg-white w-max">
       {search?.length !== 0 ? (
         <div>
