@@ -127,15 +127,6 @@ const SearchComponent = ({ keyword, search }) => {
                         {/* Filters */}
                         <form className="mt-4 border-t border-gray-200">
                           <h3 className="sr-only">Categories</h3>
-                          {/* <ul role="list" className="font-medium text-gray-900 px-2 py-3">
-                    {subCategories.map((category) => (
-                      <li key={category.name}>
-                        <a href={category.href} className="block px-2 py-3">
-                          {category.name}
-                        </a>
-                      </li>
-                    ))}
-                  </ul> */}
 
                           {filters.map((section) => (
                             <Disclosure as="div" key={section.id} className="border-t border-gray-200 px-4 py-6">

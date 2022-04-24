@@ -19,6 +19,8 @@ const topCategories = [
     img: 'https://s.udemycdn.com/home/top-categories/lohp-category-development-v2.jpg',
     imgSet: 'https://s.udemycdn.com/home/top-categories/lohp-category-development-v2.jpg 1x, https://s.udemycdn.com/home/top-categories/lohp-category-development-2x-v2.jpg 2x',
     route: '/categories/623e622e079cc03328b019d6',
+    name: 'Grow your software development skills',
+    description: 'Coding is the process of creating instructions for computers using programming languages. ',
   },
   {
     id: '623e646d079cc03328b019de',
@@ -26,6 +28,9 @@ const topCategories = [
     img: 'https://s.udemycdn.com/home/top-categories/lohp-category-personal-development-v2.jpg',
     imgSet: 'https://s.udemycdn.com/home/top-categories/lohp-category-personal-development-v2.jpg 1x, https://s.udemycdn.com/home/top-categories/lohp-category-personal-development-2x-v2.jpg 2x',
     route: '/categories/623e646d079cc03328b019de',
+    description: 'Personal and professional development courses are designed to maximise your career potential by enhancing and expanding your skillset.',
+    name: 'Grow your Personal Development skills',
+
   },
   {
     id: '623e648a079cc03328b019e4',
@@ -33,6 +38,9 @@ const topCategories = [
     img: 'https://s.udemycdn.com/home/top-categories/lohp-category-design-v2.jpg',
     imgSet: 'https://s.udemycdn.com/home/top-categories/lohp-category-design-v2.jpg 1x, https://s.udemycdn.com/home/top-categories/lohp-category-design-2x-v2.jpg 2x',
     route: '/categories/623e648a079cc03328b019e4',
+    name: 'Grow your Design skills',
+    description: ' Design courses can introduce students to fundamentals of design as they are applied to different segments of the industry. ',
+
   },
   {
     id: '623e6448079cc03328b019db',
@@ -40,6 +48,8 @@ const topCategories = [
     img: 'https://s.udemycdn.com/home/top-categories/lohp-category-business-v2.jpg',
     imgSet: 'https://s.udemycdn.com/home/top-categories/lohp-category-business-v2.jpg 1x, https://s.udemycdn.com/home/top-categories/lohp-category-business-2x-v2.jpg 2x',
     route: '/categories/623e6448079cc03328b019db',
+    name: 'Grow your Design skills',
+    description: 'Business courses combines elements of accountancy, finance, marketing, organizational studies, human resource management, and operations.',
   },
   {
     id: '623e647b079cc03328b019e1',
@@ -47,6 +57,9 @@ const topCategories = [
     img: 'https://s.udemycdn.com/home/top-categories/lohp-category-it-and-software-v2.jpg',
     imgSet: 'https://s.udemycdn.com/home/top-categories/lohp-category-it-and-software-v2.jpg 1x, https://s.udemycdn.com/home/top-categories/lohp-category-it-and-software-2x-v2.jpg 2x',
     route: '/categories/623e647b079cc03328b019e1',
+    name: 'Grow your IT & Software skills',
+    description: 'Discover how by studying for industry-approved computing qualifications and developing the necessary skills, an IT course can really empower your technology skills',
+
   },
   {
     id: '623e649a079cc03328b019e8',
@@ -54,6 +67,8 @@ const topCategories = [
     img: 'https://s.udemycdn.com/home/top-categories/lohp-category-photography-v2.jpg',
     imgSet: 'https://s.udemycdn.com/home/top-categories/lohp-category-photography-v2.jpg 1x, https://s.udemycdn.com/home/top-categories/lohp-category-photography-2x-v2.jpg 2x',
     route: '/categories/623e649a079cc03328b019e8',
+    name: 'Grow your Photography & Video skills',
+    description: 'Photography & Video courses enable the candidates to understand the utility of different camera parts, working out the lights while clicking pictures and the art of taking candid shots.',
   },
 ]
 const Home = () => {

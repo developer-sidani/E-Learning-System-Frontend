@@ -21,6 +21,7 @@ const CoursesByCategory = ({ categories }) => {
   }, [])
 
   const [selectedTab, setSelectedTab] = useState(categories[0])
+  console.log(selectedTab)
   useEffect(() => {
     fetchCoursesByCategory(selectedTab.id)
   }, [selectedTab])
@@ -69,9 +70,12 @@ const CoursesByCategory = ({ categories }) => {
       <CoursesContainer
         courses={courses}
         loading={loading}
-        route="/test"
-        title="Grow your software development skills with JavaScript"
-        description="JavaScript is a text-based computer programming language used to make dynamic web pages. A must-learn for aspiring web developers or programmers, JavaScript can be used for features like image carousels, displaying countdowns and timers, and playing media on a webpage. "
+        route={selectedTab?.route}
+        title={selectedTab?.name}
+        description={selectedTab?.description}
+
+        // title="Grow your software development skills with JavaScript"
+        // description="JavaScript is a text-based computer programming language used to make dynamic web pages. A must-learn for aspiring web developers or programmers, JavaScript can be used for features like image carousels, displaying countdowns and timers, and playing media on a webpage. "
       />
     </>
   )
