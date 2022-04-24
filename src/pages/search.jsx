@@ -46,7 +46,7 @@ const Search = () => {
 
       <PageHeader title="Learn+ | Search" />
       {/* <SearchComponent /> */}
-      <Component5 keyword={keyword} />
+      <Component5 keyword={keyword} search={search?.data} />
     </>
 
   )
