@@ -104,7 +104,7 @@ const InstructorComponent = ({ instructor }) => {
                     <Details instructor={instructor} />
 
                     {/* second tab */}
-                    <Courses course={course} />
+                    <Courses />
 
                   </Tab.Panels>
               </Tab.Group>
