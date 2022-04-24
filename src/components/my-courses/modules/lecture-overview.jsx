@@ -47,8 +47,8 @@ const LectureOverview = ({ selectedLecture }) => {
   return (
     <div className=" flex flex-col">
       <div className="mb-10">
-        <p className="text-base text-primary font-bold text-xl my-10">{selectedLecture?.title}</p>
-        <div className=" md:mx-[20%]">
+        <p className=" text-primary font-bold text-2xl my-10">{selectedLecture?.title}</p>
+        <div className="w-full">
           <ReactPlayer
             playing={duration?.length > 0}
             ref={ref}
