@@ -7,6 +7,9 @@ import moment from 'moment'
 import { useSelector } from 'react-redux'
 import { reviews } from '../../get-course/data'
 import AddQuestion from '../add-question'
+// eslint-disable-next-line import/no-cycle
+import GetQuestions from '../get-questions'
+
 import { setLastWatched } from '../../../api'
 
 function classNames(...classes) {
@@ -97,28 +100,8 @@ const LectureOverview = ({ selectedLecture }) => {
         <Tab.Panels as={Fragment}>
           <Tab.Panel className="pt-10">
             <div className="mb-10 ">
-              <h3 className="sr-only">Reviews</h3>
-
-              {reviews.featured.map((review, reviewIdx) => (
-                <div key={review.id} className="flex text-sm text-gray-500 space-x-4">
-                  <div className="flex-none py-10">
-                    <img src={review.avatarSrc} alt="" className="w-10 h-10 bg-gray-100 rounded-full" />
-                  </div>
-                  <div className={classNames(reviewIdx === 0 ? '' : 'border-y border-gray-200', 'flex-1 py-10')}>
-                    <h3 className="font-medium text-gray-900">{review.author}</h3>
-                    <p>
-                      <time dateTime={review.datetime}>{review.date}</time>
-                    </p>
-
-                    <div
-                      className="mt-4 prose prose-sm max-w-none text-gray-500"
-                      // eslint-disable-next-line react/no-danger
-                      dangerouslySetInnerHTML={{ __html: review.content }}
-                    />
-                  </div>
-                </div>
-              ))}
-              <AddQuestion />
+                <GetQuestions lectureId={selectedLecture?.id} />
+              <AddQuestion lectureId={selectedLecture?.id} />
             </div>
           </Tab.Panel>
           <Tab.Panel className="pt-10">
@@ -150,10 +133,6 @@ const LectureOverview = ({ selectedLecture }) => {
 
         </Tab.Panels>
       </Tab.Group>
-      {/* <div> */}
-      {/*  <p className="text-base text-primary font-bold text-xl my-10">Questions and Answers</p> */}
-
-      {/* </div> */}
     </div>
   )
 }

@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Formik, Form } from 'formik'
 import {
@@ -61,7 +61,6 @@ const AddReview = ({ courseId }) => {
 
   const profile = useSelector(({ profile }) => profile)
   const userId = profile?.user?.id
-  const ref = useRef(null)
   const initialValues = {
     // userId,
     courseId,
@@ -84,20 +83,6 @@ const AddReview = ({ courseId }) => {
         toast.error('Review could not be sent')
       },
     )
-    // callback(values, resetForm, handler)
-  }
-
-  const [serverError, setServerError] = useState('')
-  const [open, setOpen] = useState(false)
-
-  const scrollToError = () => {
-    if (ref && ref.current /* + other conditions */) {
-      ref.current.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start',
-        inline: 'start',
-      })
-    }
   }
 
   return (
@@ -118,7 +103,7 @@ const AddReview = ({ courseId }) => {
             >
 
               {({
-                setFieldValue,
+
                 dirty,
                 errors,
                 touched,

@@ -10,9 +10,7 @@ export { getReviews } from './get-reviews'
 export { getUser } from './get-user'
 export { getCart, updateCart } from './cart'
 export { searchData, getSearchForUser } from './searchData'
-
 export { getSectionsLectures } from './get-sections'
-
 export {
   getCoursesForStudent, getCoursesForInstructor, getCoursesByCategory, getCourseById, getCourses, getCoursesForCategory,
 } from './courses'
