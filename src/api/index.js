@@ -15,3 +15,4 @@ export {
   getCoursesForStudent, getCourseById, getCourses, getCoursesForCategory,
 } from './courses'
 export { getSectionsWithLectures } from './sections'
+export { createBilling, getBilling } from './billing'

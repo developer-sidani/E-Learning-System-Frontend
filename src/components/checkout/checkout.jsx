@@ -96,7 +96,6 @@ const Checkout = () => {
             cardNumber: '',
             expiration: '',
             cvc: '',
-
           }}
           validationSchema={CheckoutSchema}
           onSubmit={submitValues()}
