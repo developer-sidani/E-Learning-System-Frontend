@@ -62,15 +62,21 @@ const Checkout = () => {
   const profile = useSelector(({ profile }) => profile)
   const myData = useSelector(({ cart }) => cart)
   const cart = myData?.data || []
-  const subTotal = cart?.reduce((acc, { price }) => acc + price, 0)
+  const subTotal = cart?.reduce((acc, { price }) => {
+    if (price === 'Free') {
+      return acc
+    } if (typeof price === 'string') {
+      return acc + parseFloat(price.replace('$', ''))
+    }
+    return acc + price
+  }, 0)
   const dispatch = useDispatch()
   const router = useRouter()
   const cartArray = cart.map(obj => obj.id)
 
   const submitValues = () => (values, { resetForm }) => {
+    // todo on submit reset cart
     console.log(values)
-    console.log(cartArray)
-    // resetForm()
   }
 
   return (
@@ -295,8 +301,6 @@ const Checkout = () => {
                   </div>
                 </div>
               </div>
-
-              {/* Order summary */}
               <div className="mt-10 lg:mt-0">
                 <h2 className="text-lg font-medium text-gray-900">Cart summary</h2>
 
@@ -346,7 +350,6 @@ const Checkout = () => {
 
                           <div className="flex-1 pt-2 flex items-end justify-between">
                             <p className="mt-1 text-sm font-medium text-gray-900">
-                              $
                               {product.price}
                             </p>
 
@@ -382,8 +385,12 @@ const Checkout = () => {
 
                   <div className="border-t border-gray-200 py-6 px-4 sm:px-6">
                     <button
+                      disabled={subTotal === 0}
                       type="submit"
-                      className="w-full bg-indigo-600 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500"
+                      className={
+                      subTotal === 0 ? 'w-full bg-gray-400 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white'
+                        : 'w-full bg-indigo-600 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500'
+                      }
                     >
                       Confirm order
                     </button>

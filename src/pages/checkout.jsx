@@ -4,8 +4,8 @@ import { MainLayout } from '../layouts'
 
 const Checkout = () => (
     <>
-        <PageHeader title="Learn+ | Teach With Learn+" />
-        <CheckoutComponent />
+      <PageHeader title="Learn+ | Checkout Page" />
+      <CheckoutComponent />
     </>
 )
 Checkout.getLayout = (page) => (
