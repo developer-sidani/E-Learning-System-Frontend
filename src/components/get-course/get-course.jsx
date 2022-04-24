@@ -63,9 +63,6 @@ const GetCourseComponent = ({
             <div className="aspect-w-4 aspect-h-3 rounded-lg bg-gray-100 overflow-hidden">
               {/* <img src={course.imageSrc} alt={course.imageAlt} className="object-center object-cover" /> */}
               <ReactPlayer
-                // onProgress={(progress) => {
-                //   console.log(moment.utc(progress.playedSeconds * 1000).format('mm:ss'))
-                // }}
                 width="inherit"
                 height="inherit"
                 controls

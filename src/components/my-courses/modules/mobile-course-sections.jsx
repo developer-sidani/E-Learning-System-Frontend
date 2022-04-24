@@ -28,7 +28,6 @@ const MobileCourseSections = ({ courseId, setSelectedLecture, setMobileFiltersOp
   useEffect(() => {
     if (sections) {
       setSelectedSection(sections?.[0]?.id)
-      setSelectedLecture(sections?.[0]?.lectures?.[0])
     }
     return () => {
       setSelectedSection(null)

@@ -1,4 +1,6 @@
-import React, { Fragment, useRef } from 'react'
+import React, {
+  Fragment, useCallback, useEffect, useMemo, useRef, useState,
+} from 'react'
 import ReactPlayer from 'react-player'
 import { Tab } from '@headlessui/react'
 import moment from 'moment'
@@ -9,19 +11,38 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 const LectureOverview = ({ selectedLecture }) => {
+  const [progress, setProgress] = useState('00:00')
   const ref = useRef()
-  const duration = selectedLecture?.duration
-  ref.current?.seekTo(moment(duration, 'mm:ss').diff(moment().startOf('day'), 'seconds'))
-  console.log(selectedLecture?.duration)
+  const duration = useMemo(() => selectedLecture?.timeWatched, [selectedLecture?.timeWatched])
+  const updateTime = useCallback((time) => {
+    ref.current?.seekTo(moment(time, 'mm:ss')
+      .diff(moment()
+        .startOf('day'), 'seconds'))
+  }, [])
+  useEffect(
+    () => () => {
+      console.log(`ok ${progress}`)
+    },
+    [progress],
+  )
+  useEffect(() => {
+    if (duration) {
+      updateTime(duration)
+    }
+  }, [duration])
   return (
     <div className=" flex flex-col">
       <div className="mb-10">
         <p className="text-base text-primary font-bold text-xl my-10">{selectedLecture?.title}</p>
         <div className=" md:mx-[20%]">
           <ReactPlayer
+            playing={duration?.length > 0}
             ref={ref}
             height="100%"
             width="100%"
+            onProgress={(progress) => {
+              setProgress(moment.utc(progress.playedSeconds * 1000).format('mm:ss'))
+            }}
             // className="relative top-0 left-0"
             controls
             config={{ file: { attributes: { controlsList: selectedLecture?.isDownloadable ? 'download' : 'nodownload' /* controlsList: 'nodownload' || 'download' */ } } }}
