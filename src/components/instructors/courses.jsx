@@ -31,24 +31,24 @@ const Courses = ({ instructorId }) => {
   const [loading, setLoading] = useState(false)
   const [paginationData, setPaginationData] = useState({})
   // const userId = instructorId
-  const getCoursesForInstructorCallback = useCallback(async (page) => {
+  const getCoursesForInstructorCallback = useCallback(async (id, page) => {
     // await userId
+    setLoading(true)
+    try {
+      const response = await getCoursesForInstructor(id, 10, page)
+      setPaginationData(response?.data)
+      setCourses(response?.courses)
+    } catch (e) {
+      console.error(e)
+    } finally {
+      setLoading(false)
+    }
+  }, [])
+  useEffect(() => {
     if (instructorId) {
-      setLoading(true)
-      try {
-        const response = await getCoursesForInstructor(instructorId, 10, page)
-        setPaginationData(response?.data)
-        setCourses(response?.courses)
-      } catch (e) {
-        console.error(e)
-      } finally {
-        setLoading(false)
-      }
+      getCoursesForInstructorCallback(instructorId, 1)
     }
   }, [instructorId])
-  useEffect(() => {
-    getCoursesForInstructorCallback(1)
-  }, [])
 
   return (
     <Tab.Panel className="mb-10">
@@ -127,6 +127,7 @@ const Courses = ({ instructorId }) => {
             <Pagination
               paginationData={paginationData}
               getCoursesForInstructorCallback={getCoursesForInstructorCallback}
+              instructorId={instructorId}
             />
           )}
         </div>
