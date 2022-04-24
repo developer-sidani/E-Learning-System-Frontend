@@ -1,21 +1,39 @@
-import React, { Fragment, useState } from 'react'
+import React, {
+  Fragment, useCallback, useEffect, useState,
+} from 'react'
 
 import {
   Dialog, Transition,
 } from '@headlessui/react'
 import { XIcon } from '@heroicons/react/outline'
 import { VideoCameraIcon } from '@heroicons/react/solid'
-import { CourseSections, LectureOverview } from './modules'
+import { useSelector } from 'react-redux'
+import { LectureOverview } from './modules'
 import MobileCourseSections from './modules/mobile-course-sections'
 import DesktopCourseSections from './modules/desktop-course-sections'
+import { getLastWatched } from '../../api'
 
 const PurchasedCourseNew = ({ course }) => {
   const [selectedLecture, setSelectedLecture] = useState()
-
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
+  const profile = useSelector(({ profile }) => profile)
+  const getLastLectureCallback = useCallback(async (token, courseId) => {
+    try {
+      const response = await getLastWatched(token, courseId)
+      if (response.status === 200) {
+        setSelectedLecture(response?.data)
+      }
+    } catch (e) {
+      console.error(e)
+    }
+  }, [])
+  useEffect(() => {
+    if (profile?.token && course?.id) {
+      getLastLectureCallback(profile?.token, course?.id)
+    }
+  }, [profile?.token, course?.id])
   return (
     <div className="bg-white">
-
       <div>
         {/* Mobile filter dialog */}
         <Transition.Root show={mobileFiltersOpen} as={Fragment}>
