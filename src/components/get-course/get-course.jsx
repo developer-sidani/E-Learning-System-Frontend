@@ -12,9 +12,6 @@ import { Sections } from './sections'
 // eslint-disable-next-line import/no-cycle
 import { InstructorComponent, AddReview } from '.'
 import ReviewsComponent from './reviews'
-import {
-  courseOutcomes, course,
-} from './data'
 import { CoursesContainer } from '../home'
 import { addCart } from '../../slices/cart'
 import { getCoursesForStudent } from '../../api'
@@ -29,17 +26,22 @@ const GetCourseComponent = ({
   courseId,
   data,
 }) => {
+  console.log(data)
   const [courseExist, setCourseExist] = useState(false)
   const profile = useSelector(state => state.profile)
   const userId = profile?.user?.id
   const router = useRouter()
   const dispatch = useDispatch()
+  const [loading, setLoading] = useState(false)
   const getCoursesForStudentCallback = useCallback(async (user) => {
+    setLoading(true)
     try {
       const response = await getCoursesForStudent(user, 1000, 1)
       return response.courses?.filter(({ id }) => id === courseId)?.length > 0
     } catch (e) {
       console.error(e)
+    } finally {
+      setLoading(false)
     }
   }, [courseId])
   useEffect(() => {
@@ -66,7 +68,7 @@ const GetCourseComponent = ({
                 controls
                 config={{ file: { attributes: { controlsList: 'download' } } }}
                 // url="https://firebasestorage.googleapis.com/v0/b/learn-plus-fyp.appspot.com/o/lectures%2Fvideoplayback%20(1).mp4?alt=media&token=792ffaf3-6a22-4730-940b-7598005ae636"
-                url={course.videoSrc}
+                url={data?.previewVideoUrl}
               />
             </div>
           </div>
@@ -112,34 +114,46 @@ const GetCourseComponent = ({
             <p className="text-md text-gray-600">{`${data?.price}`}</p>
 
             <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2 mb-2">
-              {courseExist ? (
+              {loading ? (
                 <button
-                  onClick={() => router.push(`/my-courses/${courseId}`)}
                   type="button"
-                  className="w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500"
+                  className="animate-pulse w-full bg-gray-400 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white"
                 >
-                  Go To Course
+                  Loading...
                 </button>
               ) : (
                 // eslint-disable-next-line react/jsx-no-useless-fragment
                 <>
-                  {courseBelongsToCart ? (
+                  {courseExist ? (
                     <button
-                      onClick={() => router.push('/cart')}
+                      onClick={() => router.push(`/my-courses/${courseId}`)}
                       type="button"
                       className="w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500"
                     >
-                      View Cart
+                      Go To Course
                     </button>
                   ) : (
-                    /* TODO fix add cart */
-                    <button
-                      onClick={() => dispatch(addCart(course))}
-                      type="button"
-                      className="w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500"
-                    >
-                      Add to Cart
-                    </button>
+                    // eslint-disable-next-line react/jsx-no-useless-fragment
+                    <>
+                      {courseBelongsToCart ? (
+                        <button
+                          onClick={() => router.push('/cart')}
+                          type="button"
+                          className="w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500"
+                        >
+                          View Cart
+                        </button>
+                      ) : (
+                        /* TODO fix add cart */
+                        <button
+                          onClick={() => dispatch(addCart(data))}
+                          type="button"
+                          className="w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500"
+                        >
+                          Add to Cart
+                        </button>
+                      )}
+                    </>
                   )}
                 </>
               )}

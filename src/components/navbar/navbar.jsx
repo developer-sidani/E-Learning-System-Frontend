@@ -69,7 +69,14 @@ const Navbar = () => {
   const profile = useSelector(({ profile }) => profile)
   const myData = useSelector(({ cart }) => cart)
   const cart = myData?.data || []
-  const getTotal = cart?.reduce((acc, { price }) => acc + price, 0)
+  const getTotal = cart?.reduce((acc, { price }) => {
+    if (price === 'Free') {
+      return acc
+    } if (typeof price === 'string') {
+      return acc + parseFloat(price.replace('$', ''))
+    }
+    return acc + price
+  }, 0)
   const userData = profile?.user?.info
   const router = useRouter()
   const resources = [
@@ -355,7 +362,7 @@ const Navbar = () => {
                                           <p className="text-base font-medium text-gray-900 truncate">{x.title}</p>
                                         </div>
                                         <div>
-                                          <p className="mt-1 text-sm text-gray-500">{`$${x.price}`}</p>
+                                          <p className="mt-1 text-sm text-gray-500">{`${x.price}`}</p>
                                         </div>
                                       </div>
                                     </div>

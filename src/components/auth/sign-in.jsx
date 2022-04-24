@@ -39,7 +39,6 @@ const SignInComponent = () => {
           password,
           rememberMe,
         })
-        console.log(res)
         if (res.status === errorStatusFromBackend.user || res.status === errorStatusFromBackend.checkEmail) {
           setServerErr(prevState => ({ ...prevState, user: res?.message }))
         } else if (res?.status === errorStatusFromBackend.password) {
@@ -48,6 +47,8 @@ const SignInComponent = () => {
         } else if (res?.status === 406) {
           // SEND VERIFICATION LINK
           setServerErr(prevState => ({ ...prevState, verifyEmail: 'Verify your email' }))
+        } else if (res?.user?.info?.type !== 'Student') {
+          setServerErr(prevState => ({ ...prevState, user: 'Wrong Username' }))
         } else {
           dispatch(set({ user: res.user, token: res.token }))
           callback()

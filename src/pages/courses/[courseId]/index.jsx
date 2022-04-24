@@ -1,4 +1,6 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, {
+  memo, useCallback, useEffect, useState,
+} from 'react'
 import { useRouter } from 'next/router'
 import { useSelector } from 'react-redux'
 import { PageHeader, GetCourseComponent } from '../../../components'
@@ -42,7 +44,20 @@ const GetCoursePage = () => {
     }
   }, [courseId])
 
-  // ***********************************
+  const Loader = memo(() => {
+    const circleCommonClasses = 'h-5 w-5 bg-primary rounded-full'
+
+    return (
+      <div className="flex h-96">
+        <div className="m-auto flex">
+          <div className={`${circleCommonClasses} mr-1 animate-bounce`} />
+          <div className={`${circleCommonClasses} mr-1 animate-bounce200`} />
+          <div className={`${circleCommonClasses} animate-bounce400`} />
+        </div>
+      </div>
+    )
+  })
+
   useEffect(() => {
     if (courseId) {
       setCourseBelongsToCart(cart.filter(({ id }) => id === courseId).length > 0)
@@ -51,11 +66,13 @@ const GetCoursePage = () => {
   return (
     <>
       <PageHeader title="Learn+ | Get Course" />
-      <GetCourseComponent
-        data={course}
-        courseBelongsToCart={courseBelongsToCart}
-        courseId={courseId}
-      />
+      {loading ? (<Loader />) : (
+        <GetCourseComponent
+          data={course}
+          courseBelongsToCart={courseBelongsToCart}
+          courseId={courseId}
+        />
+      )}
     </>
 
   )

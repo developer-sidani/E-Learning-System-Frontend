@@ -6,7 +6,14 @@ import { deleteCart } from '../../slices/cart'
 const CartComponent = () => {
   const myData = useSelector(({ cart }) => cart)
   const cart = myData?.data || []
-  const subTotal = cart?.reduce((acc, { price }) => acc + price, 0)
+  const subTotal = cart?.reduce((acc, { price }) => {
+    if (price === 'Free') {
+      return acc
+    } if (typeof price === 'string') {
+      return acc + parseFloat(price.replace('$', ''))
+    }
+    return acc + price
+  }, 0)
   const dispatch = useDispatch()
   const router = useRouter()
   return (
@@ -42,15 +49,15 @@ const CartComponent = () => {
                             {items.title}
                           </button>
                         </h4>
-                        <p className="ml-4 text-sm font-medium text-gray-900">{`$${items?.price}`}</p>
+                        <p className="ml-4 text-sm font-medium text-gray-900">{`${items?.price}`}</p>
                       </div>
                       <button
                         type="button"
-                        onClick={() => router.push(`/instructors/${items?.instructor?.id}`)}
+                        onClick={() => router.push(`/instructors/${items?.instructorId?.id}`)}
                       >
-                        <p className="mt-1 text-sm text-gray-500">{items?.instructor?.name}</p>
+                        <p className="mt-1 text-sm text-gray-500 hover:text-gray-700 hover:font-bold">{items.instructorId.info.fullName}</p>
                       </button>
-                      <p className="mt-1 text-sm text-gray-500">{items?.rating}</p>
+                      <p className="mt-1 text-sm text-gray-500">{items.rating === -1 ? 'N/A' : (Math.round(items.rating * 100) / 100)?.toString()}</p>
                     </div>
                     <div className="mt-4 flex-1 flex items-end justify-between">
                       <p className="flex items-center text-sm text-gray-700 space-x-2" />
@@ -102,10 +109,10 @@ const CartComponent = () => {
               <p>
                 or
                 {' '}
-                <a href="#" className="text-indigo-600 font-medium hover:text-indigo-500">
+                <button type="button" onClick={() => router.push('/')} className="text-indigo-600 font-medium hover:text-indigo-500">
                   Continue Browsing for Courses
                   <span aria-hidden="true"> &rarr;</span>
-                </a>
+                </button>
               </p>
             </div>
           </section>
