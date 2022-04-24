@@ -1,9 +1,9 @@
 import axios from 'axios'
 import { baseUrl } from '../config'
 
-export const getCoursesForInstructor = async (userId, limit, page) => {
+export const getCoursesByCategory = async (userId, limit, page) => {
   try {
-    const res = await axios.get(`${baseUrl}/courses/instructor/${userId}/?limit=${limit}&page=${page}&isActive=true`)
+    const res = await axios.get(`${baseUrl}/categories/${userId}/courses?limit=${limit}&page=${page}?isActive=true`)
     return {
       data: {
         totalDocs: res.data.data.totalDocs,

@@ -1,5 +1,3 @@
 import CheckoutComponent from './checkout'
 
-export {
-  CheckoutComponent
-}
+export { CheckoutComponent }

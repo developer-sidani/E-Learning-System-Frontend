@@ -30,6 +30,7 @@ export { ProfileSection } from './my-account'
 export { MyCoursesComponent, PurchasedCourse, PurchasedCourseNew } from './my-courses'
 export { OnHoverComponent, MainBanner }
 export { AboutUsComponent } from './about-us'
+export { CategoriesCoursesComponent } from './categories'
 
 export {
   SearchComponent, Component5,
