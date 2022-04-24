@@ -160,7 +160,7 @@ const GetCourseComponent = ({
 
             </div>
             {/* get-user */}
-            <InstructorComponent instructor={data?.instructorId?.info} />
+            <InstructorComponent instructor={data?.instructorId} />
             <div className="border-t border-gray-200 mt-10 pt-10">
               <h3 className="text-sm font-medium text-gray-900">Course Requirements</h3>
               <div className="mt-4 prose prose-sm text-gray-500">
@@ -232,7 +232,7 @@ const GetCourseComponent = ({
                 </Tab.Panel>
                 <Tab.Panel className="-mb-10">
                   <ReviewsComponent courseId={courseId} />
-                  {token
+                  {courseExist
                     && <AddReview courseId={courseId} />}
                 </Tab.Panel>
 

@@ -42,7 +42,6 @@ const ReviewsComponent = ({ courseId }) => {
       reviewCallBack(courseId).then((r) => setReviews(r.res))
     }
   }, [courseId])
-  console.log(reviews)
   return loading ? <Loader /> : (
     <>
       <h3 className="sr-only">Reviews</h3>

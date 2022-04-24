@@ -1,4 +1,4 @@
-GET http://137.184.188.231:8080/courses?limit=10000&isActive=false
+GET http://137.184.188.231:8080/questions/62421f5a2060431b1460312d
 
 Accept: application/json
 
