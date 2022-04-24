@@ -3,15 +3,13 @@ import {
   ChevronDownIcon, FilterIcon, MinusSmIcon, PlusSmIcon, ViewGridIcon,
 } from '@heroicons/react/solid'
 import {
-  Dialog, Disclosure, Menu, Popover, Tab, Transition,
+  Dialog, Disclosure, Menu, Transition,
 } from '@headlessui/react'
 import {
-  MenuIcon, SearchIcon, ShoppingBagIcon, XIcon,
+  XIcon,
 } from '@heroicons/react/outline'
 import Pagination from './pagination'
 import Stars from './stars'
-
-const searchkey = 'test'
 
 const sortOptions = [
   { name: 'Most Popular', href: '#', current: true },
@@ -70,88 +68,11 @@ const filters = [
     ],
   },
 ]
-const products = [
-  {
-    id: 1,
-    name: 'Understanding HTML and CSS',
-    description:
-      'Deeply understand Semantic HTML, CSS, Flexbox, Grid, learn to read the specifications, and more.',
-    href: '#',
-    duration: 5.5,
-    price: '$32.00',
-    lectures: 16,
-    level: 'Beginner',
-    rating: 4,
-    instructor: 'Jonas Schmedtmann',
-    imageSrc: 'https://img-b.udemycdn.com/course/480x270/405926_02c8_2.jpg',
-    imageAlt: '',
-  },
-  {
-    id: 1,
-    name: 'Understanding HTML and CSS',
-    description:
-      'Deeply understand Semantic HTML, CSS, Flexbox, Grid, learn to read the specifications, and more.',
-    href: '#',
-    duration: 5.5,
-    price: '$32.00',
-    lectures: 16,
-    level: 'Beginner',
-    rating: 4,
-    instructor: 'Jonas Schmedtmann',
-    imageSrc: 'https://img-b.udemycdn.com/course/480x270/405926_02c8_2.jpg',
-    imageAlt: '',
-  },
-  {
-    id: 1,
-    name: 'Understanding HTML and CSS',
-    description:
-      'Deeply understand Semantic HTML, CSS, Flexbox, Grid, learn to read the specifications, and more.',
-    href: '#',
-    duration: 5.5,
-    price: '$32.00',
-    lectures: 16,
-    level: 'Beginner',
-    rating: 4,
-    instructor: 'Jonas Schmedtmann',
-    imageSrc: 'https://img-b.udemycdn.com/course/480x270/405926_02c8_2.jpg',
-    imageAlt: '',
-  },
-  {
-    id: 1,
-    name: 'Understanding HTML and CSS',
-    description:
-      'Deeply understand Semantic HTML, CSS, Flexbox, Grid, learn to read the specifications, and more.',
-    href: '#',
-    duration: 5.5,
-    price: '$32.00',
-    lectures: 16,
-    level: 'Beginner',
-    rating: 4,
-    instructor: 'Jonas Schmedtmann',
-    imageSrc: 'https://img-b.udemycdn.com/course/480x270/405926_02c8_2.jpg',
-    imageAlt: '',
-  },
-  {
-    id: 1,
-    name: 'Understanding HTML and CSS',
-    description:
-      'Deeply understand Semantic HTML, CSS, Flexbox, Grid, learn to read the specifications, and more.',
-    href: '#',
-    duration: 5.5,
-    price: '$32.00',
-    lectures: 16,
-    level: 'Beginner',
-    rating: 4,
-    instructor: 'Jonas Schmedtmann',
-    imageSrc: 'https://img-b.udemycdn.com/course/480x270/405926_02c8_2.jpg',
-    imageAlt: '',
-  },
-]
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
-const Component5 = ({ keyword, search }) => {
+const SearchComponent = ({ keyword, search }) => {
 //   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
 
@@ -476,4 +397,4 @@ const Component5 = ({ keyword, search }) => {
   )
 }
 
-export default Component5
+export default SearchComponent
