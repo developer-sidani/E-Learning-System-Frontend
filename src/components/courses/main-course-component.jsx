@@ -26,9 +26,19 @@ const MainCourseComponent = ({ course }) => {
                   {course?.instructorId?.info?.fullName}
               </p>
               <div className="flex items-center text-clip max-w-xs gap-3">
-                  <p className="font-[500] text-sm">
-                      { Math.round(course?.rating * 100) / 100 }
-                  </p>
+                      { course?.rating !== -1
+                        ? (
+                          <p className="font-[500] text-sm">
+                            {Math.round(course?.rating * 100) / 100}
+                          </p>
+                        )
+                        : (
+                          <p className="font-[500] text-sm">
+
+                          N/A
+                          </p>
+
+                        )}
                   <div className="flex items-center">
                       {[0, 1, 2, 3, 4].map((rating) => (
                         <StarIcon

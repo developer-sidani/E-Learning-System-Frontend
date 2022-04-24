@@ -16,7 +16,7 @@ export const getCourseById = async (courseId) => {
 }
 export const getCourses = async (page, limit) => {
   try {
-    const res = await axios.get(`${baseUrl}/courses?page=${page}&limit=${limit}`)
+    const res = await axios.get(`${baseUrl}/courses?page=${page}&limit=${limit}&isActive=true`)
     return {
       data: res.data.data.docs,
       status: res.data.statusCode,
@@ -29,7 +29,7 @@ export const getCourses = async (page, limit) => {
 }
 export const getCoursesForCategory = async (category, page, limit) => {
   try {
-    const res = await axios.get(`${baseUrl}/categories/${category}/courses?limit=${limit}&page=${page}`)
+    const res = await axios.get(`${baseUrl}/categories/${category}/courses?limit=${limit}&page=${page}&isActive=true`)
     return {
       data: res.data.data.docs,
       status: res.data.statusCode,

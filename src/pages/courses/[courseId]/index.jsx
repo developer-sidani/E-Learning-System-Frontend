@@ -20,11 +20,11 @@ const GetCoursePage = () => {
       setLoading(true)
       try {
         const res = await getCourse(id)
-        if (res?.status !== 200) {
+        if (res?.status !== 200 || res?.res?.data?.isActive === false) {
           await router.push('/404')
         }
         setCourse(res?.res?.data)
-        console.log(res)
+        console.log(res?.res?.data?.isActive)
       } catch (e) {
         console.log(e)
       } finally {
