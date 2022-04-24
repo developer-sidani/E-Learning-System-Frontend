@@ -26,6 +26,7 @@ const GetCourseComponent = ({
   courseId,
   data,
 }) => {
+  console.log(data)
   const [courseExist, setCourseExist] = useState(false)
   const profile = useSelector(state => state.profile)
   const userId = profile?.user?.id
@@ -67,7 +68,7 @@ const GetCourseComponent = ({
                 controls
                 config={{ file: { attributes: { controlsList: 'download' } } }}
                 // url="https://firebasestorage.googleapis.com/v0/b/learn-plus-fyp.appspot.com/o/lectures%2Fvideoplayback%20(1).mp4?alt=media&token=792ffaf3-6a22-4730-940b-7598005ae636"
-                url={data?.videoSrc}
+                url={data?.previewVideoUrl}
               />
             </div>
           </div>
