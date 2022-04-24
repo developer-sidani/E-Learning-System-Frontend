@@ -1,26 +1,41 @@
-import React, { Fragment, useCallback, useState } from 'react'
+import React, {
+  Fragment, useCallback, useEffect, useState,
+} from 'react'
 import { Combobox, Dialog, Transition } from '@headlessui/react'
 import { SearchIcon } from '@heroicons/react/solid'
 import {
-  DocumentAddIcon, FolderAddIcon, FolderIcon, HashtagIcon, TagIcon,
+  FolderIcon,
 } from '@heroicons/react/outline'
 import { useRouter } from 'next/router'
-
-const projects = [
-  { id: 1, name: 'Workflow Inc. / Website Redesign', url: '#' },
-  // More projects...
-]
-const recent = [projects[0]]
+import { useSelector } from 'react-redux'
+import { getSearchForUser } from '../../api'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 const SearchComponent = ({ open, setOpen }) => {
+  const [searchData, setSearchData] = useState([])
+  const profile = useSelector(({ profile }) => profile)
+  const getUserSearches = useCallback(async (token) => {
+    try {
+      const response = await getSearchForUser(token)
+      if (response?.status === 200) {
+        setSearchData(response?.data)
+      }
+    } catch (e) {
+      console.error(e)
+    }
+  }, [])
+  useEffect(() => {
+    if (profile?.token) {
+      getUserSearches(profile?.token)
+    }
+  }, [profile?.token])
   const router = useRouter()
   const [query, setQuery] = useState('')
   const filteredProjects = query === ''
     ? []
-    : projects.filter((project) => project.name.toLowerCase().includes(query.toLowerCase()))
+    : searchData?.filter((project) => project?.term?.toLowerCase()?.includes(query.toLowerCase()))
   const onKeyboardHandler = useCallback((e) => {
     if (e.key === 'Enter') {
       router.push(`/search?keyword=${query}`)
@@ -54,7 +69,7 @@ const SearchComponent = ({ open, setOpen }) => {
           <Combobox
             as="form"
             className="mx-auto max-w-2xl transform divide-y divide-gray-500 divide-opacity-10 overflow-hidden rounded-xl bg-white bg-opacity-80 shadow-2xl ring-1 ring-black ring-opacity-5 backdrop-blur backdrop-filter transition-all"
-            onChange={(item) => (window.location = item.url)}
+            onChange={(item) => router.push(`/search?keyword=${item?.term}`)}
           >
             <div className="relative">
               <SearchIcon
@@ -74,14 +89,17 @@ const SearchComponent = ({ open, setOpen }) => {
                 static
                 className="max-h-80 scroll-py-2 divide-y divide-gray-500 divide-opacity-10 overflow-y-auto"
               >
+                {searchData?.length > 0 && (
                 <li className="p-2">
-                  {query === '' && (
+                  {query === '' && searchData?.length > 0 && (
                     <h2 className="mt-4 mb-2 px-3 text-xs font-semibold text-gray-900">Recent searches</h2>
                   )}
-                  <ul className="text-sm text-gray-700">
-                    {(query === '' ? recent : filteredProjects).map((project) => (
+
+                    <ul className="text-sm text-gray-700">
+                      {/* eslint-disable-next-line no-unsafe-optional-chaining */}
+                      {(query === '' ? searchData : filteredProjects)?.map((project, index) => (
                       <Combobox.Option
-                        key={project.id}
+                        key={index}
                         value={project}
                         className={({ active }) => classNames(
                           'flex cursor-default select-none items-center rounded-md px-3 py-2',
@@ -92,7 +110,10 @@ const SearchComponent = ({ open, setOpen }) => {
                           <button
                             type="button"
                             className="flex flex-wrap flex-row"
-                            onClick={() => router.push(`/search?keyword=${project?.name}`)}
+                            onClick={() => {
+                              router.push(`/search?keyword=${project?.term}`)
+                              setOpen(false)
+                            }}
                           >
                             <FolderIcon
                               className={classNames(
@@ -101,14 +122,15 @@ const SearchComponent = ({ open, setOpen }) => {
                               )}
                               aria-hidden="true"
                             />
-                            <span className="ml-3 flex-auto truncate">{project.name}</span>
+                            <span className="ml-3 flex-auto truncate">{project?.term}</span>
                             {active && <span className="ml-3 flex-none text-gray-500">Jump to...</span>}
                           </button>
                         )}
                       </Combobox.Option>
-                    ))}
-                  </ul>
+                      ))}
+                    </ul>
                 </li>
+                )}
               </Combobox.Options>
             )}
 

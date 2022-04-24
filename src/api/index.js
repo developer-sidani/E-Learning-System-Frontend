@@ -9,7 +9,7 @@ export { getCourse } from './get-course'
 export { getReviews } from './get-reviews'
 export { getUser } from './get-user'
 export { getCart, updateCart } from './cart'
-export { searchData } from './searchData'
+export { searchData, getSearchForUser } from './searchData'
 
 export { getSectionsLectures } from './get-sections'
 

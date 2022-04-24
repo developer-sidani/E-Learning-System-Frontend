@@ -31,3 +31,23 @@ export const searchData = async (
     }
   }
 }
+
+export const getSearchForUser = async (token) => {
+  try {
+    const res = await axios.get(`${baseUrl}/users/searchData`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+
+    return {
+      status: res.data.statusCode,
+      data: res.data.data,
+    }
+  } catch (e) {
+    return {
+      error: e,
+      status: e.statusCode,
+    }
+  }
+}
