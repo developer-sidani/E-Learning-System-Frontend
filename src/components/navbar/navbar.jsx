@@ -369,6 +369,7 @@ const Navbar = () => {
                                   </button>
                                 ))}
                                 {cart?.length > 3 && (
+                                  // eslint-disable-next-line no-unsafe-optional-chaining
                                   <p className="text-sm text-gray-500 -my-2">{`+${cart?.length - 3} more`}</p>
                                 )}
                                 <hr />

@@ -12,7 +12,7 @@ import { searchData } from '../api'
 
 const Search = () => {
   const profile = useSelector(({ profile }) => profile)
-  const token = profile?.token
+  const userId = profile?.user?.id
   // console.log(token)
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const router = useRouter()
@@ -22,9 +22,9 @@ const Search = () => {
   const [search, setSearch] = useState()
   const [loading, setLoading] = useState(true)
 
-  const SearchDataCallBack = useCallback(async ({ keyword, token }) => {
+  const SearchDataCallBack = useCallback(async ({ keyword, userId }) => {
     try {
-      const response = await searchData({ term: keyword, token })
+      const response = await searchData({ term: keyword, userId })
       return response
     } catch (e) {
       console.error(e)
@@ -33,19 +33,19 @@ const Search = () => {
     }
   }, [])
 
-  useEffect(() => {
-    if (token && keyword) {
-      SearchDataCallBack({ keyword, token }).then(r => {
-        setSearch(r)
+  useEffect(async () => {
+    await userId
+    if (keyword) {
+      SearchDataCallBack({ keyword, userId }).then(r => {
+        setSearch(r?.data)
       })
     }
-  }, [keyword, token])
+  }, [keyword, userId])
   console.log(search)
   return (
     <>
 
       <PageHeader title="Learn+ | Search" />
-      {/* <SearchComponent /> */}
       <Component5 keyword={keyword} search={search?.data} />
     </>
 

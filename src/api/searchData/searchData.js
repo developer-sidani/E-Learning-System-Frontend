@@ -4,16 +4,23 @@ import { baseUrl } from '../config'
 export const searchData = async (
   {
     term,
-    token,
+    userId,
   },
 ) => {
   try {
-    const res = await axios.post(`${baseUrl}/searchData`, {
-      term,
-    }, {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-    console.log(token)
+    let res
+    if (userId) {
+      console.log('oj')
+      res = await axios.post(`${baseUrl}/searchData`, {
+        term,
+        userId,
+      })
+    } else {
+      res = await axios.post(`${baseUrl}/searchData`, {
+        term,
+      })
+    }
+
     return {
       data: res.data.data.docs,
       status: res.data.statusCode,
