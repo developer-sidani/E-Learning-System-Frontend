@@ -21,11 +21,13 @@ const AddReview = ({ courseId }) => {
   const ref = useRef(null)
   const initialValues = {
     message: '',
-    rating: starRating,
+    rating: 0,
   }
   const submitValues = (callback, handler) => (values, { resetForm }) => {
-    resetForm()
+    values.rating = starRating
     console.log(values)
+
+    resetForm()
     // callback(values, resetForm, handler)
   }
 
@@ -57,7 +59,6 @@ const AddReview = ({ courseId }) => {
         <Formik
           initialValues={initialValues}
           onSubmit={submitValues()}
-          enableReinitialize
           // onSubmit={submitValues({
           //   init() {
           //     setServerError('')

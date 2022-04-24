@@ -171,16 +171,6 @@ const GetCourseComponent = ({
               </div>
             </div>
 
-            {/* <div className="border-t border-gray-200 mt-10 pt-10"> */}
-            {/*  <h3 className="text-sm font-medium text-gray-900">Course Outcomes</h3> */}
-            {/*  <p className="mt-4 text-sm text-gray-500"> */}
-            {/*    {courseOutcomes.summary} */}
-            {/*    <a href={courseOutcomes.href} className="font-medium text-indigo-600 hover:text-indigo-500"> */}
-            {/*      Read full course outcomes */}
-            {/*    </a> */}
-            {/*  </p> */}
-            {/* </div> */}
-
           </div>
 
           <div className="w-full max-w-2xl mx-auto mt-16 lg:max-w-none lg:mt-0 lg:col-span-4">
