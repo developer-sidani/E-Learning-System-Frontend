@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { set as setCart } from '../slices/cart'
-import { getCart } from '../api'
+import { getCart, updateCart } from '../api'
 
 const CartProvider = ({ children }) => {
   const cart = useSelector(state => state.cart)
@@ -10,6 +10,15 @@ const CartProvider = ({ children }) => {
     try {
       const response = await getCart(token)
       return response?.data
+    } catch (e) {
+      console.error(e)
+    }
+  }, [])
+  const updateCartCallback = useCallback(async (coursesIds) => {
+    console.log('ok')
+    try {
+      const response = await updateCart(coursesIds, profile?.token || '')
+      console.log(response)
     } catch (e) {
       console.error(e)
     }
@@ -32,7 +41,7 @@ const CartProvider = ({ children }) => {
     }
   }, [dispatch, profile?.token])
   useEffect(() => {
-    console.log(cart.data)
+    updateCartCallback(cart.data?.map(({ id }) => id))
   }, [cart])
 
   return (

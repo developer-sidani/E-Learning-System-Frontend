@@ -8,7 +8,7 @@ export { contactUs } from './contact-us'
 export { getCourse } from './get-course'
 export { getReviews } from './get-reviews'
 export { getUser } from './get-user'
-export { getCart } from './cart'
+export { getCart, updateCart } from './cart'
 export { getSectionsLectures } from './get-sections'
 
 export {
