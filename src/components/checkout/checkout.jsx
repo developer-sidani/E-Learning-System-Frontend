@@ -238,6 +238,7 @@ const Checkout = () => {
                                 <div className="text-sm font-medium text-gray-900">
                                     Ending with
                                       {' '}
+                                  {/* eslint-disable-next-line no-unsafe-optional-chaining */}
                                     {data?.data?.cardNumber?.toString()?.substring(data?.data?.cardNumber?.toString()?.length - 4)}
                                 </div>
                                 <div className="mt-1 text-sm text-gray-600 sm:flex sm:items-center">
