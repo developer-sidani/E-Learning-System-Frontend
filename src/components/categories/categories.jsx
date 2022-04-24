@@ -32,24 +32,23 @@ const CategoriesCoursesComponent = ({ categoryId, title }) => {
   const [paginationData, setPaginationData] = useState({})
   // const userId = profile?.user?.id
 
-  const getCoursesByCategoryCallback = useCallback(async (page) => {
-    // await userId
+  const getCoursesByCategoryCallback = useCallback(async (id, page) => {
+    setLoading(true)
+    try {
+      const response = await getCoursesByCategory(id, 10, page)
+      setPaginationData(response?.data)
+      setCourses(response?.courses)
+    } catch (e) {
+      console.error(e)
+    } finally {
+      setLoading(false)
+    }
+  }, [])
+  useEffect(() => {
     if (categoryId) {
-      setLoading(true)
-      try {
-        const response = await getCoursesByCategory(categoryId, 10, page)
-        setPaginationData(response?.data)
-        setCourses(response?.courses)
-      } catch (e) {
-        console.error(e)
-      } finally {
-        setLoading(false)
-      }
+      getCoursesByCategoryCallback(categoryId, 1)
     }
   }, [categoryId])
-  useEffect(() => {
-    getCoursesByCategoryCallback(1)
-  }, [])
 
   return (
     <div className="my-10">
@@ -135,6 +134,7 @@ category
           <Pagination
             paginationData={paginationData}
             getCoursesByCategoryCallback={getCoursesByCategoryCallback}
+            categoryId={categoryId}
           />
         )}
       </div>
