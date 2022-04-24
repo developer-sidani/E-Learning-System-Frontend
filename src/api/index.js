@@ -18,3 +18,4 @@ export {
 } from './courses'
 export { getBilling, createBilling } from './billing'
 export { getSectionsWithLectures } from './sections'
+export { createPayment } from './payment'

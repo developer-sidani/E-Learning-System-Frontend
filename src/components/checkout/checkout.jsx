@@ -10,8 +10,10 @@ import {
 import * as Yup from 'yup'
 import { useDispatch, useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
-import { deleteCart } from '../../slices/cart'
-import { getBilling } from '../../api'
+import { toast } from 'react-hot-toast'
+import { deleteAll, deleteCart } from '../../slices/cart'
+import { createBilling, createPayment, getBilling } from '../../api'
+import { wait } from '../../utils'
 
 function classNames(...classes) {
   return classes.filter(Boolean)
@@ -31,6 +33,8 @@ const paymentMethods = [
 
 const CheckoutSchema = Yup.object()
   .shape({
+    address: Yup.string()
+      .required('Required'),
     // Personal
     firstname: Yup.string()
       .required('Required'),
@@ -63,7 +67,7 @@ const CheckoutSchema = Yup.object()
   })
 
 const Checkout = () => {
-  const [data, setData] = useState(true)
+  const [data, setData] = useState()
   const profile = useSelector(({ profile }) => profile)
   const myData = useSelector(({ cart }) => cart)
   const cart = myData?.data || []
@@ -78,18 +82,47 @@ const Checkout = () => {
   const dispatch = useDispatch()
   const [loading, setLoading] = useState(true)
   const router = useRouter()
-  const cartArray = cart.map(obj => obj.id)
+  const cartArray = cart.map(({ id }) => id)
   const fetchUserBilling = useCallback(async () => {
     try {
       const response = await getBilling(profile.user.id)
-      console.log(response)
+      setData(response)
     } catch (e) {
       console.error(e)
     } finally {
       setLoading(false)
     }
   }, [profile.user.id])
-
+  const createBillingCallback = useCallback(async (data, callback, err) => {
+    setLoading(true)
+    try {
+      const response = await createBilling(data)
+      if (response.status === 200) {
+        callback()
+      } else {
+        err()
+      }
+    } catch (e) {
+      console.error(e)
+    } finally {
+      setLoading(false)
+    }
+  }, [])
+  const createPaymentCallback = useCallback(async (data, callback, err) => {
+    setLoading(true)
+    try {
+      const response = await createPayment(data, cartArray, subTotal)
+      if (response.status === 200) {
+        callback()
+      } else {
+        err()
+      }
+    } catch (e) {
+      console.error(e)
+    } finally {
+      setLoading(false)
+    }
+  }, [cartArray, subTotal])
   useEffect(() => {
     fetchUserBilling()
   }, [])
@@ -125,8 +158,36 @@ const Checkout = () => {
   ))
 
   const submitValues = (values, { resetForm }) => {
-    // todo on submit reset cart
-    console.log(values)
+    values.expiration = values.expiration.split('/')
+    values.expiration[1] = `20${values.expiration[1]}`
+    values.expiration = values.expiration.reverse()
+    values.expiration[2] = '01'
+    values.expiration = values.expiration.join('-')
+    if (data?.isValid) {
+      createPaymentCallback(values, async () => {
+        toast.success('Congrats, you can now go to your courses!')
+        await wait(500)
+        resetForm()
+        dispatch(deleteAll())
+        await router.push('/my-courses')
+      }, () => {
+        toast.error('Please Check Entered Data!')
+      })
+    } else {
+      createBillingCallback(values, () => {
+        createPaymentCallback(values, async () => {
+          toast.success('Congrats, you can now go to your courses!')
+          await wait(500)
+          resetForm()
+          dispatch(deleteAll())
+          await router.push('/my-courses')
+        }, () => {
+          toast.error('Please Check Entered Data!')
+        })
+      }, () => {
+        toast.error('Please Check Entered Data!')
+      })
+    }
   }
 
   return (
@@ -135,19 +196,21 @@ const Checkout = () => {
       <div className="max-w-2xl mx-auto pt-16 pb-24 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
         <h2 className="sr-only">Checkout</h2>
         <Formik
+          enableReinitialize={data?.isValid}
           initialValues={{
             userId: profile?.user?.id,
-            firstname: '',
-            lastname: '',
-            email: '',
-            phone: '',
+            firstname: data?.data?.nameOnCard || '',
+            lastname: data?.data?.nameOnCard || '',
+            email: data?.data?.email || '',
+            phone: data?.data?.cardNumber || '',
             paymentType: 'Master Card',
-            nameOnCard: '',
-            cardNumber: '',
-            expiration: '',
-            cvc: '',
+            nameOnCard: data?.data?.nameOnCard || '',
+            cardNumber: data?.data?.cardNumber || '',
+            expiration: data?.data?.expiration || '',
+            address: data?.data?.expiration || '',
+            cvc: data?.data?.cvc || '',
           }}
-          validationSchema={CheckoutSchema}
+          validationSchema={!data?.isValid ? CheckoutSchema : null}
           onSubmit={submitValues}
         >
           {({
@@ -162,7 +225,7 @@ const Checkout = () => {
               {loading ? (<Loader />) : (
                 // eslint-disable-next-line react/jsx-no-useless-fragment
                 <>
-                  {data ? (
+                  {data.isValid ? (
                     <div className="bg-white shadow sm:rounded-lg">
                       <div className="px-4 py-5 sm:p-6">
                         <h3 className="text-lg leading-6 font-medium text-gray-900">Payment method</h3>
@@ -170,9 +233,13 @@ const Checkout = () => {
                           <div className="rounded-md bg-gray-50 px-6 py-5 sm:flex sm:items-start sm:justify-between">
                             <h4 className="sr-only">Visa</h4>
                             <div className="sm:flex sm:items-start">
-                              <Visa />
+                              {data?.data?.paymentType?.startsWith('Master') ? <MasterCard /> : <Visa />}
                               <div className="mt-3 sm:mt-0 sm:ml-4">
-                                <div className="text-sm font-medium text-gray-900">Ending with 4242</div>
+                                <div className="text-sm font-medium text-gray-900">
+                                    Ending with
+                                      {' '}
+                                    {data?.data?.cardNumber?.toString()?.substring(data?.data?.cardNumber?.toString()?.length - 4)}
+                                </div>
                                 <div className="mt-1 text-sm text-gray-600 sm:flex sm:items-center">
                                   <div>Expires 12/20</div>
                                   <span className="hidden sm:mx-2 sm:inline" aria-hidden="true">
@@ -348,7 +415,23 @@ const Checkout = () => {
                               />
                             </div>
                           </div>
-
+                          <div className="col-span-4">
+                            <label htmlFor="name-on-card" className="block text-sm font-medium text-gray-700">
+                              Address
+                            </label>
+                            <div className="mt-1">
+                              <TextField
+                                onBlur={handleBlur}
+                                error={Boolean(touched.address && errors.address)}
+                                fullWidth
+                                helperText={touched.address && errors.address}
+                                name="address"
+                                onChange={handleChange}
+                                required
+                                value={values.address}
+                              />
+                            </div>
+                          </div>
                           <div className="col-span-3">
                             <label htmlFor="expiration-date" className="block text-sm font-medium text-gray-700">
                               Expiration date (MM/YY)
