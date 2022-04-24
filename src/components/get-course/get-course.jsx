@@ -29,6 +29,7 @@ const GetCourseComponent = ({
 }) => {
   const [courseExist, setCourseExist] = useState(false)
   const profile = useSelector(state => state.profile)
+  const token = profile?.token
   const userId = profile?.user?.id
   const router = useRouter()
   const dispatch = useDispatch()
@@ -231,8 +232,8 @@ const GetCourseComponent = ({
                 </Tab.Panel>
                 <Tab.Panel className="-mb-10">
                   <ReviewsComponent courseId={courseId} />
-                  <AddReview courseId={courseId} />
-
+                  {token
+                    && <AddReview courseId={courseId} />}
                 </Tab.Panel>
 
                 <Tab.Panel className="pt-10">
