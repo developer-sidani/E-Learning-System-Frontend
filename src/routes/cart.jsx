@@ -15,14 +15,16 @@ const CartProvider = ({ children }) => {
     }
   }, [])
   const updateCartCallback = useCallback(async (coursesIds) => {
-    console.log('ok')
-    try {
-      const response = await updateCart(coursesIds, profile?.token || '')
-      console.log(response)
-    } catch (e) {
-      console.error(e)
+    await profile?.token
+    if (profile?.token) {
+      try {
+        const response = await updateCart(coursesIds, profile?.token)
+        console.log(response)
+      } catch (e) {
+        console.error(e)
+      }
     }
-  }, [])
+  }, [profile?.token])
   const dispatch = useDispatch()
   useEffect(() => {
     if (profile?.token) {
