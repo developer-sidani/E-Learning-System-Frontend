@@ -1,1 +1,1 @@
-export { searchData } from './searchData'
+export { searchData, getSearchForUser } from './searchData'

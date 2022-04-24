@@ -7,6 +7,7 @@ const AuthRouter = ({ children }) => {
   const dispatch = useDispatch()
 
   useEffect(() => {
+    console.log(profile?.user?.id)
     if (profile?.token && !profile?.doneNeededRefresh) {
       dispatch(setProfile({ token: null, doneNeededRefresh: true }))
     }
