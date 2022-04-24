@@ -1,6 +1,7 @@
 import React from 'react'
 import { PageHeader, CheckoutComponent } from '../components'
 import { MainLayout } from '../layouts'
+import { AuthGuard } from '../guards'
 
 const Checkout = () => (
     <>
@@ -10,7 +11,9 @@ const Checkout = () => (
 )
 Checkout.getLayout = (page) => (
   <MainLayout>
-    {page}
+    <AuthGuard>
+      {page}
+    </AuthGuard>
   </MainLayout>
 )
 export default Checkout

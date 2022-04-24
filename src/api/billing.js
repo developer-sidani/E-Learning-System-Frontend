@@ -5,6 +5,7 @@ export const getBilling = async (id) => {
   try {
     const res = await axios.get(`${baseUrl}/billings/${id}`)
     return {
+      data: res.data.data,
       isValid: res.data.data.id !== -1,
       status: res.data.statusCode,
     }

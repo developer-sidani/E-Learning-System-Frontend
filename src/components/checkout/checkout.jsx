@@ -1,4 +1,7 @@
-import React, { useRef, useState } from 'react'
+import React, {
+  memo,
+  useCallback, useEffect, useRef, useState,
+} from 'react'
 import { Formik, Form } from 'formik'
 import { StarIcon, TrashIcon } from '@heroicons/react/solid'
 import {
@@ -8,6 +11,7 @@ import * as Yup from 'yup'
 import { useDispatch, useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
 import { deleteCart } from '../../slices/cart'
+import { getBilling } from '../../api'
 
 function classNames(...classes) {
   return classes.filter(Boolean)
@@ -59,6 +63,7 @@ const CheckoutSchema = Yup.object()
   })
 
 const Checkout = () => {
+  const [data, setData] = useState(true)
   const profile = useSelector(({ profile }) => profile)
   const myData = useSelector(({ cart }) => cart)
   const cart = myData?.data || []
@@ -71,10 +76,55 @@ const Checkout = () => {
     return acc + price
   }, 0)
   const dispatch = useDispatch()
+  const [loading, setLoading] = useState(true)
   const router = useRouter()
   const cartArray = cart.map(obj => obj.id)
+  const fetchUserBilling = useCallback(async () => {
+    try {
+      const response = await getBilling(profile.user.id)
+      console.log(response)
+    } catch (e) {
+      console.error(e)
+    } finally {
+      setLoading(false)
+    }
+  }, [profile.user.id])
 
-  const submitValues = () => (values, { resetForm }) => {
+  useEffect(() => {
+    fetchUserBilling()
+  }, [])
+  const Loader = memo(() => {
+    const circleCommonClasses = 'h-5 w-5 bg-primary rounded-full'
+
+    return (
+      <div className="flex h-96">
+        <div className="m-auto flex">
+          <div className={`${circleCommonClasses} mr-1 animate-bounce`} />
+          <div className={`${circleCommonClasses} mr-1 animate-bounce200`} />
+          <div className={`${circleCommonClasses} animate-bounce400`} />
+        </div>
+      </div>
+    )
+  })
+  const Visa = memo(() => (
+      <svg className="h-8 w-auto sm:flex-shrink-0 sm:h-6" viewBox="0 0 36 24" aria-hidden="true">
+      <rect width={36} height={24} fill="#224DBA" rx={4} />
+      <path
+        fill="#fff"
+        d="M10.925 15.673H8.874l-1.538-6c-.073-.276-.228-.52-.456-.635A6.575 6.575 0 005 8.403v-.231h3.304c.456 0 .798.347.855.75l.798 4.328 2.05-5.078h1.994l-3.076 7.5zm4.216 0h-1.937L14.8 8.172h1.937l-1.595 7.5zm4.101-5.422c.057-.404.399-.635.798-.635a3.54 3.54 0 011.88.346l.342-1.615A4.808 4.808 0 0020.496 8c-1.88 0-3.248 1.039-3.248 2.481 0 1.097.969 1.673 1.653 2.02.74.346 1.025.577.968.923 0 .519-.57.75-1.139.75a4.795 4.795 0 01-1.994-.462l-.342 1.616a5.48 5.48 0 002.108.404c2.108.057 3.418-.981 3.418-2.539 0-1.962-2.678-2.077-2.678-2.942zm9.457 5.422L27.16 8.172h-1.652a.858.858 0 00-.798.577l-2.848 6.924h1.994l.398-1.096h2.45l.228 1.096h1.766zm-2.905-5.482l.57 2.827h-1.596l1.026-2.827z"
+      />
+      </svg>
+  ))
+  const MasterCard = memo(() => (
+    <svg className="h-8 w-auto sm:flex-shrink-0 sm:h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 143 88.78">
+        <title>Mastercard logo</title>
+        <polygon points="52.16 79.29 90.83 79.29 90.83 9.49 52.16 9.49 52.16 79.29" fill="#ff5f00" />
+        <path d="M495.12,512A44.38,44.38,0,0,1,512,477.1a44.39,44.39,0,1,0,0,69.8A44.39,44.39,0,0,1,495.12,512" transform="translate(-440.5 -467.61)" fill="#eb001b" />
+        <path d="M583.5,512A44.15,44.15,0,0,1,512,546.9a44.52,44.52,0,0,0,0-69.8A44.15,44.15,0,0,1,583.5,512Z" transform="translate(-440.5 -467.61)" fill="f#f79e1b" />
+    </svg>
+  ))
+
+  const submitValues = (values, { resetForm }) => {
     // todo on submit reset cart
     console.log(values)
   }
@@ -98,7 +148,7 @@ const Checkout = () => {
             cvc: '',
           }}
           validationSchema={CheckoutSchema}
-          onSubmit={submitValues()}
+          onSubmit={submitValues}
         >
           {({
             values,
@@ -109,197 +159,237 @@ const Checkout = () => {
           }) => (
 
             <Form className="lg:grid lg:grid-cols-2 lg:gap-x-12 xl:gap-x-16">
-              <div>
-                <div>
-                  <h2 className="text-lg font-medium text-gray-900">Contact information</h2>
-                  <div className="mt-4 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-4">
-                    <div>
-                      <label htmlFor="first-name" className="block text-sm font-medium text-gray-700">
-                        First name
-                      </label>
-                      <div className="mt-1">
-                        <TextField
-                          onBlur={handleBlur}
-                          error={Boolean(touched.firstname && errors.firstname)}
-                          fullWidth
-                          helperText={touched.firstname && errors.firstname}
-                          name="firstname"
-                          onChange={handleChange}
-                          required
-                          value={values.firstname}
-                        />
-                      </div>
-                    </div>
-
-                    <div>
-                      <label htmlFor="last-name" className="block text-sm font-medium text-gray-700">
-                        Last name
-                      </label>
-                      <div className="mt-1">
-                        <TextField
-                          onBlur={handleBlur}
-                          error={Boolean(touched.lastname && errors.lastname)}
-                          fullWidth
-                          helperText={touched.lastname && errors.lastname}
-                          name="lastname"
-                          onChange={handleChange}
-                          required
-                          value={values.lastname}
-                        />
-                      </div>
-                    </div>
-
-                    <div className="sm:col-span-2">
-                      <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
-                        Phone Number
-                      </label>
-                      <div className="mt-1">
-                        <TextField
-                          onBlur={handleBlur}
-                          error={Boolean(touched.phone && errors.phone)}
-                          fullWidth
-                          helperText={touched.phone && errors.phone}
-                          name="phone"
-                          onChange={handleChange}
-                          required
-                          value={values.phone}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="mt-4">
-                    <label htmlFor="email-address" className="block text-sm font-medium text-gray-700">
-                      Email address
-                    </label>
-                    <div className="mt-1">
-                      <TextField
-                        onBlur={handleBlur}
-                        error={Boolean(touched.email && errors.email)}
-                        fullWidth
-                        helperText={touched.email && errors.email}
-                        name="email"
-                        onChange={handleChange}
-                        required
-                        value={values.email}
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Payment */}
-                <div className="mt-10 border-t border-gray-200 pt-10">
-                  <h2 className="text-lg font-medium text-gray-900">Payment</h2>
-
-                  <fieldset className="mt-4">
-                    <legend className="sr-only">Payment type</legend>
-                    <div className="space-y-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-10">
-                      {paymentMethods.map((paymentMethod, paymentMethodIdx) => (
-                        <div key={paymentMethod.id} className="flex items-center">
-                          {paymentMethodIdx === 0 ? (
-                            <input
-                              id={paymentMethod.id}
-                              name="paymentType"
-                              type="radio"
-                              onChange={handleChange}
-                              value="Master Card"
-                              defaultChecked
-                              className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
-                            />
-                          ) : (
-                            <input
-                              id={paymentMethod.id}
-                              name="paymentType"
-                              type="radio"
-                              onChange={handleChange}
-                              value="visa"
-                              className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
-                            />
-                          )}
-
-                          <label htmlFor={paymentMethod.id} className="ml-3 block text-sm font-medium text-gray-700">
-                            {paymentMethod.title}
-                          </label>
+              {loading ? (<Loader />) : (
+                // eslint-disable-next-line react/jsx-no-useless-fragment
+                <>
+                  {data ? (
+                    <div className="bg-white shadow sm:rounded-lg">
+                      <div className="px-4 py-5 sm:p-6">
+                        <h3 className="text-lg leading-6 font-medium text-gray-900">Payment method</h3>
+                        <div className="mt-5">
+                          <div className="rounded-md bg-gray-50 px-6 py-5 sm:flex sm:items-start sm:justify-between">
+                            <h4 className="sr-only">Visa</h4>
+                            <div className="sm:flex sm:items-start">
+                              <Visa />
+                              <div className="mt-3 sm:mt-0 sm:ml-4">
+                                <div className="text-sm font-medium text-gray-900">Ending with 4242</div>
+                                <div className="mt-1 text-sm text-gray-600 sm:flex sm:items-center">
+                                  <div>Expires 12/20</div>
+                                  <span className="hidden sm:mx-2 sm:inline" aria-hidden="true">
+                                    &middot;
+                                  </span>
+                                  <div className="mt-1 sm:mt-0">Last updated on 22 Aug 2017</div>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="mt-4 sm:mt-0 sm:ml-6 sm:flex-shrink-0">
+                              <button
+                                onClick={() => router.push('/my-account')}
+                                type="button"
+                                className="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm"
+                              >
+                                Edit
+                              </button>
+                            </div>
+                          </div>
                         </div>
-                      ))}
-                    </div>
-                  </fieldset>
-
-                  <div className="mt-6 grid grid-cols-4 gap-y-6 gap-x-4">
-                    <div className="col-span-4">
-                      <label htmlFor="card-number" className="block text-sm font-medium text-gray-700">
-                        Card number
-                      </label>
-                      <div className="mt-1">
-                        <TextField
-                          onBlur={handleBlur}
-                          error={Boolean(touched.cardNumber && errors.cardNumber)}
-                          fullWidth
-                          helperText={touched.cardNumber && errors.cardNumber}
-                          name="cardNumber"
-                          onChange={handleChange}
-                          required
-                          value={values.cardNumber}
-                        />
-
                       </div>
                     </div>
-
-                    <div className="col-span-4">
-                      <label htmlFor="name-on-card" className="block text-sm font-medium text-gray-700">
-                        Name on card
-                      </label>
-                      <div className="mt-1">
-                        <TextField
-                          onBlur={handleBlur}
-                          error={Boolean(touched.nameOnCard && errors.nameOnCard)}
-                          fullWidth
-                          helperText={touched.nameOnCard && errors.nameOnCard}
-                          name="nameOnCard"
-                          onChange={handleChange}
-                          required
-                          value={values.nameOnCard}
-                        />
-                      </div>
-                    </div>
-
-                    <div className="col-span-3">
-                      <label htmlFor="expiration-date" className="block text-sm font-medium text-gray-700">
-                        Expiration date (MM/YY)
-                      </label>
-                      <div className="mt-1">
-                        <TextField
-                          onBlur={handleBlur}
-                          error={Boolean(touched.expiration && errors.expiration)}
-                          fullWidth
-                          helperText={touched.expiration && errors.expiration}
-                          name="expiration"
-                          onChange={handleChange}
-                          required
-                          value={values.expiration}
-                        />
-                      </div>
-                    </div>
-
+                  ) : (
                     <div>
-                      <label htmlFor="cvc" className="block text-sm font-medium text-gray-700">
-                        CVC
-                      </label>
-                      <div className="mt-1">
-                        <TextField
-                          onBlur={handleBlur}
-                          error={Boolean(touched.cvc && errors.cvc)}
-                          fullWidth
-                          helperText={touched.cvc && errors.cvc}
-                          name="cvc"
-                          onChange={handleChange}
-                          required
-                          value={values.cvc}
-                        />
+                      <div>
+                        <h2 className="text-lg font-medium text-gray-900">Contact information</h2>
+                        <div className="mt-4 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-4">
+                          <div>
+                            <label htmlFor="first-name" className="block text-sm font-medium text-gray-700">
+                              First name
+                            </label>
+                            <div className="mt-1">
+                              <TextField
+                                onBlur={handleBlur}
+                                error={Boolean(touched.firstname && errors.firstname)}
+                                fullWidth
+                                helperText={touched.firstname && errors.firstname}
+                                name="firstname"
+                                onChange={handleChange}
+                                required
+                                value={values.firstname}
+                              />
+                            </div>
+                          </div>
+
+                          <div>
+                            <label htmlFor="last-name" className="block text-sm font-medium text-gray-700">
+                              Last name
+                            </label>
+                            <div className="mt-1">
+                              <TextField
+                                onBlur={handleBlur}
+                                error={Boolean(touched.lastname && errors.lastname)}
+                                fullWidth
+                                helperText={touched.lastname && errors.lastname}
+                                name="lastname"
+                                onChange={handleChange}
+                                required
+                                value={values.lastname}
+                              />
+                            </div>
+                          </div>
+
+                          <div className="sm:col-span-2">
+                            <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
+                              Phone Number
+                            </label>
+                            <div className="mt-1">
+                              <TextField
+                                onBlur={handleBlur}
+                                error={Boolean(touched.phone && errors.phone)}
+                                fullWidth
+                                helperText={touched.phone && errors.phone}
+                                name="phone"
+                                onChange={handleChange}
+                                required
+                                value={values.phone}
+                              />
+                            </div>
+                          </div>
+                        </div>
+                        <div className="mt-4">
+                          <label htmlFor="email-address" className="block text-sm font-medium text-gray-700">
+                            Email address
+                          </label>
+                          <div className="mt-1">
+                            <TextField
+                              onBlur={handleBlur}
+                              error={Boolean(touched.email && errors.email)}
+                              fullWidth
+                              helperText={touched.email && errors.email}
+                              name="email"
+                              onChange={handleChange}
+                              required
+                              value={values.email}
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Payment */}
+                      <div className="mt-10 border-t border-gray-200 pt-10">
+                        <h2 className="text-lg font-medium text-gray-900">Payment</h2>
+
+                        <fieldset className="mt-4">
+                          <legend className="sr-only">Payment type</legend>
+                          <div className="space-y-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-10">
+                            {paymentMethods.map((paymentMethod, paymentMethodIdx) => (
+                              <div key={paymentMethod.id} className="flex items-center">
+                                {paymentMethodIdx === 0 ? (
+                                  <input
+                                    id={paymentMethod.id}
+                                    name="paymentType"
+                                    type="radio"
+                                    onChange={handleChange}
+                                    value="Master Card"
+                                    defaultChecked
+                                    className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
+                                  />
+                                ) : (
+                                  <input
+                                    id={paymentMethod.id}
+                                    name="paymentType"
+                                    type="radio"
+                                    onChange={handleChange}
+                                    value="visa"
+                                    className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
+                                  />
+                                )}
+
+                                <label htmlFor={paymentMethod.id} className="ml-3 block text-sm font-medium text-gray-700">
+                                  {paymentMethod.title}
+                                </label>
+                              </div>
+                            ))}
+                          </div>
+                        </fieldset>
+
+                        <div className="mt-6 grid grid-cols-4 gap-y-6 gap-x-4">
+                          <div className="col-span-4">
+                            <label htmlFor="card-number" className="block text-sm font-medium text-gray-700">
+                              Card number
+                            </label>
+                            <div className="mt-1">
+                              <TextField
+                                onBlur={handleBlur}
+                                error={Boolean(touched.cardNumber && errors.cardNumber)}
+                                fullWidth
+                                helperText={touched.cardNumber && errors.cardNumber}
+                                name="cardNumber"
+                                onChange={handleChange}
+                                required
+                                value={values.cardNumber}
+                              />
+
+                            </div>
+                          </div>
+
+                          <div className="col-span-4">
+                            <label htmlFor="name-on-card" className="block text-sm font-medium text-gray-700">
+                              Name on card
+                            </label>
+                            <div className="mt-1">
+                              <TextField
+                                onBlur={handleBlur}
+                                error={Boolean(touched.nameOnCard && errors.nameOnCard)}
+                                fullWidth
+                                helperText={touched.nameOnCard && errors.nameOnCard}
+                                name="nameOnCard"
+                                onChange={handleChange}
+                                required
+                                value={values.nameOnCard}
+                              />
+                            </div>
+                          </div>
+
+                          <div className="col-span-3">
+                            <label htmlFor="expiration-date" className="block text-sm font-medium text-gray-700">
+                              Expiration date (MM/YY)
+                            </label>
+                            <div className="mt-1">
+                              <TextField
+                                onBlur={handleBlur}
+                                error={Boolean(touched.expiration && errors.expiration)}
+                                fullWidth
+                                helperText={touched.expiration && errors.expiration}
+                                name="expiration"
+                                onChange={handleChange}
+                                required
+                                value={values.expiration}
+                              />
+                            </div>
+                          </div>
+
+                          <div>
+                            <label htmlFor="cvc" className="block text-sm font-medium text-gray-700">
+                              CVC
+                            </label>
+                            <div className="mt-1">
+                              <TextField
+                                onBlur={handleBlur}
+                                error={Boolean(touched.cvc && errors.cvc)}
+                                fullWidth
+                                helperText={touched.cvc && errors.cvc}
+                                name="cvc"
+                                onChange={handleChange}
+                                required
+                                value={values.cvc}
+                              />
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </div>
-              </div>
+                  )}
+                </>
+              )}
               <div className="mt-10 lg:mt-0">
                 <h2 className="text-lg font-medium text-gray-900">Cart summary</h2>
 
@@ -358,13 +448,6 @@ const Checkout = () => {
                     ))}
                   </ul>
                   <dl className="border-t border-gray-200 py-6 px-4 space-y-6 sm:px-6">
-                    {/* <div className="flex items-center justify-between"> */}
-                    {/*  <dt className="text-sm">Subtotal</dt> */}
-                    {/*  <dd className="text-sm font-medium text-gray-900"> */}
-                    {/*  $ */}
-                    {/*  {subTotal} */}
-                    {/*  </dd> */}
-                    {/* </div> */}
                     {subTotal !== 0
                       ? (
                   <div className="flex items-center justify-between border-gray-200 pt-6">
