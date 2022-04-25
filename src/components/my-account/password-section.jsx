@@ -1,74 +1,54 @@
-import React, { useRef, useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import { Formik, Form } from 'formik'
-
-import { Switch } from '@headlessui/react'
-import {
-  FormControl,
-  FormHelperText,
-  Grid, InputLabel, MenuItem, Select, TextField,
-} from '@mui/material'
-import PhoneInput from 'react-phone-input-2'
+import { TextField } from '@mui/material'
 import { useSelector } from 'react-redux'
+import { toast } from 'react-hot-toast'
 import { PasswordSchema } from './validation-schema'
-
-const submitValues = (callback, handler) => (values, { resetForm }) => {
-  console.log(values)
-  // callback(values, resetForm, handler)
-}
+import { changePassword } from '../../api/update-user'
+import { wait } from '../../utils'
 
 const PasswordSection = () => {
   const [loading, setLoading] = useState(false)
   const profile = useSelector(({ profile }) => profile)
-
-  const ref = useRef(null)
+  const [err, setErr] = useState('')
   const initialValues = {
-    old_password: '',
-    new_password: '',
-    confirm_password: '',
+    oldPassword: '',
+    newPassword: '',
+    confirmPassword: '',
   }
-
-  const [serverError, setServerError] = useState('')
-  const [open, setOpen] = useState(false)
-
-  const scrollToError = () => {
-    if (ref && ref.current /* + other conditions */) {
-      ref.current.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start',
-        inline: 'start',
-      })
+  const changePasswordCallback = useCallback(async (values, callback) => {
+    setLoading(true)
+    setErr('')
+    try {
+      await profile?.token
+      const response = await changePassword(values, profile?.token)
+      console.log(response)
+      if (response?.status === 203) {
+        callback()
+      } else {
+        setErr(response?.message)
+      }
+    } catch (e) {
+      console.error(e)
+    } finally {
+      setLoading(false)
     }
-  }
+  }, [profile?.token])
   return (
     <Formik
       initialValues={initialValues}
-      onSubmit={submitValues()}
-      enableReinitialize
-      // onSubmit={submitValues({
-      //   init() {
-      //     setServerError('')
-      //     setLoading(true)
-      //   },
-      //   error(message) {
-      //     setServerError(message)
-      //     scrollToError()
-      //   },
-      //   stopLoading() {
-      //     setLoading(false)
-      //   },
-      //   success: async (callback) => {
-      //     setServerError('')
-      //    setLoading(false) */
-      //    setOpen(true) */
-      //     await wait(500)
-      //     callback()
-      //   },
-      // })}
+      onSubmit={async (values, { resetForm }) => {
+        await changePasswordCallback(values, async () => {
+          toast.success('Password Updated Successfully')
+          await wait(700)
+          resetForm()
+        })
+      }}
       validationSchema={PasswordSchema}
     >
 
       {({
-        setFieldValue, dirty,
+        dirty,
         errors, touched, handleChange, values, handleBlur,
       }) => (
     <Form className="divide-y divide-gray-200 lg:col-span-9">
@@ -84,14 +64,14 @@ const PasswordSection = () => {
               Old Password
             </label>
             <TextField
-              error={Boolean(touched.old_password && errors.old_password)}
+              error={Boolean(touched.oldPassword && errors.oldPassword) || err?.length > 0}
               fullWidth
-              helperText={touched.old_password && errors.old_password}
+              helperText={(touched.oldPassword && errors.oldPassword) || err}
               type="password"
-              name="old_password"
+              name="oldPassword"
               onChange={handleChange}
               required
-              value={values.old_password}
+              value={values.oldPassword}
               onBlur={handleBlur}
             />
           </div>
@@ -103,14 +83,14 @@ const PasswordSection = () => {
              New Password
             </label>
             <TextField
-              error={Boolean(touched.new_password && errors.new_password)}
+              error={Boolean(touched.newPassword && errors.newPassword)}
               fullWidth
-              helperText={touched.new_password && errors.new_password}
+              helperText={touched.newPassword && errors.newPassword}
               type="password"
-              name="new_password"
+              name="newPassword"
               onChange={handleChange}
               required
-              value={values.new_password}
+              value={values.newPassword}
               onBlur={handleBlur}
             />
           </div>
@@ -121,14 +101,14 @@ const PasswordSection = () => {
             </label>
             <TextField
               onBlur={handleBlur}
-              error={Boolean(touched.confirm_password && errors.confirm_password)}
+              error={Boolean(touched.confirmPassword && errors.confirmPassword)}
               fullWidth
-              helperText={touched.confirm_password && errors.confirm_password}
+              helperText={touched.confirmPassword && errors.confirmPassword}
               type="password"
-              name="confirm_password"
+              name="confirmPassword"
               onChange={handleChange}
               required
-              value={values.confirm_password}
+              value={values.confirmPassword}
             />
           </div>
 
@@ -140,7 +120,6 @@ const PasswordSection = () => {
             className={loading ? 'animate-pulse ml-3 w-60 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-gray-400'
               : !dirty ? ' ml-3 w-60 inline-flex justify-center py-2 px-4  border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gray-400'
                 : 'ml-3 w-60 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'}
-
           >
             Change Password
           </button>

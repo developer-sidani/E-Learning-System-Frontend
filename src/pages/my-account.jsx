@@ -7,15 +7,15 @@ const MyAccountPage = () => (
   <>
 
    <PageHeader title="Learn+ | My Account" />
-  <MyAccountComponent />
+    <MyAccountComponent />
   </>
 )
 
 MyAccountPage.getLayout = (page) => (
-  <AuthGuard>
     <MainLayout>
-      {page}
+      <AuthGuard>
+       {page}
+      </AuthGuard>
     </MainLayout>
-  </AuthGuard>
 )
 export default MyAccountPage
