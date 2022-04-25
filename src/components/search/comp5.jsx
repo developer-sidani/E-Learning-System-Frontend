@@ -8,6 +8,7 @@ import {
 import {
   XIcon,
 } from '@heroicons/react/outline'
+import { useRouter } from 'next/router'
 import Pagination from './pagination'
 import Stars from './stars'
 
@@ -74,6 +75,7 @@ function classNames(...classes) {
 }
 const SearchComponent = ({ keyword, search }) => {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
+  const router = useRouter()
 
   return (
     // TODO FIX WIDTH
@@ -317,6 +319,7 @@ const SearchComponent = ({ keyword, search }) => {
                   <h3 className="sr-only">Items</h3>
                   {search?.map((product) => (
                     <div key={product?.id} className="py-10 border-b border-gray-200 flex space-x-6">
+
                       <img
                         src={product?.image_480x270}
                         alt={product?.imageAlt}
@@ -324,9 +327,14 @@ const SearchComponent = ({ keyword, search }) => {
                       />
                       <div className="flex-auto flex flex-col">
                         <div>
+                          <button
+                            type="button"
+                            onClick={() => router.push(`/courses/${product?.id}`)}
+                          >
                           <h4 className="font-medium text-gray-900 font-bold ">
                             <a href={product?.href}>{product?.title}</a>
                           </h4>
+                          </button>
                           <p className="mt-2 text-sm w-100 text-gray-600 mobile:w-max-xs">{product?.headline}</p>
                           <p className="mt-2 mb-2 text-xs w-80 text-gray-600">{product?.instructorId?.info?.fullName}</p>
                           <Stars value={product?.rating} />
