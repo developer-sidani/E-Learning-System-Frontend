@@ -15,6 +15,7 @@ import { deleteAll, deleteCart } from '../../slices/cart'
 import { createBilling, createPayment, getBilling } from '../../api'
 import { wait } from '../../utils'
 import { CoursesContainer } from '../home'
+import CrossSection from '../../pages/courses/[courseId]/get-cross-section'
 
 function classNames(...classes) {
   return classes.filter(Boolean)
@@ -570,15 +571,15 @@ const Checkout = () => {
 
       </div>
 
-      <div className="px-4">
-      {/* Related courses */}
-      <div className="flex items-center justify-between space-x-4 mt-28">
-        <h2 className="text-lg font-medium text-gray-900">Frequently Bought Together</h2>
-      </div>
-
-      {/* TODO add courses slider  */}
-      <CoursesContainer courses={[]} loading />
-      </div>
+      {cartArray?.length > 0 && (
+        <div className="px-4">
+          {/* Related courses */}
+          <div className="flex items-center justify-between space-x-4 mt-28">
+            <h2 className="text-lg font-medium text-gray-900">Frequently Bought Together</h2>
+          </div>
+          <CrossSection courseId={cartArray?.[0]} />
+        </div>
+      )}
     </div>
   )
 }
