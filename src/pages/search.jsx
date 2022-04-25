@@ -11,9 +11,9 @@ import MyAccountPage from './my-account'
 import { searchData } from '../api'
 
 const Search = () => {
-  useEffect(() => {
-    document.querySelector('#__next').className = 'w-max md:w-auto'
-  }, [])
+  // useEffect(() => {
+  //   document.querySelector('#__next').className = 'w-max md:w-auto'
+  // }, [])
 
   const profile = useSelector(({ profile }) => profile)
   const userId = profile?.user?.id
@@ -34,14 +34,14 @@ const Search = () => {
     }
   }, [])
 
-  // useEffect(async () => {
-  //   await userId
-  //   if (keyword) {
-  //     SearchDataCallBack({ keyword, userId }).then(r => {
-  //       setSearch(r?.data)
-  //     })
-  //   }
-  // }, [keyword, userId])
+  useEffect(async () => {
+    await userId
+    if (keyword) {
+      SearchDataCallBack({ keyword, userId }).then(r => {
+        setSearch(r?.data)
+      })
+    }
+  }, [keyword, userId])
   console.log(search)
   return (
     <>
