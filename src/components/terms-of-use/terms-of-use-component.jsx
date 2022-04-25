@@ -1,8 +1,8 @@
 import React from 'react'
 
 const TermsOfUseComponent = ({ data }) => (
-  <div className="px-20 bg-gray-100 py-5 pb-20">
-    <p className="font-extrabold text-3xl md:text-5xl mb-8">
+  <div className="px-20 bg-gray-100 py-10 pb-20">
+    <p className="font-extrabold text-3xl text-center md:text-5xl mb-8">
            <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#0A003C] to-[#9C4DF4]">
                 Terms of use
            </span>
