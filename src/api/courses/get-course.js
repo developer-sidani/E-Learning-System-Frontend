@@ -54,3 +54,17 @@ export const getBestSeller = async () => {
     }
   }
 }
+
+export const getCrossSell = async (courseId) => {
+  try {
+    const res = await axios.get(`${baseUrl}/courses/best-seller?limit=20&courseId=${courseId}&isActive=true`)
+    return {
+      data: res.data.data.docs,
+      status: res.data.statusCode,
+    }
+  } catch (err) {
+    return {
+      res: err.response.data,
+    }
+  }
+}

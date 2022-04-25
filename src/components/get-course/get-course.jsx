@@ -16,6 +16,7 @@ import ReviewsComponent from './reviews'
 import { CoursesContainer } from '../home'
 import { addCart } from '../../slices/cart'
 import { getCoursesForStudent } from '../../api'
+import CrossSection from '../../pages/courses/[courseId]/get-cross-section'
 
 function classNames(...classes) {
   return classes.filter(Boolean)
@@ -304,8 +305,9 @@ const GetCourseComponent = ({
           </a>
         </div>
 
-        {/* TODO add courses slider  */}
-        <CoursesContainer courses={[]} loading />
+        {/* getCrossSell  */}
+
+        <CrossSection courseId={courseId} />
 
       </main>
 
