@@ -14,6 +14,7 @@ import DesktopCourseSections from './modules/desktop-course-sections'
 import { getLastWatched } from '../../api'
 
 const PurchasedCourseNew = ({ course }) => {
+  console.log(course)
   const [selectedLecture, setSelectedLecture] = useState()
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
   const profile = useSelector(({ profile }) => profile)
@@ -112,7 +113,7 @@ const PurchasedCourseNew = ({ course }) => {
               <DesktopCourseSections courseId={course?.id} setSelectedLecture={setSelectedLecture} />
 
               <div className=" gap-y-10 gap-x-6 sm:grid-cols-2 lg:col-span-3 lg:gap-x-8">
-              <LectureOverview selectedLecture={selectedLecture} />
+              <LectureOverview selectedLecture={selectedLecture} data={course} />
               </div>
             </div>
           </section>
