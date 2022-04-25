@@ -1,14 +1,13 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { getCourses } from '../../../api'
 import { CoursesContainer } from '../courses'
-import { getBestSeller } from '../../../api/courses/get-course'
+import { getRecommendedWithoutToken } from '../../../api/courses/get-course'
 
 const StudentsAreViewingCourses = () => {
   const [courses, setCourses] = useState()
   const [loading, setLoading] = useState(true)
   const fetchStudentsAreViewing = useCallback(async () => {
     try {
-      const response = await getBestSeller()
+      const response = await getRecommendedWithoutToken(2)
       setCourses(response.data)
     } catch (e) {
       console.error(e)

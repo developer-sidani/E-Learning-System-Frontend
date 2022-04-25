@@ -574,7 +574,7 @@ const Checkout = () => {
             <div className="flex items-center justify-between space-x-4 mt-10">
               <h2 className="text-lg font-medium text-gray-900">Frequently Bought Together</h2>
             </div>
-            <CrossSection courseId={cartArray?.[0]} />
+            <CrossSection token={profile?.token} />
           </div>
         )}
 

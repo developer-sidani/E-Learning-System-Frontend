@@ -136,7 +136,7 @@ const Home = () => {
           </div>
         </div>
         <div className="px-[7%]">
-        <RecommendedCourses />
+        <RecommendedCourses token={profile?.token} />
         </div>
       </IsLoggedIn>
       <div className="px-[7%]">
@@ -148,8 +148,8 @@ const Home = () => {
         <TopCategoriesComponent categories={topCategories} />
       </div>
       <IsLoggedIn>
-        <PersonalizedSearchCourses />
-        <TrendingCourses />
+        <PersonalizedSearchCourses token={profile?.token} />
+        <TrendingCourses token={profile?.token} />
       </IsLoggedIn>
         <IsGuest>
           <StudentsAreViewingCourses />
@@ -159,7 +159,7 @@ const Home = () => {
       <CallToActionComponent />
       <IsLoggedIn>
         <div className="px-[7%]">
-        <AlsoBoughtCourses />
+        <AlsoBoughtCourses token={profile?.token} />
         </div>
       </IsLoggedIn>
       <IncentivesComponent />

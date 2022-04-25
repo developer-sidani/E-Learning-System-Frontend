@@ -1,13 +1,13 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { CoursesContainer } from '../courses'
-import { getCourses } from '../../../api'
+import { getRecommendedWithToken } from '../../../api/courses/get-course'
 
-const AlsoBoughtCourses = () => {
+const AlsoBoughtCourses = ({ token }) => {
   const [courses, setCourses] = useState()
   const [loading, setLoading] = useState(true)
-  const fetchAlsoBoughtCourses = useCallback(async () => {
+  const fetchAlsoBoughtCourses = useCallback(async (tk) => {
     try {
-      const response = await getCourses(11, 10)
+      const response = await getRecommendedWithToken(7, tk)
       setCourses(response.data)
     } catch (e) {
       console.error(e)
@@ -17,8 +17,10 @@ const AlsoBoughtCourses = () => {
   }, [])
 
   useEffect(() => {
-    fetchAlsoBoughtCourses()
-  }, [])
+    if (token) {
+      fetchAlsoBoughtCourses(token)
+    }
+  }, [token])
   return (
     <CoursesContainer
       courses={courses}

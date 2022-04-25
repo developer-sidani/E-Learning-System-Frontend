@@ -1,13 +1,14 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { CoursesContainer } from '../../../components'
-import { getCrossSell } from '../../../api/courses/get-course'
+import { getRecommendedWithToken } from '../../../api/courses/get-course'
 
-const CrossSection = ({ courseId }) => {
+const CrossSection = ({ token }) => {
   const [courses, setCourses] = useState()
   const [loading, setLoading] = useState(true)
-  const fetchStudentsAreViewing = useCallback(async (id) => {
+  const fetchStudentsAreViewing = useCallback(async (tk) => {
     try {
-      const response = await getCrossSell(id)
+      const page = Math.floor(Math.random() * 10) + 1
+      const response = await getRecommendedWithToken(page, tk)
       setCourses(response.data)
     } catch (e) {
       console.error(e)
@@ -17,10 +18,10 @@ const CrossSection = ({ courseId }) => {
   }, [])
 
   useEffect(() => {
-    if (courseId) {
-      fetchStudentsAreViewing(courseId)
+    if (token) {
+      fetchStudentsAreViewing(token)
     }
-  }, [courseId])
+  }, [token])
   return (
   <CoursesContainer courses={courses} loading={loading} />
   )

@@ -41,9 +41,9 @@ export const getCoursesForCategory = async (category, page, limit) => {
   }
 }
 
-export const getBestSeller = async () => {
+export const getRecommendedWithoutToken = async (page) => {
   try {
-    const res = await axios.get(`${baseUrl}/courses/best-seller?limit=20&isActive=true`)
+    const res = await axios.get(`${baseUrl}/courses/recommendation-by-search?limit=10&isActive=true&page=${page}`)
     return {
       data: res.data.data.docs,
       status: res.data.statusCode,
@@ -55,9 +55,13 @@ export const getBestSeller = async () => {
   }
 }
 
-export const getCrossSell = async (courseId) => {
+export const getRecommendedWithToken = async (page, token) => {
   try {
-    const res = await axios.get(`${baseUrl}/courses/best-seller?limit=20&courseId=${courseId}&isActive=true`)
+    const res = await axios.get(`${baseUrl}/courses/recommended-for-you?limit=10&isActive=true&page=${page}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
     return {
       data: res.data.data.docs,
       status: res.data.statusCode,
