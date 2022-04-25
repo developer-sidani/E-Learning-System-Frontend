@@ -27,6 +27,7 @@ const GetCourseComponent = ({
   courseId,
   data,
 }) => {
+  console.log(data)
   const [courseExist, setCourseExist] = useState(false)
   const profile = useSelector(state => state.profile)
   const token = profile?.token
@@ -53,6 +54,7 @@ const GetCourseComponent = ({
         })
     }
   }, [getCoursesForStudentCallback, userId])
+  console.log(data)
   return (
     <div className="bg-white">
 

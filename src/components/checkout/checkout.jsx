@@ -14,6 +14,7 @@ import { toast } from 'react-hot-toast'
 import { deleteAll, deleteCart } from '../../slices/cart'
 import { createBilling, createPayment, getBilling } from '../../api'
 import { wait } from '../../utils'
+import { CoursesContainer } from '../home'
 
 function classNames(...classes) {
   return classes.filter(Boolean)
@@ -193,7 +194,7 @@ const Checkout = () => {
   return (
 
     <div className="">
-      <div className="max-w-2xl mx-auto pt-16 pb-24 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
+      <div className="max-w-2xl mx-auto pt-16 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
         <h2 className="sr-only">Checkout</h2>
         <Formik
           enableReinitialize={data?.isValid}
@@ -567,6 +568,16 @@ const Checkout = () => {
           )}
         </Formik>
 
+      </div>
+
+      <div className="px-4">
+      {/* Related courses */}
+      <div className="flex items-center justify-between space-x-4 mt-28">
+        <h2 className="text-lg font-medium text-gray-900">Frequently Bought Together</h2>
+      </div>
+
+      {/* TODO add courses slider  */}
+      <CoursesContainer courses={[]} loading />
       </div>
     </div>
   )
