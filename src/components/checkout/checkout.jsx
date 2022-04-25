@@ -15,6 +15,7 @@ import { deleteAll, deleteCart } from '../../slices/cart'
 import { createBilling, createPayment, getBilling } from '../../api'
 import { wait } from '../../utils'
 import { CoursesContainer } from '../home'
+import CrossSection from '../../pages/courses/[courseId]/get-cross-section'
 
 function classNames(...classes) {
   return classes.filter(Boolean)
@@ -567,15 +568,15 @@ const Checkout = () => {
             </Form>
           )}
         </Formik>
-        <div className="mb-24">
-          {/* Related courses */}
-          <div className="flex items-center justify-between space-x-4 mt-10">
-            <h2 className="text-lg font-medium text-gray-900">Frequently Bought Together</h2>
+        {cartArray?.length > 0 && (
+          <div className="mb-24">
+            {/* Related courses */}
+            <div className="flex items-center justify-between space-x-4 mt-10">
+              <h2 className="text-lg font-medium text-gray-900">Frequently Bought Together</h2>
+            </div>
+            <CrossSection courseId={cartArray?.[0]} />
           </div>
-
-          {/* TODO add courses slider  */}
-          <CoursesContainer courses={[]} loading />
-        </div>
+        )}
 
       </div>
 
