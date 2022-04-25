@@ -567,18 +567,18 @@ const Checkout = () => {
             </Form>
           )}
         </Formik>
+        <div className="mb-24">
+          {/* Related courses */}
+          <div className="flex items-center justify-between space-x-4 mt-10">
+            <h2 className="text-lg font-medium text-gray-900">Frequently Bought Together</h2>
+          </div>
+
+          {/* TODO add courses slider  */}
+          <CoursesContainer courses={[]} loading />
+        </div>
 
       </div>
 
-      <div className="px-4">
-      {/* Related courses */}
-      <div className="flex items-center justify-between space-x-4 mt-28">
-        <h2 className="text-lg font-medium text-gray-900">Frequently Bought Together</h2>
-      </div>
-
-      {/* TODO add courses slider  */}
-      <CoursesContainer courses={[]} loading />
-      </div>
     </div>
   )
 }
