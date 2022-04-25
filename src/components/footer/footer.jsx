@@ -1,4 +1,10 @@
-import React from 'react'
+import React, { useCallback, useState } from 'react'
+import * as Yup from 'yup'
+import { toast } from 'react-hot-toast'
+import { Formik, Form } from 'formik'
+import { TextField } from '@mui/material'
+import { mailchimp } from '../../api'
+import { wait } from '../../utils'
 
 const navigation = {
   solutions: [
@@ -78,10 +84,63 @@ const navigation = {
   ],
 }
 
-const Footer = () => (
+export const mailchimpSchema = Yup.object().shape({
 
-  // <footer className="bg-gray-800 static" aria-labelledby="footer-heading">
-     <footer className="bg-primary static" aria-labelledby="footer-heading">
+  email: Yup.string().email('Must be a valid email').required('Required'),
+
+})
+
+const Footer = () => {
+  const initialValues = {
+    email: '',
+  }
+
+  const [loading, setLoading] = useState(false)
+  const mailchimpCallBack = useCallback(
+    async (
+      {
+        email,
+      },
+      successfulCallBack,
+      errorCallBack,
+    ) => {
+      setLoading(true)
+      try {
+        const response = await mailchimp({
+          email,
+        })
+        if (response?.status === 200) {
+          successfulCallBack()
+        } else {
+          errorCallBack(response?.message)
+        }
+      } catch
+      (e) {
+        console.error(e)
+      } finally {
+        setLoading(false)
+      }
+    },
+    [],
+  )
+  const submitValues = () => (values, { resetForm }) => {
+    mailchimpCallBack(
+      values,
+      async () => {
+        toast.success('Email sent successfully')
+        await wait(700)
+        resetForm()
+      },
+      (e) => {
+        toast.error(e)
+      },
+    )
+  }
+
+  return (
+
+    // <footer className="bg-gray-800 static" aria-labelledby="footer-heading">
+    <footer className="bg-primary static" aria-labelledby="footer-heading">
 
       <div className="w-full bottom-0">
         <h2 id="footer-heading" className="sr-only">
@@ -127,13 +186,30 @@ const Footer = () => (
               <p className="mt-4 text-base text-gray-300">
                 The latest news, articles, and resources, sent to your inbox weekly.
               </p>
-              <form className="mt-4 sm:flex sm:max-w-md">
+
+              <Formik
+                initialValues={initialValues}
+                onSubmit={submitValues()}
+                validationSchema={mailchimpSchema}
+              >
+
+                {({
+                  dirty,
+                  errors,
+                  touched,
+                  handleChange,
+                  values,
+                  handleBlur,
+                }) => (
+
+              <Form className="mt-4 sm:flex sm:max-w-md">
                 <label htmlFor="email-address" className="sr-only">
                   Email address
                 </label>
                 <input
+                  onChange={handleChange}
                   type="email"
-                  name="email-address"
+                  name="email"
                   id="email-address"
                   autoComplete="email"
                   required
@@ -148,7 +224,9 @@ const Footer = () => (
                     Subscribe
                   </button>
                 </div>
-              </form>
+              </Form>
+                )}
+              </Formik>
             </div>
           </div>
           <div className="mt-8 border-t border-gray-700 pt-8 md:flex md:items-center md:justify-between">
@@ -167,7 +245,8 @@ const Footer = () => (
         </div>
 
       </div>
-     </footer>
-)
+    </footer>
+  )
+}
 
 export { Footer }

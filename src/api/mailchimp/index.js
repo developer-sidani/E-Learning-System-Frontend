@@ -1,0 +1,1 @@
+export { mailchimp } from './mailchimp'
