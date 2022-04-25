@@ -16,15 +16,15 @@ export const ProfileSchema = Yup.object().shape({
 
 export const PasswordSchema = Yup.object().shape({
 
-  old_password: Yup.string().required('Required'),
+  oldPassword: Yup.string().required('Required'),
 
-  new_password: Yup.string().required('Required').matches(
+  newPassword: Yup.string().required('Required').matches(
     /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
     'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character',
   ),
 
-  confirm_password: Yup.string()
-    .oneOf([Yup.ref('new_password'), null], 'Passwords must match').required('Required'),
+  confirmPassword: Yup.string()
+    .oneOf([Yup.ref('newPassword'), null], 'Passwords must match').required('Required'),
 
 })
 

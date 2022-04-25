@@ -1,13 +1,13 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { CoursesContainer } from '../courses'
-import { getCourses } from '../../../api'
+import { getRecommendedWithToken } from '../../../api/courses/get-course'
 
-const PersonalizedSearchCourses = () => {
+const PersonalizedSearchCourses = ({ token }) => {
   const [courses, setCourses] = useState()
   const [loading, setLoading] = useState(true)
-  const fetchPersonalizedCourses = useCallback(async () => {
+  const fetchPersonalizedCourses = useCallback(async (tk) => {
     try {
-      const response = await getCourses(2, 10)
+      const response = await getRecommendedWithToken(4, tk)
       setCourses(response.data)
     } catch (e) {
       console.error(e)
@@ -17,8 +17,10 @@ const PersonalizedSearchCourses = () => {
   }, [])
 
   useEffect(() => {
-    fetchPersonalizedCourses()
-  }, [])
+    if (token) {
+      fetchPersonalizedCourses(token)
+    }
+  }, [token])
   return (
     <CoursesContainer
       courses={courses}

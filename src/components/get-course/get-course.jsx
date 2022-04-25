@@ -16,6 +16,7 @@ import ReviewsComponent from './reviews'
 import { CoursesContainer } from '../home'
 import { addCart } from '../../slices/cart'
 import { getCoursesForStudent } from '../../api'
+import CrossSection from '../../pages/courses/[courseId]/get-cross-section'
 
 function classNames(...classes) {
   return classes.filter(Boolean)
@@ -296,16 +297,18 @@ const GetCourseComponent = ({
         </div>
 
         {/* Related courses */}
-        <div className="flex items-center justify-between space-x-4 mt-28">
-          <h2 className="text-lg font-medium text-gray-900">Frequently Bought Together</h2>
-          <a href="#" className="whitespace-nowrap text-sm font-medium text-indigo-600 hover:text-indigo-500">
-            View all
-            <span aria-hidden="true"> &rarr;</span>
-          </a>
-        </div>
-
-        {/* TODO add courses slider  */}
-        <CoursesContainer courses={[]} loading />
+        {profile?.token && (
+          <>
+            <div className="flex items-center justify-between space-x-4 mt-28">
+              <h2 className="text-lg font-medium text-gray-900">Frequently Bought Together</h2>
+              <a href="#" className="whitespace-nowrap text-sm font-medium text-indigo-600 hover:text-indigo-500">
+                View all
+                <span aria-hidden="true"> &rarr;</span>
+              </a>
+            </div>
+            <CrossSection courseId={courseId} token={profile?.token} />
+          </>
+        )}
 
       </main>
 

@@ -40,3 +40,35 @@ export const getCoursesForCategory = async (category, page, limit) => {
     }
   }
 }
+
+export const getRecommendedWithoutToken = async (page) => {
+  try {
+    const res = await axios.get(`${baseUrl}/courses/recommendation-by-search?limit=10&isActive=true&page=${page}`)
+    return {
+      data: res.data.data.docs,
+      status: res.data.statusCode,
+    }
+  } catch (err) {
+    return {
+      res: err.response.data,
+    }
+  }
+}
+
+export const getRecommendedWithToken = async (page, token) => {
+  try {
+    const res = await axios.get(`${baseUrl}/courses/recommended-for-you?limit=10&isActive=true&page=${page}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    return {
+      data: res.data.data.docs,
+      status: res.data.statusCode,
+    }
+  } catch (err) {
+    return {
+      res: err.response.data,
+    }
+  }
+}
