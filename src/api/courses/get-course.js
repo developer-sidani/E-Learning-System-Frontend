@@ -40,3 +40,17 @@ export const getCoursesForCategory = async (category, page, limit) => {
     }
   }
 }
+
+export const getBestSeller = async () => {
+  try {
+    const res = await axios.get(`${baseUrl}/courses/best-seller?limit=20&isActive=true`)
+    return {
+      data: res.data.data.docs,
+      status: res.data.statusCode,
+    }
+  } catch (err) {
+    return {
+      res: err.response.data,
+    }
+  }
+}

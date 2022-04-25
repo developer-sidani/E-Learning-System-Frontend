@@ -1,13 +1,14 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { getCourses } from '../../../api'
 import { CoursesContainer } from '../courses'
+import { getBestSeller } from '../../../api/courses/get-course'
 
 const StudentsAreViewingCourses = () => {
   const [courses, setCourses] = useState()
   const [loading, setLoading] = useState(true)
   const fetchStudentsAreViewing = useCallback(async () => {
     try {
-      const response = await getCourses(10, 10)
+      const response = await getBestSeller()
       setCourses(response.data)
     } catch (e) {
       console.error(e)
