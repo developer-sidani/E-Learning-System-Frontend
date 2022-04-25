@@ -11,6 +11,10 @@ import MyAccountPage from './my-account'
 import { searchData } from '../api'
 
 const Search = () => {
+  useEffect(() => {
+    document.querySelector('#__next').className = 'w-max md:w-auto'
+  }, [])
+
   const profile = useSelector(({ profile }) => profile)
   const userId = profile?.user?.id
   // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -49,7 +53,7 @@ const Search = () => {
   )
 }
 Search.getLayout = (page) => (
-    <MainLayout>
+    <MainLayout className="w-max">
       {page}
     </MainLayout>
 )
