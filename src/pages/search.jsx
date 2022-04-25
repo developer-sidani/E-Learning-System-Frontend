@@ -34,14 +34,14 @@ const Search = () => {
     }
   }, [])
 
-  useEffect(async () => {
-    await userId
-    if (keyword) {
-      SearchDataCallBack({ keyword, userId }).then(r => {
-        setSearch(r?.data)
-      })
-    }
-  }, [keyword, userId])
+  // useEffect(async () => {
+  //   await userId
+  //   if (keyword) {
+  //     SearchDataCallBack({ keyword, userId }).then(r => {
+  //       setSearch(r?.data)
+  //     })
+  //   }
+  // }, [keyword, userId])
   console.log(search)
   return (
     <>
