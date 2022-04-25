@@ -9,7 +9,7 @@ import { AuthGuard } from '../guards'
 import { MainLayout } from '../layouts'
 import MyAccountPage from './my-account'
 import { searchData } from '../api'
-
+//
 const Search = () => {
   // useEffect(() => {
   //   document.querySelector('#__next').className = 'w-max md:w-auto'
