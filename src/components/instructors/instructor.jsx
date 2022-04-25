@@ -21,7 +21,7 @@ const InstructorComponent = ({ instructor }) => {
               {/* Profile header */}
               <div>
                 <div>
-                  <img className="h-32 w-full object-cover lg:h-48" src="https://images.unsplash.com/photo-1444628838545-ac4016a5418a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt="" />
+                  <img className="h-32 w-full object-cover lg:h-48" src="https://nagarikdiary.com/wp-content/uploads/2019/01/best-twitter-banners-70-cool-twitter-headers-random-styles-from-nature-to-business.jpg" alt="" />
                 </div>
                 <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
                   <div className="-mt-12 sm:-mt-16 sm:flex sm:items-end sm:space-x-5">

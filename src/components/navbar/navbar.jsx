@@ -365,7 +365,7 @@ const Navbar = () => {
                                         </div>
                                         <div>
                                           <div>
-                                            <p className="text-base font-medium text-gray-900 truncate">{x.title}</p>
+                                            <p className="text-sm font-medium text-gray-900 truncate">{x.title}</p>
                                           </div>
                                           <div>
                                             <p className="mt-1 text-sm text-gray-500">{`${x.price}`}</p>
