@@ -21,8 +21,17 @@ export { CheckoutComponent } from './checkout'
 export { CartComponent } from './cart'
 
 export {
-  CoursesContainer, CoursesSlider, TopCategoriesComponent, CategoryContainer, CallToActionComponent,
-  IncentivesComponent, RecommendedCourses, PersonalizedSearchCourses, TrendingCourses, StudentsAreViewingCourses, AlsoBoughtCourses,
+	CoursesContainer,
+	CoursesSlider,
+	TopCategoriesComponent,
+	CategoryContainer,
+	CallToActionComponent,
+	IncentivesComponent,
+	RecommendedCourses,
+	PersonalizedSearchCourses,
+	TrendingCourses,
+	StudentsAreViewingCourses,
+	AlsoBoughtCourses,
 } from './home'
 
 export { MyAccountComponent } from './my-account'
@@ -32,6 +41,4 @@ export { OnHoverComponent, MainBanner }
 export { AboutUsComponent } from './about-us'
 export { CategoriesCoursesComponent } from './categories'
 
-export {
-  SearchComponent, Component5,
-} from './search'
+export { SearchComponent, Component5 } from './search'

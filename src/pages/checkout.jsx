@@ -4,16 +4,14 @@ import { MainLayout } from '../layouts'
 import { AuthGuard } from '../guards'
 
 const Checkout = () => (
-    <>
-      <PageHeader title="Learn+ | Checkout Page" />
-      <CheckoutComponent />
-    </>
+	<>
+		<PageHeader title="Learn+ | Checkout Page" />
+		<CheckoutComponent />
+	</>
 )
 Checkout.getLayout = (page) => (
-  <MainLayout>
-    <AuthGuard>
-      {page}
-    </AuthGuard>
-  </MainLayout>
+	<MainLayout>
+		<AuthGuard>{page}</AuthGuard>
+	</MainLayout>
 )
 export default Checkout

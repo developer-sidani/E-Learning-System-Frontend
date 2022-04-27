@@ -13,29 +13,27 @@ import { SplashScreen } from '../screens' // You can also use <link> for styles
 const { store, persistor } = loadStore()
 
 const MyApp = ({ Component, pageProps }) => {
-  useEffect(() => {
-    AOS.init({
-      easing: 'ease-out-cubic',
-      once: true,
-      offset: 50,
-    })
-  }, [])
-  const getLayout = Component.getLayout ?? ((page) => page)
+	useEffect(() => {
+		AOS.init({
+			easing: 'ease-out-cubic',
+			once: true,
+			offset: 50,
+		})
+	}, [])
+	const getLayout = Component.getLayout ?? ((page) => page)
 
-  return (
-    <Provider store={store}>
-      <PersistGate loading={<SplashScreen />} persistor={persistor}>
-        <AuthRouter>
-          <CartProvider>
-            <Toaster position="top-center" />
-            {getLayout(
-              <Component {...pageProps} />,
-            )}
-          </CartProvider>
-        </AuthRouter>
-      </PersistGate>
-    </Provider>
-  )
+	return (
+		<Provider store={store}>
+			<PersistGate loading={<SplashScreen />} persistor={persistor}>
+				<AuthRouter>
+					<CartProvider>
+						<Toaster position="top-center" />
+						{getLayout(<Component {...pageProps} />)}
+					</CartProvider>
+				</AuthRouter>
+			</PersistGate>
+		</Provider>
+	)
 }
 
 export default MyApp

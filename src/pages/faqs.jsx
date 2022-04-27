@@ -5,42 +5,35 @@ import { getFaqs } from '../api'
 import { SplashScreen } from '../screens'
 
 const FaqsPage = () => {
-  const [faqs, setFaqs] = useState([])
-  const [loading, setLoading] = useState(false)
-  const getFaqsCallback = useCallback(
-    async () => {
-      setLoading(true)
-      try {
-        const res = await getFaqs()
-        setFaqs(res?.res?.data)
-      } catch (e) {
-        console.log(e)
-      } finally {
-        setLoading(false)
-      }
-    },
-    [],
-  )
-  useEffect(() => {
-    getFaqsCallback()
-    return () => {
-      setFaqs([])
-    }
-  }, [])
+	const [faqs, setFaqs] = useState([])
+	const [loading, setLoading] = useState(false)
+	const getFaqsCallback = useCallback(async () => {
+		setLoading(true)
+		try {
+			const res = await getFaqs()
+			setFaqs(res?.res?.data)
+		} catch (e) {
+			console.log(e)
+		} finally {
+			setLoading(false)
+		}
+	}, [])
+	useEffect(() => {
+		getFaqsCallback()
+		return () => {
+			setFaqs([])
+		}
+	}, [])
 
-  return loading ? (<SplashScreen />) : (
-    <>
-      <PageHeader
-        title="Learn+ | FAQS"
-      />
+	return loading ? (
+		<SplashScreen />
+	) : (
+		<>
+			<PageHeader title="Learn+ | FAQS" />
 
-      <FaqComponent faqs={faqs} />
-    </>
-  )
+			<FaqComponent faqs={faqs} />
+		</>
+	)
 }
-FaqsPage.getLayout = (page) => (
-  <MainLayout>
-    {page}
-  </MainLayout>
-)
+FaqsPage.getLayout = (page) => <MainLayout>{page}</MainLayout>
 export default FaqsPage

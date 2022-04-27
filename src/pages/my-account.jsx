@@ -4,18 +4,15 @@ import { MainLayout } from '../layouts'
 import { PageHeader, MyAccountComponent } from '../components'
 
 const MyAccountPage = () => (
-  <>
-
-   <PageHeader title="Learn+ | My Account" />
-    <MyAccountComponent />
-  </>
+	<>
+		<PageHeader title="Learn+ | My Account" />
+		<MyAccountComponent />
+	</>
 )
 
 MyAccountPage.getLayout = (page) => (
-    <MainLayout>
-      <AuthGuard>
-       {page}
-      </AuthGuard>
-    </MainLayout>
+	<MainLayout>
+		<AuthGuard>{page}</AuthGuard>
+	</MainLayout>
 )
 export default MyAccountPage

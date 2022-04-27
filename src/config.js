@@ -1,9 +1,13 @@
+import getConfig from 'next/config'
+
+const { publicRuntimeConfig } = getConfig()
+
 export const firebaseConfig = {
-  apiKey: 'AIzaSyC1VK73kHLRM6Picu6YjGg6pYbTcFt9gEs',
-  authDomain: 'learn-plus-fyp.firebaseapp.com',
-  projectId: 'learn-plus-fyp',
-  storageBucket: 'learn-plus-fyp.appspot.com',
-  messagingSenderId: '497930965512',
-  appId: '1:497930965512:web:f949e47f58b4e7113af7bd',
-  measurementId: 'G-TD2JKTFK9N',
+  apiKey: publicRuntimeConfig.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: publicRuntimeConfig.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: publicRuntimeConfig.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: publicRuntimeConfig.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: publicRuntimeConfig.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: publicRuntimeConfig.NEXT_PUBLIC_FIREBASE_APP_ID,
+  measurementId: publicRuntimeConfig.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
 }
