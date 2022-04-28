@@ -55,7 +55,7 @@ const ProfileSection = ({
             <div className="mt-1 flex items-center">
               <img
                 className="inline-block h-20 w-20 rounded-full"
-                src={file.url.length > 0 ? file.url : 'https://firebasestorage.googleapis.com/v0/b/learn-plus-fyp.appspot.com/o/images%2Fuser.png?alt=media&token=11e4daf6-bffa-4e1d-8359-260f96c87514'}
+                src={file.url.length > 0 ? file.url : 'https://firebasestorage.googleapis.com/v0/b/learn-plus-fyp.appspot.com/o/images%2Fuser.png?alt=media&token=84d78ce0-3b98-4506-af71-e7599f0a2bb0'}
                 alt=""
               />
               <div className="ml-4 flex">

@@ -81,7 +81,7 @@ const AddQuestion = ({ lectureId }) => {
       <div className="flex-shrink-0">
         <img
           className="inline-block h-10 w-10 rounded-full"
-          src={profile?.user?.info?.photoUrl || 'https://firebasestorage.googleapis.com/v0/b/learn-plus-fyp.appspot.com/o/images%2Fuser.png?alt=media&token=11e4daf6-bffa-4e1d-8359-260f96c87514'}
+          src={profile?.user?.info?.photoUrl || 'https://firebasestorage.googleapis.com/v0/b/learn-plus-fyp.appspot.com/o/images%2Fuser.png?alt=media&token=84d78ce0-3b98-4506-af71-e7599f0a2bb0'}
           alt=""
         />
       </div>

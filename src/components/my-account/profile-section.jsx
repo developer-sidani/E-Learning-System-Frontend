@@ -24,7 +24,7 @@ const ProfileSection = ({ user }) => {
   const [loading, setLoading] = useState(false)
   const profile = useSelector(({ profile }) => profile)
   const ref = useRef(null)
-  const [photoUrl, setPhotoUrl] = useState('https://firebasestorage.googleapis.com/v0/b/learn-plus-fyp.appspot.com/o/images%2Fuser.png?alt=media&token=11e4daf6-bffa-4e1d-8359-260f96c87514')
+  const [photoUrl, setPhotoUrl] = useState('https://firebasestorage.googleapis.com/v0/b/learn-plus-fyp.appspot.com/o/images%2Fuser.png?alt=media&token=84d78ce0-3b98-4506-af71-e7599f0a2bb0')
 
   const [file, handleUpload] = UploadFile({
     location: 'images/users/students',
@@ -48,7 +48,7 @@ const ProfileSection = ({ user }) => {
     gender: profile?.user?.info?.gender.charAt(0).toUpperCase() + profile?.user?.info?.gender.slice(1) || '',
     phone: profile?.user?.info?.phone || '',
     birthday: moment(profile?.user?.info?.birthday).format(dateFormatInput) || '',
-    // photoUrl: profile?.user?.info?.photoUrl || 'https://firebasestorage.googleapis.com/v0/b/learn-plus-fyp.appspot.com/o/images%2Fuser.png?alt=media&token=11e4daf6-bffa-4e1d-8359-260f96c87514',
+    // photoUrl: profile?.user?.info?.photoUrl || 'https://firebasestorage.googleapis.com/v0/b/learn-plus-fyp.appspot.com/o/images%2Fuser.png?alt=media&token=84d78ce0-3b98-4506-af71-e7599f0a2bb0',
   }
 
   const [serverError, setServerError] = useState('')
@@ -77,7 +77,7 @@ const ProfileSection = ({ user }) => {
       initialValues={initialValues}
       onSubmit={(values, { resetForm }) => {
         values.birthday = moment(values.birthday).format(dateFormatOutput)
-        values.photoUrl = photoUrl || 'https://firebasestorage.googleapis.com/v0/b/learn-plus-fyp.appspot.com/o/images%2Fuser.png?alt=media&token=11e4daf6-bffa-4e1d-8359-260f96c87514'
+        values.photoUrl = photoUrl || 'https://firebasestorage.googleapis.com/v0/b/learn-plus-fyp.appspot.com/o/images%2Fuser.png?alt=media&token=84d78ce0-3b98-4506-af71-e7599f0a2bb0'
         console.log({ values })
         // callback(values, resetForm, handler)
       }}
